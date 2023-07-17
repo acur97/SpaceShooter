@@ -1,7 +1,7 @@
 # PolygonUs_PruebaTecnica
 Videojuego top-down como prueba tecnica basado en Twin Bee de NES.
 
-# Un ejecutable del juego se puede descargar desde la pagina de [Releases](https://github.com/acur97/PolygonUs_PruebaTecnica/releases)
+Un ejecutable del juego se puede descargar desde la pagina de [Releases](https://github.com/acur97/PolygonUs_PruebaTecnica/releases)
 
 ## Especificaciones técnicas
 En este `Readme` se especificaran todos los contenidos
