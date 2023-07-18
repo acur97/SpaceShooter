@@ -8,10 +8,11 @@ En este `Readme` se especificaran todos los contenidos
 
 ### Requerimientos técnicos
 ```bash
-Versión actual: 0.0.1
-Tamaño: 19.7 MB.
-Sistemas operativos:
-    - Windows
+- Versión  0.0.1
+- Tamaño:
+    19.7 MB (Build)
+    1.39 GB (Proyecto).
+- Windows
 ```
 > Unity
 
