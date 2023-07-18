@@ -32,8 +32,8 @@ public class EnemySpawns : MonoBehaviour
             yield return new WaitForSeconds(_group.timeToStart);
         }
 
-        Debug.LogWarning("Grupo con enemigos tipo: " + _group.ship.name);
-        Debug.LogWarning(_group.spawnType);
+        //Debug.LogWarning("Grupo con enemigos tipo: " + _group.ship.name);
+        //Debug.LogWarning(_group.spawnType);
 
         groupRandom = Random.Range(-4.5f, 4.5f);
         for (int i = 0; i < _group.count; i++)

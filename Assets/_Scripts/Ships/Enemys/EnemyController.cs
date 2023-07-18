@@ -212,6 +212,7 @@ public class EnemyController : MonoBehaviour
             collision.gameObject.SetActive(false);
 
             GameManager.Instance.VolumePunch();
+            VfxPool.Instance.InitVfx(transform);
 
             _health--;
             if (_health <= 0)
@@ -223,6 +224,7 @@ public class EnemyController : MonoBehaviour
 
     public void Dead()
     {
+        GameManager.Instance.UpScore(GameManager.Instance.scoreEnemy);
         GameManager.Instance.leftForNextGroup--;
         transform.SetLocalPositionAndRotation(Vector2.zero, Quaternion.identity);
         gameObject.SetActive(false);

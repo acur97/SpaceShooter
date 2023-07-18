@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Instance { get; private set; }
+
     [Header("Properties")]
-    [SerializeField] private ShipScriptable _properties;
+    public ShipScriptable _properties;
+    private int _health = 0;
 
     [Space]
     [SerializeField] private new SpriteRenderer renderer;
@@ -24,9 +27,16 @@ public class PlayerController : MonoBehaviour
     private readonly string _Fire = "Fire1";
     private const string _Bullet = "Bullet";
     private const string _Collectable = "Collectable";
-    private const string _Enemy = "Enemy";
 
     private void Awake()
+    {
+        Instance = this;
+
+        SetHealth(_properties.health);
+        SetColor();
+    }
+
+    public void SetColor()
     {
         renderer.material.SetColor(_ColorCapsule, _properties.color);
 
@@ -36,41 +46,49 @@ public class PlayerController : MonoBehaviour
         module.startColor = _properties.color;
     }
 
+    public void SetHealth(int value)
+    {
+        _health = value;
+    }
+
     private void Update()
     {
-        //move
-        inputMove = new Vector2(
-            Input.GetAxis(_Horizontal) * _properties.speed * Time.deltaTime,
-            Input.GetAxis(_Vertical) * _properties.speed * Time.deltaTime);
-
-        transform.localPosition = new Vector2(
-            Mathf.Clamp(transform.localPosition.x + inputMove.x, -4.5f, 4.5f),
-            Mathf.Clamp(transform.localPosition.y + inputMove.y, -2.5f, 2.5f));
-
-        //shoot
-        if (Input.GetButtonDown(_Fire))
+        if (GameManager.Instance.isPlaying)
         {
-            hold = true;
-            timer = _properties.coolDown;
-        }
-        if (Input.GetButtonUp(_Fire))
-        {
-            hold = false;
-            timer = -1;
-        }
+            //move
+            inputMove = new Vector2(
+                Input.GetAxis(_Horizontal) * _properties.speed * Time.deltaTime,
+                Input.GetAxis(_Vertical) * _properties.speed * Time.deltaTime);
 
-        if (hold && timer >= 0)
-        {
-            if (timer == _properties.coolDown)
+            transform.localPosition = new Vector2(
+                Mathf.Clamp(transform.localPosition.x + inputMove.x, -4.5f, 4.5f),
+                Mathf.Clamp(transform.localPosition.y + inputMove.y, -2.5f, 2.5f));
+
+            //shoot
+            if (Input.GetButtonDown(_Fire))
             {
-                Shoot();
+                hold = true;
+                timer = _properties.coolDown;
+            }
+            if (Input.GetButtonUp(_Fire))
+            {
+                hold = false;
+                timer = -1;
             }
 
-            timer -= Time.deltaTime;
-
-            if (timer <= 0)
+            if (hold && timer >= 0)
             {
-                timer = _properties.coolDown;
+                if (timer == _properties.coolDown)
+                {
+                    Shoot();
+                }
+
+                timer -= Time.deltaTime;
+
+                if (timer <= 0)
+                {
+                    timer = _properties.coolDown;
+                }
             }
         }
     }
@@ -85,17 +103,21 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag(_Bullet) && collision.GetComponent<Bullet>().bulletType == Bullet.TypeBullet.enemy)
         {
             collision.gameObject.SetActive(false);
-            Debug.LogWarning("Muerto papu");
+
+            GameManager.Instance.VolumePunch();
+            VfxPool.Instance.InitVfx(transform);
+
+            _health--;
+            if (_health <= 0)
+            {
+                GameManager.Instance.EndLevel();
+            }
         }
         else if (collision.CompareTag(_Collectable))
         {
             collision.gameObject.SetActive(false);
-            Debug.LogWarning("colectable");
-        }
-        else if (CompareTag(_Enemy))
-        {
-            collision.GetComponent<EnemyController>().Dead();
-            Debug.LogWarning("Re Muerto papu");
+
+            GameManager.Instance.UpScore(GameManager.Instance.scoreCoin);
         }
     }
 }

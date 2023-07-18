@@ -14,11 +14,6 @@ public class RoundsController : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
-    {
-        StartRound();
-    }
-
     public void StartRound()
     {
         if (roundCount < level.rounds.Length - 1)

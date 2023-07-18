@@ -50,13 +50,18 @@ public class BulletsPool : MonoBehaviour
 
                 if (type == Bullet.TypeBullet.player)
                 {
-                    //agarrar desde el gamemanager
-                    bulletsC[i].renderer.material.SetColor(_Color, Color.green);
+                    bulletsC[i].renderer.material.SetColor(_Color, PlayerController.Instance._properties.color);
                 }
                 else
                 {
-                    //el 180 invertido color del usuario
-                    bulletsC[i].renderer.material.SetColor(_Color, Color.red);
+                    Color.RGBToHSV(PlayerController.Instance._properties.color, out float h, out float s, out float v);
+                    h += 0.5f;
+                    if (h > 1)
+                    {
+                        h--;
+                    }
+                    Color color = Color.HSVToRGB(h, s, v);
+                    bulletsC[i].renderer.material.SetColor(_Color, color);
                 }
                 bullets[i].SetActive(true);
                 break;

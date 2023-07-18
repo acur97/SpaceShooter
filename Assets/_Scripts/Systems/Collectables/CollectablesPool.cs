@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CollectablesPool : MonoBehaviour
 {
-    [SerializeField] private float limits;
+    [SerializeField] private float speed = 1;
     [SerializeField] private int size = 10;
     [SerializeField] private GameObject prefab;
     [SerializeField] private List<GameObject> collectables = new();
@@ -31,13 +31,32 @@ public class CollectablesPool : MonoBehaviour
 
     private void Update()
     {
-        timer -= Time.deltaTime;
-
-        if (timer < 0)
+        if (GameManager.Instance.isPlaying)
         {
-            timer = Random.Range(minProv, maxProv);
+            timer -= Time.deltaTime;
 
-            InitCoin();
+            if (timer < 0)
+            {
+                timer = Random.Range(minProv, maxProv);
+
+                InitCoin();
+            }
+
+            for (int i = 0; i < size; i++)
+            {
+                if (collectables[i].activeSelf)
+                {
+                    collectables[i].transform.position -= speed * Time.deltaTime * transform.up;
+                    if (collectables[i].transform.position.y <= -3.3f)
+                    {
+                        collectables[i].SetActive(false);
+                    }
+                }
+                else
+                {
+                    continue;
+                }
+            }
         }
     }
 
@@ -47,7 +66,7 @@ public class CollectablesPool : MonoBehaviour
         {
             if (!collectables[i].activeSelf)
             {
-                collectables[i].transform.localPosition = new Vector2(Random.Range(-limits, limits), 0);
+                collectables[i].transform.localPosition = new Vector2(Random.Range(-4.5f, 4.5f), 3.3f);
                 collectables[i].SetActive(true);
                 break;
             }
