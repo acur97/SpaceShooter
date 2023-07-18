@@ -1,7 +1,14 @@
 # PolygonUs_PruebaTecnica
 Videojuego top-down como prueba tecnica basado en Twin Bee de NES.
 
-Un ejecutable del juego se puede descargar desde la pagina de [Releases](https://github.com/acur97/PolygonUs_PruebaTecnica/releases)
+- Un ejecutable del juego se puede descargar desde la pagina de [Releases](https://github.com/acur97/PolygonUs_PruebaTecnica/releases)
+
+# Controles
+- Interaccion UI con el Mouse
+- Movimiento con las teclas WASD o las Flechas.
+- Disparo con clic del Mouse o Ctrl izquierdo.
+- Pausa con la tecla Esc.
+
 
 ## Especificaciones técnicas
 En este `Readme` se especificaran todos los contenidos
@@ -14,8 +21,9 @@ En este `Readme` se especificaran todos los contenidos
     1.39 GB (Proyecto).
 - Windows
 ```
-> Unity
 
+> Unity
+> 
 La aplicación esta usando actualmente Unity con la versión ```Unity 2021.3.28f1```, con los siguientes paquetes:
 ```bash
 Paquetes base:
@@ -34,7 +42,7 @@ Paquetes base:
     - Visual Studio Editor 2.0.18
 ```
 ```bash
-Others:
+Otros:
     - LeanTween 2.51
     - febucci Custom Hierarchy 1.2.0
 ```
