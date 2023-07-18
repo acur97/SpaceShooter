@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip clipCoin;
     [SerializeField] private AudioClip clipStart;
     [SerializeField] private AudioClip clipEnd;
+    public AudioClip clipZap;
 
     private const string _Cancel = "Cancel";
 
@@ -64,7 +65,7 @@ public class GameManager : MonoBehaviour
         canvasPause.SetActive(false);
         canvasEnd.SetActive(false);
 
-        //Time.timeScale = 0;
+        Time.timeScale = 1;
     }
 
     public void GodMode(bool on)

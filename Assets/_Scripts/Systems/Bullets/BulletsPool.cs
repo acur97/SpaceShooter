@@ -27,6 +27,8 @@ public class BulletsPool : MonoBehaviour
 
     public void InitBullet(Transform _position, float _speed, bool _double, Bullet.TypeBullet type)
     {
+        GameManager.Instance.PlaySound(GameManager.Instance.clipZap);
+
         if (_double)
         {
             Init2(new Vector2(_position.position.x + 0.157f, _position.position.y), _position.rotation, _speed, type);

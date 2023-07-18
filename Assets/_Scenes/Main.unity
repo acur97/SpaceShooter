@@ -2376,16 +2376,40 @@ PrefabInstance:
       value: God mode
       objectReference: {fileID: 0}
     - target: {fileID: 7574955492754328477, guid: 2212d3affc04b10488c16d854026b662, type: 3}
+      propertyPath: m_Maskable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7574955492754328477, guid: 2212d3affc04b10488c16d854026b662, type: 3}
       propertyPath: m_margin.y
       value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7574955492754328477, guid: 2212d3affc04b10488c16d854026b662, type: 3}
+      propertyPath: m_isRichText
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7574955492754328477, guid: 2212d3affc04b10488c16d854026b662, type: 3}
       propertyPath: m_lineSpacing
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7574955492754328477, guid: 2212d3affc04b10488c16d854026b662, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7574955492754328477, guid: 2212d3affc04b10488c16d854026b662, type: 3}
+      propertyPath: m_enableKerning
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7574955492754328477, guid: 2212d3affc04b10488c16d854026b662, type: 3}
       propertyPath: m_VerticalAlignment
       value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 7574955492754328477, guid: 2212d3affc04b10488c16d854026b662, type: 3}
+      propertyPath: m_parseCtrlCharacters
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7574955492754328477, guid: 2212d3affc04b10488c16d854026b662, type: 3}
+      propertyPath: m_useMaxVisibleDescender
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7574955492754328479, guid: 2212d3affc04b10488c16d854026b662, type: 3}
       propertyPath: m_Name
@@ -14327,6 +14351,7 @@ MonoBehaviour:
   clipCoin: {fileID: 8300000, guid: 3685df470f666a24f95e37576b48ec59, type: 3}
   clipStart: {fileID: 8300000, guid: d02142f8eaae9f44b95a094f827d4f63, type: 3}
   clipEnd: {fileID: 8300000, guid: 140bad4516a248744a144b535176d1bf, type: 3}
+  clipZap: {fileID: 8300000, guid: 6723a5efd23cf0c4b9d830e196569123, type: 3}
 --- !u!4 &1758410993
 Transform:
   m_ObjectHideFlags: 0

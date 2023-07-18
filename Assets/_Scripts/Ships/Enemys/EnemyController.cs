@@ -96,11 +96,6 @@ public class EnemyController : MonoBehaviour
         {
             case ShipScriptable.Behaviour.linear:
                 transform.position += _properties.speed * Time.deltaTime * transform.up;
-
-                if (transform.position.y <= -3.3f)
-                {
-                    Dead();
-                }
                 break;
 
             case ShipScriptable.Behaviour.direct:
@@ -131,12 +126,7 @@ public class EnemyController : MonoBehaviour
                 }
                 else
                 {
-                    transform.position += _properties.speed * Time.deltaTime * transform.right;
-                }
-
-                if (transform.position.y <= -3.3f)
-                {
-                    Dead();
+                    transform.position -= _properties.speed * Time.deltaTime * -transform.right;
                 }
                 break;
 
@@ -163,6 +153,11 @@ public class EnemyController : MonoBehaviour
 
             default:
                 break;
+        }
+
+        if (transform.position.y <= -3.3f || transform.position.y >= 3.5f)
+        {
+            Dead();
         }
 
         if (transform.position.y >= -2.25f)
