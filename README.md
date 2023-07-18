@@ -9,7 +9,7 @@ En este `Readme` se especificaran todos los contenidos
 ### Requerimientos técnicos
 ```bash
 Versión actual: 0.0.1
-Tamaño: xxx MB.
+Tamaño: 19.7 MB.
 Sistemas operativos:
     - Windows
 ```
