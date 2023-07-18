@@ -10,24 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d74892c7c2b61a40a56faac19d7f68c, type: 3}
-  m_Name: Round 1
+  m_Name: Round test
   m_EditorClassIdentifier: 
   groups:
   - timeToStart: 2
-    count: 10
-    ship: {fileID: 11400000, guid: 0b2d8ee1a193cbd458ba93593f505ec6, type: 2}
     spawnType: 0
+    count: 10
+    ship: {fileID: 11400000, guid: a3c57ab0a83fef840931bd8fa75961a5, type: 2}
     minTimeBetweenSpawn: 0.5
     maxTimeBetweenSpawn: 1
-  - timeToStart: 2
-    count: 10
-    ship: {fileID: 11400000, guid: 2cde79363b3ab70408cd641e4575cdfd, type: 2}
-    spawnType: 3
-    minTimeBetweenSpawn: 0
-    maxTimeBetweenSpawn: 0
-  - timeToStart: 2
-    count: 20
-    ship: {fileID: 11400000, guid: ece45f39c82c7a543ba4e3881b76f1fc, type: 2}
-    spawnType: 1
-    minTimeBetweenSpawn: 0.7
-    maxTimeBetweenSpawn: 0.7

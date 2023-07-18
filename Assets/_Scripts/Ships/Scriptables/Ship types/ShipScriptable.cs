@@ -16,8 +16,9 @@ public class ShipScriptable : ScriptableObject
 
     [Header("Enemy")]
     public Sprite sprite;
-    public enum Behaviour { linear, direct, waves, diagonal, wave8, custom }
+    public enum Behaviour { linear, direct, waves, wavesDirect, diagonal, wave8 }
     public Behaviour behaviour;
-    public enum Attack { continuous, burst, none }
+    public float behaviourMathfSin = 1.5f;
+    public enum Attack { continuous, continuousDouble, none }
     public Attack attack;
 }

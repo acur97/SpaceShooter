@@ -12,9 +12,6 @@ public class EnemySpawns : MonoBehaviour
     [SerializeField] private List<EnemyController> bulletsC = new();
     private float groupRandom = 0;
 
-    [Header("Control")]
-    [SerializeField] private float limits;
-
     private void Awake()
     {
         Instance = this;
@@ -38,12 +35,12 @@ public class EnemySpawns : MonoBehaviour
         Debug.LogWarning("Grupo con enemigos tipo: " + _group.ship.name);
         Debug.LogWarning(_group.spawnType);
 
-        groupRandom = Random.Range(-limits, limits);
+        groupRandom = Random.Range(-4.5f, 4.5f);
         for (int i = 0; i < _group.count; i++)
         {
-            InitEnemy(_group.ship, _group, Random.Range(-limits, limits));
+            InitEnemy(_group.ship, _group, Random.Range(-4.5f, 4.5f));
 
-            if (_group.minTimeBetweenSpawn > 0 || _group.maxTimeBetweenSpawn > 0)
+            if (_group.minTimeBetweenSpawn > 0 || _group.maxTimeBetweenSpawn > 0 || _group.spawnType != Group.SpawnType.allAtOnce)
             {
                 yield return new WaitForSeconds(Random.Range(_group.minTimeBetweenSpawn, _group.maxTimeBetweenSpawn));
             }
@@ -52,7 +49,7 @@ public class EnemySpawns : MonoBehaviour
 
     public void InitEnemy(ShipScriptable properties, Group group, float random)
     {
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < (group.spawnType == Group.SpawnType.only ? 1 : size); i++)
         {
             if (!enemys[i].activeSelf)
             {

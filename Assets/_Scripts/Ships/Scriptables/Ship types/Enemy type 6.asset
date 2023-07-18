@@ -18,5 +18,5 @@ MonoBehaviour:
   coolDown: 0.5
   health: 6
   sprite: {fileID: 21300000, guid: 8fb672820e5632848a3b6159da6691ae, type: 3}
-  behaviour: 2
+  behaviour: 1
   attack: 0

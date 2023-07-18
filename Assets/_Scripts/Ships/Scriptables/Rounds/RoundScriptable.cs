@@ -5,11 +5,11 @@ public class Group
 {
     public float timeToStart = 2;
 
+    public enum SpawnType { random, row, only, allAtOnce }
     [Space]
+    public SpawnType spawnType;
     public int count = 10;
     public ShipScriptable ship;
-    public enum SpawnType { random, row, only, allAtOnce }
-    public SpawnType spawnType;
     public float minTimeBetweenSpawn = 0.3f;
     public float maxTimeBetweenSpawn = 0.3f;
 }
