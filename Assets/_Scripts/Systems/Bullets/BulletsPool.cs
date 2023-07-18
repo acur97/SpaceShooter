@@ -30,12 +30,20 @@ public class BulletsPool : MonoBehaviour
         {
             if (!bullets[i].activeSelf)
             {
-                bullets[i].transform.SetPositionAndRotation(_position.position, Quaternion.identity);
+                bullets[i].transform.SetPositionAndRotation(_position.position, _position.rotation);
                 bulletsC[i].speed = _speed;
                 bulletsC[i].bulletType = type;
 
-                //el 180 invertido color del usuario
-                bulletsC[i].renderer.material.SetColor("_Color", Color.red);
+                if (type == Bullet.TypeBullet.player)
+                {
+                    //agarrar desde el gamemanager
+                    bulletsC[i].renderer.material.SetColor("_Color", Color.green);
+                }
+                else
+                {
+                    //el 180 invertido color del usuario
+                    bulletsC[i].renderer.material.SetColor("_Color", Color.red);
+                }
                 bullets[i].SetActive(true);
                 break;
             }

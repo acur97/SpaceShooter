@@ -9,6 +9,12 @@ public class PlayerController : MonoBehaviour
     [Header("Properties")]
     [SerializeField] private ShipScriptable _properties;
 
+    [Space]
+    [SerializeField] private new SpriteRenderer renderer;
+    [SerializeField] private ParticleSystem engine1;
+    [SerializeField] private ParticleSystem engine2;
+    private ParticleSystem.MainModule module;
+
     [Header("Control")]
     [SerializeField] private Vector2 limits;
 
@@ -18,6 +24,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform shootRoot;
     private bool hold = false;
     private float timer = -1;
+
+    private void Awake()
+    {
+        renderer.material.SetColor("_ColorCapsule", _properties.color);
+
+        module = engine1.main;
+        module.startColor = _properties.color;
+        module = engine2.main;
+        module.startColor = _properties.color;
+    }
 
     private void Update()
     {
@@ -61,5 +77,24 @@ public class PlayerController : MonoBehaviour
     private void Shoot()
     {
         BulletsPool.Instance.InitBullet(shootRoot, _properties.bulletSpeed, Bullet.TypeBullet.player);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Bullet") && collision.GetComponent<Bullet>().bulletType == Bullet.TypeBullet.enemy)
+        {
+            collision.gameObject.SetActive(false);
+            Debug.LogWarning("Muerto papu");
+        }
+        else if (collision.CompareTag("Collectable"))
+        {
+            collision.gameObject.SetActive(false);
+            Debug.LogWarning("colectable");
+        }
+        else if (CompareTag("Enemy"))
+        {
+            collision.GetComponent<EnemyController>().Dead();
+            Debug.LogWarning("Re Muerto papu");
+        }
     }
 }

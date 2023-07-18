@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57881a7a4b18dff4b82ce561559b9591, type: 3}
-  m_Name: Player Ship
+  m_Name: Enemy type 5
   m_EditorClassIdentifier: 
-  color: {r: 0.3105724, g: 4.237095, b: 0, a: 1}
-  speed: 4
-  bulletSpeed: 10
-  coolDown: 0.1
-  health: 1
-  sprite: {fileID: 0}
-  behaviour: 0
+  color: {r: 0.000607054, g: 1, b: 1, a: 1}
+  speed: 0.9
+  bulletSpeed: 7
+  coolDown: 0.5
+  health: 5
+  sprite: {fileID: 21300000, guid: 6beaf963ad47f884f854662428095c40, type: 3}
+  behaviour: 2
+  attack: 0

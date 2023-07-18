@@ -4,7 +4,7 @@ using UnityEngine;
 public class ShipScriptable : ScriptableObject
 {
     [Header("Custom")]
-    [ColorUsage(false, true)] public Color color;
+    [ColorUsage(false, true)] public Color color = Color.white;
 
     [Header("Parameters")]
     public float speed = 4;
@@ -12,9 +12,12 @@ public class ShipScriptable : ScriptableObject
     public float coolDown = 0.1f;
 
     [Space]
-    public float health = 100;
+    public int health = 100;
 
     [Header("Enemy")]
     public Sprite sprite;
-    //public enum behaviour { li}
+    public enum Behaviour { linear, direct, waves, diagonal, wave8, custom }
+    public Behaviour behaviour;
+    public enum Attack { continuous, burst, none }
+    public Attack attack;
 }

@@ -9,15 +9,15 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        transform.localPosition = new Vector2(transform.localPosition.x, transform.localPosition.y + (speed * Time.deltaTime));
+        transform.position += speed * Time.deltaTime * transform.up;
 
-        if (transform.position.x >= 5.1f ||
-            transform.position.x <= -5.1f ||
-            transform.position.y >= 3f ||
-            transform.position.y <= -3f)
+        if (transform.position.x >= 5.5f ||
+            transform.position.x <= -5.5f ||
+            transform.position.y >= 4f ||
+            transform.position.y <= -4f)
         {
-            gameObject.SetActive(false);
             transform.SetLocalPositionAndRotation(Vector2.zero, Quaternion.identity);
+            gameObject.SetActive(false);
         }
     }
 }
