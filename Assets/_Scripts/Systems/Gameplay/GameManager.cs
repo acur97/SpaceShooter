@@ -98,6 +98,7 @@ public class GameManager : MonoBehaviour
                 Pause();
             }
 
+            //DebugMode
             if (Input.GetKeyDown(KeyCode.P))
             {
                 leftForNextGroup = 0;
