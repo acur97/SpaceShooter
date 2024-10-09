@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57881a7a4b18dff4b82ce561559b9591, type: 3}
   m_Name: Player Ship
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 4.237095, a: 1}
+  color: {r: 0, g: 4.237095, b: 3.2484393, a: 1}
   speed: 4
   bulletSpeed: 10
   coolDown: 0.1
-  health: 1
+  health: 10
   sprite: {fileID: 0}
   behaviour: 0
   behaviourMathfSin: 1.5

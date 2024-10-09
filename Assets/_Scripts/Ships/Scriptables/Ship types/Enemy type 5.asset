@@ -17,6 +17,7 @@ MonoBehaviour:
   bulletSpeed: 7
   coolDown: 0.5
   health: 5
-  sprite: {fileID: 21300000, guid: 6beaf963ad47f884f854662428095c40, type: 3}
+  sprite: {fileID: 21300000, guid: 08a41882fc06e5046addc8dca77c17d9, type: 3}
   behaviour: 3
+  behaviourMathfSin: 1.5
   attack: 0
