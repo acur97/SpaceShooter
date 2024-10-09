@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private float timer = -1;
 
     private readonly int _ColorCapsule = Shader.PropertyToID("_ColorCapsule");
+    private readonly int _Color = Shader.PropertyToID("_Color");
     private const string _Horizontal = "Horizontal";
     private const string _Vertical = "Vertical";
     private readonly string _Fire = "Fire1";
@@ -39,11 +40,18 @@ public class PlayerController : MonoBehaviour
     public void SetColor()
     {
         renderer.material.SetColor(_ColorCapsule, _properties.color);
+        renderer.material.SetColor(_Color, ConvertColor(_properties.color));
 
         module = engine1.main;
         module.startColor = _properties.color;
         module = engine2.main;
         module.startColor = _properties.color;
+    }
+
+    private Color ConvertColor(Color col)
+    {
+        Color.RGBToHSV(col, out float h, out float s, out float v);
+        return Color.HSVToRGB(h, s * 0.25f, v);
     }
 
     public void SetHealth(int value)
