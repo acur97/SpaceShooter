@@ -6,9 +6,25 @@ public class Bullet : MonoBehaviour
     public enum TypeBullet { player, enemy }
     public TypeBullet bulletType;
     public new SpriteRenderer renderer;
+    public new Collider2D collider;
 
-    private void Update()
+    private void Awake()
     {
+        PoolsUpdateManager.PoolUpdate += OnUpdate;
+    }
+
+    private void OnDestroy()
+    {
+        PoolsUpdateManager.PoolUpdate -= OnUpdate;
+    }
+
+    private void OnUpdate()
+    {
+        if (!gameObject.activeSelf)
+        {
+            return;
+        }
+
         transform.position += speed * Time.deltaTime * transform.up;
 
         if (transform.position.x >= 5.5f ||
@@ -16,7 +32,7 @@ public class Bullet : MonoBehaviour
             transform.position.y >= 4f ||
             transform.position.y <= -4f)
         {
-            transform.SetLocalPositionAndRotation(Vector2.zero, Quaternion.identity);
+            transform.SetPositionAndRotation(Vector2.zero, Quaternion.identity);
             gameObject.SetActive(false);
         }
     }

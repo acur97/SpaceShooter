@@ -4,5 +4,4 @@ using UnityEngine;
 public class LevelScriptable : ScriptableObject
 {
     public RoundScriptable[] rounds;
-
 }

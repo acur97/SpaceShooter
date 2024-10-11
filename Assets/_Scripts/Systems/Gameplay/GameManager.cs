@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    public bool hasStarted = false;
     public bool isPlaying = false;
     public int leftForNextGroup = 0;
 
@@ -17,8 +18,10 @@ public class GameManager : MonoBehaviour
     private VolumeProfile profile;
     private ColorAdjustments colorAdjustments;
     private ChromaticAberration chromaticAberration;
-    private int tween1;
-    private int tween2;
+    private int tweenPostExposure1;
+    private int tweenPostExposure2;
+    private int tweenChromaticAberration1;
+    private int tweenChromaticAberration2;
 
     [Header("Score")]
     public int scoreCoin = 5;
@@ -26,9 +29,9 @@ public class GameManager : MonoBehaviour
 
     [Space]
     [SerializeField] private TextMeshProUGUI scoreText;
-    private const string preScore = "Score: ";
-    private int score = 0;
     [SerializeField] private TextMeshProUGUI endScore;
+    private int score = 0;
+    private const string preScore = "Score: ";
     private const string postcore = "Final score:\n ";
 
     [Header("UI")]
@@ -70,11 +73,12 @@ public class GameManager : MonoBehaviour
 
     public void GodMode(bool on)
     {
-        PlayerController.Instance.SetHealth(on ? 1000 : 1);
+        PlayerController.Instance.SetHealth(on ? 1000000 : 1);
     }
 
     public void StartGame()
     {
+        hasStarted = true;
         isPlaying = true;
         Time.timeScale = 1;
         canvasGameplay.SetActive(true);
@@ -91,55 +95,60 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (isPlaying)
+        if (hasStarted)
         {
             if (Input.GetButtonDown(_Cancel))
             {
                 Pause();
             }
 
-            //DebugMode
-            if (Input.GetKeyDown(KeyCode.P))
+            if (isPlaying)
             {
-                leftForNextGroup = 0;
-            }
+                if (leftForNextGroup == 0)
+                {
+                    RoundsController.Instance.StartGroup();
+                }
 
-            if (leftForNextGroup == 0)
-            {
-                RoundsController.Instance.StartGroup();
+                //DebugMode
+                if (Input.GetKeyDown(KeyCode.P))
+                {
+                    leftForNextGroup = 0;
+                }
             }
         }
     }
 
     public void PlaySound(AudioClip clip)
     {
-        source.PlayOneShot(clip);
+        source.PlayOneShot(clip, 0.25f);
     }
 
     public void VolumePunch()
     {
-        LeanTween.cancel(tween1);
-        tween1 = LeanTween.value(colorAdjustments.postExposure.value, 50, volumeSpeed).setOnUpdate((float value) =>
+        LeanTween.cancel(tweenPostExposure1);
+        LeanTween.cancel(tweenPostExposure2);
+        tweenPostExposure1 = LeanTween.value(colorAdjustments.postExposure.value, 50, volumeSpeed).setOnUpdate((float value) =>
         {
             colorAdjustments.saturation.value = value;
         }).setOnComplete(() =>
         {
-            LeanTween.value(colorAdjustments.postExposure.value, 25, volumeSpeed).setOnUpdate((float value) =>
+            tweenPostExposure2 = LeanTween.value(colorAdjustments.postExposure.value, 25, volumeSpeed).setOnUpdate((float value) =>
             {
                 colorAdjustments.saturation.value = value;
-            });
+            }).id;
         }).id;
 
-        LeanTween.cancel(tween2);
-        tween2 = LeanTween.value(chromaticAberration.intensity.value, 0.1f, volumeSpeed).setOnUpdate((float value) =>
+        LeanTween.cancel(tweenChromaticAberration1);
+        LeanTween.cancel(tweenChromaticAberration2);
+        tweenChromaticAberration1 = LeanTween.value(chromaticAberration.intensity.value, 0.1f, volumeSpeed).setOnUpdate((float value) =>
         {
             chromaticAberration.intensity.value = value;
         }).setOnComplete(() =>
         {
-            LeanTween.value(chromaticAberration.intensity.value, 0.05f, volumeSpeed).setOnUpdate((float value) =>
+            tweenChromaticAberration2 = LeanTween.value(chromaticAberration.intensity.value, 0.05f, volumeSpeed).setOnUpdate((float value) =>
             {
                 chromaticAberration.intensity.value = value;
-            });
+            }).id;
         }).id;
 
         PlaySound(clipBoom);
@@ -159,10 +168,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SelectColor(int value)
+    public void EndLevel()
     {
-        PlayerController.Instance._properties.color = colors[value];
-        PlayerController.Instance.SetColor();
+        if (isPlaying)
+        {
+            isPlaying = false;
+            canvasGameplay.SetActive(false);
+            canvasEnd.SetActive(true);
+
+            endScore.SetText(postcore + score);
+            PlaySound(clipEnd);
+
+            Time.timeScale = 0.5f;
+
+            leftForNextGroup = -1;
+        }
     }
 
     public void Pause()
@@ -181,6 +201,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SelectColor(int value)
+    {
+        PlayerController.Instance._properties.color = colors[value];
+        PlayerController.Instance.SetColor();
+    }
+
     public void Retry()
     {
         SceneManager.LoadScene(0);
@@ -189,22 +215,5 @@ public class GameManager : MonoBehaviour
     public void Exit()
     {
         Application.Quit();
-    }
-
-    public void EndLevel()
-    {
-        if (isPlaying)
-        {
-            isPlaying = false;
-            canvasGameplay.SetActive(false);
-            canvasEnd.SetActive(true);
-
-            endScore.SetText(postcore + score);
-            PlaySound(clipEnd);
-
-            Time.timeScale = 0.5f;
-
-            leftForNextGroup = -1;
-        }
     }
 }

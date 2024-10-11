@@ -1,17 +1,18 @@
 using UnityEngine;
 
 [System.Serializable]
-public class Group
+public struct Group
 {
-    public float timeToStart = 2;
+    public float timeToStart;
 
     public enum SpawnType { random, row, only, allAtOnce }
+
     [Space]
     public SpawnType spawnType;
-    public int count = 10;
+    public int count;
     public ShipScriptable ship;
-    public float minTimeBetweenSpawn = 0.3f;
-    public float maxTimeBetweenSpawn = 0.3f;
+    public float minTimeBetweenSpawn;
+    public float maxTimeBetweenSpawn;
 }
 
 [CreateAssetMenu(fileName = "Round ", menuName = "ScriptableObjects/Round properties", order = 1)]

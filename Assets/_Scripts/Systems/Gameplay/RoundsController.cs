@@ -20,6 +20,7 @@ public class RoundsController : MonoBehaviour
         {
             roundCount++;
             groupCount = -1;
+
             StartGroup();
         }
         else
@@ -33,8 +34,9 @@ public class RoundsController : MonoBehaviour
         if (groupCount < level.rounds[roundCount].groups.Length - 1)
         {
             groupCount++;
+
             GameManager.Instance.leftForNextGroup = level.rounds[roundCount].groups[groupCount].count;
-            StartCoroutine(EnemySpawns.Instance.InstantiateEnemys(level.rounds[roundCount].groups[groupCount]));
+            EnemySpawns.Instance.InstantiateEnemys(level.rounds[roundCount].groups[groupCount]).Forget();
         }
         else
         {
