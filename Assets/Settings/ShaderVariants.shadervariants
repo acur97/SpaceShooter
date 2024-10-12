@@ -13,16 +13,6 @@ ShaderVariantCollection:
       variants:
       - keywords: 
         passType: 0
-  - first: {fileID: 66, guid: 0000000000000000f000000000000000, type: 0}
-    second:
-      variants:
-      - keywords: 
-        passType: 0
-  - first: {fileID: 9101, guid: 0000000000000000f000000000000000, type: 0}
-    second:
-      variants:
-      - keywords: 
-        passType: 0
   - first: {fileID: 19011, guid: 0000000000000000f000000000000000, type: 0}
     second:
       variants:
@@ -81,9 +71,4 @@ ShaderVariantCollection:
       - keywords: 
         passType: 0
       - keywords: UNDERLAY_ON
-        passType: 0
-  - first: {fileID: 4800000, guid: 93446b5c5339d4f00b85c159e1159b7c, type: 3}
-    second:
-      variants:
-      - keywords: 
         passType: 0

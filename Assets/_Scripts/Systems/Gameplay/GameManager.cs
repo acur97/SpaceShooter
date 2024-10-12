@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
 
         RoundsController.Instance.StartRound();
 
-        PlaySound(clipStart);
+        PlaySound(clipStart, 2f);
     }
 
     private void Update()
@@ -118,9 +118,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void PlaySound(AudioClip clip)
+    public void PlaySound(AudioClip clip, float volume = 1f)
     {
-        source.PlayOneShot(clip, 0.25f);
+        source.PlayOneShot(clip, volume);
     }
 
     public void VolumePunch()
@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
             }).id;
         }).id;
 
-        PlaySound(clipBoom);
+        PlaySound(clipBoom, 0.25f);
     }
 
     public void UpScore(int value)
@@ -177,7 +177,7 @@ public class GameManager : MonoBehaviour
             canvasEnd.SetActive(true);
 
             endScore.SetText(postcore + score);
-            PlaySound(clipEnd);
+            PlaySound(clipEnd, 2f);
 
             Time.timeScale = 0.5f;
 
