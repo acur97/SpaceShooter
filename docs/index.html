@@ -31,7 +31,7 @@
       var loadingBar = document.querySelector("#unity-loading-bar");
       var progressBarFull = document.querySelector("#unity-progress-bar-full");
       var warningBanner = document.querySelector("#unity-warning");
-      var isMobile = false;
+      var isMobile = 0;
       var _unityInstance = null;
 
       // Shows a temporary message banner/ribbon for a few seconds, or
@@ -85,13 +85,13 @@
         meta.name = 'viewport';
         meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
         document.getElementsByTagName('head')[0].appendChild(meta);
-        isMobile = true;
+        isMobile = 1;
       }
 
       function CheckDevice()
       {
         if (typeof _unityInstance !== 'undefined' && _unityInstance !== null) {
-            _unityInstance.SendMessage('ControlsManager', 'OnDeviceCheck', isMobile);
+            _unityInstance.SendMessage('--Manager--', 'OnDeviceCheck', isMobile);
         } else {
             console.error("unityInstance is not defined or null");
         }
