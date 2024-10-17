@@ -18,9 +18,20 @@ public class ControlsManager : MonoBehaviour
     private const string _Vertical = "Vertical";
     private const string _Fire = "Fire1";
 
-    private void Awake()
+    private void Start()
     {
-        if (SystemInfo.deviceType == DeviceType.Handheld)
+#if UNITY_WEBGL && !UNITY_EDITOR
+        // Call the JavaScript function to check the device
+        Application.ExternalCall("CheckDevice");
+#elif UNITY_EDITOR
+        OnDeviceCheck(false);
+#endif
+    }
+
+    // This method will be called from JavaScript
+    public void OnDeviceCheck(bool isMobile)
+    {
+        if (isMobile)
         {
             touchControls = true;
             touchUi.SetActive(true);
