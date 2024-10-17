@@ -24,19 +24,18 @@ public class ControlsManager : MonoBehaviour
         // Call the JavaScript function to check the device
         Application.ExternalCall("CheckDevice");
 #elif UNITY_EDITOR
-        OnDeviceCheck(false);
+        OnDeviceCheck(true);
 #endif
     }
 
     // This method will be called from JavaScript
-    public void OnDeviceCheck(bool isMobile)
+    public void OnDeviceCheck(bool isPc)
     {
-        if (isMobile)
+        touchControls = !isPc;
+        touchUi.SetActive(!isPc);
+
+        if (!isPc)
         {
-            touchControls = true;
-            touchUi.SetActive(true);
-
-
             EventTrigger.Entry entryDown = new()
             {
                 eventID = EventTriggerType.PointerDown
@@ -50,11 +49,6 @@ public class ControlsManager : MonoBehaviour
             };
             entryUp.callback.AddListener((eventData) => { fireDown = false; fireUp = true; });
             fireBtn.triggers.Add(entryUp);
-        }
-        else
-        {
-            touchControls = false;
-            touchUi.SetActive(false);
         }
     }
 
