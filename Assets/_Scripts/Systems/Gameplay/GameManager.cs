@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    public bool hasStarted = false;
     public bool isPlaying = false;
     public int leftForNextGroup = 0;
 
@@ -17,8 +18,10 @@ public class GameManager : MonoBehaviour
     private VolumeProfile profile;
     private ColorAdjustments colorAdjustments;
     private ChromaticAberration chromaticAberration;
-    private int tween1;
-    private int tween2;
+    private int tweenPostExposure1;
+    private int tweenPostExposure2;
+    private int tweenChromaticAberration1;
+    private int tweenChromaticAberration2;
 
     [Header("Score")]
     public int scoreCoin = 5;
@@ -26,9 +29,9 @@ public class GameManager : MonoBehaviour
 
     [Space]
     [SerializeField] private TextMeshProUGUI scoreText;
-    private const string preScore = "Score: ";
-    private int score = 0;
     [SerializeField] private TextMeshProUGUI endScore;
+    private int score = 0;
+    private const string preScore = "Score: ";
     private const string postcore = "Final score:\n ";
 
     [Header("UI")]
@@ -36,6 +39,35 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject canvasGameplay;
     [SerializeField] private GameObject canvasPause;
     [SerializeField] private GameObject canvasEnd;
+
+    [Space]
+    [SerializeField] private GameObject shadowBorders;
+
+    [Header("Screen Properties")]
+    [SerializeField] private float playerLimit = -0.4f;
+    private Vector2 playerLimits = Vector2.zero;
+    public static Vector2 PlayerLimits => Instance.playerLimits;
+
+    [SerializeField] private float bulletLimit = 0.1f;
+    private Vector2 bulletLimits = Vector2.zero;
+    public static Vector2 BulletLimits => Instance.bulletLimits;
+
+    [SerializeField] private float boundsLimit = 0.5f;
+    private Vector2 boundsLimits = Vector2.zero;
+    public static Vector2 BoundsLimits => Instance.boundsLimits;
+
+    [SerializeField] private float enemyLine = 1.55f;
+    private float enemyLineLimit;
+    public static float EnemyLine => Instance.enemyLineLimit;
+
+    private float horizontalMultiplier = 1f;
+    public static float HorizontalMultiplier => Instance.horizontalMultiplier;
+    private float horizontalInvertedMultiplier = 1f;
+    public static float HorizontalInvertedMultiplier => Instance.horizontalInvertedMultiplier;
+
+    [Space]
+    [SerializeField] private RectTransform uiRect;
+    [SerializeField] private Camera mainCamera;
 
     [Space]
     [SerializeField, ColorUsage(true, true)] private Color[] colors;
@@ -49,6 +81,69 @@ public class GameManager : MonoBehaviour
     public AudioClip clipZap;
 
     private const string _Cancel = "Cancel";
+
+    private void OnDrawGizmosSelected()
+    {
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(uiRect, uiRect.position, mainCamera, out Vector3 canvasBorders);
+
+        // Player Limits
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLineList(new Vector3[8]
+            {
+            new(-(canvasBorders.x - playerLimit), canvasBorders.y - playerLimit),
+            new(canvasBorders.x - playerLimit, canvasBorders.y - playerLimit),
+
+            new(-(canvasBorders.x - playerLimit), -(canvasBorders.y - playerLimit)),
+            new(canvasBorders.x - playerLimit, -(canvasBorders.y - playerLimit)),
+
+            new(-(canvasBorders.x - playerLimit), -(canvasBorders.y - playerLimit)),
+            new(-(canvasBorders.x - playerLimit), canvasBorders.y - playerLimit),
+
+            new(canvasBorders.x - playerLimit, -(canvasBorders.y - playerLimit)),
+            new(canvasBorders.x - playerLimit, canvasBorders.y - playerLimit)
+            });
+
+
+        // Bullet Limits
+        Gizmos.color = Color.red;
+        Gizmos.DrawLineList(new Vector3[8]
+            {
+            new(-(canvasBorders.x - bulletLimit), canvasBorders.y - bulletLimit),
+            new(canvasBorders.x - bulletLimit, canvasBorders.y - bulletLimit),
+
+            new(-(canvasBorders.x - bulletLimit), -(canvasBorders.y - bulletLimit)),
+            new(canvasBorders.x - bulletLimit, -(canvasBorders.y - bulletLimit)),
+
+            new(-(canvasBorders.x - bulletLimit), -(canvasBorders.y - bulletLimit)),
+            new(-(canvasBorders.x - bulletLimit), canvasBorders.y - bulletLimit),
+
+            new(canvasBorders.x - bulletLimit, -(canvasBorders.y - bulletLimit)),
+            new(canvasBorders.x - bulletLimit, canvasBorders.y - bulletLimit)
+            });
+
+
+        // Bounds Limits
+        Gizmos.color = Color.blue + Color.red;
+        Gizmos.DrawLineList(new Vector3[8]
+            {
+            new(-(canvasBorders.x - boundsLimit), canvasBorders.y - boundsLimit),
+            new(canvasBorders.x - boundsLimit, canvasBorders.y - boundsLimit),
+
+            new(-(canvasBorders.x - boundsLimit), -(canvasBorders.y - boundsLimit)),
+            new(canvasBorders.x - boundsLimit, -(canvasBorders.y - boundsLimit)),
+
+            new(-(canvasBorders.x - boundsLimit), -(canvasBorders.y - boundsLimit)),
+            new(-(canvasBorders.x - boundsLimit), canvasBorders.y - boundsLimit),
+
+            new(canvasBorders.x - boundsLimit, -(canvasBorders.y - boundsLimit)),
+            new(canvasBorders.x - boundsLimit, canvasBorders.y - boundsLimit)
+            });
+
+
+        // Enemy Line
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(new Vector2(canvasBorders.x, canvasBorders.y - (enemyLine * canvasBorders.y)), new Vector2(-canvasBorders.x, canvasBorders.y - (enemyLine * canvasBorders.y)));
+    }
 
     private void Awake()
     {
@@ -70,11 +165,12 @@ public class GameManager : MonoBehaviour
 
     public void GodMode(bool on)
     {
-        PlayerController.Instance.SetHealth(on ? 1000 : 1);
+        PlayerController.Instance.SetHealth(on ? 1000000 : 1);
     }
 
     public void StartGame()
     {
+        hasStarted = true;
         isPlaying = true;
         Time.timeScale = 1;
         canvasGameplay.SetActive(true);
@@ -82,67 +178,89 @@ public class GameManager : MonoBehaviour
         LeanTween.alphaCanvas(canvasSelect.GetComponent<CanvasGroup>(), 0, 1).setOnComplete(() =>
         {
             canvasSelect.SetActive(false);
-        });
+        }).setIgnoreTimeScale(true);
 
         RoundsController.Instance.StartRound();
 
-        PlaySound(clipStart);
+        PlaySound(clipStart, 2f);
     }
 
     private void Update()
     {
-        if (isPlaying)
+        UpdateBorders();
+
+        if (hasStarted)
         {
             if (Input.GetButtonDown(_Cancel))
             {
                 Pause();
             }
 
-            //DebugMode
-            if (Input.GetKeyDown(KeyCode.P))
+            if (isPlaying)
             {
-                leftForNextGroup = 0;
-            }
+                if (leftForNextGroup == 0)
+                {
+                    RoundsController.Instance.StartGroup();
+                }
 
-            if (leftForNextGroup == 0)
-            {
-                RoundsController.Instance.StartGroup();
+                //DebugMode
+                if (Input.GetKeyDown(KeyCode.P))
+                {
+                    leftForNextGroup = 0;
+                }
             }
         }
     }
 
-    public void PlaySound(AudioClip clip)
+    private void UpdateBorders()
     {
-        source.PlayOneShot(clip);
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(uiRect, uiRect.position, mainCamera, out Vector3 canvasBorders);
+
+        playerLimits = new Vector2(-canvasBorders.x + playerLimit, -canvasBorders.y + playerLimit);
+        bulletLimits = new Vector2(-canvasBorders.x + bulletLimit, -canvasBorders.y + bulletLimit);
+        boundsLimits = new Vector2(-canvasBorders.x + boundsLimit, -canvasBorders.y + boundsLimit);
+        enemyLineLimit = canvasBorders.y - (enemyLine * canvasBorders.y);
+        horizontalMultiplier = mainCamera.pixelWidth / 1280f;
+        horizontalInvertedMultiplier = 1280f / mainCamera.pixelWidth;
+
+        // black gradient borders to fix wider aspect ratios
+        shadowBorders.SetActive((mainCamera.pixelWidth / (float)mainCamera.pixelHeight) > 1.94f);
+    }
+
+    public void PlaySound(AudioClip clip, float volume = 1f)
+    {
+        source.PlayOneShot(clip, volume);
     }
 
     public void VolumePunch()
     {
-        LeanTween.cancel(tween1);
-        tween1 = LeanTween.value(colorAdjustments.postExposure.value, 50, volumeSpeed).setOnUpdate((float value) =>
+        LeanTween.cancel(tweenPostExposure1);
+        LeanTween.cancel(tweenPostExposure2);
+        tweenPostExposure1 = LeanTween.value(colorAdjustments.postExposure.value, 50, volumeSpeed).setOnUpdate((float value) =>
         {
             colorAdjustments.saturation.value = value;
         }).setOnComplete(() =>
         {
-            LeanTween.value(colorAdjustments.postExposure.value, 25, volumeSpeed).setOnUpdate((float value) =>
+            tweenPostExposure2 = LeanTween.value(colorAdjustments.postExposure.value, 25, volumeSpeed).setOnUpdate((float value) =>
             {
                 colorAdjustments.saturation.value = value;
-            });
+            }).id;
         }).id;
 
-        LeanTween.cancel(tween2);
-        tween2 = LeanTween.value(chromaticAberration.intensity.value, 0.1f, volumeSpeed).setOnUpdate((float value) =>
+        LeanTween.cancel(tweenChromaticAberration1);
+        LeanTween.cancel(tweenChromaticAberration2);
+        tweenChromaticAberration1 = LeanTween.value(chromaticAberration.intensity.value, 0.1f, volumeSpeed).setOnUpdate((float value) =>
         {
             chromaticAberration.intensity.value = value;
         }).setOnComplete(() =>
         {
-            LeanTween.value(chromaticAberration.intensity.value, 0.05f, volumeSpeed).setOnUpdate((float value) =>
+            tweenChromaticAberration2 = LeanTween.value(chromaticAberration.intensity.value, 0.05f, volumeSpeed).setOnUpdate((float value) =>
             {
                 chromaticAberration.intensity.value = value;
-            });
+            }).id;
         }).id;
 
-        PlaySound(clipBoom);
+        PlaySound(clipBoom, 0.25f);
     }
 
     public void UpScore(int value)
@@ -159,10 +277,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SelectColor(int value)
+    public void EndLevel()
     {
-        PlayerController.Instance._properties.color = colors[value];
-        PlayerController.Instance.SetColor();
+        if (isPlaying)
+        {
+            isPlaying = false;
+            hasStarted = false;
+            canvasGameplay.SetActive(false);
+            canvasEnd.SetActive(true);
+
+            endScore.SetText(postcore + score);
+            PlaySound(clipEnd, 2.5f);
+
+            Time.timeScale = 0.5f;
+
+            leftForNextGroup = -1;
+        }
     }
 
     public void Pause()
@@ -181,6 +311,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SelectColor(int value)
+    {
+        PlayerController.Instance._properties.color = colors[value];
+        PlayerController.Instance.SetColor();
+    }
+
     public void Retry()
     {
         SceneManager.LoadScene(0);
@@ -189,22 +325,5 @@ public class GameManager : MonoBehaviour
     public void Exit()
     {
         Application.Quit();
-    }
-
-    public void EndLevel()
-    {
-        if (isPlaying)
-        {
-            isPlaying = false;
-            canvasGameplay.SetActive(false);
-            canvasEnd.SetActive(true);
-
-            endScore.SetText(postcore + score);
-            PlaySound(clipEnd);
-
-            Time.timeScale = 0.5f;
-
-            leftForNextGroup = -1;
-        }
     }
 }
