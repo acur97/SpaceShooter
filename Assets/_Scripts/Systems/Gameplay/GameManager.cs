@@ -178,7 +178,7 @@ public class GameManager : MonoBehaviour
         LeanTween.alphaCanvas(canvasSelect.GetComponent<CanvasGroup>(), 0, 1).setOnComplete(() =>
         {
             canvasSelect.SetActive(false);
-        });
+        }).setIgnoreTimeScale(true);
 
         RoundsController.Instance.StartRound();
 
@@ -282,11 +282,12 @@ public class GameManager : MonoBehaviour
         if (isPlaying)
         {
             isPlaying = false;
+            hasStarted = false;
             canvasGameplay.SetActive(false);
             canvasEnd.SetActive(true);
 
             endScore.SetText(postcore + score);
-            PlaySound(clipEnd, 2f);
+            PlaySound(clipEnd, 2.5f);
 
             Time.timeScale = 0.5f;
 

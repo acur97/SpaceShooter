@@ -1,9 +1,9 @@
 const cacheName = "Urrego-PolygonUs_PruebaTecnica-0.0.2";
 const contentToCache = [
     "Build/docs.loader.js",
-    "Build/docs.framework.js",
-    "Build/docs.data",
-    "Build/docs.wasm",
+    "Build/docs.framework.js.br",
+    "Build/docs.data.br",
+    "Build/docs.wasm.br",
     "TemplateData/style.css"
 
 ];

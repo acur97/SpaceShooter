@@ -16,7 +16,7 @@ MonoBehaviour:
   speed: 4
   bulletSpeed: 10
   coolDown: 0.1
-  health: 100
+  health: 20
   sprite: {fileID: 0}
   behaviour: 0
   behaviourMathfSin: 1.5
