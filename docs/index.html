@@ -92,7 +92,7 @@
       function CheckDevice()
       {
         if (typeof _unityInstance !== 'undefined' && _unityInstance !== null) {
-            _unityInstance.SendMessage('DeviceChecker', 'OnDeviceCheck', isMobile);
+            _unityInstance.SendMessage('ControlsManager', 'OnDeviceCheck', isMobile);
         } else {
             console.error("unityInstance is not defined or null");
         }
