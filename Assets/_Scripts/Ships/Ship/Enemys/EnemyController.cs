@@ -101,7 +101,7 @@ public class EnemyController : ShipBaseController
                 break;
 
             case ShipScriptable.Behaviour.direct:
-                if (transform.position.y > 1.5f)
+                if (transform.position.y > GameManager.EnemyLine)
                 {
                     transform.position += _properties.speed * Time.deltaTime * transform.up;
                 }
@@ -109,20 +109,20 @@ public class EnemyController : ShipBaseController
 
             case ShipScriptable.Behaviour.waves:
                 transform.position += _properties.speed * Time.deltaTime * transform.up;
-                transform.localPosition = new Vector2(startPosition.x + Mathf.Sin(Time.time) * _properties.behaviourMathfSin, transform.localPosition.y);
+                transform.localPosition = new Vector2(startPosition.x + Mathf.Sin(Time.time * GameManager.HorizontalInvertedMultiplier) * _properties.behaviourMathfSin * GameManager.HorizontalMultiplier, transform.localPosition.y);
                 break;
 
             case ShipScriptable.Behaviour.wavesDirect:
-                if (transform.position.y > 1.5f)
+                if (transform.position.y > GameManager.EnemyLine)
                 {
                     transform.position += _properties.speed * Time.deltaTime * transform.up;
                 }
 
-                transform.localPosition = new Vector2(startPosition.x + Mathf.Sin(Time.time) * _properties.behaviourMathfSin, transform.localPosition.y);
+                transform.localPosition = new Vector2(startPosition.x + Mathf.Sin(Time.time * GameManager.HorizontalInvertedMultiplier) * _properties.behaviourMathfSin * GameManager.HorizontalMultiplier, transform.localPosition.y);
                 break;
 
             case ShipScriptable.Behaviour.diagonal:
-                if (transform.localEulerAngles.z == 225)
+                if (transform.localEulerAngles.z == 135)
                 {
                     transform.position += _properties.speed * Time.deltaTime * -transform.right;
                 }
@@ -156,12 +156,12 @@ public class EnemyController : ShipBaseController
                 break;
         }
 
-        if (transform.position.y <= -3.3f || transform.position.y >= 3.5f)
+        if (transform.position.y <= -GameManager.BoundsLimits.y || transform.position.y >= GameManager.BoundsLimits.y)
         {
             Dead();
         }
 
-        if (transform.position.y >= -2.25f)
+        if (transform.position.y >= -GameManager.PlayerLimits.y)
         {
             switch (_properties.attack)
             {

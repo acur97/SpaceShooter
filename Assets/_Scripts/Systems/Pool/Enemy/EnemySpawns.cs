@@ -36,10 +36,10 @@ public class EnemySpawns : PoolBaseController
         //Debug.LogWarning($"Grupo con enemigos tipo: {_group.ship.name}");
         //Debug.LogWarning(_group.spawnType);
 
-        groupRandom = Random.Range(-4.5f, 4.5f);
+        groupRandom = Random.Range(-GameManager.PlayerLimits.x, GameManager.PlayerLimits.x);
         for (int i = 0; i < _group.count; i++)
         {
-            InitEnemy(_group.ship, _group, Random.Range(-4.5f, 4.5f));
+            InitEnemy(_group.ship, _group, Random.Range(-GameManager.PlayerLimits.x, GameManager.PlayerLimits.x));
 
             if (_group.minTimeBetweenSpawn > 0 || _group.maxTimeBetweenSpawn > 0 || _group.spawnType != Group.SpawnType.allAtOnce)
             {
@@ -57,19 +57,19 @@ public class EnemySpawns : PoolBaseController
                 switch (group.spawnType)
                 {
                     case Group.SpawnType.random:
-                        enemys[i].transform.position = new Vector2(random, 3.3f);
+                        enemys[i].transform.position = new Vector2(random, GameManager.BoundsLimits.y);
                         break;
 
                     case Group.SpawnType.row:
-                        enemys[i].transform.position = new Vector2(groupRandom, 3.3f);
+                        enemys[i].transform.position = new Vector2(groupRandom, GameManager.BoundsLimits.y);
                         break;
 
                     case Group.SpawnType.only:
-                        enemys[i].transform.position = new Vector2(random, 3.3f);
+                        enemys[i].transform.position = new Vector2(random, GameManager.BoundsLimits.y);
                         break;
 
                     case Group.SpawnType.allAtOnce:
-                        enemys[i].transform.position = new Vector2(random, 3.3f);
+                        enemys[i].transform.position = new Vector2(random, GameManager.BoundsLimits.y);
                         break;
 
                     default:

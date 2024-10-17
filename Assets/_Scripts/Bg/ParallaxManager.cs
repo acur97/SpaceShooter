@@ -4,6 +4,7 @@ public class ParallaxManager : MonoBehaviour
 {
     [SerializeField] private Material mat;
     [SerializeField] private float speed = 1;
+    [SerializeField] private float xOffset = 10;
 
     private int materialsCount;
     private Material[] materials;
@@ -19,6 +20,8 @@ public class ParallaxManager : MonoBehaviour
         {
             materials[i] = transform.GetChild(i).GetComponent<SpriteRenderer>().material = Instantiate(mat);
         }
+
+        transform.localPosition = new Vector2(Random.Range(-xOffset, xOffset), 0);
     }
 
     private void Update()

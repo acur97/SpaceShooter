@@ -27,10 +27,10 @@ public class Bullet : MonoBehaviour
 
         transform.position += speed * Time.deltaTime * transform.up;
 
-        if (transform.position.x >= 5.5f ||
-            transform.position.x <= -5.5f ||
-            transform.position.y >= 4f ||
-            transform.position.y <= -4f)
+        if (transform.position.x >= GameManager.BulletLimits.x ||
+            transform.position.x <= -GameManager.BulletLimits.x ||
+            transform.position.y >= GameManager.BulletLimits.y ||
+            transform.position.y <= -GameManager.BulletLimits.y)
         {
             transform.SetPositionAndRotation(Vector2.zero, Quaternion.identity);
             gameObject.SetActive(false);

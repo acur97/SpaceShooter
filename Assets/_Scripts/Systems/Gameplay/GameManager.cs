@@ -41,6 +41,35 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject canvasEnd;
 
     [Space]
+    [SerializeField] private GameObject shadowBorders;
+
+    [Header("Screen Properties")]
+    [SerializeField] private float playerLimit = -0.4f;
+    private Vector2 playerLimits = Vector2.zero;
+    public static Vector2 PlayerLimits => Instance.playerLimits;
+
+    [SerializeField] private float bulletLimit = 0.1f;
+    private Vector2 bulletLimits = Vector2.zero;
+    public static Vector2 BulletLimits => Instance.bulletLimits;
+
+    [SerializeField] private float boundsLimit = 0.5f;
+    private Vector2 boundsLimits = Vector2.zero;
+    public static Vector2 BoundsLimits => Instance.boundsLimits;
+
+    [SerializeField] private float enemyLine = 1.55f;
+    private float enemyLineLimit;
+    public static float EnemyLine => Instance.enemyLineLimit;
+
+    private float horizontalMultiplier = 1f;
+    public static float HorizontalMultiplier => Instance.horizontalMultiplier;
+    private float horizontalInvertedMultiplier = 1f;
+    public static float HorizontalInvertedMultiplier => Instance.horizontalInvertedMultiplier;
+
+    [Space]
+    [SerializeField] private RectTransform uiRect;
+    [SerializeField] private Camera mainCamera;
+
+    [Space]
     [SerializeField, ColorUsage(true, true)] private Color[] colors;
 
     [Header("Sounds")]
@@ -52,6 +81,69 @@ public class GameManager : MonoBehaviour
     public AudioClip clipZap;
 
     private const string _Cancel = "Cancel";
+
+    private void OnDrawGizmosSelected()
+    {
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(uiRect, uiRect.position, mainCamera, out Vector3 canvasBorders);
+
+        // Player Limits
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLineList(new Vector3[8]
+            {
+            new(-(canvasBorders.x - playerLimit), canvasBorders.y - playerLimit),
+            new(canvasBorders.x - playerLimit, canvasBorders.y - playerLimit),
+
+            new(-(canvasBorders.x - playerLimit), -(canvasBorders.y - playerLimit)),
+            new(canvasBorders.x - playerLimit, -(canvasBorders.y - playerLimit)),
+
+            new(-(canvasBorders.x - playerLimit), -(canvasBorders.y - playerLimit)),
+            new(-(canvasBorders.x - playerLimit), canvasBorders.y - playerLimit),
+
+            new(canvasBorders.x - playerLimit, -(canvasBorders.y - playerLimit)),
+            new(canvasBorders.x - playerLimit, canvasBorders.y - playerLimit)
+            });
+
+
+        // Bullet Limits
+        Gizmos.color = Color.red;
+        Gizmos.DrawLineList(new Vector3[8]
+            {
+            new(-(canvasBorders.x - bulletLimit), canvasBorders.y - bulletLimit),
+            new(canvasBorders.x - bulletLimit, canvasBorders.y - bulletLimit),
+
+            new(-(canvasBorders.x - bulletLimit), -(canvasBorders.y - bulletLimit)),
+            new(canvasBorders.x - bulletLimit, -(canvasBorders.y - bulletLimit)),
+
+            new(-(canvasBorders.x - bulletLimit), -(canvasBorders.y - bulletLimit)),
+            new(-(canvasBorders.x - bulletLimit), canvasBorders.y - bulletLimit),
+
+            new(canvasBorders.x - bulletLimit, -(canvasBorders.y - bulletLimit)),
+            new(canvasBorders.x - bulletLimit, canvasBorders.y - bulletLimit)
+            });
+
+
+        // Bounds Limits
+        Gizmos.color = Color.blue + Color.red;
+        Gizmos.DrawLineList(new Vector3[8]
+            {
+            new(-(canvasBorders.x - boundsLimit), canvasBorders.y - boundsLimit),
+            new(canvasBorders.x - boundsLimit, canvasBorders.y - boundsLimit),
+
+            new(-(canvasBorders.x - boundsLimit), -(canvasBorders.y - boundsLimit)),
+            new(canvasBorders.x - boundsLimit, -(canvasBorders.y - boundsLimit)),
+
+            new(-(canvasBorders.x - boundsLimit), -(canvasBorders.y - boundsLimit)),
+            new(-(canvasBorders.x - boundsLimit), canvasBorders.y - boundsLimit),
+
+            new(canvasBorders.x - boundsLimit, -(canvasBorders.y - boundsLimit)),
+            new(canvasBorders.x - boundsLimit, canvasBorders.y - boundsLimit)
+            });
+
+
+        // Enemy Line
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(new Vector2(canvasBorders.x, canvasBorders.y - (enemyLine * canvasBorders.y)), new Vector2(-canvasBorders.x, canvasBorders.y - (enemyLine * canvasBorders.y)));
+    }
 
     private void Awake()
     {
@@ -95,6 +187,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        UpdateBorders();
+
         if (hasStarted)
         {
             if (Input.GetButtonDown(_Cancel))
@@ -116,6 +210,21 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void UpdateBorders()
+    {
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(uiRect, uiRect.position, mainCamera, out Vector3 canvasBorders);
+
+        playerLimits = new Vector2(-canvasBorders.x + playerLimit, -canvasBorders.y + playerLimit);
+        bulletLimits = new Vector2(-canvasBorders.x + bulletLimit, -canvasBorders.y + bulletLimit);
+        boundsLimits = new Vector2(-canvasBorders.x + boundsLimit, -canvasBorders.y + boundsLimit);
+        enemyLineLimit = canvasBorders.y - (enemyLine * canvasBorders.y);
+        horizontalMultiplier = mainCamera.pixelWidth / 1280f;
+        horizontalInvertedMultiplier = 1280f / mainCamera.pixelWidth;
+
+        // black gradient borders to fix wider aspect ratios
+        shadowBorders.SetActive((mainCamera.pixelWidth / (float)mainCamera.pixelHeight) > 1.94f);
     }
 
     public void PlaySound(AudioClip clip, float volume = 1f)

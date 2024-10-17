@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : ShipBaseController
 {
     public static PlayerController Instance { get; private set; }
+
+    [SerializeField] private Slider healthBar;
 
     private Vector3 inputMove;
     private bool hold = false;
@@ -19,6 +22,8 @@ public class PlayerController : ShipBaseController
     {
         Instance = this;
 
+        healthBar.maxValue = _properties.health;
+        healthBar.value = _properties.health;
         SetHealth(_properties.health);
         SetColor();
     }
@@ -55,8 +60,8 @@ public class PlayerController : ShipBaseController
                 Input.GetAxis(_Vertical) * _properties.speed * Time.deltaTime);
 
             transform.localPosition = new Vector2(
-                Mathf.Clamp(transform.localPosition.x + inputMove.x, -4.5f, 4.5f),
-                Mathf.Clamp(transform.localPosition.y + inputMove.y, -2.5f, 2.5f));
+                Mathf.Clamp(transform.localPosition.x + inputMove.x, -GameManager.PlayerLimits.x, GameManager.PlayerLimits.x),
+                Mathf.Clamp(transform.localPosition.y + inputMove.y, -GameManager.PlayerLimits.y, GameManager.PlayerLimits.y));
 
             //shoot
             if (Input.GetButtonDown(_Fire))
@@ -102,6 +107,7 @@ public class PlayerController : ShipBaseController
             VfxPool.Instance.InitVfx(transform);
 
             health--;
+            healthBar.value = health;
             if (health <= 0)
             {
                 GameManager.Instance.EndLevel();
