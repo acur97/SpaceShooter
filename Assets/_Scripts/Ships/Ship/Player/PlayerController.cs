@@ -5,6 +5,7 @@ public class PlayerController : ShipBaseController
 {
     public static PlayerController Instance { get; private set; }
 
+    [SerializeField] private ControlsManager controls;
     [SerializeField] private Slider healthBar;
 
     private Vector3 inputMove;
@@ -55,21 +56,24 @@ public class PlayerController : ShipBaseController
         if (GameManager.Instance.isPlaying)
         {
             //move
-            inputMove = new Vector2(
-                Input.GetAxis(_Horizontal) * _properties.speed * Time.deltaTime,
-                Input.GetAxis(_Vertical) * _properties.speed * Time.deltaTime);
+            //inputMove = new Vector2(
+            //    Input.GetAxis(_Horizontal) * _properties.speed * Time.deltaTime,
+            //    Input.GetAxis(_Vertical) * _properties.speed * Time.deltaTime);
+            inputMove = new Vector2(controls.move.x * _properties.speed * Time.deltaTime, controls.move.y * _properties.speed * Time.deltaTime);
 
             transform.localPosition = new Vector2(
                 Mathf.Clamp(transform.localPosition.x + inputMove.x, -GameManager.PlayerLimits.x, GameManager.PlayerLimits.x),
                 Mathf.Clamp(transform.localPosition.y + inputMove.y, -GameManager.PlayerLimits.y, GameManager.PlayerLimits.y));
 
             //shoot
-            if (Input.GetButtonDown(_Fire))
+            //if (Input.GetButtonDown(_Fire))
+            if (controls.fireDown)
             {
                 hold = true;
                 timer = _properties.coolDown;
             }
-            if (Input.GetButtonUp(_Fire))
+            //if (Input.GetButtonUp(_Fire))
+            if (controls.fireUp)
             {
                 hold = false;
                 timer = -1;
