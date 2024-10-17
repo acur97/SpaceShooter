@@ -18,14 +18,25 @@ public class ControlsManager : MonoBehaviour
     private const string _Vertical = "Vertical";
     private const string _Fire = "Fire1";
 
-    private void Awake()
+    [System.Obsolete]
+    private void Start()
     {
-        if (SystemInfo.deviceType == DeviceType.Handheld)
+#if UNITY_WEBGL && !UNITY_EDITOR
+        // Call the JavaScript function to check the device
+        Application.ExternalCall("CheckDevice");
+#elif UNITY_EDITOR
+        OnDeviceCheck(0);
+#endif
+    }
+
+    // This method will be called from JavaScript
+    public void OnDeviceCheck(int isMobile)
+    {
+        touchControls = isMobile == 1;
+        touchUi.SetActive(touchControls);
+
+        if (touchControls)
         {
-            touchControls = true;
-            touchUi.SetActive(true);
-
-
             EventTrigger.Entry entryDown = new()
             {
                 eventID = EventTriggerType.PointerDown
@@ -39,11 +50,6 @@ public class ControlsManager : MonoBehaviour
             };
             entryUp.callback.AddListener((eventData) => { fireDown = false; fireUp = true; });
             fireBtn.triggers.Add(entryUp);
-        }
-        else
-        {
-            touchControls = false;
-            touchUi.SetActive(false);
         }
     }
 
