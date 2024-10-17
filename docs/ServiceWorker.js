@@ -1,4 +1,4 @@
-const cacheName = "Urrego-PolygonUs_PruebaTecnica-0.0.2";
+const cacheName = "Urrego-PolygonUs_PruebaTecnica-0.1.0";
 const contentToCache = [
     "Build/docs.loader.js",
     "Build/docs.framework.js.br",

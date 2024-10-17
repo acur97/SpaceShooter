@@ -18,6 +18,7 @@ public class ControlsManager : MonoBehaviour
     private const string _Vertical = "Vertical";
     private const string _Fire = "Fire1";
 
+    [System.Obsolete]
     private void Start()
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
