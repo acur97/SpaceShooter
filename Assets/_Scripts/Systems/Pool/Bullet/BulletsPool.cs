@@ -25,7 +25,7 @@ public class BulletsPool : PoolBaseController
 
     public void InitBullet(Transform _position, float _speed, bool _double, Bullet.TypeBullet type)
     {
-        GameManager.Instance.PlaySound(GameManager.Instance.clipZap, 0.2f);
+        AudioManager.Instance.PlaySound(AudioManager.AudioType.Zap, 0.2f);
 
         if (_double)
         {

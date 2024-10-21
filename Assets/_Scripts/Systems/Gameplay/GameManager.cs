@@ -1,7 +1,7 @@
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
+using UnityEngine.LowLevel;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -11,17 +11,6 @@ public class GameManager : MonoBehaviour
     public bool hasStarted = false;
     public bool isPlaying = false;
     public int leftForNextGroup = 0;
-
-    [Header("Post Processing")]
-    [SerializeField] private Volume volume;
-    [SerializeField] private float volumeSpeed = 0.1f;
-    private VolumeProfile profile;
-    private ColorAdjustments colorAdjustments;
-    private ChromaticAberration chromaticAberration;
-    private int tweenPostExposure1;
-    private int tweenPostExposure2;
-    private int tweenChromaticAberration1;
-    private int tweenChromaticAberration2;
 
     [Header("Score")]
     public int scoreCoin = 5;
@@ -34,13 +23,7 @@ public class GameManager : MonoBehaviour
     private const string preScore = "Score: ";
     private const string postcore = "Final score:\n ";
 
-    [Header("UI")]
-    [SerializeField] private GameObject canvasSelect;
-    [SerializeField] private GameObject canvasGameplay;
-    [SerializeField] private GameObject canvasPause;
-    [SerializeField] private GameObject canvasEnd;
-
-    [Space]
+    [Header("Ui")]
     [SerializeField] private GameObject shadowBorders;
 
     [Header("Screen Properties")]
@@ -72,15 +55,14 @@ public class GameManager : MonoBehaviour
     [Space]
     [SerializeField, ColorUsage(true, true)] private Color[] colors;
 
-    [Header("Sounds")]
-    [SerializeField] private AudioSource source;
-    [SerializeField] private AudioClip clipBoom;
-    [SerializeField] private AudioClip clipCoin;
-    [SerializeField] private AudioClip clipStart;
-    [SerializeField] private AudioClip clipEnd;
-    public AudioClip clipZap;
-
     private const string _Cancel = "Cancel";
+
+    [Header("Managers")]
+    [SerializeField] private UiManager uiManager;
+    [SerializeField] private RoundsController roundsController;
+    [SerializeField] private ControlsManager controlsManager;
+    [SerializeField] private PostProcessingController postProcessingController;
+    [SerializeField] private AudioManager audioManager;
 
     private void OnDrawGizmosSelected()
     {
@@ -145,27 +127,10 @@ public class GameManager : MonoBehaviour
         Gizmos.DrawLine(new Vector2(canvasBorders.x, canvasBorders.y - (enemyLine * canvasBorders.y)), new Vector2(-canvasBorders.x, canvasBorders.y - (enemyLine * canvasBorders.y)));
     }
 
-    private void Awake()
+    public void SelectColor(int value)
     {
-        Instance = this;
-
-        profile = volume.profile;
-        profile.TryGet(out colorAdjustments);
-        profile.TryGet(out chromaticAberration);
-
-        scoreText.SetText(preScore + score);
-
-        canvasSelect.SetActive(true);
-        canvasGameplay.SetActive(false);
-        canvasPause.SetActive(false);
-        canvasEnd.SetActive(false);
-
-        Time.timeScale = 1;
-    }
-
-    public void GodMode(bool on)
-    {
-        PlayerController.Instance.SetHealth(on ? 1000000 : 1);
+        PlayerController.Instance._properties.color = colors[value];
+        PlayerController.Instance.SetColor();
     }
 
     public void StartGame()
@@ -173,16 +138,37 @@ public class GameManager : MonoBehaviour
         hasStarted = true;
         isPlaying = true;
         Time.timeScale = 1;
-        canvasGameplay.SetActive(true);
 
-        LeanTween.alphaCanvas(canvasSelect.GetComponent<CanvasGroup>(), 0, 1).setOnComplete(() =>
-        {
-            canvasSelect.SetActive(false);
-        }).setIgnoreTimeScale(true);
+        UiManager.Instance.SetUi(UiType.Gameplay, true);
+        UiManager.Instance.SetUi(UiType.Select, false, 1);
 
         RoundsController.Instance.StartRound();
 
-        PlaySound(clipStart, 2f);
+        AudioManager.Instance.PlaySound(AudioManager.AudioType.Start, 2f);
+    }
+
+    public void GodMode(bool on)
+    {
+        PlayerController.Instance.SetHealth(on ? 1000000 : 1);
+    }
+
+    private void Awake()
+    {
+        PlayerLoopSystem loop = PlayerLoop.GetCurrentPlayerLoop();
+        PlayerLoopHelper.Initialize(ref loop, InjectPlayerLoopTimings.Minimum);
+        //PlayerLoopHelper.DumpCurrentPlayerLoop();
+
+        Instance = this;
+
+        uiManager.Init();
+        roundsController.Init();
+        //controlsManager.Init();
+        audioManager.Init();
+        postProcessingController.Init();
+
+        scoreText.SetText(preScore + score);
+
+        Time.timeScale = 1;
     }
 
     private void Update()
@@ -227,42 +213,6 @@ public class GameManager : MonoBehaviour
         shadowBorders.SetActive((mainCamera.pixelWidth / (float)mainCamera.pixelHeight) > 1.94f);
     }
 
-    public void PlaySound(AudioClip clip, float volume = 1f)
-    {
-        source.PlayOneShot(clip, volume);
-    }
-
-    public void VolumePunch()
-    {
-        LeanTween.cancel(tweenPostExposure1);
-        LeanTween.cancel(tweenPostExposure2);
-        tweenPostExposure1 = LeanTween.value(colorAdjustments.postExposure.value, 50, volumeSpeed).setOnUpdate((float value) =>
-        {
-            colorAdjustments.saturation.value = value;
-        }).setOnComplete(() =>
-        {
-            tweenPostExposure2 = LeanTween.value(colorAdjustments.postExposure.value, 25, volumeSpeed).setOnUpdate((float value) =>
-            {
-                colorAdjustments.saturation.value = value;
-            }).id;
-        }).id;
-
-        LeanTween.cancel(tweenChromaticAberration1);
-        LeanTween.cancel(tweenChromaticAberration2);
-        tweenChromaticAberration1 = LeanTween.value(chromaticAberration.intensity.value, 0.1f, volumeSpeed).setOnUpdate((float value) =>
-        {
-            chromaticAberration.intensity.value = value;
-        }).setOnComplete(() =>
-        {
-            tweenChromaticAberration2 = LeanTween.value(chromaticAberration.intensity.value, 0.05f, volumeSpeed).setOnUpdate((float value) =>
-            {
-                chromaticAberration.intensity.value = value;
-            }).id;
-        }).id;
-
-        PlaySound(clipBoom, 0.25f);
-    }
-
     public void UpScore(int value)
     {
         if (isPlaying)
@@ -272,7 +222,7 @@ public class GameManager : MonoBehaviour
 
             if (value == scoreCoin)
             {
-                PlaySound(clipCoin);
+                AudioManager.Instance.PlaySound(AudioManager.AudioType.Coin);
             }
         }
     }
@@ -283,11 +233,10 @@ public class GameManager : MonoBehaviour
         {
             isPlaying = false;
             hasStarted = false;
-            canvasGameplay.SetActive(false);
-            canvasEnd.SetActive(true);
+            UiManager.Instance.SetUi(UiType.End, true, 1, () => UiManager.Instance.SetUi(UiType.Gameplay, false));
 
             endScore.SetText(postcore + score);
-            PlaySound(clipEnd, 2.5f);
+            AudioManager.Instance.PlaySound(AudioManager.AudioType.End, 2.5f);
 
             Time.timeScale = 0.5f;
 
@@ -297,29 +246,23 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
-        if (!canvasPause.activeSelf)
+        if (isPlaying)
         {
-            canvasPause.SetActive(true);
+            UiManager.Instance.SetUi(UiType.Pause, true);
             Time.timeScale = 0;
             isPlaying = false;
         }
         else
         {
-            canvasPause.SetActive(false);
+            UiManager.Instance.SetUi(UiType.Pause, false);
             Time.timeScale = 1;
             isPlaying = true;
         }
     }
 
-    public void SelectColor(int value)
-    {
-        PlayerController.Instance._properties.color = colors[value];
-        PlayerController.Instance.SetColor();
-    }
-
     public void Retry()
     {
-        SceneManager.LoadScene(0);
+        UiManager.Instance.SetUi(UiType.Fade, true, 0.25f, () => SceneManager.LoadScene(0));
     }
 
     public void Exit()

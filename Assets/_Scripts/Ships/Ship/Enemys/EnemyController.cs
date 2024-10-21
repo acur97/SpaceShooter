@@ -5,6 +5,7 @@ public class EnemyController : ShipBaseController
     private Vector2 startPosition;
     private float customFloat = 0;
     private bool customBool = false;
+    private float _timeToContinue;
 
     private const string _Bullet = "Bullet";
 
@@ -22,6 +23,8 @@ public class EnemyController : ShipBaseController
         module.startColor = _properties.color;
         module = engine2.main;
         module.startColor = _properties.color;
+
+        _timeToContinue = _properties.timeToContinue;
 
         transform.localEulerAngles = new Vector3(0, 0, 180);
 
@@ -94,6 +97,16 @@ public class EnemyController : ShipBaseController
             return;
         }
 
+        if (_timeToContinue > 0)
+        {
+            _timeToContinue -= Time.deltaTime;
+
+            if (_timeToContinue < 0)
+            {
+                _timeToContinue = 0;
+            }
+        }
+
         switch (_properties.behaviour)
         {
             case ShipScriptable.Behaviour.linear:
@@ -101,7 +114,7 @@ public class EnemyController : ShipBaseController
                 break;
 
             case ShipScriptable.Behaviour.direct:
-                if (transform.position.y > GameManager.EnemyLine)
+                if (transform.position.y > GameManager.EnemyLine || _timeToContinue == 0)
                 {
                     transform.position += _properties.speed * Time.deltaTime * transform.up;
                 }
@@ -113,7 +126,7 @@ public class EnemyController : ShipBaseController
                 break;
 
             case ShipScriptable.Behaviour.wavesDirect:
-                if (transform.position.y > GameManager.EnemyLine)
+                if (transform.position.y > GameManager.EnemyLine || _timeToContinue == 0)
                 {
                     transform.position += _properties.speed * Time.deltaTime * transform.up;
                 }
@@ -207,7 +220,7 @@ public class EnemyController : ShipBaseController
         {
             collision.gameObject.SetActive(false);
 
-            GameManager.Instance.VolumePunch();
+            PostProcessingController.Instance.VolumePunch();
             VfxPool.Instance.InitVfx(transform);
 
             health--;
@@ -221,7 +234,6 @@ public class EnemyController : ShipBaseController
     public void Dead()
     {
         gameObject.SetActive(false);
-        transform.SetLocalPositionAndRotation(Vector2.zero, Quaternion.identity);
 
         GameManager.Instance.leftForNextGroup--;
         GameManager.Instance.UpScore(GameManager.Instance.scoreEnemy);

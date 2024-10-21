@@ -32,7 +32,6 @@ public class Bullet : MonoBehaviour
             transform.position.y >= GameManager.BulletLimits.y ||
             transform.position.y <= -GameManager.BulletLimits.y)
         {
-            transform.SetPositionAndRotation(Vector2.zero, Quaternion.identity);
             gameObject.SetActive(false);
         }
     }

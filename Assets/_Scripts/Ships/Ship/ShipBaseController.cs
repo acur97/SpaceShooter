@@ -5,6 +5,7 @@ public class ShipBaseController : MonoBehaviour
     [Header("Properties")]
     public ShipScriptable _properties;
     [HideInInspector] public int health = 0;
+    [HideInInspector] public float healthNormalized = 1f;
 
     [Space]
     public new SpriteRenderer renderer;

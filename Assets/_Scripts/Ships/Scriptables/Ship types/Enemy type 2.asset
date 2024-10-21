@@ -19,4 +19,6 @@ MonoBehaviour:
   health: 2
   sprite: {fileID: 21300000, guid: abee6315eac439a4f810c7357838182a, type: 3}
   behaviour: 1
+  behaviourMathfSin: 1.5
   attack: 0
+  timeToContinue: 20

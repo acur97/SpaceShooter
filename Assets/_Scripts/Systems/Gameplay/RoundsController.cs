@@ -9,7 +9,7 @@ public class RoundsController : MonoBehaviour
     [SerializeField] private int roundCount = -1;
     [SerializeField] private int groupCount = -1;
 
-    private void Awake()
+    public void Init()
     {
         Instance = this;
     }

@@ -21,3 +21,4 @@ MonoBehaviour:
   behaviour: 1
   behaviourMathfSin: 1.5
   attack: 1
+  timeToContinue: 45

@@ -4769,7 +4769,7 @@ ParticleSystemRenderer:
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
-  m_MotionVectors: 1
+  m_MotionVectors: 2
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
@@ -9602,7 +9602,7 @@ ParticleSystemRenderer:
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
-  m_MotionVectors: 1
+  m_MotionVectors: 2
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
@@ -9718,6 +9718,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _properties: {fileID: 11400000, guid: 0b2d8ee1a193cbd458ba93593f505ec6, type: 2}
   health: 0
+  healthNormalized: 1
   renderer: {fileID: 2265447281794558195}
   engine1: {fileID: 2265447281500441620}
   engine2: {fileID: 2265447281486309951}

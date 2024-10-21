@@ -13,9 +13,6 @@ public class PlayerController : ShipBaseController
 
     private readonly int _ColorCapsule = Shader.PropertyToID("_ColorCapsule");
     private readonly int _Color = Shader.PropertyToID("_Color");
-    private const string _Horizontal = "Horizontal";
-    private const string _Vertical = "Vertical";
-    private const string _Fire = "Fire1";
     private const string _Bullet = "Bullet";
     private const string _Collectable = "Collectable";
 
@@ -25,7 +22,9 @@ public class PlayerController : ShipBaseController
 
         healthBar.maxValue = _properties.health;
         healthBar.value = _properties.health;
+        healthNormalized = (float)health / _properties.health;
         SetHealth(_properties.health);
+
         SetColor();
     }
 
@@ -55,24 +54,17 @@ public class PlayerController : ShipBaseController
     {
         if (GameManager.Instance.isPlaying)
         {
-            //move
-            //inputMove = new Vector2(
-            //    Input.GetAxis(_Horizontal) * _properties.speed * Time.deltaTime,
-            //    Input.GetAxis(_Vertical) * _properties.speed * Time.deltaTime);
             inputMove = new Vector2(controls.move.x * _properties.speed * Time.deltaTime, controls.move.y * _properties.speed * Time.deltaTime);
 
             transform.localPosition = new Vector2(
                 Mathf.Clamp(transform.localPosition.x + inputMove.x, -GameManager.PlayerLimits.x, GameManager.PlayerLimits.x),
                 Mathf.Clamp(transform.localPosition.y + inputMove.y, -GameManager.PlayerLimits.y, GameManager.PlayerLimits.y));
 
-            //shoot
-            //if (Input.GetButtonDown(_Fire))
             if (controls.fireDown)
             {
                 hold = true;
                 timer = _properties.coolDown;
             }
-            //if (Input.GetButtonUp(_Fire))
             if (controls.fireUp)
             {
                 hold = false;
@@ -107,11 +99,19 @@ public class PlayerController : ShipBaseController
         {
             collision.gameObject.SetActive(false);
 
-            GameManager.Instance.VolumePunch();
+            PostProcessingController.Instance.VolumePunch();
             VfxPool.Instance.InitVfx(transform);
 
+            if (health < 0)
+            {
+                return;
+            }
+
             health--;
+            healthNormalized = (float)health / _properties.health;
             healthBar.value = health;
+            PostProcessingController.Instance.SetVolumeHealth(healthNormalized.Remap(0, 1, PostProcessingController.Instance.maxVignette, 0));
+
             if (health <= 0)
             {
                 GameManager.Instance.EndLevel();

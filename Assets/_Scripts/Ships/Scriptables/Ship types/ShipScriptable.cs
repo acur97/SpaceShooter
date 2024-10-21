@@ -21,4 +21,5 @@ public class ShipScriptable : ScriptableObject
     public float behaviourMathfSin = 1.5f;
     public enum Attack { continuous, continuousDouble, none }
     public Attack attack;
+    public int timeToContinue = -1;
 }
