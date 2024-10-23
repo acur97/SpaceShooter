@@ -16,4 +16,6 @@ public class ShipBaseController : MonoBehaviour
     [Header("Firing")]
     public Transform shootRoot;
     [HideInInspector] public float timer = -1;
+    [HideInInspector] public float timer2 = -1;
+    [HideInInspector] public bool timer2Up = false;
 }

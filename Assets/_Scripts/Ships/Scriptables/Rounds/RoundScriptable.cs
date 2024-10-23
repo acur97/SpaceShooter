@@ -3,6 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public struct Group
 {
+    public bool chained;
     public float timeToStart;
 
     public enum SpawnType { random, row, only, allAtOnce }

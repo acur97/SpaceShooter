@@ -6,7 +6,7 @@ public class PlayerController : ShipBaseController
 {
     public static PlayerController Instance { get; private set; }
 
-    [Header("Player Properties")]
+    [Header("Explosion Feedback")]
     [SerializeField] private float forceTime = 0.1f;
     [SerializeField] private float force = 1;
 

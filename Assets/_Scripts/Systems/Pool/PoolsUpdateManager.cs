@@ -5,7 +5,7 @@ public class PoolsUpdateManager : MonoBehaviour
 {
     public static Action PoolUpdate;
 
-    void Update()
+    private void Update()
     {
         PoolUpdate?.Invoke();
     }

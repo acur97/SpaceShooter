@@ -37,6 +37,21 @@ public class RoundsController : MonoBehaviour
 
             GameManager.Instance.leftForNextGroup = level.rounds[roundCount].groups[groupCount].count;
             EnemySpawns.Instance.InstantiateEnemys(level.rounds[roundCount].groups[groupCount]).Forget();
+
+            for (int i = groupCount + 1; i < level.rounds[roundCount].groups.Length; i++)
+            {
+                if (level.rounds[roundCount].groups[i].chained)
+                {
+                    groupCount++;
+
+                    GameManager.Instance.leftForNextGroup += level.rounds[roundCount].groups[i].count;
+                    EnemySpawns.Instance.InstantiateEnemys(level.rounds[roundCount].groups[i]).Forget();
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
         else
         {

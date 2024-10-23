@@ -27,6 +27,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject shadowBorders;
 
     [Header("Screen Properties")]
+    [SerializeField] private float innerLimit = -1.6f;
+    private Vector2 innerLimits = Vector2.zero;
+    public static Vector2 InnerLimits => Instance.innerLimits;
+
     [SerializeField] private float playerLimit = -0.4f;
     private Vector2 playerLimits = Vector2.zero;
     public static Vector2 PlayerLimits => Instance.playerLimits;
@@ -67,6 +71,24 @@ public class GameManager : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         RectTransformUtility.ScreenPointToWorldPointInRectangle(uiRect, uiRect.position, mainCamera, out Vector3 canvasBorders);
+
+        // Inner Limits
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLineList(new Vector3[8]
+            {
+            new(-(canvasBorders.x - innerLimit), canvasBorders.y - innerLimit),
+            new(canvasBorders.x - innerLimit, canvasBorders.y - innerLimit),
+
+            new(-(canvasBorders.x - innerLimit), -(canvasBorders.y - innerLimit)),
+            new(canvasBorders.x - innerLimit, -(canvasBorders.y - innerLimit)),
+
+            new(-(canvasBorders.x - innerLimit), -(canvasBorders.y - innerLimit)),
+            new(-(canvasBorders.x - innerLimit), canvasBorders.y - innerLimit),
+
+            new(canvasBorders.x - innerLimit, -(canvasBorders.y - innerLimit)),
+            new(canvasBorders.x - innerLimit, canvasBorders.y - innerLimit)
+            });
+
 
         // Player Limits
         Gizmos.color = Color.cyan;
@@ -202,9 +224,11 @@ public class GameManager : MonoBehaviour
     {
         RectTransformUtility.ScreenPointToWorldPointInRectangle(uiRect, uiRect.position, mainCamera, out Vector3 canvasBorders);
 
+        innerLimits  = new Vector2(-canvasBorders.x + innerLimit,  -canvasBorders.y + innerLimit);
         playerLimits = new Vector2(-canvasBorders.x + playerLimit, -canvasBorders.y + playerLimit);
         bulletLimits = new Vector2(-canvasBorders.x + bulletLimit, -canvasBorders.y + bulletLimit);
         boundsLimits = new Vector2(-canvasBorders.x + boundsLimit, -canvasBorders.y + boundsLimit);
+
         enemyLineLimit = canvasBorders.y - (enemyLine * canvasBorders.y);
         horizontalMultiplier = mainCamera.pixelWidth / 1280f;
         horizontalInvertedMultiplier = 1280f / mainCamera.pixelWidth;

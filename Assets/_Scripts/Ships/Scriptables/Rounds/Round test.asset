@@ -13,9 +13,59 @@ MonoBehaviour:
   m_Name: Round test
   m_EditorClassIdentifier: 
   groups:
-  - timeToStart: 2
-    spawnType: 0
-    count: 10
-    ship: {fileID: 11400000, guid: 371a0df8a176d5f4ca542cd22b00ec74, type: 2}
-    minTimeBetweenSpawn: 0.5
-    maxTimeBetweenSpawn: 1
+  - chained: 0
+    timeToStart: 2
+    spawnType: 3
+    count: 2
+    ship: {fileID: 11400000, guid: a3c57ab0a83fef840931bd8fa75961a5, type: 2}
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+  - chained: 1
+    timeToStart: 4
+    spawnType: 3
+    count: 2
+    ship: {fileID: 11400000, guid: a3c57ab0a83fef840931bd8fa75961a5, type: 2}
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+  - chained: 1
+    timeToStart: 6
+    spawnType: 3
+    count: 2
+    ship: {fileID: 11400000, guid: a3c57ab0a83fef840931bd8fa75961a5, type: 2}
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+  - chained: 1
+    timeToStart: 14
+    spawnType: 3
+    count: 2
+    ship: {fileID: 11400000, guid: a3c57ab0a83fef840931bd8fa75961a5, type: 2}
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+  - chained: 1
+    timeToStart: 16
+    spawnType: 3
+    count: 2
+    ship: {fileID: 11400000, guid: a3c57ab0a83fef840931bd8fa75961a5, type: 2}
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+  - chained: 1
+    timeToStart: 18
+    spawnType: 3
+    count: 2
+    ship: {fileID: 11400000, guid: a3c57ab0a83fef840931bd8fa75961a5, type: 2}
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+  - chained: 1
+    timeToStart: 20
+    spawnType: 3
+    count: 2
+    ship: {fileID: 11400000, guid: a3c57ab0a83fef840931bd8fa75961a5, type: 2}
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+  - chained: 1
+    timeToStart: 22
+    spawnType: 3
+    count: 2
+    ship: {fileID: 11400000, guid: a3c57ab0a83fef840931bd8fa75961a5, type: 2}
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0

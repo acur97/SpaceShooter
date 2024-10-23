@@ -22,7 +22,6 @@ public class EnemySpawns : PoolBaseController
         for (int i = 0; i < size; i++)
         {
             enemys[i] = Instantiate(prefab, transform).GetComponent<EnemyController>();
-            enemys[i].gameObject.SetActive(false);
         }
     }
 
@@ -33,12 +32,13 @@ public class EnemySpawns : PoolBaseController
             await UniTask.WaitForSeconds(_group.timeToStart, cancellationToken: cancellationToken);
         }
 
-        //Debug.LogWarning($"Grupo con enemigos tipo: {_group.ship.name}");
+        //Debug.LogWarning($"Group with enemies type: {_group.ship.name}");
         //Debug.LogWarning(_group.spawnType);
 
         groupRandom = Random.Range(-GameManager.PlayerLimits.x, GameManager.PlayerLimits.x);
         for (int i = 0; i < _group.count; i++)
         {
+            _group.ship.spawnCount = i;
             InitEnemy(_group.ship, _group, Random.Range(-GameManager.PlayerLimits.x, GameManager.PlayerLimits.x));
 
             if (_group.minTimeBetweenSpawn > 0 || _group.maxTimeBetweenSpawn > 0 || _group.spawnType != Group.SpawnType.allAtOnce)
@@ -70,9 +70,6 @@ public class EnemySpawns : PoolBaseController
 
                     case Group.SpawnType.allAtOnce:
                         enemys[i].transform.position = new Vector2(random, GameManager.BoundsLimits.y);
-                        break;
-
-                    default:
                         break;
                 }
 

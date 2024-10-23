@@ -23,16 +23,13 @@ public class EnemyController : ShipBaseController
         module = engine2.main;
         module.startColor = _properties.color;
 
-        movement._timeToContinue = _properties.timeToContinue;
-
         transform.localEulerAngles = new Vector3(0, 0, 180);
 
-        movement.Init(_properties.behaviour);
-        shoot.Init(_properties, shootRoot);
+        movement.Init(_properties.behaviour, _properties.timeToContinue, _properties.spawnCount);
 
         timer = _properties.coolDown;
-        movement.customFloat = 0;
-        movement.customBool = false;
+        timer2 = _properties.spaceCooldown;
+        timer2Up = false;
     }
 
     private void OnDestroy()
@@ -42,29 +39,68 @@ public class EnemyController : ShipBaseController
 
     private void OnUpdate()
     {
-        if (!gameObject.activeSelf)
+        if (!gameObject.activeSelf || !GameManager.Instance.isPlaying)
         {
             return;
         }
 
         movement.Move(_properties);
 
-        if (transform.position.y <= -GameManager.BoundsLimits.y || transform.position.y >= GameManager.BoundsLimits.y)
+        if (transform.position.x >= GameManager.BoundsLimits.x ||
+            transform.position.x <= -GameManager.BoundsLimits.x ||
+            transform.position.y >= GameManager.BoundsLimits.y ||
+            transform.position.y <= -GameManager.BoundsLimits.y)
+        //if (transform.position.y <= -GameManager.BoundsLimits.y || transform.position.y >= GameManager.BoundsLimits.y)
         {
             Dead();
+            return;
         }
-
 
         if (transform.position.y >= -GameManager.PlayerLimits.y && _properties.attack != ShipScriptable.Attack.none)
         {
             timer -= Time.deltaTime;
 
-            if (timer <= 0)
+            if (_properties.spaceCooldown > 0)
             {
-                shoot.Shoot();
+                if (timer2Up)
+                {
+                    timer2 += Time.deltaTime;
 
-                timer = _properties.coolDown;
+                    if (timer2 > _properties.spaceCooldown)
+                    {
+                        timer2 = _properties.spaceCooldown;
+                        timer2Up = false;
+                    }
+
+                    TimerToShoot();
+                }
+                else
+                {
+                    timer2 -= Time.deltaTime;
+
+                    if (timer2 < 0)
+                    {
+                        timer2 = 0;
+                        timer2Up = true;
+                    }
+                }
             }
+            else
+            {
+                TimerToShoot();
+            }
+        }
+    }
+
+    private void TimerToShoot()
+    {
+        timer -= Time.deltaTime;
+
+        if (timer <= 0)
+        {
+            shoot.Shoot(shootRoot, _properties);
+
+            timer = _properties.coolDown;
         }
     }
 

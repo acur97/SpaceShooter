@@ -13,7 +13,6 @@ public abstract class PoolBaseController : MonoBehaviour
         for (int i = 0; i < size; i++)
         {
             objects[i] = Instantiate(prefab, transform);
-            objects[i].SetActive(false);
         }
     }
 }

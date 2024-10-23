@@ -19,7 +19,6 @@ public class BulletsPool : PoolBaseController
         {
             bullets[i] = Instantiate(prefab, transform).GetComponent<Bullet>();
             bullets[i].renderer.material.SetColor(_Color, Color.white);
-            bullets[i].gameObject.SetActive(false);
         }
     }
 
@@ -29,8 +28,16 @@ public class BulletsPool : PoolBaseController
 
         if (_double)
         {
-            Init(new Vector2(_position.position.x + 0.157f, _position.position.y), _position.rotation, _speed, type);
-            Init(new Vector2(_position.position.x - 0.157f, _position.position.y), _position.rotation, _speed, type);
+            if (_position.parent.localEulerAngles.z == 0)
+            {
+                Init(new Vector2(_position.position.x + 0.157f, _position.position.y), _position.rotation, _speed, type);
+                Init(new Vector2(_position.position.x - 0.157f, _position.position.y), _position.rotation, _speed, type);
+            }
+            else
+            {
+                Init(new Vector2(_position.position.x, _position.position.y + 0.157f), _position.rotation, _speed, type);
+                Init(new Vector2(_position.position.x, _position.position.y - 0.157f), _position.rotation, _speed, type);
+            }
         }
         else
         {
