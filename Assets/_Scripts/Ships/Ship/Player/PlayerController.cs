@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,6 +6,11 @@ public class PlayerController : ShipBaseController
 {
     public static PlayerController Instance { get; private set; }
 
+    [Header("Player Properties")]
+    [SerializeField] private float forceTime = 0.1f;
+    [SerializeField] private float force = 1;
+
+    [Space]
     [SerializeField] private ControlsManager controls;
     [SerializeField] private Slider healthBar;
 
@@ -100,7 +106,9 @@ public class PlayerController : ShipBaseController
             collision.gameObject.SetActive(false);
 
             PostProcessingController.Instance.VolumePunch();
-            VfxPool.Instance.InitVfx(transform);
+            VfxPool.Instance.InitVfx(transform.position);
+
+            CollisionForce(forceTime, new Vector2(transform.position.x - collision.transform.position.x, -force * 0.02f)).Forget();
 
             if (health < 0)
             {
@@ -122,6 +130,19 @@ public class PlayerController : ShipBaseController
             collision.gameObject.SetActive(false);
 
             GameManager.Instance.UpScore(GameManager.Instance.scoreCoin);
+        }
+    }
+
+    private async UniTaskVoid CollisionForce(float _time, Vector3 direction)
+    {
+        float time = _time;
+
+        while (time > 0)
+        {
+            transform.localPosition += force * Time.deltaTime * direction;
+            await UniTask.Yield();
+
+            time -= Time.deltaTime;
         }
     }
 }

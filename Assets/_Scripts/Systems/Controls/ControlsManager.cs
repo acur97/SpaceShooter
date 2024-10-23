@@ -94,7 +94,8 @@ public class ControlsManager : MonoBehaviour
         }
         else
         {
-            move = new Vector2(Input.GetAxis(_Horizontal), Input.GetAxis(_Vertical));
+            move.x = Input.GetAxis(_Horizontal);
+            move.y = Input.GetAxis(_Vertical);
 
             fireDown = Input.GetButtonDown(_Fire);
             fireUp = Input.GetButtonUp(_Fire);

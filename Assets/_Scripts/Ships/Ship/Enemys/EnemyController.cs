@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class EnemyController : ShipBaseController
 {
-    private Vector2 startPosition;
-    private float customFloat = 0;
-    private bool customBool = false;
-    private float _timeToContinue;
-
     private const string _Bullet = "Bullet";
+
+    [Header("Behaviour")]
+    [SerializeField] private EnemyMovement movement;
+    [SerializeField] private EnemyShoot shoot;
 
     private void Awake()
     {
@@ -24,65 +23,16 @@ public class EnemyController : ShipBaseController
         module = engine2.main;
         module.startColor = _properties.color;
 
-        _timeToContinue = _properties.timeToContinue;
+        movement._timeToContinue = _properties.timeToContinue;
 
         transform.localEulerAngles = new Vector3(0, 0, 180);
 
-        switch (_properties.behaviour)
-        {
-            case ShipScriptable.Behaviour.linear:
-                break;
-
-            case ShipScriptable.Behaviour.direct:
-                break;
-
-            case ShipScriptable.Behaviour.waves:
-                if (transform.localPosition.x > 3)
-                {
-                    transform.localPosition = new Vector3(3, transform.localPosition.y);
-                }
-                else if (transform.localPosition.x < -3)
-                {
-                    transform.localPosition = new Vector3(-3, transform.localPosition.y);
-                }
-                startPosition = transform.localPosition;
-                break;
-
-            case ShipScriptable.Behaviour.wavesDirect:
-                if (transform.localPosition.x > 3)
-                {
-                    transform.localPosition = new Vector3(3, transform.localPosition.y);
-                }
-                else if (transform.localPosition.x < -3)
-                {
-                    transform.localPosition = new Vector3(-3, transform.localPosition.y);
-                }
-                startPosition = transform.localPosition;
-                break;
-
-            case ShipScriptable.Behaviour.diagonal:
-                if (transform.localPosition.x > 0)
-                {
-                    transform.localEulerAngles = new Vector3(0, 0, 225);
-                }
-                else
-                {
-                    transform.localEulerAngles = new Vector3(0, 0, 135);
-                }
-                break;
-
-            case ShipScriptable.Behaviour.wave8:
-                transform.localPosition = new Vector3(0, 3.3f);
-                startPosition = transform.localPosition;
-                break;
-
-            default:
-                break;
-        }
+        movement.Init(_properties.behaviour);
+        shoot.Init(_properties, shootRoot);
 
         timer = _properties.coolDown;
-        customFloat = 0;
-        customBool = false;
+        movement.customFloat = 0;
+        movement.customBool = false;
     }
 
     private void OnDestroy()
@@ -97,121 +47,25 @@ public class EnemyController : ShipBaseController
             return;
         }
 
-        if (_timeToContinue > 0)
-        {
-            _timeToContinue -= Time.deltaTime;
-
-            if (_timeToContinue < 0)
-            {
-                _timeToContinue = 0;
-            }
-        }
-
-        switch (_properties.behaviour)
-        {
-            case ShipScriptable.Behaviour.linear:
-                transform.position += _properties.speed * Time.deltaTime * transform.up;
-                break;
-
-            case ShipScriptable.Behaviour.direct:
-                if (transform.position.y > GameManager.EnemyLine || _timeToContinue == 0)
-                {
-                    transform.position += _properties.speed * Time.deltaTime * transform.up;
-                }
-                break;
-
-            case ShipScriptable.Behaviour.waves:
-                transform.position += _properties.speed * Time.deltaTime * transform.up;
-                transform.localPosition = new Vector2(startPosition.x + Mathf.Sin(Time.time * GameManager.HorizontalInvertedMultiplier) * _properties.behaviourMathfSin * GameManager.HorizontalMultiplier, transform.localPosition.y);
-                break;
-
-            case ShipScriptable.Behaviour.wavesDirect:
-                if (transform.position.y > GameManager.EnemyLine || _timeToContinue == 0)
-                {
-                    transform.position += _properties.speed * Time.deltaTime * transform.up;
-                }
-
-                transform.localPosition = new Vector2(startPosition.x + Mathf.Sin(Time.time * GameManager.HorizontalInvertedMultiplier) * _properties.behaviourMathfSin * GameManager.HorizontalMultiplier, transform.localPosition.y);
-                break;
-
-            case ShipScriptable.Behaviour.diagonal:
-                if (transform.localEulerAngles.z == 135)
-                {
-                    transform.position += _properties.speed * Time.deltaTime * -transform.right;
-                }
-                else
-                {
-                    transform.position -= _properties.speed * Time.deltaTime * -transform.right;
-                }
-                break;
-
-            case ShipScriptable.Behaviour.wave8:
-                if (!customBool && transform.position.y > 1)
-                {
-                    transform.position += _properties.speed * Time.deltaTime * transform.up;
-                    transform.localPosition = new Vector2(startPosition.x + Mathf.Sin(Time.time) * _properties.behaviourMathfSin, transform.localPosition.y);
-                }
-                else
-                {
-                    customBool = true;
-                    transform.localPosition = new Vector2(
-                        startPosition.x + Mathf.Sin(Time.time) * _properties.behaviourMathfSin,
-                        Mathf.Lerp(transform.localPosition.y, 0.5f + Mathf.Sin(Time.time * 1.5f) * _properties.behaviourMathfSin / 2, customFloat));
-                }
-
-                if (customBool && customFloat < 1 && customFloat >= 0)
-                {
-                    customFloat += (Time.deltaTime / 4);
-                }
-                break;
-
-            default:
-                break;
-        }
+        movement.Move(_properties);
 
         if (transform.position.y <= -GameManager.BoundsLimits.y || transform.position.y >= GameManager.BoundsLimits.y)
         {
             Dead();
         }
 
-        if (transform.position.y >= -GameManager.PlayerLimits.y)
+
+        if (transform.position.y >= -GameManager.PlayerLimits.y && _properties.attack != ShipScriptable.Attack.none)
         {
-            switch (_properties.attack)
+            timer -= Time.deltaTime;
+
+            if (timer <= 0)
             {
-                case ShipScriptable.Attack.continuous:
-                    timer -= Time.deltaTime;
+                shoot.Shoot();
 
-                    if (timer <= 0)
-                    {
-                        Shoot();
-
-                        timer = _properties.coolDown;
-                    }
-                    break;
-
-                case ShipScriptable.Attack.continuousDouble:
-                    timer -= Time.deltaTime;
-
-                    if (timer <= 0)
-                    {
-                        Shoot(true);
-
-                        timer = _properties.coolDown;
-                    }
-                    break;
-
-                case ShipScriptable.Attack.none:
-                    break;
-
-                default:
-                    break;
+                timer = _properties.coolDown;
             }
         }
-    }
-
-    private void Shoot(bool _double = false)
-    {
-        BulletsPool.Instance.InitBullet(shootRoot, _properties.bulletSpeed, _double, Bullet.TypeBullet.enemy);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -221,7 +75,7 @@ public class EnemyController : ShipBaseController
             collision.gameObject.SetActive(false);
 
             PostProcessingController.Instance.VolumePunch();
-            VfxPool.Instance.InitVfx(transform);
+            VfxPool.Instance.InitVfx(transform.position);
 
             health--;
             if (health == 0)

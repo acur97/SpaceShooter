@@ -2083,6 +2083,8 @@ MonoBehaviour:
   engine2: {fileID: 1939282547}
   shootRoot: {fileID: 334066549}
   timer: -1
+  forceTime: 0.1
+  force: 10
   controls: {fileID: 1758410994}
   healthBar: {fileID: 913314779}
 --- !u!50 &592885557

@@ -32,6 +32,7 @@ public class CollectablesPool : PoolBaseController
                 if (objects[i].activeSelf)
                 {
                     objects[i].transform.position -= speed * Time.deltaTime * transform.up;
+
                     if (objects[i].transform.position.y <= -GameManager.BoundsLimits.y)
                     {
                         objects[i].SetActive(false);

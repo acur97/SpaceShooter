@@ -9676,6 +9676,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2265447281794558193}
   - component: {fileID: 2265447281794558198}
+  - component: {fileID: 6415017930471614804}
+  - component: {fileID: 3514301320637606348}
   - component: {fileID: 2265447281794558195}
   - component: {fileID: 2265447281794558194}
   - component: {fileID: 8031115035408530487}
@@ -9724,6 +9726,35 @@ MonoBehaviour:
   engine2: {fileID: 2265447281486309951}
   shootRoot: {fileID: 2265447282651099347}
   timer: -1
+  movement: {fileID: 6415017930471614804}
+  shoot: {fileID: 3514301320637606348}
+--- !u!114 &6415017930471614804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2265447281794558093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9f56355a258be9448a017477411d0c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customFloat: 0
+  customBool: 0
+  _timeToContinue: 0
+--- !u!114 &3514301320637606348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2265447281794558093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c52f7e40c1ef4f47a51cb71fec8b43e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &2265447281794558195
 SpriteRenderer:
   m_ObjectHideFlags: 0
