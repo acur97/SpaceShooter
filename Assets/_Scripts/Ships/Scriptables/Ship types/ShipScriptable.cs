@@ -1,21 +1,21 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Ship", menuName = "ScriptableObjects/Ship properties", order = 0)]
+[CreateAssetMenu(fileName = "Ship ", menuName = "Gameplay/Ship", order = 2)]
 public class ShipScriptable : ScriptableObject
 {
     [Header("Custom")]
     [ColorUsage(false, true)] public Color color = Color.white;
 
-    [Header("Bullet Parameters")]
+    [Header("Ship Parameters")]
     public float speed = 4;
+    public int health = 100;
+
+    [Header("Bullet Parameters (-1 disable)")]
     public float bulletSpeed = 10;
     public float coolDown = 0.1f;
     public float spaceCooldown = -1;
 
-    [Space]
-    public int health = 100;
-
-    [Header("Enemy")]
+    [Header("Enemy (-1 disable)")]
     public Sprite sprite;
     public enum Behaviour
     {
