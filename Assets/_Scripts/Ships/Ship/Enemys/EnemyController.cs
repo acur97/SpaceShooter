@@ -25,7 +25,7 @@ public class EnemyController : ShipBaseController
 
         transform.localEulerAngles = new Vector3(0, 0, 180);
 
-        movement.Init(_properties.behaviour, _properties.timeToContinue, _properties.spawnIndex);
+        movement.Init(_properties.behaviour, _properties._timeToContinue, _properties.timeToContinue, _properties.spawnIndex);
 
         timer = _properties.coolDown;
         timer2 = _properties.spaceCooldown;

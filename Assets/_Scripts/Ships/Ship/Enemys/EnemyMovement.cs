@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    private bool _boolToContinue = false;
     private float _timeToContinue;
     private float customFloat = 0;
     private bool customBool = false;
     private Vector2 startPosition;
 
-    public void Init(ShipScriptable.Behaviour properties, float timeToContinue, int customInt)
+    public void Init(ShipScriptable.Behaviour properties, bool boolToContinue, float timeToContinue, int customInt)
     {
+        _boolToContinue = boolToContinue;
         _timeToContinue = timeToContinue;
 
         switch (properties)
@@ -77,7 +79,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void Move(ShipScriptable properties)
     {
-        if (_timeToContinue > 0)
+        if (_boolToContinue && _timeToContinue > 0)
         {
             _timeToContinue -= Time.deltaTime;
 
