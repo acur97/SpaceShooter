@@ -25,7 +25,7 @@ public class EnemyController : ShipBaseController
 
         transform.localEulerAngles = new Vector3(0, 0, 180);
 
-        movement.Init(_properties.behaviour, _properties.timeToContinue, _properties.spawnCount);
+        movement.Init(_properties.behaviour, _properties.timeToContinue, _properties.spawnIndex);
 
         timer = _properties.coolDown;
         timer2 = _properties.spaceCooldown;
@@ -60,7 +60,7 @@ public class EnemyController : ShipBaseController
         {
             timer -= Time.deltaTime;
 
-            if (_properties.spaceCooldown > 0)
+            if (_properties._spaceCoolDown && _properties.spaceCooldown > 0)
             {
                 if (timer2Up)
                 {
