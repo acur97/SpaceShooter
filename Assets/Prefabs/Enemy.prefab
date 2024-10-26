@@ -9726,6 +9726,8 @@ MonoBehaviour:
   engine2: {fileID: 2265447281486309951}
   shootRoot: {fileID: 2265447282651099347}
   timer: -1
+  timer2: -1
+  timer2Up: 0
   movement: {fileID: 6415017930471614804}
   shoot: {fileID: 3514301320637606348}
 --- !u!114 &6415017930471614804

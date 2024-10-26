@@ -52,7 +52,7 @@ public class EnemyController : ShipBaseController
             transform.position.y <= -GameManager.BoundsLimits.y)
         //if (transform.position.y <= -GameManager.BoundsLimits.y || transform.position.y >= GameManager.BoundsLimits.y)
         {
-            Dead();
+            Dead(true);
             return;
         }
 
@@ -121,11 +121,17 @@ public class EnemyController : ShipBaseController
         }
     }
 
-    public void Dead()
+    public void Dead(bool outOfBounds = false)
     {
         gameObject.SetActive(false);
 
         GameManager.Instance.leftForNextGroup--;
+
+        if (outOfBounds)
+        {
+            return;
+        }
+
         GameManager.Instance.UpScore(GameManager.Instance.scoreEnemy);
     }
 }

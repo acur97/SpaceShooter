@@ -8,6 +8,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    [Header("Editor")]
+    [SerializeField] private bool debugMode = true;
+
+    [Space]
     public bool hasStarted = false;
     public bool isPlaying = false;
     public int leftForNextGroup = 0;
@@ -19,7 +23,7 @@ public class GameManager : MonoBehaviour
     [Space]
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI endScore;
-    private int score = 0;
+    public int score = 0;
     private const string preScore = "Score: ";
     private const string postcore = "Final score:\n ";
 
@@ -70,6 +74,11 @@ public class GameManager : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        if (!debugMode)
+        {
+            return;
+        }
+
         RectTransformUtility.ScreenPointToWorldPointInRectangle(uiRect, uiRect.position, mainCamera, out Vector3 canvasBorders);
 
         // Inner Limits
@@ -287,10 +296,5 @@ public class GameManager : MonoBehaviour
     public void Retry()
     {
         UiManager.Instance.SetUi(UiType.Fade, true, 0.25f, () => SceneManager.LoadScene(0));
-    }
-
-    public void Exit()
-    {
-        Application.Quit();
     }
 }

@@ -62,9 +62,7 @@ public class PlayerController : ShipBaseController
         {
             inputMove = new Vector2(controls.move.x * _properties.speed * Time.deltaTime, controls.move.y * _properties.speed * Time.deltaTime);
 
-            transform.localPosition = new Vector2(
-                Mathf.Clamp(transform.localPosition.x + inputMove.x, -GameManager.PlayerLimits.x, GameManager.PlayerLimits.x),
-                Mathf.Clamp(transform.localPosition.y + inputMove.y, -GameManager.PlayerLimits.y, GameManager.PlayerLimits.y));
+            ClampPosition();
 
             if (controls.fireDown)
             {
@@ -92,6 +90,13 @@ public class PlayerController : ShipBaseController
                 }
             }
         }
+    }
+
+    private void ClampPosition()
+    {
+        transform.localPosition = new Vector2(
+            Mathf.Clamp(transform.localPosition.x + inputMove.x, -GameManager.PlayerLimits.x, GameManager.PlayerLimits.x),
+            Mathf.Clamp(transform.localPosition.y + inputMove.y, -GameManager.PlayerLimits.y, GameManager.PlayerLimits.y));
     }
 
     private void Shoot()
@@ -137,9 +142,10 @@ public class PlayerController : ShipBaseController
     {
         float time = _time;
 
-        while (time > 0)
+        while (time > 0 && this != null)
         {
             transform.localPosition += force * Time.deltaTime * direction;
+            ClampPosition();
             await UniTask.Yield();
 
             time -= Time.deltaTime;
