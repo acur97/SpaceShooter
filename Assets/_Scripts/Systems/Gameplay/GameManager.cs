@@ -166,6 +166,11 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        if (hasStarted)
+        {
+            return;
+        }
+
         hasStarted = true;
         isPlaying = true;
         Time.timeScale = 1;
@@ -180,7 +185,7 @@ public class GameManager : MonoBehaviour
 
     public void GodMode(bool on)
     {
-        PlayerController.Instance.SetHealth(on ? 1000000 : 1);
+        PlayerController.Instance.SetHealth(on ? 10000000 : 1);
     }
 
     private void Awake()
@@ -239,8 +244,8 @@ public class GameManager : MonoBehaviour
         boundsLimits = new Vector2(-canvasBorders.x + boundsLimit, -canvasBorders.y + boundsLimit);
 
         enemyLineLimit = canvasBorders.y - (enemyLine * canvasBorders.y);
-        horizontalMultiplier = mainCamera.pixelWidth / 1280f;
-        horizontalInvertedMultiplier = 1280f / mainCamera.pixelWidth;
+        horizontalMultiplier = mainCamera.aspect * 0.5625f;
+        horizontalInvertedMultiplier = horizontalMultiplier.Remap(1, 0, 0, 1) + 1;
 
         // black gradient borders to fix wider aspect ratios
         shadowBorders.SetActive((mainCamera.pixelWidth / (float)mainCamera.pixelHeight) > 1.94f);

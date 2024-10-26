@@ -22105,7 +22105,7 @@ MonoBehaviour:
   shadowBorders: {fileID: 1799059218}
   innerLimit: -1.6
   playerLimit: -0.4
-  bulletLimit: 0.1
+  bulletLimit: 0.05
   boundsLimit: 0.5
   enemyLine: 1.55
   uiRect: {fileID: 604143352}

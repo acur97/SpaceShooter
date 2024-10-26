@@ -114,7 +114,7 @@ public class FirestoreManager : MonoBehaviour
 
     public void StartUploadScore()
     {
-        if (string.IsNullOrEmpty(nameInput.text))
+        if (string.IsNullOrEmpty(nameInput.text) || PlayerController.Instance.health > PlayerController.Instance._properties.health)
         {
             return;
         }
@@ -136,6 +136,12 @@ public class FirestoreManager : MonoBehaviour
             if (GameManager.Instance.score >= int.Parse(leaderboard.Scores[i].Split(scoreSeparator)[0]))
             {
                 leaderboard.Scores.Insert(i, $"{GameManager.Instance.score}{scoreSeparator}{nameInput.text}");
+                break;
+            }
+
+            if (i == leaderboard.Scores.Count - 1 && GameManager.Instance.score > 0)
+            {
+                leaderboard.Scores.Add($"{GameManager.Instance.score}{scoreSeparator}{nameInput.text}");
                 break;
             }
         }

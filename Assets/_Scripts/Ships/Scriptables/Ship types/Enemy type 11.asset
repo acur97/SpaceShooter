@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57881a7a4b18dff4b82ce561559b9591, type: 3}
-  m_Name: Enemy type 6
+  m_Name: Enemy type 11
   m_EditorClassIdentifier: 
-  color: {r: 1, g: 1, b: 0.039546248, a: 1}
-  sprite: {fileID: 21300000, guid: 8fb672820e5632848a3b6159da6691ae, type: 3}
-  speed: 1
-  health: 4
-  bulletSpeed: 6
-  coolDown: 0.5
-  _spaceCoolDown: 1
-  spaceCooldown: 0.8
-  attack: 1
+  color: {r: 0.37626222, g: 0.016807375, b: 0.07618539, a: 1}
+  sprite: {fileID: 21300000, guid: b18feba7989afb54e9ba24fa2d987e5d, type: 3}
+  speed: 1.2
+  health: 40
+  bulletSpeed: 10
+  coolDown: 0.25
+  _spaceCoolDown: 0
+  spaceCooldown: -1
+  attack: 0
   enemyCollision: 1
-  behaviour: 1
-  behaviourMathfSin: 1.7
-  _timeToContinue: 1
-  timeToContinue: 60
-  spawnIndex: 19
+  behaviour: 5
+  behaviourMathfSin: -2.1
+  _timeToContinue: 0
+  timeToContinue: -1
+  spawnIndex: 0

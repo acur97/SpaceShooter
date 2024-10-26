@@ -13,12 +13,17 @@ MonoBehaviour:
   m_Name: Enemy type 3
   m_EditorClassIdentifier: 
   color: {r: 0.50888145, g: 1, b: 0.009134057, a: 1}
+  sprite: {fileID: 21300000, guid: b5bafd758a5718e4783e023a5bac886d, type: 3}
   speed: 0.7
+  health: 8
   bulletSpeed: 5
   coolDown: 0.5
-  health: 7
-  sprite: {fileID: 21300000, guid: b5bafd758a5718e4783e023a5bac886d, type: 3}
+  _spaceCoolDown: 0
+  spaceCooldown: -1
+  attack: 0
+  enemyCollision: 1
   behaviour: 4
   behaviourMathfSin: 1.5
-  attack: 0
+  _timeToContinue: 0
   timeToContinue: -1
+  spawnIndex: 19

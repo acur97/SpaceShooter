@@ -20,6 +20,7 @@ public class PlayerController : ShipBaseController
     private readonly int _ColorCapsule = Shader.PropertyToID("_ColorCapsule");
     private readonly int _Color = Shader.PropertyToID("_Color");
     private const string _Bullet = "Bullet";
+    private const string _Enemy = "Enemy";
     private const string _Collectable = "Collectable";
 
     private void Awake()
@@ -112,29 +113,52 @@ public class PlayerController : ShipBaseController
 
             PostProcessingController.Instance.VolumePunch();
             VfxPool.Instance.InitVfx(transform.position);
-
             CollisionForce(forceTime, new Vector2(transform.position.x - collision.transform.position.x, -force * 0.02f)).Forget();
 
-            if (health < 0)
-            {
-                return;
-            }
-
-            health--;
-            healthNormalized = (float)health / _properties.health;
-            healthBar.value = health;
-            PostProcessingController.Instance.SetVolumeHealth(healthNormalized.Remap(0, 1, PostProcessingController.Instance.maxVignette, 0));
-
-            if (health <= 0)
-            {
-                GameManager.Instance.EndLevel();
-            }
+            DoDamage();
         }
         else if (collision.CompareTag(_Collectable))
         {
             collision.gameObject.SetActive(false);
 
             GameManager.Instance.UpScore(GameManager.Instance.scoreCoin);
+        }
+        else if (collision.CompareTag(_Enemy) && collision.TryGetComponent(out EnemyController enemyController) && enemyController._properties.enemyCollision)
+        {
+            PostProcessingController.Instance.VolumePunch();
+            VfxPool.Instance.InitVfx(transform.position);
+
+            enemyController.DoDamage();
+
+            DoDamage();
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag(_Enemy) && collision.TryGetComponent(out EnemyController enemyController) && enemyController._properties.enemyCollision)
+        {
+            transform.position += new Vector3(
+                (transform.position.x - collision.transform.position.x) * 0.5f,
+                (transform.position.y - collision.transform.position.y) * 0.5f);
+        }
+    }
+
+    public void DoDamage()
+    {
+        if (health < 0)
+        {
+            return;
+        }
+
+        health--;
+        healthNormalized = (float)health / _properties.health;
+        healthBar.value = health;
+        PostProcessingController.Instance.SetVolumeHealth(healthNormalized.Remap(0, 1, PostProcessingController.Instance.maxVignette, 0));
+
+        if (health <= 0)
+        {
+            GameManager.Instance.EndLevel();
         }
     }
 

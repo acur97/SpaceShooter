@@ -8,7 +8,6 @@ public class EnemySpawns : PoolBaseController
 
     [SerializeField] private EnemyController[] enemys;
 
-    private float groupRandom = 0;
     private CancellationToken cancellationToken;
 
     private new void Awake()
@@ -35,11 +34,11 @@ public class EnemySpawns : PoolBaseController
         //Debug.LogWarning($"Group with enemies type: {_group.ship.name}");
         //Debug.LogWarning(_group.spawnType);
 
-        groupRandom = Random.Range(-GameManager.PlayerLimits.x, GameManager.PlayerLimits.x);
+        float _groupRandom = Random.Range(-GameManager.PlayerLimits.x, GameManager.PlayerLimits.x);
         for (int i = 0; i < _group.count; i++)
         {
             _group.ship.spawnIndex = i;
-            InitEnemy(_group.ship, _group, Random.Range(-GameManager.PlayerLimits.x, GameManager.PlayerLimits.x));
+            InitEnemy(_group.ship, _group, Random.Range(-GameManager.PlayerLimits.x, GameManager.PlayerLimits.x), _groupRandom);
 
             if (_group.minTimeBetweenSpawn > 0 || _group.maxTimeBetweenSpawn > 0 || _group.spawnType != Group.SpawnType.allAtOnce)
             {
@@ -48,9 +47,9 @@ public class EnemySpawns : PoolBaseController
         }
     }
 
-    public void InitEnemy(ShipScriptable properties, Group group, float random)
+    public void InitEnemy(ShipScriptable properties, Group group, float random, float groupRandom)
     {
-        for (int i = 0; i < (group.spawnType == Group.SpawnType.only ? 1 : size); i++)
+        for (int i = 0; i < size; i++)
         {
             if (!enemys[i].gameObject.activeSelf)
             {
@@ -60,16 +59,20 @@ public class EnemySpawns : PoolBaseController
                         enemys[i].transform.position = new Vector2(random, GameManager.BoundsLimits.y);
                         break;
 
-                    case Group.SpawnType.row:
+                    case Group.SpawnType.randomPoint:
                         enemys[i].transform.position = new Vector2(groupRandom, GameManager.BoundsLimits.y);
                         break;
 
-                    case Group.SpawnType.only:
-                        enemys[i].transform.position = new Vector2(random, GameManager.BoundsLimits.y);
+                    case Group.SpawnType.center:
+                        enemys[i].transform.position = new Vector2(0, GameManager.BoundsLimits.y);
                         break;
 
                     case Group.SpawnType.allAtOnce:
                         enemys[i].transform.position = new Vector2(random, GameManager.BoundsLimits.y);
+                        break;
+
+                    case Group.SpawnType.specific:
+                        enemys[i].transform.position = new Vector2(group.customFloat, GameManager.BoundsLimits.y);
                         break;
                 }
 

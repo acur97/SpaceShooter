@@ -6,6 +6,7 @@ public class RoundsController : MonoBehaviour
 
     public LevelScriptable level;
 
+    [Header("-1 means it starts at 0")]
     [SerializeField] private int roundCount = -1;
     [SerializeField] private int groupCount = -1;
 

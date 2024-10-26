@@ -113,11 +113,17 @@ public class EnemyController : ShipBaseController
             PostProcessingController.Instance.VolumePunch();
             VfxPool.Instance.InitVfx(transform.position);
 
-            health--;
-            if (health == 0)
-            {
-                Dead();
-            }
+            DoDamage();
+        }
+    }
+
+    public void DoDamage()
+    {
+        health--;
+
+        if (health == 0)
+        {
+            Dead();
         }
     }
 

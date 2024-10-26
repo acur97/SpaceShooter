@@ -23,6 +23,7 @@
     </ui:Foldout>
     <ui:Foldout text="Enemy Only" style="margin-top: 0; margin-bottom: 10px; background-color: rgba(255, 255, 255, 0.05); padding-right: 6px;">
         <ui:EnumField label="Attack Type" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" binding-path="attack" tooltip="Type of shot" />
+        <ui:Toggle label="Collision" binding-path="enemyCollision" tooltip="The player collides with this ship?" />
         <ui:EnumField label="Movement Behaviour" value="Left" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" binding-path="behaviour" tooltip="Type of movement/behavior" />
         <ui:FloatField label="Sin ∿ wave" value="1.5" binding-path="behaviourMathfSin" tooltip="Wave strength of behaviours that use it" />
         <ui:VisualElement style="flex-grow: 1; flex-direction: row; margin-bottom: 4px;">

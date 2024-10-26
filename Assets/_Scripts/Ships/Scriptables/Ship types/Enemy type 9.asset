@@ -21,6 +21,7 @@ MonoBehaviour:
   _spaceCoolDown: 1
   spaceCooldown: 3
   attack: 1
+  enemyCollision: 1
   behaviour: 6
   behaviourMathfSin: 1.5
   _timeToContinue: 0

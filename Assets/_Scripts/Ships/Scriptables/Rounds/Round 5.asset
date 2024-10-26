@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d74892c7c2b61a40a56faac19d7f68c, type: 3}
-  m_Name: Round 3
+  m_Name: Round 5
   m_EditorClassIdentifier: 
   groups:
   - chained: 0
@@ -19,21 +19,21 @@ MonoBehaviour:
     customFloat: 0
     minTimeBetweenSpawn: 0.5
     maxTimeBetweenSpawn: 1.5
-    count: 10
-    ship: {fileID: 11400000, guid: 4f1616953502d0441a34f045a3a03102, type: 2}
+    count: 20
+    ship: {fileID: 11400000, guid: 3ddc9ccfc46dab44eaae66262e071e16, type: 2}
   - chained: 0
-    timeToStart: 2
-    spawnType: 3
+    timeToStart: 3
+    spawnType: 2
     customFloat: 0
     minTimeBetweenSpawn: 0
     maxTimeBetweenSpawn: 0
-    count: 10
-    ship: {fileID: 11400000, guid: d4c36c4630e5fc8459e69f8b499be7fc, type: 2}
-  - chained: 0
-    timeToStart: 2
-    spawnType: 0
+    count: 1
+    ship: {fileID: 11400000, guid: 371a0df8a176d5f4ca542cd22b00ec74, type: 2}
+  - chained: 1
+    timeToStart: 5
+    spawnType: 2
     customFloat: 0
-    minTimeBetweenSpawn: 0.9
-    maxTimeBetweenSpawn: 1
-    count: 20
-    ship: {fileID: 11400000, guid: 71b658ed0cf5bb743a1a6055a81a876b, type: 2}
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+    count: 1
+    ship: {fileID: 11400000, guid: 6e8295c70d769e64f9e1990f4a57c6f0, type: 2}

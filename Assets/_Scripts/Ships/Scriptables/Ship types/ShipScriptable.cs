@@ -21,6 +21,7 @@ public class ShipScriptable : ScriptableObject
     public enum Attack { continuous, continuousDouble, none }
     [Header("==  Enemy  ==")]
     public Attack attack;
+    public bool enemyCollision = true;
     public enum Behaviour
     {
         linear,
@@ -35,7 +36,7 @@ public class ShipScriptable : ScriptableObject
     public float behaviourMathfSin = 1.5f;
     [Space]
     public bool _timeToContinue = false;
-    public int timeToContinue = -1;
+    public float timeToContinue = -1;
 
     [HideInInspector] public int spawnIndex;
 }
