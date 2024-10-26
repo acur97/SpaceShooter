@@ -35,12 +35,12 @@ public class FirestoreManager : MonoBehaviour
 
     private void Awake()
     {
-        Init();
-
         panelEnd.SetActive(true);
         panelSubmit.SetActive(false);
         panelSubmiting.SetActive(false);
         panelSubmited.SetActive(false);
+
+        Init();
     }
 
     private void Init()
@@ -54,8 +54,6 @@ public class FirestoreManager : MonoBehaviour
             ProjectId = connection.projectId
         });
         db = FirebaseFirestore.DefaultInstance;
-
-        DownloadLeaderboard().Forget();
     }
 
     public void SetLeaderboardStatus(bool on)
