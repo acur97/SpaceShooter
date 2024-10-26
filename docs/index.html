@@ -31,6 +31,8 @@
       var loadingBar = document.querySelector("#unity-loading-bar");
       var progressBarFull = document.querySelector("#unity-progress-bar-full");
       var warningBanner = document.querySelector("#unity-warning");
+      var isMobile = 0;
+      var _unityInstance = null;
 
       // Shows a temporary message banner/ribbon for a few seconds, or
       // a permanent error message on top of the canvas if type=='error'.
@@ -83,6 +85,16 @@
         meta.name = 'viewport';
         meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
         document.getElementsByTagName('head')[0].appendChild(meta);
+        isMobile = 1;
+      }
+
+      function CheckDevice()
+      {
+        if (typeof _unityInstance !== 'undefined' && _unityInstance !== null) {
+            _unityInstance.SendMessage('--Manager--', 'OnDeviceCheck', isMobile);
+        } else {
+            console.error("unityInstance is not defined or null");
+        }
       }
 
       loadingBar.style.display = "block";
@@ -93,6 +105,7 @@
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
+          _unityInstance = unityInstance;
           loadingBar.style.display = "none";
         }).catch((message) => {
           alert(message);

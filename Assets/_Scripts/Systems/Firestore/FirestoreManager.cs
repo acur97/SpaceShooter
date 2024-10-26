@@ -1,24 +1,24 @@
 using UnityEngine;
-using Firebase;
-using Firebase.Firestore;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using TMPro;
+using System;
+using UnityEngine.Networking;
 
 public class FirestoreManager : MonoBehaviour
 {
-    [SerializeField] private FirestoreConnection connection;
+    [SerializeField] private string firestoreUrl = "https://firestore.googleapis.com/v1/projects/polygonus-spaceshooter/databases/(default)/documents/Leaderboard/Tt5KB3zN015943sAcR5Q";
+    private const string _patch = "PATCH";
 
-    private FirebaseFirestore db;
-    private Leaderboard leaderboard;
-
-    private DocumentSnapshot snapshot;
+    [Space]
+    [SerializeField] private Document leaderboard;
 
     [Header("UI")]
     [SerializeField] private GameObject panelEnd;
     [SerializeField] private GameObject panelSubmit;
     [SerializeField] private GameObject panelSubmiting;
     [SerializeField] private GameObject panelSubmited;
+    private bool isOn = false;
 
     [Space]
     [SerializeField] private TMP_InputField nameInput;
@@ -39,30 +39,22 @@ public class FirestoreManager : MonoBehaviour
         panelSubmit.SetActive(false);
         panelSubmiting.SetActive(false);
         panelSubmited.SetActive(false);
-
-        Init();
-    }
-
-    private void Init()
-    {
-        FirebaseApp.Create(new AppOptions()
-        {
-            AppId = connection.appId,
-            ApiKey = connection.apiKey,
-            MessageSenderId = connection.messagingSenderId,
-            StorageBucket = connection.storageBucket,
-            ProjectId = connection.projectId
-        });
-        db = FirebaseFirestore.DefaultInstance;
     }
 
     public void SetLeaderboardStatus(bool on)
     {
+        if (on && isOn)
+        {
+            return;
+        }
+
         Leaderboard(on).Forget();
     }
 
     public async UniTaskVoid Leaderboard(bool on)
     {
+        isOn = on;
+
         if (on)
         {
             await DownloadLeaderboard();
@@ -75,9 +67,25 @@ public class FirestoreManager : MonoBehaviour
 
     private async UniTask DownloadLeaderboard()
     {
-        snapshot = await db.Collection(connection.collectionName).Document(connection.documentId).GetSnapshotAsync();
+        using UnityWebRequest webRequest = UnityWebRequest.Get(firestoreUrl);
+        await webRequest.SendWebRequest();
 
-        leaderboard = snapshot.ConvertTo<Leaderboard>();
+        if (webRequest.result == UnityWebRequest.Result.Success && webRequest.isDone)
+        {
+            leaderboard = JsonUtility.FromJson<Document>(webRequest.downloadHandler.text);
+        }
+    }
+
+    public void OnDownloadLeaderboard(string data)
+    {
+        Debug.LogWarning("OnDownloadLeaderboard");
+        Debug.LogWarning(data);
+    }
+
+    public void OnFailDownloadLeaderboard(string data)
+    {
+        Debug.LogWarning("OnFailDownloadLeaderboard");
+        Debug.LogWarning(data);
     }
 
     private void SetLeaderboardRecords()
@@ -87,9 +95,9 @@ public class FirestoreManager : MonoBehaviour
             Destroy(recordContainer.GetChild(i).gameObject);
         }
 
-        for (int i = 0; i < leaderboard.Scores.Count; i++)
+        for (int i = 0; i < leaderboard.fields.Scores.arrayValue.values.Count; i++)
         {
-            playerStats = leaderboard.Scores[i].Split(scoreSeparator);
+            playerStats = leaderboard.fields.Scores.arrayValue.values[i].stringValue.Split(scoreSeparator);
             playerScore = FormatNumber(playerStats[0]);
             playerName = playerStats[1];
             Instantiate(recordPrefab, recordContainer).GetComponent<RecordChild>().SetRecord((i + 1).ToString(), playerScore, playerName);
@@ -129,33 +137,61 @@ public class FirestoreManager : MonoBehaviour
     {
         await DownloadLeaderboard();
 
-        for (int i = 0; i < leaderboard.Scores.Count; i++)
+        for (int i = 0; i < leaderboard.fields.Scores.arrayValue.values.Count; i++)
         {
-            if (GameManager.Instance.score >= int.Parse(leaderboard.Scores[i].Split(scoreSeparator)[0]))
+            if (GameManager.Instance.score >= int.Parse(leaderboard.fields.Scores.arrayValue.values[i].stringValue.Split(scoreSeparator)[0]))
             {
-                leaderboard.Scores.Insert(i, $"{GameManager.Instance.score}{scoreSeparator}{nameInput.text}");
+                leaderboard.fields.Scores.arrayValue.values.Insert(i, new() { stringValue = $"{GameManager.Instance.score}{scoreSeparator}{nameInput.text}" });
                 break;
             }
 
-            if (i == leaderboard.Scores.Count - 1 && GameManager.Instance.score > 0)
+            if (i == leaderboard.fields.Scores.arrayValue.values.Count - 1 && GameManager.Instance.score > 0)
             {
-                leaderboard.Scores.Add($"{GameManager.Instance.score}{scoreSeparator}{nameInput.text}");
+                leaderboard.fields.Scores.arrayValue.values.Add(new() { stringValue = $"{GameManager.Instance.score}{scoreSeparator}{nameInput.text}" });
                 break;
             }
         }
 
-        await db.Collection(connection.collectionName).Document(connection.documentId).SetAsync(leaderboard);
+        using UnityWebRequest webRequest = UnityWebRequest.Put(firestoreUrl, JsonUtility.ToJson(leaderboard));
+        webRequest.method = _patch;
+        await webRequest.SendWebRequest();
 
-        panelEnd.SetActive(false);
-        panelSubmit.SetActive(false);
-        panelSubmiting.SetActive(false);
-        panelSubmited.SetActive(true);
+        if (webRequest.result == UnityWebRequest.Result.Success && webRequest.isDone)
+        {
+            panelEnd.SetActive(false);
+            panelSubmit.SetActive(false);
+            panelSubmiting.SetActive(false);
+            panelSubmited.SetActive(true);
+        }
     }
 }
 
-[FirestoreData()]
-public class Leaderboard
+[Serializable]
+public class Document
 {
-    [FirestoreProperty()]
-    public List<string> Scores { get; set; }
+    public Fields fields;
+
+    [Serializable]
+    public class Fields
+    {
+        public Scores Scores;
+    }
+
+    [Serializable]
+    public class Scores
+    {
+        public ArrayValue arrayValue;
+    }
+
+    [Serializable]
+    public class ArrayValue
+    {
+        public List<Value> values;
+    }
+
+    [Serializable]
+    public class Value
+    {
+        public string stringValue;
+    }
 }
