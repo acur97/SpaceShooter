@@ -1,6 +1,6 @@
 {
-    "name": "PolygonUs_PruebaTecnica",
-    "short_name": "PolygonUs_PruebaTecnica",
+    "name": "SpaceShooter",
+    "short_name": "SpaceShooter",
     "start_url": "index.html",
     "display": "fullscreen",
     "background_color": "#000000",

@@ -3,23 +3,23 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Ship ", menuName = "Gameplay/Ship", order = 2)]
 public class ShipScriptable : ScriptableObject
 {
-    [Header("==  Custom  ==")]
-    /*[ColorUsage(false, true)]*/ public Color color = Color.white;
+    // Custom
+    public Color color = Color.white;
 
-    [Header("==  Ship Parameters  ==")]
+    // Ship Parameters
     public Sprite sprite;
     public float speed = 4;
     public int health = 100;
 
-    [Header("==  Bullet Parameters  ==")]
+    // Bullet Parameters
     public float bulletSpeed = 10;
     public float coolDown = 0.1f;
     [Space]
     public bool _spaceCoolDown = false;
     public float spaceCooldown = -1;
 
+    // Enemy
     public enum Attack { continuous, continuousDouble, none }
-    [Header("==  Enemy  ==")]
     public Attack attack;
     public bool enemyCollision = true;
     public enum Behaviour

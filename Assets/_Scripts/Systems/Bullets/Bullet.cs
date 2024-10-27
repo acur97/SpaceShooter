@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
 
     private void OnUpdate()
     {
-        if (!gameObject.activeSelf)
+        if (!gameObject.activeSelf || !GameManager.Instance.isPlaying)
         {
             return;
         }

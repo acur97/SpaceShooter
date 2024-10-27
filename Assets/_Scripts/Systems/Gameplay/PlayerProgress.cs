@@ -12,7 +12,7 @@ public class PlayerProgress : MonoBehaviour
         {
             Destroy(Instance);
         }
-        
+
         Instance = this;
     }
 }

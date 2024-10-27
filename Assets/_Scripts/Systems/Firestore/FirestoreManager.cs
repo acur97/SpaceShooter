@@ -1,8 +1,8 @@
-using UnityEngine;
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using TMPro;
 using System;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 using UnityEngine.Networking;
 
 public class FirestoreManager : MonoBehaviour
@@ -76,18 +76,6 @@ public class FirestoreManager : MonoBehaviour
         }
     }
 
-    public void OnDownloadLeaderboard(string data)
-    {
-        Debug.LogWarning("OnDownloadLeaderboard");
-        Debug.LogWarning(data);
-    }
-
-    public void OnFailDownloadLeaderboard(string data)
-    {
-        Debug.LogWarning("OnFailDownloadLeaderboard");
-        Debug.LogWarning(data);
-    }
-
     private void SetLeaderboardRecords()
     {
         for (int i = 0; i < recordContainer.childCount; i++)
@@ -139,15 +127,16 @@ public class FirestoreManager : MonoBehaviour
 
         for (int i = 0; i < leaderboard.fields.Scores.arrayValue.values.Count; i++)
         {
+            playerScore = $"{GameManager.Instance.score}{scoreSeparator}{nameInput.text}";
             if (GameManager.Instance.score >= int.Parse(leaderboard.fields.Scores.arrayValue.values[i].stringValue.Split(scoreSeparator)[0]))
             {
-                leaderboard.fields.Scores.arrayValue.values.Insert(i, new() { stringValue = $"{GameManager.Instance.score}{scoreSeparator}{nameInput.text}" });
+                leaderboard.fields.Scores.arrayValue.values.Insert(i, new Document.Value() { stringValue = playerScore });
                 break;
             }
 
             if (i == leaderboard.fields.Scores.arrayValue.values.Count - 1 && GameManager.Instance.score > 0)
             {
-                leaderboard.fields.Scores.arrayValue.values.Add(new() { stringValue = $"{GameManager.Instance.score}{scoreSeparator}{nameInput.text}" });
+                leaderboard.fields.Scores.arrayValue.values.Add(new Document.Value() { stringValue = playerScore });
                 break;
             }
         }
