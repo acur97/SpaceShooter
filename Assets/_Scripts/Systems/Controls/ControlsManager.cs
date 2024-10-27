@@ -3,8 +3,10 @@ using UnityEngine.EventSystems;
 
 public class ControlsManager : MonoBehaviour
 {
+#if UNITY_EDITOR
     [Header("Editor controls")]
     [SerializeField] private bool editorTouch = false;
+#endif
 
     [Header("Controls")]
     public bool fireDown;
