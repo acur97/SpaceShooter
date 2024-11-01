@@ -138,6 +138,6 @@ public class EnemyController : ShipBaseController
             return;
         }
 
-        GameManager.Instance.UpScore(GameManager.Instance.scoreEnemy);
+        GameManager.Instance.UpScore(_properties.deathScore);
     }
 }

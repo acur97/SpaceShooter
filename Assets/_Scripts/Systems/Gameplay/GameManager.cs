@@ -16,10 +16,6 @@ public class GameManager : MonoBehaviour
     public bool isPlaying = false;
     public int leftForNextGroup = 0;
 
-    [Header("Score")]
-    public int scoreCoin = 5;
-    public int scoreEnemy = 8;
-
     [Space]
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI endScore;
@@ -29,6 +25,11 @@ public class GameManager : MonoBehaviour
 
     [Header("Ui")]
     [SerializeField] private GameObject shadowBorders;
+    [SerializeField] private RectTransform uiRect;
+    [SerializeField] private Camera mainCamera;
+
+    [Space]
+    [SerializeField, ColorUsage(true, true)] private Color[] colors;
 
     [Header("Screen Properties")]
     [SerializeField] private float innerLimit = -1.6f;
@@ -56,21 +57,15 @@ public class GameManager : MonoBehaviour
     private float horizontalInvertedMultiplier = 1f;
     public static float HorizontalInvertedMultiplier => Instance.horizontalInvertedMultiplier;
 
-    [Space]
-    [SerializeField] private RectTransform uiRect;
-    [SerializeField] private Camera mainCamera;
-
-    [Space]
-    [SerializeField, ColorUsage(true, true)] private Color[] colors;
-
-    private const string _Cancel = "Cancel";
-
     [Header("Managers")]
+    public GameplayScriptable gameplayScriptable;
     [SerializeField] private UiManager uiManager;
     [SerializeField] private RoundsController roundsController;
     [SerializeField] private ControlsManager controlsManager;
     [SerializeField] private PostProcessingController postProcessingController;
     [SerializeField] private AudioManager audioManager;
+
+    private const string _Cancel = "Cancel";
 
     private void OnDrawGizmosSelected()
     {
@@ -185,7 +180,7 @@ public class GameManager : MonoBehaviour
 
     public void GodMode(bool on)
     {
-        PlayerController.Instance.SetHealth(on ? 10000000 : 1);
+        PlayerController.Instance.SetHealth(on ? 10000000 : PlayerController.Instance._properties.health);
     }
 
     private void Awake()
@@ -258,7 +253,7 @@ public class GameManager : MonoBehaviour
             score += value;
             scoreText.SetText(preScore + score);
 
-            if (value == scoreCoin)
+            if (value == gameplayScriptable.coinValue)
             {
                 AudioManager.Instance.PlaySound(AudioManager.AudioType.Coin);
             }

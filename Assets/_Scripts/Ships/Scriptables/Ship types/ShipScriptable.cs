@@ -22,6 +22,7 @@ public class ShipScriptable : ScriptableObject
     public enum Attack { continuous, continuousDouble, none }
     public Attack attack;
     public bool enemyCollision = true;
+    public int deathScore = 8;
     public enum Behaviour
     {
         linear,

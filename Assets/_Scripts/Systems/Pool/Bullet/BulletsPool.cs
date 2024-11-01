@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BulletsPool : PoolBaseController
 {
-    public static BulletsPool Instance { get; private set; }
+    public static BulletsPool Instance;
 
     [SerializeField] private Bullet[] bullets;
 

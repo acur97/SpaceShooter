@@ -21117,8 +21117,6 @@ MonoBehaviour:
   hasStarted: 0
   isPlaying: 0
   leftForNextGroup: 0
-  scoreCoin: 5
-  scoreEnemy: 8
   scoreText: {fileID: 1504449926}
   endScore: {fileID: 1327159356}
   score: 0
@@ -21137,6 +21135,7 @@ MonoBehaviour:
   - {r: 3.0365846, g: 0, b: 4.237095, a: 1}
   - {r: 0, g: 4.237095, b: 3.2484393, a: 1}
   - {r: 2.6834934, g: 4.237095, b: 0, a: 1}
+  gameplayScriptable: {fileID: 11400000, guid: 070223270d4b91e439e28c8272600240, type: 2}
   uiManager: {fileID: 1758410995}
   roundsController: {fileID: 1758410991}
   controlsManager: {fileID: 1758410994}

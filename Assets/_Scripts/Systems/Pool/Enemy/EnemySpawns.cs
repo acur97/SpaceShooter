@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawns : PoolBaseController
 {
-    public static EnemySpawns Instance { get; private set; }
+    public static EnemySpawns Instance;
 
     [SerializeField] private EnemyController[] enemys;
 

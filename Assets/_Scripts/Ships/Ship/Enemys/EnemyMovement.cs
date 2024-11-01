@@ -184,7 +184,7 @@ public class EnemyMovement : MonoBehaviour
 
         if (customBool && customFloat < 1 && customFloat >= 0)
         {
-            customFloat += (Time.deltaTime / 4);
+            customFloat += Time.deltaTime / 4;
         }
     }
 

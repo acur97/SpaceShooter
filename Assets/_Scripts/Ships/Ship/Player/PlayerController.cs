@@ -121,7 +121,7 @@ public class PlayerController : ShipBaseController
         {
             collision.gameObject.SetActive(false);
 
-            GameManager.Instance.UpScore(GameManager.Instance.scoreCoin);
+            GameManager.Instance.UpScore(GameManager.Instance.gameplayScriptable.coinValue);
         }
         else if (collision.CompareTag(_Enemy) && collision.TryGetComponent(out EnemyController enemyController) && enemyController._properties.enemyCollision)
         {

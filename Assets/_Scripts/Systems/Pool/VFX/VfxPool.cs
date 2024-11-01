@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class VfxPool : PoolBaseController
 {
-    public static VfxPool Instance { get; private set; }
+    public static VfxPool Instance;
 
     protected override void Awake()
     {
