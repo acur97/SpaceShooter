@@ -18,7 +18,7 @@ public struct Group
     public ShipScriptable ship;
 }
 
-[CreateAssetMenu(fileName = "Round ", menuName = "Gameplay/Round", order = 1)]
+[CreateAssetMenu(fileName = "Round ", menuName = "Gameplay/Level design/Round", order = 1)]
 public class RoundScriptable : ScriptableObject
 {
     public Group[] groups;

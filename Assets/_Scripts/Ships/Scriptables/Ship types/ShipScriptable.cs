@@ -1,13 +1,16 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Ship ", menuName = "Gameplay/Ship", order = 2)]
+[CreateAssetMenu(fileName = "Ship ", menuName = "Gameplay/Level design/Ship", order = 2)]
 public class ShipScriptable : ScriptableObject
 {
     // Custom
     public Color color = Color.white;
+    public float customFloat1 = 0;
+    public float customFloat2 = 0;
 
     // Ship Parameters
     public Sprite sprite;
+    public Material material;
     public float speed = 4;
     public int health = 100;
 

@@ -119,6 +119,8 @@ public class EnemyController : ShipBaseController
 
     public void DoDamage()
     {
+        PowerUpsManager.Enemy_Damage?.Invoke(this);
+
         health--;
 
         if (health == 0)
@@ -129,6 +131,8 @@ public class EnemyController : ShipBaseController
 
     public void Dead(bool outOfBounds = false)
     {
+        PowerUpsManager.Enemy_Death?.Invoke(this);
+
         gameObject.SetActive(false);
 
         GameManager.Instance.leftForNextGroup--;

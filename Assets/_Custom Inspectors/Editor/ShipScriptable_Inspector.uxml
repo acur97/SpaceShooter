@@ -1,6 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
     <ui:Foldout text="Custom" style="margin-bottom: 10px; background-color: rgba(255, 255, 255, 0.05); margin-top: 10px; padding-bottom: 0; margin-right: 0; padding-right: 6px;">
         <uie:ColorField label="Custom Color" binding-path="color" tooltip="Custom color for particles and bullets" show-eye-dropper="false" show-alpha="true" hdr="true" value="#FFFFFFFF" style="margin-bottom: 4px;" />
+        <ui:FloatField label="Custom Float 1" value="0" binding-path="customFloat1" />
+        <ui:FloatField label="Custom Float 2" value="0" binding-path="customFloat2" />
     </ui:Foldout>
     <ui:Foldout text="Ship Parameters" style="margin-top: 0; margin-bottom: 10px; background-color: rgba(255, 255, 255, 0.05); padding-right: 6px;">
         <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
@@ -9,6 +11,7 @@
                 <ui:VisualElement name="VisualSprite" style="background-image: url(&quot;project://database/Assets/Sprites/ships/_Player2.png?fileID=2800000&amp;guid=14e8c8df02407bd4b8aa044eedeb5630&amp;type=3#_Player2&quot;); width: 32px; height: 32px; align-self: center;" />
             </ui:VisualElement>
         </ui:VisualElement>
+        <uie:ObjectField label="Material" binding-path="material" type="UnityEngine.Material, UnityEngine.CoreModule" style="margin-bottom: 8px;" />
         <ui:FloatField label="Speed" value="4" tooltip="Speed/Movement of the Ship" binding-path="speed" />
         <ui:UnsignedIntegerField label="Health" value="10" binding-path="health" tooltip="Health of the Ship" style="margin-bottom: 4px;" />
     </ui:Foldout>

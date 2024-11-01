@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private ControlsManager controlsManager;
     [SerializeField] private PostProcessingController postProcessingController;
     [SerializeField] private AudioManager audioManager;
+    [SerializeField] private PowerUpsManager powerUpsManager;
+    [SerializeField] private PlayerController playerController;
 
     private const string _Cancel = "Cancel";
 
@@ -196,6 +198,8 @@ public class GameManager : MonoBehaviour
         //controlsManager.Init();
         audioManager.Init();
         postProcessingController.Init();
+        powerUpsManager.Init();
+        playerController.Init();
 
         scoreText.SetText(preScore + score);
 

@@ -4,18 +4,20 @@ using UnityEngine.UI;
 
 public class PlayerController : ShipBaseController
 {
-    public static PlayerController Instance { get; private set; }
-
-    [Header("Explosion Feedback")]
-    [SerializeField] private float forceTime = 0.1f;
-    [SerializeField] private float force = 1;
+    public static PlayerController Instance;
 
     [Space]
-    [SerializeField] private ControlsManager controls;
+    [SerializeField] private GameplayScriptable gameplayScriptable;
+
+    [Space]
     [SerializeField] private Slider healthBar;
 
-    private Vector3 inputMove;
-    private bool hold = false;
+    [Header("Controllers")]
+    public ControlsManager controls;
+    public PlayerMovement movement;
+    public PlayerShoot shoot;
+
+    public bool copy = false;
 
     private readonly int _ColorCapsule = Shader.PropertyToID("_ColorCapsule");
     private readonly int _Color = Shader.PropertyToID("_Color");
@@ -23,22 +25,43 @@ public class PlayerController : ShipBaseController
     private const string _Enemy = "Enemy";
     private const string _Collectable = "Collectable";
 
-    private void Awake()
+    public void Init(bool _copy = false)
     {
-        Instance = this;
+        copy = _copy;
 
-        healthBar.maxValue = _properties.health;
-        healthBar.value = _properties.health;
-        healthNormalized = (float)health / _properties.health;
+        if (controls == null)
+        {
+            controls = Instance.controls;
+        }
+
+        if (!copy)
+        {
+            Instance = this;
+
+            healthBar.maxValue = _properties.health;
+            healthBar.value = _properties.health;
+            healthNormalized = (float)health / _properties.health;
+
+            movement.Init(this, controls);
+            shoot.Init(this, controls);
+        }
+
         SetHealth(_properties.health);
-
         SetColor();
     }
 
     public void SetColor()
     {
-        renderer.material.SetColor(_ColorCapsule, _properties.color);
-        renderer.material.SetColor(_Color, ConvertColor(_properties.color));
+        if (!copy)
+        {
+            renderer.material.SetColor(_ColorCapsule, _properties.color);
+            renderer.material.SetColor(_Color, ConvertColor(_properties.color));
+        }
+        else
+        {
+            renderer.material = _properties.material;
+            renderer.sprite = _properties.sprite;
+        }
 
         module = engine1.main;
         module.startColor = _properties.color;
@@ -61,48 +84,9 @@ public class PlayerController : ShipBaseController
     {
         if (GameManager.Instance.isPlaying)
         {
-            inputMove = new Vector2(controls.move.x * _properties.speed * Time.deltaTime, controls.move.y * _properties.speed * Time.deltaTime);
-
-            ClampPosition();
-
-            if (controls.fireDown)
-            {
-                hold = true;
-                timer = _properties.coolDown;
-            }
-            if (controls.fireUp)
-            {
-                hold = false;
-                timer = -1;
-            }
-
-            if (hold && timer >= 0)
-            {
-                if (timer == _properties.coolDown)
-                {
-                    Shoot();
-                }
-
-                timer -= Time.deltaTime;
-
-                if (timer <= 0)
-                {
-                    timer = _properties.coolDown;
-                }
-            }
+            movement.OnUpdate();
+            shoot.OnUpdate();
         }
-    }
-
-    private void ClampPosition()
-    {
-        transform.localPosition = new Vector2(
-            Mathf.Clamp(transform.localPosition.x + inputMove.x, -GameManager.PlayerLimits.x, GameManager.PlayerLimits.x),
-            Mathf.Clamp(transform.localPosition.y + inputMove.y, -GameManager.PlayerLimits.y, GameManager.PlayerLimits.y));
-    }
-
-    private void Shoot()
-    {
-        BulletsPool.Instance.InitBullet(shootRoot, _properties.bulletSpeed, false, Bullet.TypeBullet.player);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -113,7 +97,11 @@ public class PlayerController : ShipBaseController
 
             PostProcessingController.Instance.VolumePunch();
             VfxPool.Instance.InitVfx(transform.position);
-            CollisionForce(forceTime, new Vector2(transform.position.x - collision.transform.position.x, -force * 0.02f)).Forget();
+
+            if (!copy)
+            {
+                CollisionForce(gameplayScriptable.forceTime, new Vector2(transform.position.x - collision.transform.position.x, -gameplayScriptable.force * 0.02f)).Forget();
+            }
 
             DoDamage();
         }
@@ -144,22 +132,41 @@ public class PlayerController : ShipBaseController
         }
     }
 
-    public void DoDamage()
+    public void DoDamage(int damage = 1)
     {
+        PowerUpsManager.Player_Damage?.Invoke();
+
         if (health < 0)
         {
             return;
         }
 
-        health--;
-        healthNormalized = (float)health / _properties.health;
-        healthBar.value = health;
+        health -= damage;
+        UpdateHealthUi();
         PostProcessingController.Instance.SetVolumeHealth(healthNormalized.Remap(0, 1, PostProcessingController.Instance.maxVignette, 0));
 
         if (health <= 0)
         {
-            GameManager.Instance.EndLevel();
+            if (!copy)
+            {
+                GameManager.Instance.EndLevel();
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
+    }
+
+    public void UpdateHealthUi()
+    {
+        if (copy)
+        {
+            return;
+        }
+
+        healthNormalized = (float)health / _properties.health;
+        healthBar.value = health;
     }
 
     private async UniTaskVoid CollisionForce(float _time, Vector3 direction)
@@ -168,8 +175,8 @@ public class PlayerController : ShipBaseController
 
         while (time > 0 && this != null)
         {
-            transform.localPosition += force * Time.deltaTime * direction;
-            ClampPosition();
+            transform.localPosition += gameplayScriptable.force * Time.deltaTime * direction;
+            movement.ClampPosition();
             await UniTask.Yield();
 
             time -= Time.deltaTime;

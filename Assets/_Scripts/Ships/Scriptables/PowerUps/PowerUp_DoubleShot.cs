@@ -1,0 +1,43 @@
+public class PowerUp_DoubleShot : PowerUpBase
+{
+    public PowerUp_DoubleShot() : base()
+    {
+        type = PowerUpsManager.PowerUpType.DoubleShot;
+        duration = 20f;
+    }
+
+    public override void OnActivate()
+    {
+        PlayerController.Instance.shoot.shootPowerUp = true;
+    }
+
+    public override void OnDeactivate()
+    {
+        PlayerController.Instance.shoot.shootPowerUp = false;
+    }
+
+    public override void OnEnemyDamage(ShipBaseController enemy)
+    {
+
+    }
+
+    public override void OnEnemyDeath(ShipBaseController enemy)
+    {
+
+    }
+
+    public override void OnGameUpdate()
+    {
+
+    }
+
+    public override void OnPlayerDamage()
+    {
+
+    }
+
+    public override void OnPlayerShoot()
+    {
+        BulletsPool.Instance.InitBullet(shipBase.shootRoot, shipBase._properties.bulletSpeed, true, Bullet.TypeBullet.player);
+    }
+}
