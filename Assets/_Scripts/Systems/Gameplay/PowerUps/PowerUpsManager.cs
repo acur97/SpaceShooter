@@ -31,6 +31,8 @@ public class PowerUpsManager : MonoBehaviour
         OrbitalLaser
     }
 
+    [SerializeField] private PowerUpBase powerUpStartTest;
+    [SerializeField] private List<PowerUpBase> powerUps;
     public List<PowerUpBase> currentPowerUps = new();
 
     public void Init()
@@ -47,7 +49,7 @@ public class PowerUpsManager : MonoBehaviour
     {
         await UniTask.WaitForSeconds(10f);
 
-        AddPowerUp(new PowerUp_Missile());
+        AddPowerUp(powerUpStartTest);
     }
 
     private void OnDisable()
@@ -61,8 +63,13 @@ public class PowerUpsManager : MonoBehaviour
     public void AddPowerUp(PowerUpBase type)
     {
         currentPowerUps.Add(type);
+        type.shipBase = PlayerController.Instance;
         type.OnActivate();
-        type.CountDuration().Forget();
+
+        if (type.useDuration)
+        {
+            type.CountDuration().Forget();
+        }
     }
 
     public void RemovePowerUp(PowerUpBase type)

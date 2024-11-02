@@ -1,9 +1,13 @@
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "PowerUp_TripleShot", menuName = "Gameplay/PowerUps/TripleShot", order = 2)]
 public class PowerUp_TripleShot : PowerUpBase
 {
     public PowerUp_TripleShot() : base()
     {
         type = PowerUpsManager.PowerUpType.TripleShot;
-        duration = 20f;
+        useDuration = true;
+        durationRange = new Vector2(20f, 20f);
     }
 
     public override void OnActivate()

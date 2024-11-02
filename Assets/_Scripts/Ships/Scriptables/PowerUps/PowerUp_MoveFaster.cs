@@ -1,11 +1,13 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "PowerUp_MoveFaster", menuName = "Gameplay/PowerUps/MoveFaster", order = 7)]
 public class PowerUp_MoveFaster : PowerUpBase
 {
     public PowerUp_MoveFaster() : base()
     {
         type = PowerUpsManager.PowerUpType.MoveFaster;
-        duration = Random.Range(8f, 10f);
+        useDuration = true;
+        durationRange = new Vector2(8f, 10f);
     }
 
     public override void OnActivate()

@@ -1,8 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
     <ui:Foldout text="Custom" style="margin-bottom: 10px; background-color: rgba(255, 255, 255, 0.05); margin-top: 10px; padding-bottom: 0; margin-right: 0; padding-right: 6px;">
         <uie:ColorField label="Custom Color" binding-path="color" tooltip="Custom color for particles and bullets" show-eye-dropper="false" show-alpha="true" hdr="true" value="#FFFFFFFF" style="margin-bottom: 4px;" />
-        <ui:FloatField label="Custom Float 1" value="0" binding-path="customFloat1" />
-        <ui:FloatField label="Custom Float 2" value="0" binding-path="customFloat2" />
     </ui:Foldout>
     <ui:Foldout text="Ship Parameters" style="margin-top: 0; margin-bottom: 10px; background-color: rgba(255, 255, 255, 0.05); padding-right: 6px;">
         <ui:VisualElement style="flex-grow: 1; flex-direction: row;">

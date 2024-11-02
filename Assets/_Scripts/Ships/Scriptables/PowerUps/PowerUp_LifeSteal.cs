@@ -1,9 +1,13 @@
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "PowerUp_LifeSteal", menuName = "Gameplay/PowerUps/LifeSteal", order = 9)]
 public class PowerUp_LifeSteal : PowerUpBase
 {
     public PowerUp_LifeSteal() : base()
     {
         type = PowerUpsManager.PowerUpType.LifeSteal;
-        duration = 10f;
+        useDuration = true;
+        durationRange = new Vector2(10f, 10f);
     }
 
     public override void OnActivate()

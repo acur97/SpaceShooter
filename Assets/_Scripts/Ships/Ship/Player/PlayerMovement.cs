@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 inputMove;
     private Vector2 randomOffset;
 
-    public void Init(PlayerController _controller, ControlsManager _controls)
+    public void Init(PlayerController _controller, ControlsManager _controls, float _randomOffset = 0.6f)
     {
         inited = true;
 
@@ -19,8 +19,8 @@ public class PlayerMovement : MonoBehaviour
         controls = _controls;
 
         randomOffset = new Vector2(
-            Random.Range(0, 2) == 0 ? -controller._properties.customFloat1 : controller._properties.customFloat1,
-            Random.Range(0, 2) == 0 ? -controller._properties.customFloat1 : controller._properties.customFloat1);
+            Random.Range(0, 2) == 0 ? -_randomOffset : _randomOffset,
+            Random.Range(0, 2) == 0 ? -_randomOffset : _randomOffset);
     }
 
     public void OnUpdate()

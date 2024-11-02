@@ -1,10 +1,15 @@
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "PowerUp_DroneOrbital", menuName = "Gameplay/PowerUps/DroneOrbital", order = 12)]
 public class PowerUp_DroneOrbital : PowerUpBase
 {
-    GameObject dronObject;
-    PlayerController playerDron;
+    [Space]
+    [SerializeField] private GameObject prefab;
+    [SerializeField] private float distance = 1f;
+    [SerializeField] private float speed = 2f;
+
+    private GameObject dronObject;
+    private PlayerController playerDron;
 
     private float angle;
     private Vector2 newPosition = new Vector3();
@@ -12,17 +17,13 @@ public class PowerUp_DroneOrbital : PowerUpBase
     public PowerUp_DroneOrbital() : base()
     {
         type = PowerUpsManager.PowerUpType.DroneOrbital;
-        duration = 30f;
+        useDuration = true;
+        durationRange = new Vector2(30f, 30f);
     }
 
     public override void OnActivate()
     {
-        LoadPrefab().Forget();
-    }
-
-    private async UniTaskVoid LoadPrefab()
-    {
-        dronObject = Object.Instantiate(await Resources.LoadAsync("Ships/Player Dron 2") as GameObject);
+        dronObject = Object.Instantiate(prefab);
         playerDron = dronObject.GetComponent<PlayerController>();
 
         playerDron.Init(true);
@@ -53,9 +54,9 @@ public class PowerUp_DroneOrbital : PowerUpBase
             return;
         }
 
-        angle += playerDron._properties.customFloat2 * Time.deltaTime;
-        newPosition.x = shipBase.transform.position.x + playerDron._properties.customFloat1 * Mathf.Cos(angle);
-        newPosition.y = shipBase.transform.position.y + playerDron._properties.customFloat1 * Mathf.Sin(angle);
+        angle += speed * Time.deltaTime;
+        newPosition.x = shipBase.transform.position.x + distance * Mathf.Cos(angle);
+        newPosition.y = shipBase.transform.position.y + distance * Mathf.Sin(angle);
         dronObject.transform.position = newPosition;
 
         playerDron.movement.ClampPosition();

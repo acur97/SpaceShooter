@@ -1,17 +1,24 @@
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "PowerUp_FastFire", menuName = "Gameplay/PowerUps/FastFire", order = 8)]
 public class PowerUp_FastFire : PowerUpBase
 {
+    [Space]
+    [SerializeField] private float multiplier = 2f;
+
     private float prevBulletSpeed;
 
     public PowerUp_FastFire() : base()
     {
         type = PowerUpsManager.PowerUpType.FastFire;
-        duration = 10f;
+        useDuration = true;
+        durationRange = new Vector2(10f, 10f);
     }
 
     public override void OnActivate()
     {
         prevBulletSpeed = shipBase._properties.bulletSpeed;
-        shipBase._properties.bulletSpeed *= 2f;
+        shipBase._properties.bulletSpeed *= multiplier;
     }
 
     public override void OnDeactivate()

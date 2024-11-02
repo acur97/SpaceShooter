@@ -5,8 +5,6 @@ public class ShipScriptable : ScriptableObject
 {
     // Custom
     public Color color = Color.white;
-    public float customFloat1 = 0;
-    public float customFloat2 = 0;
 
     // Ship Parameters
     public Sprite sprite;

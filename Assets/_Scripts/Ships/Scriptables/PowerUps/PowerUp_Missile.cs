@@ -3,9 +3,11 @@ using System;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
+[CreateAssetMenu(fileName = "PowerUp_Missile", menuName = "Gameplay/PowerUps/Missile", order = 3)]
 public class PowerUp_Missile : PowerUpBase
 {
-    private int count = 2;
+    [Space]
+    [SerializeField] private int count = 2;
 
     private GameObject missileObject;
     private Missile missile;

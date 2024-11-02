@@ -1,9 +1,13 @@
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "PowerUp_DoubleShot", menuName = "Gameplay/PowerUps/DoubleShot", order = 1)]
 public class PowerUp_DoubleShot : PowerUpBase
 {
     public PowerUp_DoubleShot() : base()
     {
         type = PowerUpsManager.PowerUpType.DoubleShot;
-        duration = 20f;
+        useDuration = true;
+        durationRange = new Vector2(20f, 20f);
     }
 
     public override void OnActivate()
