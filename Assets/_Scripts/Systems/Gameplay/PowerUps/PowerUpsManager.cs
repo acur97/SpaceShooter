@@ -28,7 +28,8 @@ public class PowerUpsManager : MonoBehaviour
         DroneSupport,
         DroneOrbital,
         LaserBurst,
-        OrbitalLaser
+        OrbitalLaser,
+        ExtractLife
     }
 
     [SerializeField] private PowerUpBase powerUpStartTest;

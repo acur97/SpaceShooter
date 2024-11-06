@@ -32,7 +32,8 @@ public class ShipScriptable : ScriptableObject
         wavesDirect,
         diagonal,
         wave8,
-        borders
+        borders,
+        chase
     }
     public Behaviour behaviour;
     public float behaviourMathfSin = 1.5f;

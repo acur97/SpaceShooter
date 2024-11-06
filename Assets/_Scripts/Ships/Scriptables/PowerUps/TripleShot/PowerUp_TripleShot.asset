@@ -9,14 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8189e2c8fc47cd541913e14187d72451, type: 3}
-  m_Name: PowerUp_DroneOrbital
+  m_Script: {fileID: 11500000, guid: 144e89259653bc74494491e24d34aa16, type: 3}
+  m_Name: PowerUp_TripleShot
   m_EditorClassIdentifier: 
   shipBase: {fileID: 0}
-  type: 12
+  type: 2
+  cost: 20
   useDuration: 1
-  duration: -0.0006392114
-  durationRange: {x: 30, y: 30}
-  prefab: {fileID: 3048626543858494239, guid: 3479a277a7aae61489f7ef1ff55c5236, type: 3}
-  distance: 1
-  speed: 2
+  duration: -1
+  durationRange: {x: 20, y: 20}

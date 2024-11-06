@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03b99fbdd975dce4685c0b44daf69ecf, type: 3}
-  m_Name: PowerUp_DoubleShot
+  m_Script: {fileID: 11500000, guid: f3c2c23a4020abe4f9d92fe8d46f7ff9, type: 3}
+  m_Name: PowerUp_TimeSlower
   m_EditorClassIdentifier: 
   shipBase: {fileID: 0}
-  type: 1
+  type: 6
+  cost: 1
   useDuration: 1
-  durationRange: {x: 20, y: 20}
   duration: -1
+  durationRange: {x: 5, y: 5}
+  timePercent: 0.5

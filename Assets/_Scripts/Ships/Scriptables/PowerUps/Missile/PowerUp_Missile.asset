@@ -9,13 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1762dfd106dc8ee4892946af0afa5fc5, type: 3}
-  m_Name: PowerUp_DroneSupport
+  m_Script: {fileID: 11500000, guid: b8f444efeba782f43bbe885e316f398e, type: 3}
+  m_Name: PowerUp_Missile
   m_EditorClassIdentifier: 
   shipBase: {fileID: 0}
-  type: 11
-  useDuration: 1
+  type: 3
+  cost: 50
+  useDuration: 0
   duration: -1
-  durationRange: {x: 40, y: 40}
-  prefab: {fileID: 3048626543858494239, guid: ed2a88de22652594b86214c051823c4f, type: 3}
-  randomOffset: 0.6
+  durationRange: {x: -1, y: -1}
+  prefab: {fileID: 9047772751246052230, guid: 097de99970859564898840ff6c2a93ad, type: 3}
+  count: 2
+  damage: 15
+  initialSpeed: 0.1
+  speedUp: 0.05

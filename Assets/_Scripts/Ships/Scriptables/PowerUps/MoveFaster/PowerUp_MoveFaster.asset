@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a68daaadafc93641803897c35c1c82b, type: 3}
-  m_Name: PowerUp_LifeRegen
+  m_Script: {fileID: 11500000, guid: 780f5b05e22aece4c8838252a0bcce9d, type: 3}
+  m_Name: PowerUp_MoveFaster
   m_EditorClassIdentifier: 
   shipBase: {fileID: 0}
-  type: 10
-  useDuration: 0
-  durationRange: {x: -1, y: -1}
+  type: 7
+  cost: 40
+  useDuration: 1
   duration: -1
-  regenPercentage: 0.3
+  durationRange: {x: 8, y: 10}

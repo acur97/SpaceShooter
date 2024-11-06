@@ -9,13 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6452a681c3ef0a048ae00f9f5996d126, type: 3}
-  m_Name: PowerUp_Shield
+  m_Script: {fileID: 11500000, guid: 8189e2c8fc47cd541913e14187d72451, type: 3}
+  m_Name: PowerUp_DroneOrbital
   m_EditorClassIdentifier: 
   shipBase: {fileID: 0}
-  type: 4
+  type: 12
+  cost: 30
   useDuration: 1
-  duration: 6.4028635
-  durationRange: {x: 10, y: 10}
-  prefab: {fileID: 8673868457665229473, guid: 46e7898ec58473e4c8b6547da340c5db, type: 3}
-  bulletAbsortion: 5
+  duration: -0.0006392114
+  durationRange: {x: 30, y: 30}
+  prefab: {fileID: 3048626543858494239, guid: 3479a277a7aae61489f7ef1ff55c5236, type: 3}
+  distance: 1
+  speed: 2

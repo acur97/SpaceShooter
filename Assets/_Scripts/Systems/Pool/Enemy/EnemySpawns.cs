@@ -6,7 +6,7 @@ public class EnemySpawns : PoolBaseController
 {
     public static EnemySpawns Instance;
 
-    [SerializeField] private EnemyController[] enemys;
+    public EnemyController[] enemys;
 
     private CancellationToken cancellationToken;
 

@@ -9,11 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 780f5b05e22aece4c8838252a0bcce9d, type: 3}
-  m_Name: PowerUp_MoveFaster
+  m_Script: {fileID: 11500000, guid: 6452a681c3ef0a048ae00f9f5996d126, type: 3}
+  m_Name: PowerUp_Shield
   m_EditorClassIdentifier: 
   shipBase: {fileID: 0}
-  type: 7
+  type: 4
+  cost: 1
   useDuration: 1
-  durationRange: {x: 8, y: 10}
-  duration: -1
+  duration: 6.4028635
+  durationRange: {x: 10, y: 10}
+  prefab: {fileID: 8673868457665229473, guid: 46e7898ec58473e4c8b6547da340c5db, type: 3}
+  bulletAbsortion: 100

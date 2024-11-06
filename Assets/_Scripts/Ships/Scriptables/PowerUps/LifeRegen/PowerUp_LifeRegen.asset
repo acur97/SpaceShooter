@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce3756c96b1c0b84c82bd569d8279162, type: 3}
-  m_Name: PowerUp_LifeSteal
+  m_Script: {fileID: 11500000, guid: 1a68daaadafc93641803897c35c1c82b, type: 3}
+  m_Name: PowerUp_LifeRegen
   m_EditorClassIdentifier: 
   shipBase: {fileID: 0}
-  type: 9
-  useDuration: 1
+  type: 10
+  cost: 15
+  useDuration: 0
   duration: -1
-  durationRange: {x: 10, y: 10}
+  durationRange: {x: -1, y: -1}
+  regenPercentage: 0.3

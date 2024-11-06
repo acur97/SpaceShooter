@@ -4,7 +4,7 @@ using UnityEngine;
 public class PowerUp_LifeRegen : PowerUpBase
 {
     [Space]
-    [SerializeField] private float regenPercentage = 0.3f;
+    [SerializeField, Range(0f, 1f)] private float regenPercentage = 0.3f;
 
     public PowerUp_LifeRegen() : base()
     {

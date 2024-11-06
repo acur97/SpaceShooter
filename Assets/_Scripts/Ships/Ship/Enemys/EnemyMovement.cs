@@ -118,6 +118,10 @@ public class EnemyMovement : MonoBehaviour
             case ShipScriptable.Behaviour.borders:
                 Borders(properties);
                 break;
+
+            case ShipScriptable.Behaviour.chase:
+                Chase(properties);
+                break;
         }
     }
 
@@ -197,6 +201,20 @@ public class EnemyMovement : MonoBehaviour
         else
         {
             transform.position += properties.speed * Time.deltaTime * transform.right;
+        }
+    }
+
+    private void Chase(ShipScriptable properties)
+    {
+        transform.position += properties.speed * Time.deltaTime * transform.up;
+
+        if (transform.position.x > PlayerController.Instance.transform.position.x)
+        {
+            transform.position = new Vector2(transform.position.x - (properties.speed * Time.deltaTime * properties.behaviourMathfSin), transform.position.y);
+        }
+        else if (transform.position.x < PlayerController.Instance.transform.position.x)
+        {
+            transform.position = new Vector2(transform.position.x + (properties.speed * Time.deltaTime * properties.behaviourMathfSin), transform.position.y);
         }
     }
 }

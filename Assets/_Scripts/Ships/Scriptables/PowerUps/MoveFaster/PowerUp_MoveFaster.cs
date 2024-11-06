@@ -3,6 +3,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PowerUp_MoveFaster", menuName = "Gameplay/PowerUps/MoveFaster", order = 7)]
 public class PowerUp_MoveFaster : PowerUpBase
 {
+    [Space]
+    [SerializeField] private float multiplier = 2f;
+
     public PowerUp_MoveFaster() : base()
     {
         type = PowerUpsManager.PowerUpType.MoveFaster;
@@ -12,7 +15,7 @@ public class PowerUp_MoveFaster : PowerUpBase
 
     public override void OnActivate()
     {
-        PlayerController.Instance.movement.movePowerUp = 2f;
+        PlayerController.Instance.movement.movePowerUp = multiplier;
     }
 
     public override void OnDeactivate()
