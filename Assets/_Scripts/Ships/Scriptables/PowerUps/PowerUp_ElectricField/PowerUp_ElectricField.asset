@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3164d3d41ad9664296805888bee8eb5, type: 3}
+  m_Name: PowerUp_ElectricField
+  m_EditorClassIdentifier: 
+  shipBase: {fileID: 0}
+  type: 4
+  useDuration: 1
+  duration: -0.004772027
+  durationRange: {x: 10, y: 10}
+  prefab: {fileID: 7042420193141323986, guid: 7d55612c4b7e5784892fd597f8fe0233, type: 3}
+  enemyDamage: 5

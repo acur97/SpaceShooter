@@ -111,19 +111,19 @@ public class EnemyController : ShipBaseController
             collision.gameObject.SetActive(false);
 
             PostProcessingController.Instance.VolumePunch();
-            VfxPool.Instance.InitVfx(transform.position);
+            VfxPool.Instance.InitVfx(collision.transform.position);
 
             DoDamage();
         }
     }
 
-    public void DoDamage()
+    public void DoDamage(int damage = 1)
     {
         PowerUpsManager.Enemy_Damage?.Invoke(this);
 
-        health--;
+        health -= damage;
 
-        if (health == 0)
+        if (health <= 0)
         {
             Dead();
         }

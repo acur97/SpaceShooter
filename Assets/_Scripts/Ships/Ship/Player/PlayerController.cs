@@ -96,7 +96,7 @@ public class PlayerController : ShipBaseController
             collision.gameObject.SetActive(false);
 
             PostProcessingController.Instance.VolumePunch();
-            VfxPool.Instance.InitVfx(transform.position);
+            VfxPool.Instance.InitVfx(collision.transform.position);
 
             if (!copy)
             {
@@ -114,7 +114,7 @@ public class PlayerController : ShipBaseController
         else if (collision.CompareTag(_Enemy) && collision.TryGetComponent(out EnemyController enemyController) && enemyController._properties.enemyCollision)
         {
             PostProcessingController.Instance.VolumePunch();
-            VfxPool.Instance.InitVfx(transform.position);
+            VfxPool.Instance.InitVfx(collision.transform.position);
 
             enemyController.DoDamage();
 
