@@ -11394,7 +11394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70337eff295113f4b9c9977fd566a043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpStartTest: {fileID: 11400000, guid: 4dd6b80fd97c4f84b8c40a08daf7db49, type: 2}
+  powerUpStartTest: {fileID: 11400000, guid: 989994e37cfbee940b5dcdb727aed0f1, type: 2}
   powerUps:
   - {fileID: 11400000, guid: 2f5b416c7307fdd449a39ac6d6daa6c1, type: 2}
   - {fileID: 11400000, guid: 0c12553f632fcbb4ea13d2c948d5502b, type: 2}

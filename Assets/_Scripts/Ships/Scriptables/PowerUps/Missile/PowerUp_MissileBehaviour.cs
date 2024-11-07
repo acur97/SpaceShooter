@@ -101,8 +101,6 @@ public class PowerUp_MissileBehaviour : MonoBehaviour
     {
         if (collision.CompareTag(_Enemy) && collision.TryGetComponent(out EnemyController enemyController))
         {
-            collision.gameObject.SetActive(false);
-
             PostProcessingController.Instance.VolumePunch();
             VfxPool.Instance.InitVfx(transform.position);
             VfxPool.Instance.InitVfx(collision.transform.position);
