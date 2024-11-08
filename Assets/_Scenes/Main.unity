@@ -4274,10 +4274,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.000907441
     y: 0
-    width: 1
-    height: 1
+    width: 0.9981851
+    height: 0.9980198
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -11419,7 +11419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70337eff295113f4b9c9977fd566a043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpStartTest: {fileID: 11400000, guid: ca120ee2daf3ccf48ad037f431e3d983, type: 2}
+  powerUpStartTest: {fileID: 11400000, guid: 0718980e695f00a42a860890628ab9c4, type: 2}
   powerUps:
   - {fileID: 11400000, guid: 2f5b416c7307fdd449a39ac6d6daa6c1, type: 2}
   - {fileID: 11400000, guid: 0c12553f632fcbb4ea13d2c948d5502b, type: 2}
