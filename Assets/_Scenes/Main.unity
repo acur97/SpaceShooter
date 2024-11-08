@@ -11357,6 +11357,7 @@ MonoBehaviour:
   exposureRange: {x: 25, y: 50}
   chromaticAberrationRange: {x: 0.05, y: 0.2}
   maxVignette: 0.25
+  cam: {fileID: 800530120}
 --- !u!114 &1758410998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11394,13 +11395,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70337eff295113f4b9c9977fd566a043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpStartTest: {fileID: 11400000, guid: 989994e37cfbee940b5dcdb727aed0f1, type: 2}
+  powerUpStartTest: {fileID: 11400000, guid: ca120ee2daf3ccf48ad037f431e3d983, type: 2}
   powerUps:
   - {fileID: 11400000, guid: 2f5b416c7307fdd449a39ac6d6daa6c1, type: 2}
   - {fileID: 11400000, guid: 0c12553f632fcbb4ea13d2c948d5502b, type: 2}
   - {fileID: 11400000, guid: 3dc1eee61fadd304e9aedfd27bedc994, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 0718980e695f00a42a860890628ab9c4, type: 2}
+  - {fileID: 11400000, guid: 6aabb1dbfe06d534296bf9f6e4e29900, type: 2}
   - {fileID: 11400000, guid: c985b7e674b63744387fa0b744bea4d5, type: 2}
   - {fileID: 11400000, guid: d273a388845ccb44089c34248c7d352a, type: 2}
   - {fileID: 11400000, guid: de26e4a8346f06549b0baba4b6b58b30, type: 2}
@@ -11408,8 +11409,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4b9ec353ab82ec04c8c14f027e31e82e, type: 2}
   - {fileID: 11400000, guid: dc90e432820812c46ba657eda2002fa7, type: 2}
   - {fileID: 11400000, guid: 3201450dc519e4c4a8a3188e183f6c7f, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 989994e37cfbee940b5dcdb727aed0f1, type: 2}
+  - {fileID: 11400000, guid: ca120ee2daf3ccf48ad037f431e3d983, type: 2}
+  - {fileID: 11400000, guid: 5210848e21cfca049b1c30ab5e862492, type: 2}
   currentPowerUps: []
 --- !u!1001 &1766444713
 PrefabInstance:
@@ -14332,7 +14334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8446570600989465726, guid: 335432e015b03384b8094285fa47f94f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.5
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8446570600989465726, guid: 335432e015b03384b8094285fa47f94f, type: 3}
       propertyPath: m_LocalPosition.z

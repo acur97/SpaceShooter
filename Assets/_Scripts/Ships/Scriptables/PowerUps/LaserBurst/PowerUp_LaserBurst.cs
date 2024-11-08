@@ -22,7 +22,7 @@ public class PowerUp_LaserBurst : PowerUpBase
         PlayerController.Instance.shoot.shootPowerUp = true;
 
         laserInstance = Object.Instantiate(prefab).GetComponent<PowerUp_LaserBurstBehaviour>();
-        laserInstance.Init(timeToStart, damage, shipBase._properties.color).Forget();
+        laserInstance.Init(timeToStart, damage, shipBase._properties.color, duration).Forget();
     }
 
     public override void OnDeactivate()

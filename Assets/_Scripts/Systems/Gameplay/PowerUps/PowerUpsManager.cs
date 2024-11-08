@@ -65,12 +65,13 @@ public class PowerUpsManager : MonoBehaviour
     {
         currentPowerUps.Add(type);
         type.shipBase = PlayerController.Instance;
-        type.OnActivate();
 
         if (type.useDuration)
         {
             type.CountDuration().Forget();
         }
+
+        type.OnActivate();
     }
 
     public void RemovePowerUp(PowerUpBase type)

@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.LowLevel;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -219,16 +220,16 @@ public class GameManager : MonoBehaviour
 
             if (isPlaying)
             {
-                if (leftForNextGroup == 0)
+                if (leftForNextGroup <= 0)
                 {
                     RoundsController.Instance.StartGroup();
                 }
 
                 //DebugMode
-                if (Input.GetKeyDown(KeyCode.P))
-                {
-                    leftForNextGroup = 0;
-                }
+                //if (Input.GetKeyDown(KeyCode.P))
+                //{
+                //    leftForNextGroup = 0;
+                //}
             }
         }
     }

@@ -18,7 +18,7 @@ public class PowerUp_LaserBurstBehaviour : MonoBehaviour
     private Vector3 laserPoint = Vector3.zero;
     private float range = 0;
 
-    public async UniTaskVoid Init(float startDelay, uint _damage, Color color)
+    public async UniTaskVoid Init(float startDelay, uint _damage, Color color, float shakeDuration)
     {
         damage = _damage;
 
@@ -47,6 +47,8 @@ public class PowerUp_LaserBurstBehaviour : MonoBehaviour
 
         line.enabled = true;
         boxCollider.enabled = true;
+
+        PostProcessingController.Instance.ScreenShake(shakeDuration - startDelay).Forget();
 
         for (int i = 0; i < extraParticles.Length; i++)
         {
