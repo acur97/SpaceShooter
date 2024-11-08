@@ -2,12 +2,21 @@ using UnityEngine;
 
 public class CollectablesPool : PoolBaseController
 {
+    public static CollectablesPool Instance;
+
     [Space]
     [SerializeField] private float speed = 1;
     [SerializeField] private float minProv = 1;
     [SerializeField] private float maxProv = 5;
 
     private float timer = 0;
+
+    protected override void Awake()
+    {
+        Instance = this;
+
+        base.Awake();
+    }
 
     private void Start()
     {

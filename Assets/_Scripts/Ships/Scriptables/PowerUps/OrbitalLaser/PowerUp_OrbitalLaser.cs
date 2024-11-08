@@ -14,6 +14,7 @@ public class PowerUp_OrbitalLaser : PowerUpBase
     public override void OnActivate()
     {
         Object.Instantiate(prefab).transform.position = PlayerController.Instance.transform.position;
+        PowerUpsManager.Instance.RemovePowerUp(this);
     }
 
     public override void OnDeactivate()

@@ -24,7 +24,9 @@ public class PostProcessingController : MonoBehaviour
     private int tweenChromaticAberration1;
     private int tweenChromaticAberration2;
 
+    [Space]
     [SerializeField] private Transform cam;
+    [SerializeField] private AnimationCurve shakeCurve;
     private float shakeDuration = 0f;
     private Vector3 cameraOrigin = new(0f, 0f, -1f);
     private Vector3 shake;
@@ -33,10 +35,22 @@ public class PostProcessingController : MonoBehaviour
     {
         Instance = this;
 
+        ResetCameraPosition();
+
         profile = volume.profile;
         profile.TryGet(out colorAdjustments);
         profile.TryGet(out chromaticAberration);
         profile.TryGet(out vignette);
+    }
+
+    private void ResetCameraPosition()
+    {
+        if (cam == null)
+        {
+            return;
+        }
+
+        cam.localPosition = cameraOrigin;
     }
 
     public void VolumePunch()
@@ -81,7 +95,7 @@ public class PostProcessingController : MonoBehaviour
 
         while (shakeDuration > 0)
         {
-            shake = cameraOrigin + Random.insideUnitSphere * shakeAmount;
+            shake = cameraOrigin + shakeAmount * shakeCurve.Evaluate(shakeDuration.Remap(0, duration, 1, 0)) * Random.insideUnitSphere;
             shake.z = -1f;
             cam.localPosition = shake;
 
@@ -90,6 +104,11 @@ public class PostProcessingController : MonoBehaviour
             await UniTask.Yield();
         }
 
-        cam.localPosition = cameraOrigin;
+        ResetCameraPosition();
+    }
+
+    private void OnDestroy()
+    {
+        ResetCameraPosition();
     }
 }

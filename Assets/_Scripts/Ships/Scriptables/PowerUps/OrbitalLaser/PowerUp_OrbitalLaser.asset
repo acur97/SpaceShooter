@@ -19,4 +19,5 @@ MonoBehaviour:
   useDuration: 0
   durationRange: {x: -1, y: -1}
   duration: -1
-  prefab: {fileID: 0}
+  prefab: {fileID: 4395468141826009023, guid: 9827e1a2dff5243489f5c3b5ec57d1b6, type: 3}
+  damage: 1000

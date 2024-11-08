@@ -1,193 +1,145 @@
 using UnityEngine;
 using Nakama;
-using System.Threading.Tasks;
 using System;
+using Cysharp.Threading.Tasks;
 
 public class NakamaConnection : MonoBehaviour
 {
-    public string url = "https://73c2-8-242-214-187.ngrok-free.app";
-    public string serverKey = "defaultkey";
-    public string palStorage = "{\"Progreso\":{\"monedas\":13,\"color\":\"FFFFFF\"}}"
+    [SerializeField] private string url = "https://73c2-8-242-214-187.ngrok-free.app";
+    [SerializeField] private string serverKey = "defaultkey";
+
+    [Space]
+    [SerializeField] private string leaderboardId = "4ec4f126-3f9d-11e7-84ef-b7c182b36521";
+
+    [Space]
+    [SerializeField]
+    private string storageValueJson = "{\"Progreso\":{\"monedas\":13,\"color\":\"FFFFFF\"}}"
 ;
-    private const string SessionPrefName = "nakama.Session";
+    //private const string SessionPrefName = "nakama.Session";
     private const string DeviceIdentifierPrefName = "nakama.deviceUniqueIdentifier";
 
-    //[SerializeField] private string currentMatchmakingTicket;
-    //[SerializeField] private string currentMatchId;
+    private IClient Client;
+    private ISession Session;
+    //private ISocket Socket;
 
-    public IClient Client;
-    public ISession Session;
-    //public ISocket Socket;
-
-    [ContextMenu("Inicar")]
-    public void Va()
-    {
-        _ = Connect();
-    }
-
-    /// <summary>
-    /// Establishes a connection to the Nakama server.
-    /// </summary>
-    private async Task Connect()
+    [ContextMenu("Init Connection")]
+    private async UniTaskVoid Connect()
     {
         Debug.Log("Connect");
 
-        // Initialize the client with the server URL and key
         Client = new Client(new Uri(url), serverKey);
 
-        // Search for a cached session
-        CacheSessionSearch(SessionPrefName);
+        //CacheSessionSearch(SessionPrefName);
 
-        // Authenticate the session if it's null
         await AuthenticateSessionIfNull();
-        // TODO: Re-enable socket connection when needed
+
         // Socket = Client.NewSocket();
         // await Socket.ConnectAsync(Session, true);
 
         Debug.Log("Connect finish");
     }
 
-    /// <summary>
-    /// Searches for a cached session in the PlayerPrefs and restores it if found.
-    /// </summary>
-    /// <param name="sessionPrefName">The name of the PlayerPrefs key where the session is stored.</param>
-    private void CacheSessionSearch(string sessionPrefName)
-    {
-        Debug.Log("CacheSessionSearch");
+    //private void CacheSessionSearch(string sessionPrefName)
+    //{
+    //    Debug.Log("CacheSessionSearch");
 
-        // Get the cached session from PlayerPrefs
-        string cacheSession = PlayerPrefs.GetString(sessionPrefName);
+    //    if (PlayerPrefs.HasKey(sessionPrefName))
+    //    {
+    //        ISession session = Nakama.Session.Restore(PlayerPrefs.GetString(sessionPrefName));
 
-        // Check if a cached session was found
-        if (!string.IsNullOrEmpty(cacheSession))
-        {
-            // Restore the session from the cached data
-            ISession session = Nakama.Session.Restore(cacheSession);
+    //        if (!session.IsExpired)
+    //        {
+    //            Session = session;
+    //        }
+    //    }
 
-            // Check if the restored session is not expired
-            if (!session.IsExpired)
-            {
-                // Set the restored session as the current session
-                Session = session;
-            }
-        }
+    //    Debug.Log("CacheSessionSearch finish");
+    //}
 
-        Debug.Log("CacheSessionSearch finish");
-    }
-
-    /// <summary>
-    /// Authenticates the session if it's null.
-    /// </summary>
-    private async Task AuthenticateSessionIfNull()
+    private async UniTask AuthenticateSessionIfNull()
     {
         Debug.Log("AuthenticateSessionIfNull");
 
-        // Check if the session is null
-        if (Session == null)
-        {
-            // Get or create a unique device identifier
-            string deviceId = GetDeviceIdentifier();
-
-            // Authenticate the device with the Nakama server
-            Session = await Client.AuthenticateDeviceAsync(deviceId);
-        }
+        Session ??= await Client.AuthenticateDeviceAsync(GetDeviceIdentifier());
 
         Debug.Log("AuthenticateSessionIfNull finish");
     }
 
-    /// <summary>
-    /// Gets or creates a unique device identifier.
-    /// </summary>
-    /// <returns>A unique device identifier.</returns>
     private string GetDeviceIdentifier()
     {
-        // Check if a device identifier is stored in PlayerPrefs
+        Debug.Log("GetDeviceIdentifier");
+
         if (PlayerPrefs.HasKey(DeviceIdentifierPrefName))
         {
-            // Return the stored device identifier
             return PlayerPrefs.GetString(DeviceIdentifierPrefName);
         }
         else
         {
-            // Get the device unique identifier
             string deviceId = SystemInfo.deviceUniqueIdentifier;
 
-            // If the device unique identifier is not supported, generate a new one
             if (deviceId == SystemInfo.unsupportedIdentifier)
             {
                 deviceId = Guid.NewGuid().ToString();
             }
 
-            // Store the device identifier in PlayerPrefs
             PlayerPrefs.SetString(DeviceIdentifierPrefName, deviceId);
 
-            // Return the device identifier
             return deviceId;
         }
     }
 
-    [ContextMenu("Enviar Leaderboard")]
-    /// <summary>
-    /// Sends a leaderboard record to the Nakama server.
-    /// </summary>
-    public void EnviarPalLeaderboard()
+    [ContextMenu("Test Send Leaderboard")]
+    public async UniTaskVoid SendLeaderboard()
     {
-        Debug.Log("EnviarPalLeaderboard");
+        Debug.Log("SendLeaderboard");
 
-        // Write the leaderboard record to the Nakama server
-        // The record is written to the leaderboard with the specified ID and a score of 69
-        Client.WriteLeaderboardRecordAsync(Session, "4ec4f126-3f9d-11e7-84ef-b7c182b36521", 69);
+        await Client.WriteLeaderboardRecordAsync(Session, leaderboardId, 320);
 
-        Debug.Log("EnviarPalLeaderboard finish");
+        Debug.Log("SendLeaderboard finish");
     }
 
-    [ContextMenu("Retorna Leaderboard")]
-    /// <summary>
-    /// Retrieves and logs all leaderboard records from the Nakama server.
-    /// </summary>
-    public async void RotameElLeaderboard()
+    [ContextMenu("Test Get Leaderboard")]
+    public async UniTaskVoid GetLeaderboard()
     {
-        Debug.Log("RotameElLeaderboard");
+        Debug.Log("GetLeaderboard");
 
-        // Retrieve the leaderboard records from the Nakama server
-        // The leaderboard ID is hardcoded for demonstration purposes
-        string leaderboardId = "4ec4f126-3f9d-11e7-84ef-b7c182b36521";
         IApiLeaderboardRecordList leaderboardRecords = await Client.ListLeaderboardRecordsAsync(Session, leaderboardId);
 
-        // Log each leaderboard record
         foreach (IApiLeaderboardRecord record in leaderboardRecords.Records)
         {
             Debug.Log(record);
         }
 
-        Debug.Log("RotameElLeaderboard finish");
+        Debug.Log("GetLeaderboard finish");
     }
 
-    [ContextMenu("Enviar Storage")]
-    /// <summary>
-    /// Writes the player's progress to the Nakama storage.
-    /// </summary>
-    public void EncaletameEsta()
+    [ContextMenu("Test Send Storage")]
+    public async UniTaskVoid SendStorage()
     {
-        Debug.Log("EncaletameEsta");
+        Debug.Log("SendStorage");
 
-        // Create a new WriteStorageObject to store the player's progress
-        WriteStorageObject writeStorageObject = new()
+        WriteStorageObject[] objects = new[]
         {
-            // The collection name for storing player progress
-            Collection = "player_progress",
-            // The unique key for this record
-            Key = "progress_data",
-            // The value to be stored
-            Value = palStorage,
-            // Permission settings: public read, private write
-            PermissionRead = 2, // 2 = Public (others can read if needed)
-            PermissionWrite = 1 // 1 = Private (only the owner can write)
+            new WriteStorageObject
+            {
+                Collection = "test_progress",
+                Key = "test_data",
+                Value = "Test data",
+                PermissionRead = 2, // 2 = Public (others can read if needed)
+                PermissionWrite = 1 // 1 = Private (only the owner can write)
+            },
+            new WriteStorageObject
+            {
+                Collection = "player_progress",
+                Key = "progress_data",
+                Value = storageValueJson,
+                PermissionRead = 2, // 2 = Public (others can read if needed)
+                PermissionWrite = 1 // 1 = Private (only the owner can write)
+            }
         };
 
-        // Write the storage object to the Nakama server asynchronously
-        Client.WriteStorageObjectsAsync(Session, new[] { writeStorageObject });
+        await Client.WriteStorageObjectsAsync(Session, objects);
 
-        Debug.Log("EncaletameEsta finish");
+        Debug.Log("SendStorage finish");
     }
 }

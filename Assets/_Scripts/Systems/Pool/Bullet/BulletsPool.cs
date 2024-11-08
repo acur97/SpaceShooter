@@ -4,7 +4,7 @@ public class BulletsPool : PoolBaseController
 {
     public static BulletsPool Instance;
 
-    [SerializeField] private Bullet[] bullets;
+    public Bullet[] bullets;
 
     private readonly int _Color = Shader.PropertyToID("_Color");
 
