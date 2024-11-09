@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
     private const string postcore = "Final score:\n ";
 
     [Header("Ui")]
-    [SerializeField] private GameObject shadowBorders;
     [SerializeField] private RectTransform uiRect;
     [SerializeField] private Camera mainCamera;
 
@@ -245,9 +244,6 @@ public class GameManager : MonoBehaviour
         enemyLineLimit = canvasBorders.y - (enemyLine * canvasBorders.y);
         horizontalMultiplier = mainCamera.aspect * 0.5625f;
         horizontalInvertedMultiplier = horizontalMultiplier.Remap(1, 0, 0, 1) + 1;
-
-        // black gradient borders to fix wider aspect ratios
-        shadowBorders.SetActive((mainCamera.pixelWidth / (float)mainCamera.pixelHeight) > 1.94f);
     }
 
     public void UpScore(int value)

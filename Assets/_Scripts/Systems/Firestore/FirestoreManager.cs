@@ -96,11 +96,11 @@ public class FirestoreManager : MonoBehaviour
     {
         if (input.Length > 3)
         {
-            input = input.Insert(3, scorePoint);
+            input = input.Insert(1, scorePoint);
         }
         if (input.Length > 7)
         {
-            input = input.Insert(7, scorePoint);
+            input = input.Insert(4, scorePoint);
         }
 
         return input;

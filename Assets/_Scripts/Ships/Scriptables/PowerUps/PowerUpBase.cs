@@ -5,7 +5,8 @@ public abstract class PowerUpBase : ScriptableObject
 {
     [HideInInspector] public ShipBaseController shipBase;
     public PowerUpsManager.PowerUpType type;
-    public uint level = 1;
+    public uint currentAmount = 0;
+    //public uint level = 1;
     public uint cost = 1;
     public bool useDuration = false;
     public Vector2 durationRange = new(-1f, -1f);
