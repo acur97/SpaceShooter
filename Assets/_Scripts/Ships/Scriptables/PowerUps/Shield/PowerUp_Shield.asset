@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipBase: {fileID: 0}
   type: 4
+  level: 1
   cost: 1
   useDuration: 1
-  duration: 6.4028635
   durationRange: {x: 10, y: 10}
-  prefab: {fileID: 8673868457665229473, guid: 46e7898ec58473e4c8b6547da340c5db, type: 3}
+  duration: -0.00080525025
+  prefab: {fileID: 8673868457665229473, guid: 88e76c1601a3ee149933cd7c32f71216, type: 3}
   bulletAbsortion: 100

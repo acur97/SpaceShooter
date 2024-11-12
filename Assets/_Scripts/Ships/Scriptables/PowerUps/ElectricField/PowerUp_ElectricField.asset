@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipBase: {fileID: 0}
   type: 4
+  level: 1
+  cost: 1
   useDuration: 1
-  duration: -0.004772027
   durationRange: {x: 10, y: 10}
-  prefab: {fileID: 7042420193141323986, guid: 7d55612c4b7e5784892fd597f8fe0233, type: 3}
+  duration: -0.0017660989
+  prefab: {fileID: 7042420193141323986, guid: 5eb71fd6d8174ff418a0787677b1284c, type: 3}
   enemyDamage: 5
