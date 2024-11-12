@@ -5,6 +5,8 @@ public abstract class PowerUpBase : ScriptableObject
 {
     [HideInInspector] public ShipBaseController shipBase;
     public PowerUpsManager.PowerUpType type;
+    public string powerName;
+    public Sprite sprite;
     public uint currentAmount = 0;
     //public uint level = 1;
     public uint cost = 1;

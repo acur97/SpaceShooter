@@ -10,19 +10,24 @@ public class StoreItem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI priceTxt;
     [SerializeField] private Button buttonBtn;
 
-    private int price;
+    private uint price;
     private PowerUpBase powerUp;
 
-    public void Init(PowerUpBase _powerUp, Sprite _sprite, string _title, int _price)
+    public void Init(PowerUpBase _powerUp)
     {
         powerUp = _powerUp;
-        price = _price;
+        price = powerUp.cost;
 
-        spriteImg.sprite = _sprite;
+        spriteImg.sprite = powerUp.sprite;
         countTxt.text = powerUp.currentAmount.ToString();
-        titleTxt.text = _title;
+        titleTxt.text = powerUp.powerName;
         priceTxt.text = $"${price}";
 
+        StoreManager.onRefresh += UpdateBtn;
+    }
+
+    private void UpdateBtn()
+    {
         if (PlayerProgress.coins < price)
         {
             buttonBtn.interactable = false;
@@ -31,9 +36,14 @@ public class StoreItem : MonoBehaviour
 
     public void Buy()
     {
-        PlayerProgress.coins -= price;
+        PlayerProgress.coins -= (int)price;
         powerUp.currentAmount++;
 
         countTxt.text = powerUp.currentAmount.ToString();
+    }
+
+    private void OnDestroy()
+    {
+        StoreManager.onRefresh -= UpdateBtn;
     }
 }

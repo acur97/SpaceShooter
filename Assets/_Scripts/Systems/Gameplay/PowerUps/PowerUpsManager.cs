@@ -33,7 +33,7 @@ public class PowerUpsManager : MonoBehaviour
     }
 
     [SerializeField] private PowerUpBase powerUpStartTest;
-    [SerializeField] private List<PowerUpBase> powerUps;
+    public List<PowerUpBase> powerUps;
     public List<PowerUpBase> currentPowerUps = new();
 
     public void Init()
