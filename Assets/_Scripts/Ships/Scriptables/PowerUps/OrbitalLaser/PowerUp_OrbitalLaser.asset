@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipBase: {fileID: 0}
   type: 14
-  level: 1
-  cost: 1
+  powerName: Orbital Laser
+  sprite: {fileID: 1346643922, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
+  description: Devastating laser that clears the entire screen of enemies
+  currentAmount: 999
+  cost: 400
   useDuration: 0
   durationRange: {x: -1, y: -1}
   duration: -1
   prefab: {fileID: 4395468141826009023, guid: 9827e1a2dff5243489f5c3b5ec57d1b6, type: 3}
-  damage: 1000

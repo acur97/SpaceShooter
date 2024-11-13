@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipBase: {fileID: 0}
   type: 7
+  powerName: Move Faster
+  sprite: {fileID: 935428350, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
+  description: x2 movement speed, lasts 8 to 10 seconds
+  currentAmount: 1000
   cost: 40
   useDuration: 1
-  duration: -1
   durationRange: {x: 8, y: 10}
+  duration: -1
+  multiplier: 2

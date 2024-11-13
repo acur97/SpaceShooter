@@ -8,38 +8,35 @@ public class StoreItem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI countTxt;
     [SerializeField] private TextMeshProUGUI titleTxt;
     [SerializeField] private TextMeshProUGUI priceTxt;
-    [SerializeField] private Button buttonBtn;
+    [SerializeField] private Button selectBtn;
 
     private uint price;
+    private StoreManager store;
     private PowerUpBase powerUp;
 
-    public void Init(PowerUpBase _powerUp)
+    public void Init(StoreManager _store, PowerUpBase _powerUp)
     {
+        store = _store;
         powerUp = _powerUp;
         price = powerUp.cost;
 
         spriteImg.sprite = powerUp.sprite;
-        countTxt.text = powerUp.currentAmount.ToString();
         titleTxt.text = powerUp.powerName;
         priceTxt.text = $"${price}";
 
         StoreManager.onRefresh += UpdateBtn;
+
+        selectBtn.onClick.AddListener(Select);
     }
 
     private void UpdateBtn()
     {
-        if (PlayerProgress.coins < price)
-        {
-            buttonBtn.interactable = false;
-        }
+        countTxt.text = powerUp.currentAmount.ToString();
     }
 
-    public void Buy()
+    private void Select()
     {
-        PlayerProgress.coins -= (int)price;
-        powerUp.currentAmount++;
-
-        countTxt.text = powerUp.currentAmount.ToString();
+        store.SelectPowerUp(powerUp);
     }
 
     private void OnDestroy()

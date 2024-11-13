@@ -4,20 +4,22 @@ using UnityEngine;
 public abstract class PowerUpBase : ScriptableObject
 {
     [HideInInspector] public ShipBaseController shipBase;
+
+    [Header("Descriptions")]
     public PowerUpsManager.PowerUpType type;
     public string powerName;
     public Sprite sprite;
+    [TextArea] public string description;
+
+    [Header("Prices")]
     public uint currentAmount = 0;
     //public uint level = 1;
-    public uint cost = 1;
+    public uint cost = 10;
+
+    [Header("Properties")]
     public bool useDuration = false;
     public Vector2 durationRange = new(-1f, -1f);
     [ReadOnly] public float duration = -1f;
-
-    //public PowerUpBase()
-    //{
-    //    shipBase = PlayerController.Instance;
-    //}
 
     public abstract void OnActivate();
 

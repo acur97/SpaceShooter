@@ -1,4 +1,3 @@
-using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,12 +28,14 @@ public class PowerUpsManager : MonoBehaviour
         DroneOrbital,
         LaserBurst,
         OrbitalLaser,
-        ExtractLife
+        ExtractLife,
+        CoinMagnet
     }
 
-    [SerializeField] private PowerUpBase powerUpStartTest;
     public List<PowerUpBase> powerUps;
-    public List<PowerUpBase> currentPowerUps = new();
+    //public List<PowerUpBase> currentPowerUps = new();
+    public PowerUpBase selectedPowerUps;
+    private PowerUpBase currentPowerUp;
 
     public void Init()
     {
@@ -44,13 +45,6 @@ public class PowerUpsManager : MonoBehaviour
         Player_Damage += PlayerDamage;
         Enemy_Damage += EnemyDamage;
         Enemy_Death += EnemyDeath;
-    }
-
-    public async UniTaskVoid Start()
-    {
-        await UniTask.WaitForSeconds(10f);
-
-        AddPowerUp(powerUpStartTest);
     }
 
     private void OnDisable()
@@ -63,7 +57,16 @@ public class PowerUpsManager : MonoBehaviour
 
     public void AddPowerUp(PowerUpBase type)
     {
-        currentPowerUps.Add(type);
+        if (currentPowerUp != null)
+        {
+            return;
+        }
+
+        //currentPowerUps.Add(type);
+        currentPowerUp = type;
+        currentPowerUp.currentAmount--;
+        selectedPowerUps = null;
+
         type.shipBase = PlayerController.Instance;
 
         if (type.useDuration)
@@ -77,47 +80,60 @@ public class PowerUpsManager : MonoBehaviour
     public void RemovePowerUp(PowerUpBase type)
     {
         type.OnDeactivate();
-        currentPowerUps.Remove(type);
+
+        //currentPowerUps.Remove(type);
+        currentPowerUp = null;
+
         type.Dispose();
     }
 
     public void PlayerShoot()
     {
-        for (int i = 0; i < currentPowerUps.Count; i++)
-        {
-            currentPowerUps[i].OnPlayerShoot();
-        }
+        //for (int i = 0; i < currentPowerUps.Count; i++)
+        //{
+        //    currentPowerUps[i].OnPlayerShoot();
+        //}
+
+        currentPowerUp?.OnPlayerShoot();
     }
 
     public void PlayerDamage()
     {
-        for (int i = 0; i < currentPowerUps.Count; i++)
-        {
-            currentPowerUps[i].OnPlayerDamage();
-        }
+        //for (int i = 0; i < currentPowerUps.Count; i++)
+        //{
+        //    currentPowerUps[i].OnPlayerDamage();
+        //}
+
+        currentPowerUp?.OnPlayerDamage();
     }
 
     public void EnemyDamage(ShipBaseController enemy)
     {
-        for (int i = 0; i < currentPowerUps.Count; i++)
-        {
-            currentPowerUps[i].OnEnemyDamage(enemy);
-        }
+        //for (int i = 0; i < currentPowerUps.Count; i++)
+        //{
+        //    currentPowerUps[i].OnEnemyDamage(enemy);
+        //}
+
+        currentPowerUp?.OnEnemyDamage(enemy);
     }
 
     public void EnemyDeath(ShipBaseController enemy)
     {
-        for (int i = 0; i < currentPowerUps.Count; i++)
-        {
-            currentPowerUps[i].OnEnemyDeath(enemy);
-        }
+        //for (int i = 0; i < currentPowerUps.Count; i++)
+        //{
+        //    currentPowerUps[i].OnEnemyDeath(enemy);
+        //}
+
+        currentPowerUp?.OnEnemyDeath(enemy);
     }
 
     private void Update()
     {
-        for (int i = 0; i < currentPowerUps.Count; i++)
-        {
-            currentPowerUps[i].OnGameUpdate();
-        }
+        //for (int i = 0; i < currentPowerUps.Count; i++)
+        //{
+        //    currentPowerUps[i].OnGameUpdate();
+        //}
+
+        currentPowerUp?.OnGameUpdate();
     }
 }

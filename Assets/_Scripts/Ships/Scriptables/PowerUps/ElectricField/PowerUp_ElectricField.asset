@@ -13,9 +13,15 @@ MonoBehaviour:
   m_Name: PowerUp_ElectricField
   m_EditorClassIdentifier: 
   shipBase: {fileID: 0}
-  type: 4
+  type: 5
+  powerName: Electric Field
+  sprite: {fileID: 1142201859, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
+  description: Electric shield that does not protect but deals damage when touched
+    by the enemy, lasts 40 seconds
+  currentAmount: 999
+  cost: 10
   useDuration: 1
-  duration: -0.004772027
   durationRange: {x: 10, y: 10}
+  duration: -0.001059358
   prefab: {fileID: 7042420193141323986, guid: 7d55612c4b7e5784892fd597f8fe0233, type: 3}
   enemyDamage: 5

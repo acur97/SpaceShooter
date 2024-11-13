@@ -4,7 +4,9 @@ public class PlayerProgress : MonoBehaviour
 {
     public static PlayerProgress Instance;
 
-    public static int coins = 0;
+    private static int coins = 0;
+
+    private const string _coins = "Coins";
 
     private void Awake()
     {
@@ -14,5 +16,19 @@ public class PlayerProgress : MonoBehaviour
         }
 
         Instance = this;
+
+        coins = PlayerPrefs.GetInt(_coins, 0);
+    }
+
+    public static int UpCoins(int value)
+    {
+        coins += value;
+        PlayerPrefs.SetInt(_coins, coins);
+        return coins;
+    }
+
+    public static int GetCoins()
+    {
+        return coins;
     }
 }

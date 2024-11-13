@@ -12,16 +12,19 @@ public class ControlsManager : MonoBehaviour
     public bool fireDown;
     public bool fireUp;
     public Vector2 move;
+    public bool power;
 
     [Header("Touch Controls")]
     [SerializeField] private bool touchControls;
     [SerializeField] private GameObject touchUi;
     [SerializeField] private EventTrigger fireBtn;
+    [SerializeField] private EventTrigger powerBtn;
     [SerializeField] private Joystick joystick;
 
     private const string _Horizontal = "Horizontal";
     private const string _Vertical = "Vertical";
     private const string _Fire = "Fire1";
+    private const string _Jump = "Jump";
 
     [Header("Tutorial")]
     [SerializeField] private GameObject tutorialMobile;
@@ -46,19 +49,36 @@ public class ControlsManager : MonoBehaviour
 
         if (touchControls)
         {
-            EventTrigger.Entry entryDown = new()
+            // fire btn
+            EventTrigger.Entry fireEntryDown = new()
             {
                 eventID = EventTriggerType.PointerDown
             };
-            entryDown.callback.AddListener((eventData) => { fireDown = true; fireUp = false; });
-            fireBtn.triggers.Add(entryDown);
+            fireEntryDown.callback.AddListener((eventData) => { fireDown = true; fireUp = false; });
+            fireBtn.triggers.Add(fireEntryDown);
 
-            EventTrigger.Entry entryUp = new()
+            EventTrigger.Entry fireEntryUp = new()
             {
                 eventID = EventTriggerType.PointerUp
             };
-            entryUp.callback.AddListener((eventData) => { fireDown = false; fireUp = true; });
-            fireBtn.triggers.Add(entryUp);
+            fireEntryUp.callback.AddListener((eventData) => { fireDown = false; fireUp = true; });
+            fireBtn.triggers.Add(fireEntryUp);
+
+
+            // power btn
+            EventTrigger.Entry powerEntryDown = new()
+            {
+                eventID = EventTriggerType.PointerDown
+            };
+            powerEntryDown.callback.AddListener((eventData) => power = true);
+            powerBtn.triggers.Add(powerEntryDown);
+
+            EventTrigger.Entry powerEntryUp = new()
+            {
+                eventID = EventTriggerType.PointerUp
+            };
+            powerEntryUp.callback.AddListener((eventData) => power = false);
+            powerBtn.triggers.Add(powerEntryUp);
         }
     }
 
@@ -93,6 +113,9 @@ public class ControlsManager : MonoBehaviour
 
             if (fireUp == true)
                 fireUp = false;
+
+            if (power == true)
+                power = false;
         }
         else
         {
@@ -101,6 +124,8 @@ public class ControlsManager : MonoBehaviour
 
             fireDown = Input.GetButtonDown(_Fire);
             fireUp = Input.GetButtonUp(_Fire);
+
+            power = Input.GetButtonDown(_Jump);
         }
     }
 }

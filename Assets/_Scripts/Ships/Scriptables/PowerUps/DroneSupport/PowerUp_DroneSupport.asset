@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipBase: {fileID: 0}
   type: 11
+  powerName: Support Dron
+  sprite: {fileID: 821985148, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
+  description: Drone that shoots next to you, lasts 40 seconds
+  currentAmount: 999
   cost: 30
   useDuration: 1
-  duration: -1
   durationRange: {x: 40, y: 40}
+  duration: 32.880848
   prefab: {fileID: 3048626543858494239, guid: ed2a88de22652594b86214c051823c4f, type: 3}
   randomOffset: 0.6

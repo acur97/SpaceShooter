@@ -14,10 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipBase: {fileID: 0}
   type: 12
+  powerName: Orbital Dron
+  sprite: {fileID: 979358522, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
+  description: Drone orbiting around you, lasts 30 seconds
+  currentAmount: 999
   cost: 30
   useDuration: 1
-  duration: -0.0006392114
   durationRange: {x: 30, y: 30}
+  duration: 7.5119066
   prefab: {fileID: 3048626543858494239, guid: 3479a277a7aae61489f7ef1ff55c5236, type: 3}
   distance: 1
   speed: 2

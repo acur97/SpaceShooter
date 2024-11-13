@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipBase: {fileID: 0}
   type: 2
+  powerName: Triple Shot
+  sprite: {fileID: 1346643922, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
+  description: Triple shot that lasts 20 seconds
+  currentAmount: 999
   cost: 20
   useDuration: 1
-  duration: -1
   durationRange: {x: 20, y: 20}
+  duration: 16.183472

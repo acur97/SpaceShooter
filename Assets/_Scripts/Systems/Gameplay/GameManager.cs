@@ -16,12 +16,17 @@ public class GameManager : MonoBehaviour
     public bool isPlaying = false;
     public int leftForNextGroup = 0;
 
-    [Space]
+    [Header("Score")]
     [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI endScore;
-    public int score = 0;
     private const string preScore = "Score: ";
-    private const string postcore = "Final score:\n ";
+    public int score = 0;
+    [SerializeField] private TextMeshProUGUI endScore;
+    private const string postScore = "Final score:\n ";
+
+    [Header("Coins")]
+    [SerializeField] private TextMeshProUGUI coinsText;
+    private const string preCoins = "Coins: ";
+    [SerializeField] private TextMeshProUGUI endCoins;
 
     [Header("Ui")]
     [SerializeField] private RectTransform uiRect;
@@ -200,9 +205,12 @@ public class GameManager : MonoBehaviour
         powerUpsManager.Init();
         playerController.Init();
 
-        scoreText.SetText(preScore + score);
-
         Time.timeScale = 1;
+    }
+
+    private void Start()
+    {
+        coinsText.SetText(preCoins + PlayerProgress.GetCoins());
     }
 
     private void Update()
@@ -246,15 +254,19 @@ public class GameManager : MonoBehaviour
         horizontalInvertedMultiplier = horizontalMultiplier.Remap(1, 0, 0, 1) + 1;
     }
 
-    public void UpScore(int value)
+    public void UpScore(int value, bool enemy = true)
     {
         if (isPlaying)
         {
-            score += value;
-            scoreText.SetText(preScore + score);
-
-            if (value == gameplayScriptable.coinValue)
+            if (enemy)
             {
+                score += value;
+                scoreText.SetText(preScore + score);
+            }
+            else
+            {
+                PlayerProgress.UpCoins(value);
+                coinsText.SetText(preCoins + PlayerProgress.GetCoins());
                 AudioManager.Instance.PlaySound(AudioManager.AudioType.Coin);
             }
         }
@@ -268,7 +280,9 @@ public class GameManager : MonoBehaviour
             hasStarted = false;
             UiManager.Instance.SetUi(UiType.End, true, 1, () => UiManager.Instance.SetUi(UiType.Gameplay, false));
 
-            endScore.SetText(postcore + score);
+            endScore.SetText(postScore + score);
+            endCoins.SetText(preCoins + PlayerProgress.GetCoins());
+            PlayerPrefs.Save();
             AudioManager.Instance.PlaySound(AudioManager.AudioType.End, 2.5f);
 
             Time.timeScale = 0.5f;

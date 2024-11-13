@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipBase: {fileID: 0}
   type: 4
-  cost: 1
+  powerName: Shield
+  sprite: {fileID: -2126760304, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
+  description: Shield that absorbs 100 impacts or lasts 10 seconds
+  currentAmount: 999
+  cost: 10
   useDuration: 1
-  duration: 6.4028635
   durationRange: {x: 10, y: 10}
+  duration: -0.0043281647
   prefab: {fileID: 8673868457665229473, guid: 46e7898ec58473e4c8b6547da340c5db, type: 3}
   bulletAbsortion: 100

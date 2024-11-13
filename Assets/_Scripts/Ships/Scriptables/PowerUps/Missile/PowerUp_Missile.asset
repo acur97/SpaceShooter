@@ -14,10 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipBase: {fileID: 0}
   type: 3
+  powerName: Missile
+  sprite: {fileID: -400897349, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
+  description: Fires 2 homing missiles that deal 15 damage
+  currentAmount: 999
   cost: 50
   useDuration: 0
-  duration: -1
   durationRange: {x: -1, y: -1}
+  duration: -1
   prefab: {fileID: 9047772751246052230, guid: 097de99970859564898840ff6c2a93ad, type: 3}
   count: 2
   damage: 15

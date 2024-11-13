@@ -86,6 +86,11 @@ public class PlayerController : ShipBaseController
         {
             movement.OnUpdate();
             shoot.OnUpdate();
+
+            if (controls.power && PowerUpsManager.Instance.selectedPowerUps != null)
+            {
+                PowerUpsManager.Instance.AddPowerUp(PowerUpsManager.Instance.selectedPowerUps);
+            }
         }
     }
 
@@ -109,7 +114,7 @@ public class PlayerController : ShipBaseController
         {
             collision.gameObject.SetActive(false);
 
-            GameManager.Instance.UpScore(GameManager.Instance.gameplayScriptable.coinValue);
+            GameManager.Instance.UpScore(GameManager.Instance.gameplayScriptable.coinValue, false);
         }
         else if (collision.CompareTag(_Enemy) && collision.TryGetComponent(out EnemyController enemyController) && enemyController._properties.enemyCollision)
         {

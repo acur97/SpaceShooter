@@ -14,8 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipBase: {fileID: 0}
   type: 15
-  cost: 1
+  powerName: Extract Life
+  sprite: {fileID: -400897349, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
+  description: Steals the total life of the enemy you destroy
+  currentAmount: 1000
+  cost: 10
   useDuration: 0
-  duration: -1
   durationRange: {x: -1, y: -1}
+  duration: -1
   steals: 1

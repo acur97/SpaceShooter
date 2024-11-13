@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipBase: {fileID: 0}
   type: 13
-  level: 1
-  cost: 1
+  powerName: Laser Burst
+  sprite: {fileID: -1683858658, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
+  description: Directional laser that damages whatever it touches
+  currentAmount: 999
+  cost: 200
   useDuration: 1
   durationRange: {x: 6, y: 9}
-  duration: -0.0010145991
+  duration: -0.0028732761
   prefab: {fileID: 7956906068790334098, guid: 371c982636414444db270f0e2ee76f8b, type: 3}
   timeToStart: 3
   damage: 25
