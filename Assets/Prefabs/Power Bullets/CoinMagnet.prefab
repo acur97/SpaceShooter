@@ -4847,7 +4847,7 @@ GameObject:
   - component: {fileID: 90464495339691966}
   - component: {fileID: 8628865837954465294}
   m_Layer: 0
-  m_Name: ElectricFieldTest3
+  m_Name: CoinMagnet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
