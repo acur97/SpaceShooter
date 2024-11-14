@@ -13,8 +13,8 @@ public class StoreManager : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private Camera cam;
-    [SerializeField] private RectTransform topPanel;
-    [SerializeField] private RectTransform bottomPanel;
+    [SerializeField] private RectTransform panel1;
+    [SerializeField] private RectTransform panel2;
 
     [Header("Info Panel")]
     [SerializeField] private TextMeshProUGUI titleTxt;
@@ -29,7 +29,7 @@ public class StoreManager : MonoBehaviour
     [Space]
     [SerializeField] private TextMeshProUGUI coinsTxt;
 
-    private const float limit = 1.777777f;
+    private const float limit = 0.746988f;
     private float cameraAspect = 1.777778f;
 
     private void Awake()
@@ -148,15 +148,23 @@ public class StoreManager : MonoBehaviour
     {
         cameraAspect = cam.aspect;
 
-        //if (cameraAspect >= limit)
-        //{
-        //    topPanel.sizeDelta = new Vector2(0, 78f);
-        //    bottomPanel.offsetMax = new Vector2(0, -78f);
-        //}
-        //else
-        //{
-        //    topPanel.sizeDelta = new Vector2(0, 152f);
-        //    bottomPanel.offsetMax = new Vector2(0, -152f);
-        //}
+        if (cameraAspect >= limit)
+        {
+            // horizontal
+            panel1.anchorMin = new Vector2(0.04f, 0.06f);
+            panel1.anchorMax = new Vector2(0.49f, 0.9f);
+
+            panel2.anchorMin = new Vector2(0.51f, 0.06f);
+            panel2.anchorMax = new Vector2(0.96f, 0.9f);
+        }
+        else
+        {
+            // vertical
+            panel1.anchorMin = new Vector2(0.04f, 0.4f);
+            panel1.anchorMax = new Vector2(0.96f, 0.9f);
+
+            panel2.anchorMin = new Vector2(0.04f, 0.06f);
+            panel2.anchorMax = new Vector2(0.96f, 0.4f);
+        }
     }
 }

@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: $400
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1cd7f8ebb17cf634aac94c61f3c88579, type: 2}
-  m_sharedMaterial: {fileID: 8791771155795309100, guid: 1cd7f8ebb17cf634aac94c61f3c88579, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 90b23862536275f4caae518d05053d6d, type: 2}
+  m_sharedMaterial: {fileID: 4197149272205909118, guid: 90b23862536275f4caae518d05053d6d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 64
-  m_fontSizeBase: 64
+  m_fontSize: 34
+  m_fontSizeBase: 34
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 32
@@ -341,10 +341,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 99999
+  m_text: 999999
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1cd7f8ebb17cf634aac94c61f3c88579, type: 2}
-  m_sharedMaterial: {fileID: 8791771155795309100, guid: 1cd7f8ebb17cf634aac94c61f3c88579, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 90b23862536275f4caae518d05053d6d, type: 2}
+  m_sharedMaterial: {fileID: 4197149272205909118, guid: 90b23862536275f4caae518d05053d6d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -368,17 +368,17 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 64
-  m_fontSizeBase: 64
+  m_fontSize: 27
+  m_fontSizeBase: 27
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 32
   m_fontSizeMax: 128
   m_fontStyle: 0
   m_HorizontalAlignment: 4
-  m_VerticalAlignment: 8192
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
-  m_characterSpacing: 2
+  m_characterSpacing: 11.5
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -406,7 +406,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -21.9, w: 0}
+  m_margin: {x: 0, y: 0, z: -16, w: 7}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -520,7 +520,7 @@ RectTransform:
   m_Father: {fileID: 4883964330199774920}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.18, y: 1}
+  m_AnchorMax: {x: 0.2, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
@@ -556,10 +556,10 @@ RectTransform:
   - {fileID: 1761930443251674861}
   m_Father: {fileID: 4883964330199774920}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.18, y: 0}
+  m_AnchorMin: {x: 0.2, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -0.0000076293945, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &9191494815386644201
 GameObject:
@@ -628,8 +628,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Double Shot
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1cd7f8ebb17cf634aac94c61f3c88579, type: 2}
-  m_sharedMaterial: {fileID: 8791771155795309100, guid: 1cd7f8ebb17cf634aac94c61f3c88579, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 90b23862536275f4caae518d05053d6d, type: 2}
+  m_sharedMaterial: {fileID: 4197149272205909118, guid: 90b23862536275f4caae518d05053d6d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -653,12 +653,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 64
-  m_fontSizeBase: 64
+  m_fontSize: 38
+  m_fontSizeBase: 38
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 32
-  m_fontSizeMax: 128
+  m_fontSizeMax: 64
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 8192
@@ -669,7 +669,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}

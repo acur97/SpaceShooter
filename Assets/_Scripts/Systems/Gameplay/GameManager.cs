@@ -176,6 +176,9 @@ public class GameManager : MonoBehaviour
         isPlaying = true;
         Time.timeScale = 1;
 
+        scoreText.SetText(preScore + score);
+        coinsText.SetText(preCoins + PlayerProgress.GetCoins());
+
         UiManager.Instance.SetUi(UiType.Gameplay, true);
         UiManager.Instance.SetUi(UiType.Select, false, 1);
 
@@ -206,11 +209,6 @@ public class GameManager : MonoBehaviour
         playerController.Init();
 
         Time.timeScale = 1;
-    }
-
-    private void Start()
-    {
-        coinsText.SetText(preCoins + PlayerProgress.GetCoins());
     }
 
     private void Update()
@@ -263,7 +261,7 @@ public class GameManager : MonoBehaviour
                 score += value;
                 scoreText.SetText(preScore + score);
             }
-            else
+            else if (PlayerController.Instance.health <= PlayerController.Instance._properties.health)
             {
                 PlayerProgress.UpCoins(value);
                 coinsText.SetText(preCoins + PlayerProgress.GetCoins());
