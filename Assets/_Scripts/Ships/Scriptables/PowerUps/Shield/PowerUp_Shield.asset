@@ -18,6 +18,6 @@ MonoBehaviour:
   cost: 1
   useDuration: 1
   durationRange: {x: 10, y: 10}
-  duration: 0.9699398
-  prefab: {fileID: 7042420193141323986, guid: 52832364ff91bea4ca6f4b235820fdcb, type: 3}
+  duration: 2.6195047
+  prefab: {fileID: 7042420193141323986, guid: 931e1c3b03c3abf4e86be2b3582c9880, type: 3}
   bulletAbsortion: 100
