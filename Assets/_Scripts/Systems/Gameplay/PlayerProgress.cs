@@ -1,34 +1,130 @@
 using UnityEngine;
 
-public class PlayerProgress : MonoBehaviour
+public class PlayerProgress
 {
-    public static PlayerProgress Instance;
-
-    private static int coins = 0;
-
-    private const string _coins = "Coins";
-
-    private void Awake()
+    private struct Player_Progress
     {
-        if (Instance != null)
+        public string playerName;
+
+        public int coins;
+
+        public uint[] powerUpAmounts;
+        public int powerUpIndex;
+
+        public bool[] customsOwneds;
+        public int customsIndex;
+    }
+
+    private static Player_Progress progress;
+
+    private const string _progress = "PlayerProgress";
+
+    public static void Init()
+    {
+        if (!PlayerPrefs.HasKey(_progress))
         {
-            Destroy(Instance);
+            progress = new Player_Progress();
+            return;
         }
 
-        Instance = this;
+        progress = JsonUtility.FromJson<Player_Progress>(PlayerPrefs.GetString(_progress));
 
-        coins = PlayerPrefs.GetInt(_coins, 0);
+        InitPowerUps();
+        InitCustoms();
+    }
+
+    private static void InitPowerUps()
+    {
+        for (int i = 0; i < progress.powerUpAmounts.Length; i++)
+        {
+            PowerUpsManager.Instance.powerUps[i].currentAmount = progress.powerUpAmounts[i];
+        }
+
+        if (progress.powerUpIndex >= 0)
+        {
+            PowerUpsManager.Instance.selectedPowerUp = PowerUpsManager.Instance.powerUps[progress.powerUpIndex];
+        }
+    }
+
+    private static void InitCustoms()
+    {
+        for (int i = 0; i < progress.customsOwneds.Length; i++)
+        {
+            GameManager.Instance.customs[i].owned = progress.customsOwneds[i];
+        }
+
+        if (progress.customsIndex >= 0)
+        {
+            GameManager.Instance.selectedCustoms = GameManager.Instance.customs[progress.customsIndex];
+        }
+    }
+
+    public static void SaveAll()
+    {
+        SavePowerUps(false);
+        SaveCustoms(false);
+
+        WriteSaves();
+    }
+
+    private static void WriteSaves()
+    {
+        PlayerPrefs.SetString(_progress, JsonUtility.ToJson(progress));
+        PlayerPrefs.Save();
+    }
+
+    public static void SavePowerUps(bool _writeSave)
+    {
+        progress.powerUpAmounts = new uint[PowerUpsManager.Instance.powerUps.Count];
+
+        for (int i = 0; i < PowerUpsManager.Instance.powerUps.Count; i++)
+        {
+            progress.powerUpAmounts[i] = PowerUpsManager.Instance.powerUps[i].currentAmount;
+        }
+
+        progress.powerUpIndex = PowerUpsManager.Instance.powerUps.IndexOf(PowerUpsManager.Instance.selectedPowerUp);
+
+        if (_writeSave)
+        {
+            WriteSaves();
+        }
+    }
+
+    public static void SaveCustoms(bool _writeSave)
+    {
+        progress.customsOwneds = new bool[GameManager.Instance.customs.Count];
+
+        for (int i = 0; i < GameManager.Instance.customs.Count; i++)
+        {
+            progress.customsOwneds[i] = GameManager.Instance.customs[i].owned;
+        }
+
+        progress.customsIndex = GameManager.Instance.customs.IndexOf(GameManager.Instance.selectedCustoms);
+
+        if (_writeSave)
+        {
+            WriteSaves();
+        }
+    }
+
+    public static void SavePlayerName(string name)
+    {
+        progress.playerName = name;
+        WriteSaves();
+    }
+
+    public static string GetPlayerName()
+    {
+        return progress.playerName;
     }
 
     public static int UpCoins(int value)
     {
-        coins += value;
-        PlayerPrefs.SetInt(_coins, coins);
-        return coins;
+        return progress.coins += value;
     }
 
     public static int GetCoins()
     {
-        return coins;
+        return progress.coins;
     }
 }

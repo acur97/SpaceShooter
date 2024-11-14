@@ -8,13 +8,18 @@ public class StoreManager : MonoBehaviour
     public static Action onRefresh;
 
     [Header("Store")]
-    [SerializeField] private GameObject prefab;
+    [SerializeField] private GameObject prefabPowerUps;
+    [SerializeField] private GameObject prefabCustoms;
     [SerializeField] private Transform content;
 
     [Header("UI")]
     [SerializeField] private Camera cam;
     [SerializeField] private RectTransform panel1;
     [SerializeField] private RectTransform panel2;
+
+    [Space]
+    [SerializeField] private Toggle customTgl;
+    [SerializeField] private Toggle powersTgl;
 
     [Header("Info Panel")]
     [SerializeField] private TextMeshProUGUI titleTxt;
@@ -24,7 +29,9 @@ public class StoreManager : MonoBehaviour
     [SerializeField] private GameObject onTgl;
     [SerializeField] private GameObject offTgl;
 
+    private bool powerUpsMode = true;
     private PowerUpBase showingPowerUp;
+    private ShipScriptable showingShip;
 
     [Space]
     [SerializeField] private TextMeshProUGUI coinsTxt;
@@ -34,22 +41,55 @@ public class StoreManager : MonoBehaviour
 
     private void Awake()
     {
+        onRefresh += UpdateUi;
+
+        customTgl.onValueChanged.AddListener((on) =>
+        {
+            if (on)
+            {
+                powerUpsMode = false;
+                InitPrefabs();
+            }
+        });
+        powersTgl.onValueChanged.AddListener((on) =>
+        {
+            if (on)
+            {
+                powerUpsMode = true;
+                InitPrefabs();
+            }
+        });
+
+        InitPrefabs();
+
+        selectTgl.onValueChanged.AddListener(UpdateToggle);
+
+        SelectPowerUp(null);
+    }
+
+    private void InitPrefabs()
+    {
         for (int i = 0; i < content.childCount; i++)
         {
             Destroy(content.GetChild(i).gameObject);
         }
 
-        for (int i = 0; i < PowerUpsManager.Instance.powerUps.Count; i++)
+        if (powerUpsMode)
         {
-            Instantiate(prefab, content).GetComponent<StoreItem>().Init(this, PowerUpsManager.Instance.powerUps[i]);
+            for (int i = 0; i < PowerUpsManager.Instance.powerUps.Count; i++)
+            {
+                Instantiate(prefabPowerUps, content).GetComponent<StoreItem>().Init(this, PowerUpsManager.Instance.powerUps[i]);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < GameManager.Instance.customs.Count; i++)
+            {
+                Instantiate(prefabCustoms, content).GetComponent<StoreItemCustom>().Init(this, GameManager.Instance.customs[i]);
+            }
         }
 
-        onRefresh += UpdateUi;
-
-        selectTgl.onValueChanged.AddListener(UpdateToggle);
-        selectTgl.onValueChanged.AddListener(SetToggle);
-
-        SelectPowerUp(null);
+        onRefresh?.Invoke();
     }
 
     private void UpdateToggle(bool on)
@@ -57,26 +97,30 @@ public class StoreManager : MonoBehaviour
         onTgl.SetActive(on);
         offTgl.SetActive(!on);
 
-        if (on)
+        if (powerUpsMode)
         {
-            PowerUpsManager.Instance.selectedPowerUps = showingPowerUp;
+            if (on)
+            {
+                PowerUpsManager.Instance.selectedPowerUp = showingPowerUp;
+            }
+            else
+            {
+                PowerUpsManager.Instance.selectedPowerUp = null;
+            }
         }
         else
         {
-            PowerUpsManager.Instance.selectedPowerUps = null;
+            if (on)
+            {
+                GameManager.Instance.SetCustoms(showingShip);
+            }
+            else
+            {
+                selectTgl.isOn = true;
+            }
         }
-    }
 
-    private void SetToggle(bool on)
-    {
-        if (on)
-        {
-            PowerUpsManager.Instance.selectedPowerUps = showingPowerUp;
-        }
-        else
-        {
-            PowerUpsManager.Instance.selectedPowerUps = null;
-        }
+        onRefresh?.Invoke();
     }
 
     private void Start()
@@ -99,6 +143,9 @@ public class StoreManager : MonoBehaviour
         {
             UiManager.Instance.SetUi(UiType.Select, true);
             UiManager.Instance.SetUi(UiType.Store, false, 0.25f);
+
+            PlayerProgress.SavePowerUps(false);
+            PlayerProgress.SaveCustoms(true);
         }
     }
 
@@ -128,7 +175,7 @@ public class StoreManager : MonoBehaviour
         buyBtn.onClick.AddListener(() => BuyPowerUp());
         buyBtn.interactable = PlayerProgress.GetCoins() >= showingPowerUp.cost;
 
-        selectTgl.SetIsOnWithoutNotify(PowerUpsManager.Instance.selectedPowerUps == showingPowerUp);
+        selectTgl.SetIsOnWithoutNotify(PowerUpsManager.Instance.selectedPowerUp == showingPowerUp);
         onTgl.SetActive(selectTgl.isOn);
         offTgl.SetActive(!selectTgl.isOn);
         selectTgl.interactable = showingPowerUp.currentAmount > 0;
@@ -140,6 +187,48 @@ public class StoreManager : MonoBehaviour
         showingPowerUp.currentAmount++;
         buyBtn.interactable = PlayerProgress.GetCoins() >= showingPowerUp.cost;
         selectTgl.interactable = showingPowerUp.currentAmount > 0;
+
+        onRefresh?.Invoke();
+    }
+
+    public void SelectCustom(ShipScriptable ship)
+    {
+        if (ship == null)
+        {
+            titleTxt.text = string.Empty;
+            descriptionTxt.text = string.Empty;
+
+            buyBtn.interactable = false;
+            selectTgl.interactable = false;
+
+            selectTgl.SetIsOnWithoutNotify(false);
+            onTgl.SetActive(false);
+            offTgl.SetActive(true);
+
+            return;
+        }
+
+        showingShip = ship;
+
+        titleTxt.text = showingShip.name;
+        descriptionTxt.text = showingShip.description;
+
+        buyBtn.onClick.RemoveAllListeners();
+        buyBtn.onClick.AddListener(() => BuyCustom());
+        buyBtn.interactable = PlayerProgress.GetCoins() >= showingShip.cost && !showingShip.owned;
+
+        selectTgl.SetIsOnWithoutNotify(GameManager.Instance.selectedCustoms == showingShip);
+        onTgl.SetActive(selectTgl.isOn);
+        offTgl.SetActive(!selectTgl.isOn);
+        selectTgl.interactable = showingShip.owned;
+    }
+
+    public void BuyCustom()
+    {
+        PlayerProgress.UpCoins(-(int)showingShip.cost);
+        showingShip.owned = true;
+        buyBtn.interactable = !showingShip.owned;
+        selectTgl.interactable = showingShip.owned;
 
         onRefresh?.Invoke();
     }

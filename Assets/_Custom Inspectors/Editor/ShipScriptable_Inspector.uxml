@@ -1,6 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
     <ui:Foldout text="Custom" style="margin-bottom: 10px; background-color: rgba(255, 255, 255, 0.05); margin-top: 10px; padding-bottom: 0; margin-right: 0; padding-right: 6px;">
         <uie:ColorField label="Custom Color" binding-path="color" tooltip="Custom color for particles and bullets" show-eye-dropper="false" show-alpha="true" hdr="true" value="#FFFFFFFF" style="margin-bottom: 4px;" />
+        <ui:Label text="Store" style="margin-top: 6px; -unity-font-style: bold; padding-left: 3px;" />
+        <ui:TextField label="Store Name" placeholder-text="store name..." tooltip="Name in the store" binding-path="name" />
+        <ui:TextField label="Description" placeholder-text="description..." binding-path="description" tooltip="Description of the custom for the store" vertical-scroller-visibility="AlwaysVisible" multiline="true" style="white-space: normal;" />
+        <ui:Toggle label="Owned" tooltip="I have this customization" binding-path="owned" />
+        <ui:UnsignedIntegerField label="Store cost" value="0" binding-path="cost" />
     </ui:Foldout>
     <ui:Foldout text="Ship Parameters" style="margin-top: 0; margin-bottom: 10px; background-color: rgba(255, 255, 255, 0.05); padding-right: 6px;">
         <ui:VisualElement style="flex-grow: 1; flex-direction: row;">

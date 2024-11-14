@@ -17,7 +17,7 @@ MonoBehaviour:
   powerName: Fast Fire
   sprite: {fileID: -1990333599, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
   description: Double firing speed
-  currentAmount: 1000
+  currentAmount: 0
   cost: 10
   useDuration: 1
   durationRange: {x: 10, y: 10}

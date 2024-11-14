@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
 using Nakama.TinyJson;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Nakama.Snippets
@@ -27,7 +27,7 @@ namespace Nakama.Snippets
 
         private async void Start()
         {
-            _client =  new Client("defaultkey", UnityWebRequestAdapter.Instance);
+            _client = new Client("defaultkey", UnityWebRequestAdapter.Instance);
 
             var deviceId = SystemInfo.deviceUniqueIdentifier;
             var session = await _client.AuthenticateDeviceAsync(deviceId);
@@ -66,7 +66,7 @@ namespace Nakama.Snippets
             Debug.LogFormat("Joined chat channel: {0}", channel);
 
             // Send many chat messages.
-            var content = new Dictionary<string, string> {{"hello", "world"}}.ToJson();
+            var content = new Dictionary<string, string> { { "hello", "world" } }.ToJson();
             _ = _socket.WriteChatMessageAsync(channel, content);
             _ = _socket.WriteChatMessageAsync(channel, content);
             _ = _socket.WriteChatMessageAsync(channel, content);

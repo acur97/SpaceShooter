@@ -11,6 +11,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] private CanvasGroup canvasPause;
     [SerializeField] private CanvasGroup canvasSelect;
     [SerializeField] private CanvasGroup canvasStore;
+    [SerializeField] private CanvasGroup canvasWnew;
     [SerializeField] private CanvasGroup canvasTutorial;
     [SerializeField] private CanvasGroup canvasEnd;
     [SerializeField] private CanvasGroup canvasLeaderboard;
@@ -24,6 +25,7 @@ public class UiManager : MonoBehaviour
         canvasPause.gameObject.SetActive(false);
         canvasSelect.gameObject.SetActive(false);
         canvasStore.gameObject.SetActive(false);
+        canvasWnew.gameObject.SetActive(false);
         canvasTutorial.gameObject.SetActive(false);
         canvasEnd.gameObject.SetActive(false);
         canvasLeaderboard.gameObject.SetActive(false);
@@ -72,6 +74,14 @@ public class UiManager : MonoBehaviour
                     FadeCanvas(canvasStore, active, fadeTime, callback);
                 else
                     canvasStore.gameObject.SetActive(active);
+                break;
+
+
+            case UiType.Wnew:
+                if (fadeTime > 0)
+                    FadeCanvas(canvasWnew, active, fadeTime, callback);
+                else
+                    canvasWnew.gameObject.SetActive(active);
                 break;
 
             case UiType.Tutorial:
@@ -124,6 +134,7 @@ public enum UiType
     Pause,
     Select,
     Store,
+    Wnew,
     Tutorial,
     End,
     Leaderboard,

@@ -17,7 +17,7 @@ MonoBehaviour:
   powerName: Orbital Dron
   sprite: {fileID: 979358522, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
   description: Drone orbiting around you, lasts 30 seconds
-  currentAmount: 999
+  currentAmount: 0
   cost: 30
   useDuration: 1
   durationRange: {x: 30, y: 30}

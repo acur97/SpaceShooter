@@ -40,7 +40,7 @@ namespace Nakama.Snippets
             Debug.LogFormat("User username: '{0}'", account.User.Username);
             Debug.LogFormat("User online: {0}", account.User.Online);
 
-            var result = await _client.GetUsersAsync(session, new[] {session.UserId});
+            var result = await _client.GetUsersAsync(session, new[] { session.UserId });
             Debug.LogFormat("Users: [{0}]", string.Join(",\n", result.Users));
         }
     }

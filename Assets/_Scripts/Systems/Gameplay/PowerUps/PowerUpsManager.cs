@@ -34,7 +34,7 @@ public class PowerUpsManager : MonoBehaviour
 
     public List<PowerUpBase> powerUps;
     //public List<PowerUpBase> currentPowerUps = new();
-    public PowerUpBase selectedPowerUps;
+    public PowerUpBase selectedPowerUp;
     private PowerUpBase currentPowerUp;
 
     public void Init()
@@ -65,7 +65,7 @@ public class PowerUpsManager : MonoBehaviour
         //currentPowerUps.Add(type);
         currentPowerUp = type;
         currentPowerUp.currentAmount--;
-        selectedPowerUps = null;
+        selectedPowerUp = null;
 
         type.shipBase = PlayerController.Instance;
 

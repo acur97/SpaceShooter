@@ -41,6 +41,11 @@ public class FirestoreManager : MonoBehaviour
         panelSubmited.SetActive(false);
     }
 
+    private void Start()
+    {
+        nameInput.text = PlayerProgress.GetPlayerName();
+    }
+
     public void SetLeaderboardStatus(bool on)
     {
         if (on && isOn)
@@ -151,6 +156,8 @@ public class FirestoreManager : MonoBehaviour
             panelSubmit.SetActive(false);
             panelSubmiting.SetActive(false);
             panelSubmited.SetActive(true);
+
+            PlayerProgress.SavePlayerName(nameInput.text);
         }
     }
 }

@@ -17,7 +17,7 @@ MonoBehaviour:
   powerName: Time Slower
   sprite: {fileID: 2098772786, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
   description: Slow motion for 5 seconds
-  currentAmount: 1000
+  currentAmount: 0
   cost: 10
   useDuration: 1
   durationRange: {x: 5, y: 5}

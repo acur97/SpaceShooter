@@ -17,7 +17,7 @@ MonoBehaviour:
   powerName: Missile
   sprite: {fileID: -400897349, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
   description: Fires 2 homing missiles that deal 15 damage
-  currentAmount: 999
+  currentAmount: 0
   cost: 50
   useDuration: 0
   durationRange: {x: -1, y: -1}

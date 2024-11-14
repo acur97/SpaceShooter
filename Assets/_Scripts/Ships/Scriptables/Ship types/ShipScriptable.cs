@@ -5,6 +5,10 @@ public class ShipScriptable : ScriptableObject
 {
     // Custom
     public Color color = Color.white;
+    public new string name;
+    public string description;
+    public bool owned = false;
+    public uint cost = 0;
 
     // Ship Parameters
     public Sprite sprite;

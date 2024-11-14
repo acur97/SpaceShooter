@@ -12,12 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using Nakama.TinyJson;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Nakama.TinyJson;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -126,7 +126,7 @@ namespace Satori
                 {
                     // TODO think of best way to map HTTP code to GRPC code since we can't rely
                     // on server to process it. Manually adding the mapping to SDK seems brittle.
-                    errback(new ApiResponseException((int) www.responseCode, www.downloadHandler.text, -1));
+                    errback(new ApiResponseException((int)www.responseCode, www.downloadHandler.text, -1));
                     www.Dispose();
                     yield break;
                 }
@@ -138,7 +138,7 @@ namespace Satori
                 if (decoded != null)
                 {
                     var msg = decoded.ContainsKey("message") ? decoded["message"].ToString() : string.Empty;
-                    var grpcCode = decoded.ContainsKey("code") ? (int) decoded["code"] : -1;
+                    var grpcCode = decoded.ContainsKey("code") ? (int)decoded["code"] : -1;
 
                     e = new ApiResponseException(www.responseCode, msg, grpcCode);
 

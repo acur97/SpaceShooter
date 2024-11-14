@@ -17,7 +17,7 @@ MonoBehaviour:
   powerName: Support Dron
   sprite: {fileID: 821985148, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
   description: Drone that shoots next to you, lasts 40 seconds
-  currentAmount: 999
+  currentAmount: 0
   cost: 30
   useDuration: 1
   durationRange: {x: 40, y: 40}

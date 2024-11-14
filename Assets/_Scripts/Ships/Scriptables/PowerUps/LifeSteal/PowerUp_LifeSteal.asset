@@ -17,7 +17,7 @@ MonoBehaviour:
   powerName: Life Steal
   sprite: {fileID: -1636013377, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
   description: Each hit to the enemy regenerates your life (10% maximum life)
-  currentAmount: 1000
+  currentAmount: 0
   cost: 5
   useDuration: 1
   durationRange: {x: 10, y: 10}

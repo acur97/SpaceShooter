@@ -1,7 +1,7 @@
-using UnityEngine;
+using Cysharp.Threading.Tasks;
 using Nakama;
 using System;
-using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 public class NakamaConnection : MonoBehaviour
 {

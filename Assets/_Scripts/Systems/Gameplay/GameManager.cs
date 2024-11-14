@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.LowLevel;
@@ -31,9 +32,11 @@ public class GameManager : MonoBehaviour
     [Header("Ui")]
     [SerializeField] private RectTransform uiRect;
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private TextMeshProUGUI wNewTxt;
 
-    [Space]
-    [SerializeField, ColorUsage(true, true)] private Color[] colors;
+    [Header("Customs")]
+    public List<ShipScriptable> customs;
+    public ShipScriptable selectedCustoms;
 
     [Header("Screen Properties")]
     [SerializeField] private float innerLimit = -1.6f;
@@ -72,6 +75,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerController playerController;
 
     private const string _Cancel = "Cancel";
+
+    [ContextMenu("Delete PlayerProgress")]
+    public void DeletePlayerProgress()
+    {
+        PlayerPrefs.DeleteKey("PlayerProgress");
+    }
 
     private void OnDrawGizmosSelected()
     {
@@ -159,12 +168,6 @@ public class GameManager : MonoBehaviour
         Gizmos.DrawLine(new Vector2(canvasBorders.x, canvasBorders.y - (enemyLine * canvasBorders.y)), new Vector2(-canvasBorders.x, canvasBorders.y - (enemyLine * canvasBorders.y)));
     }
 
-    public void SelectColor(int value)
-    {
-        PlayerController.Instance._properties.color = colors[value];
-        PlayerController.Instance.SetColor();
-    }
-
     public void StartGame()
     {
         if (hasStarted)
@@ -185,6 +188,12 @@ public class GameManager : MonoBehaviour
         RoundsController.Instance.StartRound();
 
         AudioManager.Instance.PlaySound(AudioManager.AudioType.Start, 2f);
+    }
+
+    public void OpenWnew(bool on)
+    {
+        UiManager.Instance.SetUi(UiType.Select, !on, 0.5f);
+        UiManager.Instance.SetUi(UiType.Wnew, on, 0.5f);
     }
 
     public void GodMode(bool on)
@@ -209,6 +218,18 @@ public class GameManager : MonoBehaviour
         playerController.Init();
 
         Time.timeScale = 1;
+
+        PlayerProgress.Init();
+        SetCustoms(selectedCustoms);
+
+        wNewTxt.text = $"What's new    {Application.version}";
+    }
+
+    public void SetCustoms(ShipScriptable value)
+    {
+        selectedCustoms = value;
+        PlayerController.Instance._properties.color = selectedCustoms.color; ;
+        PlayerController.Instance.SetColor();
     }
 
     private void Update()
@@ -276,16 +297,18 @@ public class GameManager : MonoBehaviour
         {
             isPlaying = false;
             hasStarted = false;
+
             UiManager.Instance.SetUi(UiType.End, true, 1, () => UiManager.Instance.SetUi(UiType.Gameplay, false));
 
             endScore.SetText(postScore + score);
             endCoins.SetText(preCoins + PlayerProgress.GetCoins());
-            PlayerPrefs.Save();
             AudioManager.Instance.PlaySound(AudioManager.AudioType.End, 2.5f);
 
             Time.timeScale = 0.5f;
 
             leftForNextGroup = -1;
+
+            PlayerProgress.SaveAll();
         }
     }
 

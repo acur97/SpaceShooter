@@ -17,7 +17,7 @@ MonoBehaviour:
   powerName: Life Regen
   sprite: {fileID: -1387879791, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
   description: Restores 30% of life instantly
-  currentAmount: 1000
+  currentAmount: 0
   cost: 20
   useDuration: 0
   durationRange: {x: -1, y: -1}
