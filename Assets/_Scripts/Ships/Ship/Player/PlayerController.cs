@@ -155,7 +155,7 @@ public class PlayerController : ShipBaseController
             if (!copy)
             {
                 GameManager.Instance.EndLevel();
-                PostProcessingController.Instance.ScreenShake(0.25f).Forget();
+                PostProcessingController.Instance.ScreenShake(0.5f).Forget();
                 gameObject.SetActive(false);
             }
             else

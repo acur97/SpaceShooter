@@ -5909,7 +5909,7 @@ MonoBehaviour:
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
-  m_Dithering: 1
+  m_Dithering: 0
   m_ClearDepth: 1
   m_AllowXRRendering: 1
   m_AllowHDROutput: 1
@@ -15383,7 +15383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc1871af035abce4290ba77a6fed22df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  editorTouch: 1
+  editorTouch: 0
   fireDown: 0
   fireUp: 0
   move: {x: 0, y: 0}
