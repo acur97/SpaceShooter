@@ -21,4 +21,4 @@ MonoBehaviour:
   cost: 10
   useDuration: 1
   durationRange: {x: 20, y: 20}
-  duration: -0.004362466
+  duration: -0.0031990283

@@ -4,29 +4,37 @@ using UnityEngine;
 public class PowerUp_OrbitalLaserBehaviour : MonoBehaviour
 {
     [SerializeField] private int damage = 1000;
-    [SerializeField] private Transform circle;
+    [SerializeField] private GameObject circle1;
+    [SerializeField] private Transform circle2;
+    [SerializeField] private Animator circle1Anim;
     [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private AudioClip warmUpSound;
 
     private float counter = 4.5f;
 
     private void OnEnable()
     {
         BlindCircle().Forget();
-
-        PostProcessingController.Instance.ScreenShake(counter, 0.1f).Forget();
     }
 
     private async UniTaskVoid BlindCircle()
     {
-        circle.localScale = Vector3.zero;
+        circle2.localScale = Vector3.zero;
+        AudioManager.Instance.PlaySound(warmUpSound, 5f);
 
+        await UniTask.WaitUntil(() => circle1Anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+
+        circle1.SetActive(false);
+
+        PostProcessingController.Instance.ImpactFrame(false).Forget();
+        PostProcessingController.Instance.ScreenShake(counter, 0.1f).Forget();
         PostProcessingController.Instance.VolumePunch();
 
-        while (circle.localScale.x < 150f)
+        while (circle2.localScale.x < 150f)
         {
             await UniTask.Yield();
 
-            circle.localScale += Time.deltaTime * 225f * Vector3.one;
+            circle2.localScale += Time.deltaTime * 225f * Vector3.one;
         }
 
         Sparkles().Forget();
@@ -75,5 +83,7 @@ public class PowerUp_OrbitalLaserBehaviour : MonoBehaviour
                 Random.Range(-GameManager.BulletLimits.x, GameManager.BulletLimits.x),
                 Random.Range(-GameManager.BulletLimits.y, GameManager.BulletLimits.y)));
         }
+
+        Destroy(gameObject);
     }
 }

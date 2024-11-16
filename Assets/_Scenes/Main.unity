@@ -15408,11 +15408,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 2021451161}
-  clipBoom: {fileID: 8300000, guid: cb2b7d7c7bf4b4740b35175d276f257b, type: 3}
-  clipCoin: {fileID: 8300000, guid: 3685df470f666a24f95e37576b48ec59, type: 3}
-  clipStart: {fileID: 8300000, guid: d02142f8eaae9f44b95a094f827d4f63, type: 3}
-  clipEnd: {fileID: 8300000, guid: 140bad4516a248744a144b535176d1bf, type: 3}
-  clipZap: {fileID: 8300000, guid: 6723a5efd23cf0c4b9d830e196569123, type: 3}
+  clipBoom: {fileID: 8300000, guid: 95b399ad22fed2f42abd4f02a6eeef74, type: 3}
+  clipCoin: {fileID: 8300000, guid: dfa1683fcf2c74e4fa33addac162ff01, type: 3}
+  clipStart: {fileID: 8300000, guid: f953d60b890db2b4396b0b04fe7ac111, type: 3}
+  clipEnd: {fileID: 8300000, guid: d4e971fe8d920214fbfc55679d47ebc6, type: 3}
+  clipZap: {fileID: 8300000, guid: 44700ebe8c1c4a04cbb73b85c94c9637, type: 3}
 --- !u!114 &1758410997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15430,7 +15430,6 @@ MonoBehaviour:
   exposureRange: {x: 25, y: 50}
   chromaticAberrationRange: {x: 0.05, y: 0.2}
   maxVignette: 0.25
-  cam: {fileID: 800530120}
   shakeCurve:
     serializedVersion: 2
     m_Curve:
@@ -15455,6 +15454,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  renderer2DData: {fileID: 11400000, guid: 424799608f7334c24bf367e4bbfa7f9a, type: 2}
+  impactFrameMaterial: {fileID: 2100000, guid: 6313e6d5b4f5d7a4d81a11e246d445be, type: 2}
+  impactFrameSpacing: 0.075
 --- !u!114 &1758410998
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -52,4 +52,9 @@ public class AudioManager : MonoBehaviour
                 break;
         }
     }
+
+    public void PlaySound(AudioClip clip, float volume = 1f)
+    {
+        source.PlayOneShot(clip, volume);
+    }
 }

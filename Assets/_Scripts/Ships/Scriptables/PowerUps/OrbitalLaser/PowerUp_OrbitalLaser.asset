@@ -16,8 +16,9 @@ MonoBehaviour:
   type: 14
   powerName: Orbital Laser
   sprite: {fileID: 1346643922, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
-  description: Devastating laser that clears the entire screen of enemies
-  currentAmount: 0
+  description: Devastating laser that clears the entire screen of enemies, has pre-charge
+    time
+  currentAmount: 4294967286
   cost: 400
   useDuration: 0
   durationRange: {x: -1, y: -1}

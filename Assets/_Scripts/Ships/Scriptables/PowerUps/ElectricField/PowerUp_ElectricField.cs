@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PowerUp_ElectricField", menuName = "Gameplay/PowerUps/ElectricField", order = 5)]
 public class PowerUp_ElectricField : PowerUpBase
 {
+    [Space]
     [SerializeField] private GameObject prefab;
     [SerializeField] private uint enemyDamage = 5;
 

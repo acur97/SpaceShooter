@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PowerUp_Shield", menuName = "Gameplay/PowerUps/Shield", order = 4)]
 public class PowerUp_Shield : PowerUpBase
 {
+    [Space]
     [SerializeField] private GameObject prefab;
     [SerializeField] private uint bulletAbsortion = 5;
 

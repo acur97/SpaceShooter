@@ -1,15 +1,16 @@
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using Random = UnityEngine.Random;
 
 public class PostProcessingController : MonoBehaviour
 {
     public static PostProcessingController Instance;
 
+    [Header("Volume Control")]
     [SerializeField] private Volume volume;
-
-    [Space]
     [SerializeField] private float volumeSpeed = 0.1f;
     [SerializeField] private Vector2 exposureRange;
     [SerializeField] private Vector2 chromaticAberrationRange;
@@ -24,16 +25,31 @@ public class PostProcessingController : MonoBehaviour
     private int tweenChromaticAberration1;
     private int tweenChromaticAberration2;
 
-    [Space]
-    [SerializeField] private Transform cam;
+    private Camera cam;
+    private Transform camT;
+    [Header("Camera Control")]
     [SerializeField] private AnimationCurve shakeCurve;
     private float shakeDuration = 0f;
     private Vector3 cameraOrigin = new(0f, 0f, -1f);
     private Vector3 shake;
 
+    [Header("Renderer Control")]
+    [SerializeField] private Renderer2DData renderer2DData;
+    [SerializeField] private Material impactFrameMaterial;
+    [SerializeField] private float impactFrameSpacing = 0.1f;
+
+    private readonly int _invert = Shader.PropertyToID("_invert");
+    private readonly int _frecuency = Shader.PropertyToID("_frecuency");
+    private readonly int _Offset = Shader.PropertyToID("_Offset");
+
     public void Init()
     {
         Instance = this;
+
+        renderer2DData.rendererFeatures[1].SetActive(false);
+
+        cam = Camera.main;
+        camT = cam.transform;
 
         ResetCameraPosition();
 
@@ -45,12 +61,12 @@ public class PostProcessingController : MonoBehaviour
 
     private void ResetCameraPosition()
     {
-        if (cam == null)
+        if (camT == null)
         {
             return;
         }
 
-        cam.localPosition = cameraOrigin;
+        camT.localPosition = cameraOrigin;
     }
 
     public void VolumePunch()
@@ -97,7 +113,7 @@ public class PostProcessingController : MonoBehaviour
         {
             shake = cameraOrigin + shakeAmount * shakeCurve.Evaluate(shakeDuration.Remap(0, duration, 1, 0)) * Random.insideUnitSphere;
             shake.z = -1f;
-            cam.localPosition = shake;
+            camT.localPosition = shake;
 
             shakeDuration -= Time.deltaTime;
 
@@ -105,6 +121,44 @@ public class PostProcessingController : MonoBehaviour
         }
 
         ResetCameraPosition();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            ImpactFrame().Forget();
+        }
+    }
+
+    public async UniTaskVoid ImpactFrame(bool lastFrame = true, Action onComplete = null)
+    {
+        impactFrameMaterial.SetInt(_invert, 0);
+        impactFrameMaterial.SetVector(_frecuency, new Vector2(100, 100));
+        impactFrameMaterial.SetVector(_Offset, cam.WorldToViewportPoint(PlayerController.Instance.transform.position));
+
+        renderer2DData.rendererFeatures[1].SetActive(true);
+
+        await UniTask.WaitForSeconds(impactFrameSpacing);
+
+        impactFrameMaterial.SetInt(_invert, 1);
+
+        await UniTask.WaitForSeconds(impactFrameSpacing);
+
+        impactFrameMaterial.SetVector(_frecuency, new Vector2(-100, -100));
+
+        await UniTask.WaitForSeconds(impactFrameSpacing);
+
+        if (lastFrame)
+        {
+            impactFrameMaterial.SetInt(_invert, 0);
+
+            await UniTask.WaitForSeconds(impactFrameSpacing);
+        }
+
+        renderer2DData.rendererFeatures[1].SetActive(false);
+
+        onComplete?.Invoke();
     }
 
     private void OnDestroy()

@@ -39,8 +39,10 @@ public class PowerUp_LaserBurstBehaviour : MonoBehaviour
 
         await UniTask.WaitForSeconds(startDelay);
 
+        PostProcessingController.Instance.ImpactFrame().Forget();
+
         startSpeedCurve.mode = ParticleSystemCurveMode.Constant;
-        startSpeedCurve.constant = 2f;
+        startSpeedCurve.constant = 1f;
         mainModule.startSpeed = startSpeedCurve;
 
         line.SetPosition(1, laserPoint);

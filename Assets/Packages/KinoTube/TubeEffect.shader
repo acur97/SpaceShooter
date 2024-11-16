@@ -18,6 +18,8 @@ Shader "Hidden/TubeEffect"
         half _BleedDelta;  // The bleed delta value.
         half _FringeDelta;  // The fringe delta value.
         half _Scanline;  // The scanline value.
+        half _ScalineScale;
+        half _ScalineSpeed;
 
         // This function converts an RGB color to a YIQ color.
         // YIQ is a color space that separates the luminance (brightness) from the chrominance (color) information.
@@ -105,7 +107,8 @@ Shader "Hidden/TubeEffect"
 
             // Perform scanline effect by generating a sine wave based on the Y coordinate of the UV and scaling it.
             // The scanline effect is controlled by the _Scanline variable.
-            half scan = sin(uv.y * 500 * UNITY_PI);
+            uv.y += _Time * _ScalineSpeed;
+            half scan = sin(uv.y * _ScalineScale * UNITY_PI);
             scan = lerp(1, (scan + 1) / 2, _Scanline);
 
             // Convert the YIQ color to RGB and multiply it by the scanline effect.
@@ -120,6 +123,8 @@ Shader "Hidden/TubeEffect"
         _bleedingSteps ("Bleeding Quality", Range(0.0, 1920.0)) = 720
         _fringing ("Fringing", Range(0.0, 1.0)) = 0.25
         _Scanline ("Scanline", Range(0.0, 1.0)) = 0.0
+        _ScalineScale ("Scanline Scale", Range(0.0, 1000.0)) = 500
+        _ScalineSpeed ("Scanline Speed", Range(-1.0, 1.0)) = 0.0
     }
     SubShader
     {

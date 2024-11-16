@@ -16,7 +16,7 @@ MonoBehaviour:
   type: 3
   powerName: Missile
   sprite: {fileID: -400897349, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
-  description: Fires 2 homing missiles that deal 15 damage
+  description: Changes the shot to 2 guided missiles at the enemy, dealing 15 damage
   currentAmount: 0
   cost: 50
   useDuration: 0

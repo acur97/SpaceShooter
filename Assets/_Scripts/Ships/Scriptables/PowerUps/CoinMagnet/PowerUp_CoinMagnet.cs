@@ -1,27 +1,28 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PowerUp_OrbitalLaser", menuName = "Gameplay/PowerUps/OrbitalLaser", order = 14)]
-public class PowerUp_OrbitalLaser : PowerUpBase
+[CreateAssetMenu(fileName = "PowerUp_CoinMagnet", menuName = "Gameplay/PowerUps/CoinMagnet", order = 16)]
+public class PowerUp_CoinMagnet : PowerUpBase
 {
     [Space]
+    [SerializeField] private float range = 3f;
+    [SerializeField] private float attractionSpeed = 1f;
     [SerializeField] private GameObject prefab;
 
-    public PowerUp_OrbitalLaser() : base()
+    public PowerUp_CoinMagnet() : base()
     {
-        type = PowerUpsManager.PowerUpType.OrbitalLaser;
+        type = PowerUpsManager.PowerUpType.CoinMagnet;
+        useDuration = true;
+        durationRange = new Vector2(10f, 10f);
     }
 
     public override void OnActivate()
     {
-        PlayerController.Instance.shoot.shootPowerUp = true;
 
-        Object.Instantiate(prefab, PlayerController.Instance.transform);
-        PowerUpsManager.Instance.RemovePowerUp(this);
     }
 
     public override void OnDeactivate()
     {
-        PlayerController.Instance.shoot.shootPowerUp = false;
+
     }
 
     public override void OnEnemyDamage(ShipBaseController enemy)
