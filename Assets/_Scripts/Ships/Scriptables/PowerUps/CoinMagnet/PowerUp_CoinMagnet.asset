@@ -21,7 +21,7 @@ MonoBehaviour:
   cost: 10
   useDuration: 1
   durationRange: {x: 10, y: 10}
-  duration: -1
-  range: 3
+  duration: -0.0045088534
+  range: 1.5
   attractionSpeed: 1
-  prefab: {fileID: 0}
+  prefab: {fileID: 7042420193141323986, guid: 1ebeeb334484fd148b3736b26f81642b, type: 3}

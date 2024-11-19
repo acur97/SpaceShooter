@@ -34,10 +34,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     [SerializeField] private TextMeshProUGUI wNewTxt;
 
-    [Header("Customs")]
-    public List<ShipScriptable> customs;
-    public ShipScriptable selectedCustoms;
-
     [Header("Screen Properties")]
     [SerializeField] private float innerLimit = -1.6f;
     private Vector2 innerLimits = Vector2.zero;
@@ -219,16 +215,16 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 1;
 
-        PlayerProgress.Init();
-        SetCustoms(selectedCustoms);
+        PlayerProgress.Init(gameplayScriptable);
+        SetCustoms(gameplayScriptable.selectedCustoms);
 
         wNewTxt.text = $"What's new    {Application.version}";
     }
 
     public void SetCustoms(ShipScriptable value)
     {
-        selectedCustoms = value;
-        PlayerController.Instance._properties.color = selectedCustoms.color; ;
+        gameplayScriptable.selectedCustoms = value;
+        PlayerController.Instance._properties.color = gameplayScriptable.selectedCustoms.color; ;
         PlayerController.Instance.SetColor();
     }
 

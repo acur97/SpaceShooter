@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2265447281486309945}
   - component: {fileID: 2265447281486309951}
   - component: {fileID: 2265447281486309950}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particle System (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4844,7 +4844,7 @@ GameObject:
   - component: {fileID: 2265447281500441622}
   - component: {fileID: 2265447281500441620}
   - component: {fileID: 2265447281500441623}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particle System (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9681,7 +9681,7 @@ GameObject:
   - component: {fileID: 2265447281794558195}
   - component: {fileID: 2265447281794558194}
   - component: {fileID: 8031115035408530487}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -9900,7 +9900,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2265447282651099347}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: shoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

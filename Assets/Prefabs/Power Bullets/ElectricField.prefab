@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3232933804555148465}
   - component: {fileID: 4630305697077240053}
   - component: {fileID: 206044390179420601}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Particle System (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4845,7 +4845,7 @@ GameObject:
   - component: {fileID: 1675808268198626939}
   - component: {fileID: 90464495339691966}
   - component: {fileID: 8628865837954465294}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ElectricField
   m_TagString: Untagged
   m_Icon: {fileID: 0}

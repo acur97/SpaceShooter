@@ -4,7 +4,7 @@ public class RoundsController : MonoBehaviour
 {
     public static RoundsController Instance { get; private set; }
 
-    public LevelScriptable level;
+    [SerializeField] private GameplayScriptable gameplayScriptable;
 
     [Header("-1 means it starts at 0")]
     [SerializeField] private int roundCount = -1;
@@ -17,7 +17,7 @@ public class RoundsController : MonoBehaviour
 
     public void StartRound()
     {
-        if (roundCount < level.rounds.Length - 1)
+        if (roundCount < gameplayScriptable.levels[0].rounds.Length - 1)
         {
             roundCount++;
             groupCount = -1;
@@ -32,21 +32,21 @@ public class RoundsController : MonoBehaviour
 
     public void StartGroup()
     {
-        if (groupCount < level.rounds[roundCount].groups.Length - 1)
+        if (groupCount < gameplayScriptable.levels[0].rounds[roundCount].groups.Length - 1)
         {
             groupCount++;
 
-            GameManager.Instance.leftForNextGroup = level.rounds[roundCount].groups[groupCount].count;
-            EnemySpawns.Instance.InstantiateEnemys(level.rounds[roundCount].groups[groupCount]).Forget();
+            GameManager.Instance.leftForNextGroup = gameplayScriptable.levels[0].rounds[roundCount].groups[groupCount].count;
+            EnemySpawns.Instance.InstantiateEnemys(gameplayScriptable.levels[0].rounds[roundCount].groups[groupCount]).Forget();
 
-            for (int i = groupCount + 1; i < level.rounds[roundCount].groups.Length; i++)
+            for (int i = groupCount + 1; i < gameplayScriptable.levels[0].rounds[roundCount].groups.Length; i++)
             {
-                if (level.rounds[roundCount].groups[i].chained)
+                if (gameplayScriptable.levels[0].rounds[roundCount].groups[i].chained)
                 {
                     groupCount++;
 
-                    GameManager.Instance.leftForNextGroup += level.rounds[roundCount].groups[i].count;
-                    EnemySpawns.Instance.InstantiateEnemys(level.rounds[roundCount].groups[i]).Forget();
+                    GameManager.Instance.leftForNextGroup += gameplayScriptable.levels[0].rounds[roundCount].groups[i].count;
+                    EnemySpawns.Instance.InstantiateEnemys(gameplayScriptable.levels[0].rounds[roundCount].groups[i]).Forget();
                 }
                 else
                 {

@@ -7,6 +7,8 @@ public class StoreManager : MonoBehaviour
 {
     public static Action onRefresh;
 
+    [SerializeField] private GameplayScriptable gameplayScriptable;
+
     [Header("Store")]
     [SerializeField] private GameObject prefabPowerUps;
     [SerializeField] private GameObject prefabCustoms;
@@ -76,16 +78,16 @@ public class StoreManager : MonoBehaviour
 
         if (powerUpsMode)
         {
-            for (int i = 0; i < PowerUpsManager.Instance.powerUps.Count; i++)
+            for (int i = 0; i < gameplayScriptable.powerUps.Count; i++)
             {
-                Instantiate(prefabPowerUps, content).GetComponent<StoreItem>().Init(this, PowerUpsManager.Instance.powerUps[i]);
+                Instantiate(prefabPowerUps, content).GetComponent<StoreItem>().Init(this, gameplayScriptable.powerUps[i]);
             }
         }
         else
         {
-            for (int i = 0; i < GameManager.Instance.customs.Count; i++)
+            for (int i = 0; i < gameplayScriptable.customs.Count; i++)
             {
-                Instantiate(prefabCustoms, content).GetComponent<StoreItemCustom>().Init(this, GameManager.Instance.customs[i]);
+                Instantiate(prefabCustoms, content).GetComponent<StoreItemCustom>().Init(this, gameplayScriptable.customs[i]);
             }
         }
 
@@ -101,11 +103,11 @@ public class StoreManager : MonoBehaviour
         {
             if (on)
             {
-                PowerUpsManager.Instance.selectedPowerUp = showingPowerUp;
+                gameplayScriptable.selectedPowerUp = showingPowerUp;
             }
             else
             {
-                PowerUpsManager.Instance.selectedPowerUp = null;
+                gameplayScriptable.selectedPowerUp = null;
             }
         }
         else
@@ -175,7 +177,7 @@ public class StoreManager : MonoBehaviour
         buyBtn.onClick.AddListener(() => BuyPowerUp());
         buyBtn.interactable = PlayerProgress.GetCoins() >= showingPowerUp.cost;
 
-        selectTgl.SetIsOnWithoutNotify(PowerUpsManager.Instance.selectedPowerUp == showingPowerUp);
+        selectTgl.SetIsOnWithoutNotify(gameplayScriptable.selectedPowerUp == showingPowerUp);
         onTgl.SetActive(selectTgl.isOn);
         offTgl.SetActive(!selectTgl.isOn);
         selectTgl.interactable = showingPowerUp.currentAmount > 0;
@@ -217,7 +219,7 @@ public class StoreManager : MonoBehaviour
         buyBtn.onClick.AddListener(() => BuyCustom());
         buyBtn.interactable = PlayerProgress.GetCoins() >= showingShip.cost && !showingShip.owned;
 
-        selectTgl.SetIsOnWithoutNotify(GameManager.Instance.selectedCustoms == showingShip);
+        selectTgl.SetIsOnWithoutNotify(gameplayScriptable.selectedCustoms == showingShip);
         onTgl.SetActive(selectTgl.isOn);
         offTgl.SetActive(!selectTgl.isOn);
         selectTgl.interactable = showingShip.owned;

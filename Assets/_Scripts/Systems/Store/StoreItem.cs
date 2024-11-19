@@ -33,7 +33,7 @@ public class StoreItem : MonoBehaviour
     private void UpdateBtn()
     {
         countTxt.text = powerUp.currentAmount.ToString();
-        selected.enabled = PowerUpsManager.Instance.selectedPowerUp == powerUp;
+        selected.enabled = GameManager.Instance.gameplayScriptable.selectedPowerUp == powerUp;
     }
 
     private void Select()

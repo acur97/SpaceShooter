@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 733169579531778485}
   - component: {fileID: 8789773519911136863}
   - component: {fileID: 6475506926472451362}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Particle System (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4842,7 +4842,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 820171794758127725}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: shoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4875,7 +4875,7 @@ GameObject:
   - component: {fileID: 5194789479628904296}
   - component: {fileID: 4266813755072769466}
   - component: {fileID: 428864005922355851}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Particle System (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9708,7 +9708,7 @@ GameObject:
   - component: {fileID: 8664520026835777643}
   - component: {fileID: 8306514308511232260}
   - component: {fileID: 8415072546267195319}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Particle System (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14545,7 +14545,7 @@ GameObject:
   - component: {fileID: 5288136284487058108}
   - component: {fileID: 8478058540152977835}
   - component: {fileID: 442501581250349005}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -14560,7 +14560,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5766385531524862640}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14598,6 +14598,7 @@ MonoBehaviour:
   controls: {fileID: 0}
   movement: {fileID: 6232858554377877128}
   shoot: {fileID: 6295853942958457189}
+  copy: 0
 --- !u!114 &6232858554377877128
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1801,6 +1801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3a779e78d7615a49b51691bb7d8ba5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameplayScriptable: {fileID: 11400000, guid: 070223270d4b91e439e28c8272600240, type: 2}
   prefabPowerUps: {fileID: 844970828650698671, guid: 8165eb589c62127438fe97ff88b64749, type: 3}
   prefabCustoms: {fileID: 8580600857887935575, guid: 40868b02656f4d54bb5173124697e884, type: 3}
   content: {fileID: 982122860}
@@ -5855,7 +5856,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 41
+    m_Bits: 2025
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -15306,7 +15307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cacf037565c5734eba7bca003e987dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: {fileID: 11400000, guid: 2f63fb46e2f815841b152e0343debc7f, type: 2}
+  gameplayScriptable: {fileID: 11400000, guid: 070223270d4b91e439e28c8272600240, type: 2}
   roundCount: -1
   groupCount: -1
 --- !u!114 &1758410992
@@ -15333,14 +15334,6 @@ MonoBehaviour:
   uiRect: {fileID: 604143352}
   mainCamera: {fileID: 800530119}
   wNewTxt: {fileID: 454688364}
-  customs:
-  - {fileID: 11400000, guid: 7b37b7f225a66d946a96ea1acd797e03, type: 2}
-  - {fileID: 11400000, guid: d67d2aeae0e5a4d49b14b6213330bb50, type: 2}
-  - {fileID: 11400000, guid: 9396716e18b09c445a5d80e70b81a1fe, type: 2}
-  - {fileID: 11400000, guid: b3613040e6c9af04a93b789a0b9caaf3, type: 2}
-  - {fileID: 11400000, guid: c92af78e6d93f574385b108a12590052, type: 2}
-  - {fileID: 11400000, guid: 4e3b12753f29d7b4190c16e2592e9b7f, type: 2}
-  selectedCustoms: {fileID: 11400000, guid: d67d2aeae0e5a4d49b14b6213330bb50, type: 2}
   innerLimit: -1.6
   playerLimit: -0.4
   bulletLimit: 0.05
@@ -15494,23 +15487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70337eff295113f4b9c9977fd566a043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUps:
-  - {fileID: 11400000, guid: 2f5b416c7307fdd449a39ac6d6daa6c1, type: 2}
-  - {fileID: 11400000, guid: 0c12553f632fcbb4ea13d2c948d5502b, type: 2}
-  - {fileID: 11400000, guid: 3dc1eee61fadd304e9aedfd27bedc994, type: 2}
-  - {fileID: 11400000, guid: 0718980e695f00a42a860890628ab9c4, type: 2}
-  - {fileID: 11400000, guid: 6aabb1dbfe06d534296bf9f6e4e29900, type: 2}
-  - {fileID: 11400000, guid: c985b7e674b63744387fa0b744bea4d5, type: 2}
-  - {fileID: 11400000, guid: d273a388845ccb44089c34248c7d352a, type: 2}
-  - {fileID: 11400000, guid: de26e4a8346f06549b0baba4b6b58b30, type: 2}
-  - {fileID: 11400000, guid: abc85c35f65e13446b5f3cac9c101972, type: 2}
-  - {fileID: 11400000, guid: 4b9ec353ab82ec04c8c14f027e31e82e, type: 2}
-  - {fileID: 11400000, guid: dc90e432820812c46ba657eda2002fa7, type: 2}
-  - {fileID: 11400000, guid: 3201450dc519e4c4a8a3188e183f6c7f, type: 2}
-  - {fileID: 11400000, guid: 989994e37cfbee940b5dcdb727aed0f1, type: 2}
-  - {fileID: 11400000, guid: ca120ee2daf3ccf48ad037f431e3d983, type: 2}
-  - {fileID: 11400000, guid: 5210848e21cfca049b1c30ab5e862492, type: 2}
-  selectedPowerUp: {fileID: 0}
+  gameplayScriptable: {fileID: 11400000, guid: 070223270d4b91e439e28c8272600240, type: 2}
 --- !u!224 &1766444714
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18259,7 +18236,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 36
   m_Viewport: {fileID: 857023624}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 100263153}

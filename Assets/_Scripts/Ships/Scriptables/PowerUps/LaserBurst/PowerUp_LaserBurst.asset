@@ -22,7 +22,7 @@ MonoBehaviour:
   cost: 200
   useDuration: 1
   durationRange: {x: 6, y: 9}
-  duration: -0.0028193826
+  duration: 1.5206001
   prefab: {fileID: 7956906068790334098, guid: 371c982636414444db270f0e2ee76f8b, type: 3}
   timeToStart: 3
   damage: 25

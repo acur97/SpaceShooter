@@ -32,9 +32,9 @@ public class PowerUpsManager : MonoBehaviour
         CoinMagnet
     }
 
-    public List<PowerUpBase> powerUps;
+    [SerializeField] private GameplayScriptable gameplayScriptable;
+
     //public List<PowerUpBase> currentPowerUps = new();
-    public PowerUpBase selectedPowerUp;
     private PowerUpBase currentPowerUp;
 
     public void Init()
@@ -65,7 +65,7 @@ public class PowerUpsManager : MonoBehaviour
         //currentPowerUps.Add(type);
         currentPowerUp = type;
         currentPowerUp.currentAmount--;
-        selectedPowerUp = null;
+        gameplayScriptable.selectedPowerUp = null;
 
         type.shipBase = PlayerController.Instance;
 

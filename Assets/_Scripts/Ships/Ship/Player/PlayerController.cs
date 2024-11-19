@@ -87,9 +87,9 @@ public class PlayerController : ShipBaseController
             movement.OnUpdate();
             shoot.OnUpdate();
 
-            if (controls.power && PowerUpsManager.Instance.selectedPowerUp != null)
+            if (controls.power && GameManager.Instance.gameplayScriptable.selectedPowerUp != null)
             {
-                PowerUpsManager.Instance.AddPowerUp(PowerUpsManager.Instance.selectedPowerUp);
+                PowerUpsManager.Instance.AddPowerUp(GameManager.Instance.gameplayScriptable.selectedPowerUp);
             }
         }
     }

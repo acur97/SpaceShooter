@@ -26,7 +26,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _ScalineScale: 50
-    - _ScalineSpeed: -0.5
+    - _ScalineSpeed: -0.75
     - _Scanline: 0.05
     - _bleeding: 0.25
     - _bleedingSteps: 720

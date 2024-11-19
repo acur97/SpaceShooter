@@ -33,7 +33,7 @@ public class StoreItemCustom : MonoBehaviour
     private void UpdateBtn()
     {
         priceTxt.text = ship.owned ? _owned : _free;
-        selected.enabled = GameManager.Instance.selectedCustoms == ship;
+        selected.enabled = GameManager.Instance.gameplayScriptable.selectedCustoms == ship;
     }
 
     private void Select()

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6661502936168992036}
   - component: {fileID: 7409127596330106837}
   - component: {fileID: 7294965278218790891}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Particle System (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4844,7 +4844,7 @@ GameObject:
   - component: {fileID: 6977152332942811136}
   - component: {fileID: 6676043421246630157}
   - component: {fileID: 3046698229981636236}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Particle System (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9680,7 +9680,7 @@ GameObject:
   - component: {fileID: 6356473581450267296}
   - component: {fileID: 1850688939840400086}
   - component: {fileID: 9037991231823399588}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}

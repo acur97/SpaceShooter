@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3115281521562454141}
   - component: {fileID: 3703041830010878627}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1368235051625760068}
   - component: {fileID: 9182325218276148335}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: OrbitalLaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 2869571992720093235}
   - component: {fileID: 940906846133028906}
   - component: {fileID: 3114548207455815787}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: circle 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 
 public class PlayerProgress
 {
-    private struct Player_Progress
+    [Serializable]
+    public struct Player_Progress
     {
         public string playerName;
 
@@ -15,19 +17,21 @@ public class PlayerProgress
         public int customsIndex;
     }
 
-    private static Player_Progress progress;
+    private static GameplayScriptable scriptable;
 
     private const string _progress = "PlayerProgress";
 
-    public static void Init()
+    public static void Init(GameplayScriptable _scriptable)
     {
+        scriptable = _scriptable;
+
         if (!PlayerPrefs.HasKey(_progress))
         {
-            progress = new Player_Progress();
+            scriptable.progress = new Player_Progress();
             return;
         }
 
-        progress = JsonUtility.FromJson<Player_Progress>(PlayerPrefs.GetString(_progress));
+        scriptable.progress = JsonUtility.FromJson<Player_Progress>(PlayerPrefs.GetString(_progress));
 
         InitPowerUps();
         InitCustoms();
@@ -35,27 +39,27 @@ public class PlayerProgress
 
     private static void InitPowerUps()
     {
-        for (int i = 0; i < progress.powerUpAmounts.Length; i++)
+        for (int i = 0; i < scriptable.progress.powerUpAmounts.Length; i++)
         {
-            PowerUpsManager.Instance.powerUps[i].currentAmount = progress.powerUpAmounts[i];
+            scriptable.powerUps[i].currentAmount = scriptable.progress.powerUpAmounts[i];
         }
 
-        if (progress.powerUpIndex >= 0)
+        if (scriptable.progress.powerUpIndex >= 0)
         {
-            PowerUpsManager.Instance.selectedPowerUp = PowerUpsManager.Instance.powerUps[progress.powerUpIndex];
+            scriptable.selectedPowerUp = scriptable.powerUps[scriptable.progress.powerUpIndex];
         }
     }
 
     private static void InitCustoms()
     {
-        for (int i = 0; i < progress.customsOwneds.Length; i++)
+        for (int i = 0; i < scriptable.progress.customsOwneds.Length; i++)
         {
-            GameManager.Instance.customs[i].owned = progress.customsOwneds[i];
+            scriptable.customs[i].owned = scriptable.progress.customsOwneds[i];
         }
 
-        if (progress.customsIndex >= 0)
+        if (scriptable.progress.customsIndex >= 0)
         {
-            GameManager.Instance.selectedCustoms = GameManager.Instance.customs[progress.customsIndex];
+            scriptable.selectedCustoms = scriptable.customs[scriptable.progress.customsIndex];
         }
     }
 
@@ -69,20 +73,20 @@ public class PlayerProgress
 
     private static void WriteSaves()
     {
-        PlayerPrefs.SetString(_progress, JsonUtility.ToJson(progress));
+        PlayerPrefs.SetString(_progress, JsonUtility.ToJson(scriptable.progress));
         PlayerPrefs.Save();
     }
 
     public static void SavePowerUps(bool _writeSave)
     {
-        progress.powerUpAmounts = new uint[PowerUpsManager.Instance.powerUps.Count];
+        scriptable.progress.powerUpAmounts = new uint[scriptable.powerUps.Count];
 
-        for (int i = 0; i < PowerUpsManager.Instance.powerUps.Count; i++)
+        for (int i = 0; i < scriptable.powerUps.Count; i++)
         {
-            progress.powerUpAmounts[i] = PowerUpsManager.Instance.powerUps[i].currentAmount;
+            scriptable.progress.powerUpAmounts[i] = scriptable.powerUps[i].currentAmount;
         }
 
-        progress.powerUpIndex = PowerUpsManager.Instance.powerUps.IndexOf(PowerUpsManager.Instance.selectedPowerUp);
+        scriptable.progress.powerUpIndex = scriptable.powerUps.IndexOf(scriptable.selectedPowerUp);
 
         if (_writeSave)
         {
@@ -92,14 +96,14 @@ public class PlayerProgress
 
     public static void SaveCustoms(bool _writeSave)
     {
-        progress.customsOwneds = new bool[GameManager.Instance.customs.Count];
+        scriptable.progress.customsOwneds = new bool[scriptable.customs.Count];
 
-        for (int i = 0; i < GameManager.Instance.customs.Count; i++)
+        for (int i = 0; i < scriptable.customs.Count; i++)
         {
-            progress.customsOwneds[i] = GameManager.Instance.customs[i].owned;
+            scriptable.progress.customsOwneds[i] = scriptable.customs[i].owned;
         }
 
-        progress.customsIndex = GameManager.Instance.customs.IndexOf(GameManager.Instance.selectedCustoms);
+        scriptable.progress.customsIndex = scriptable.customs.IndexOf(scriptable.selectedCustoms);
 
         if (_writeSave)
         {
@@ -109,22 +113,22 @@ public class PlayerProgress
 
     public static void SavePlayerName(string name)
     {
-        progress.playerName = name;
+        scriptable.progress.playerName = name;
         WriteSaves();
     }
 
     public static string GetPlayerName()
     {
-        return progress.playerName;
+        return scriptable.progress.playerName;
     }
 
     public static int UpCoins(int value)
     {
-        return progress.coins += value;
+        return scriptable.progress.coins += value;
     }
 
     public static int GetCoins()
     {
-        return progress.coins;
+        return scriptable.progress.coins;
     }
 }

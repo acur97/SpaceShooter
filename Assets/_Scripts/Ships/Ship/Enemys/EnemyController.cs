@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class EnemyController : ShipBaseController
 {
-    private const string _Bullet = "Bullet";
-
     [Header("Behaviour")]
     [SerializeField] private EnemyMovement movement;
     [SerializeField] private EnemyShoot shoot;
+
+    private bool dead = true;
+
+    private const string _Bullet = "Bullet";
 
     private void Awake()
     {
@@ -15,6 +17,8 @@ public class EnemyController : ShipBaseController
 
     private void OnEnable()
     {
+        dead = false;
+
         renderer.sprite = _properties.sprite;
         health = _properties.health;
 
@@ -123,7 +127,7 @@ public class EnemyController : ShipBaseController
 
         health -= damage;
 
-        if (health <= 0)
+        if (!dead && health <= 0)
         {
             Dead();
         }
@@ -131,17 +135,15 @@ public class EnemyController : ShipBaseController
 
     public void Dead(bool outOfBounds = false)
     {
-        PowerUpsManager.Enemy_Death?.Invoke(this);
-
+        dead = true;
         gameObject.SetActive(false);
 
+        PowerUpsManager.Enemy_Death?.Invoke(this);
         GameManager.Instance.leftForNextGroup--;
 
-        if (outOfBounds)
+        if (!outOfBounds)
         {
-            return;
+            GameManager.Instance.UpScore(_properties.deathScore);
         }
-
-        GameManager.Instance.UpScore(_properties.deathScore);
     }
 }

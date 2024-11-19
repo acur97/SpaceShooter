@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8396168948310153340}
   - component: {fileID: 7308676131975307400}
   - component: {fileID: 5576039027023155931}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Particle System (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4847,7 +4847,7 @@ GameObject:
   - component: {fileID: 6570595903465663439}
   - component: {fileID: 4357790524571989836}
   - component: {fileID: 3999870323774410865}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
