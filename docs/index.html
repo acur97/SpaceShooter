@@ -31,6 +31,8 @@
       var loadingBar = document.querySelector("#unity-loading-bar");
       var progressBarFull = document.querySelector("#unity-progress-bar-full");
       var warningBanner = document.querySelector("#unity-warning");
+      var isMobile = 0;
+      var _unityInstance = null;
 
       // Shows a temporary message banner/ribbon for a few seconds, or
       // a permanent error message on top of the canvas if type=='error'.
@@ -60,13 +62,13 @@
       var loaderUrl = buildUrl + "/7f46c4e10add95d60a7c6deacf727032.loader.js";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/d1ee69fd965746c0a28849f21126f6b6.data",
+        dataUrl: buildUrl + "/a35dccbff000c8dffcfdf33ca8da75be.data",
         frameworkUrl: buildUrl + "/3fc20a04c3106e559c8ea8586bb34e1f.framework.js",
         codeUrl: buildUrl + "/ed2ee966ea922d50754d163f9fe22253.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "PolygonUs",
         productName: "SpaceShooter",
-        productVersion: "0.3.3",
+        productVersion: "0.3.4",
         showBanner: unityShowBanner,
       };
 
@@ -83,6 +85,16 @@
         meta.name = 'viewport';
         meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
         document.getElementsByTagName('head')[0].appendChild(meta);
+        isMobile = 1;
+      }
+
+      function CheckDevice()
+      {
+        if (typeof _unityInstance !== 'undefined' && _unityInstance !== null) {
+            _unityInstance.SendMessage('--Manager--', 'OnDeviceCheck', isMobile);
+        } else {
+            console.error("unityInstance is not defined or null");
+        }
       }
 
       loadingBar.style.display = "block";
@@ -93,6 +105,7 @@
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
+          _unityInstance = unityInstance;
           loadingBar.style.display = "none";
         }).catch((message) => {
           alert(message);

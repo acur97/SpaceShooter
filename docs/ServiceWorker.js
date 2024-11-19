@@ -1,8 +1,8 @@
-const cacheName = "PolygonUs-SpaceShooter-0.3.3";
+const cacheName = "PolygonUs-SpaceShooter-0.3.4";
 const contentToCache = [
     "Build/7f46c4e10add95d60a7c6deacf727032.loader.js",
     "Build/3fc20a04c3106e559c8ea8586bb34e1f.framework.js",
-    "Build/d1ee69fd965746c0a28849f21126f6b6.data",
+    "Build/a35dccbff000c8dffcfdf33ca8da75be.data",
     "Build/ed2ee966ea922d50754d163f9fe22253.wasm",
     "TemplateData/style.css"
 
