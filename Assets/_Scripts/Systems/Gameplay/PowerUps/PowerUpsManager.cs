@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PowerUpsManager : MonoBehaviour
 {
@@ -33,6 +34,10 @@ public class PowerUpsManager : MonoBehaviour
 
     [SerializeField] private GameplayScriptable gameplayScriptable;
 
+    [Header("UI")]
+    public Slider slider;
+    [SerializeField] private Image icon;
+
     //public List<PowerUpBase> currentPowerUps = new();
     private PowerUpBase currentPowerUp;
 
@@ -52,6 +57,35 @@ public class PowerUpsManager : MonoBehaviour
         Player_Damage -= PlayerDamage;
         Enemy_Damage -= EnemyDamage;
         Enemy_Death -= EnemyDeath;
+    }
+
+    public void SelectPowerUp(PowerUpBase powerUp)
+    {
+        gameplayScriptable.selectedPowerUp = powerUp;
+
+        if (powerUp == null)
+        {
+            icon.enabled = false;
+            slider.enabled = false;
+        }
+        else
+        {
+            icon.enabled = true;
+            slider.enabled = true;
+
+            icon.sprite = powerUp.sprite;
+
+            if (powerUp.useDuration)
+            {
+                slider.maxValue = powerUp.InitDuration();
+                slider.value = powerUp.duration;
+            }
+            else
+            {
+                slider.maxValue = 1;
+                slider.value = 1;
+            }
+        }
     }
 
     public void AddPowerUp(PowerUpBase type)
@@ -74,6 +108,15 @@ public class PowerUpsManager : MonoBehaviour
         }
 
         type.OnActivate();
+
+        if (type.useDuration)
+        {
+            slider.maxValue = type.duration;
+        }
+        else
+        {
+            slider.maxValue = 1;
+        }
     }
 
     public void RemovePowerUp(PowerUpBase type)
@@ -84,6 +127,9 @@ public class PowerUpsManager : MonoBehaviour
         currentPowerUp = null;
 
         type.Dispose();
+
+        slider.value = 0;
+        icon.enabled = false;
     }
 
     public void PlayerShoot()
@@ -134,5 +180,10 @@ public class PowerUpsManager : MonoBehaviour
         //}
 
         currentPowerUp?.OnGameUpdate();
+
+        if ((currentPowerUp != null && currentPowerUp.useDuration))
+        {
+            slider.value = currentPowerUp.duration;
+        }
     }
 }

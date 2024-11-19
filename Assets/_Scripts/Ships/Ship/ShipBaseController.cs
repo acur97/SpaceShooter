@@ -14,7 +14,9 @@ public class ShipBaseController : MonoBehaviour
     [HideInInspector] public ParticleSystem.MainModule module;
 
     [Header("Firing")]
-    public Transform shootRoot;
+    public Transform shootRoot1;
+    public Transform shootRoot2;
+    public Transform shootRoot3;
     [HideInInspector] public float timer = -1;
     [HideInInspector] public float timer2 = -1;
     [HideInInspector] public bool timer2Up = false;

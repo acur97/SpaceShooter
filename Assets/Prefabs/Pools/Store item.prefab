@@ -192,6 +192,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteImg: {fileID: 5653993139469277056}
   countTxt: {fileID: 279784259498888738}
+  haveColor: {r: 0.67058825, g: 1, b: 0.6039216, a: 1}
+  dontColor: {r: 1, g: 0.6039216, b: 0.6039216, a: 1}
   titleTxt: {fileID: 5810436098106769002}
   priceTxt: {fileID: 6889357414811137545}
   selectBtn: {fileID: 7787360189830531835}
@@ -352,8 +354,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4288348075
+  m_fontColor: {r: 0.67058825, g: 1, b: 0.6039216, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

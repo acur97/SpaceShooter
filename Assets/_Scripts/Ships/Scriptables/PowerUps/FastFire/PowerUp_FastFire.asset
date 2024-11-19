@@ -15,7 +15,7 @@ MonoBehaviour:
   shipBase: {fileID: 0}
   type: 8
   powerName: Fast Fire
-  sprite: {fileID: -1990333599, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
+  sprite: {fileID: 21300000, guid: 542cc942de0b8c2429b92290adcdfdb5, type: 3}
   description: Double firing speed that lasts 10 seconds
   currentAmount: 0
   cost: 10

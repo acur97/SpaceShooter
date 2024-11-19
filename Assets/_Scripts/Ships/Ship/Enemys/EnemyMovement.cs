@@ -208,6 +208,11 @@ public class EnemyMovement : MonoBehaviour
     {
         transform.position += properties.speed * Time.deltaTime * transform.up;
 
+        //if (transform.position.y < PlayerController.Instance.transform.position.y)
+        //{
+        //    return;
+        //}
+
         if (transform.position.x > PlayerController.Instance.transform.position.x)
         {
             transform.position = new Vector2(transform.position.x - (properties.speed * Time.deltaTime * properties.behaviourMathfSin), transform.position.y);

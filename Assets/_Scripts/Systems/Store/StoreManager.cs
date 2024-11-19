@@ -103,11 +103,11 @@ public class StoreManager : MonoBehaviour
         {
             if (on)
             {
-                gameplayScriptable.selectedPowerUp = showingPowerUp;
+                PowerUpsManager.Instance.SelectPowerUp(showingPowerUp);
             }
             else
             {
-                gameplayScriptable.selectedPowerUp = null;
+                PowerUpsManager.Instance.SelectPowerUp(null);
             }
         }
         else

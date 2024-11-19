@@ -73,6 +73,11 @@ public class PowerUp_MissileBehaviour : MonoBehaviour
             }
         }
 
+        if (strongestEnemyIndex == -1)
+        {
+            return;
+        }
+
         source.sourceTransform = EnemySpawns.Instance.enemys[strongestEnemyIndex].transform;
         source.weight = 1f;
 

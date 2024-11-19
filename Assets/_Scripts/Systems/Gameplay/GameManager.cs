@@ -325,6 +325,8 @@ public class GameManager : MonoBehaviour
 
     public void Retry()
     {
+        PlayerProgress.SaveCustoms(true);
+
         UiManager.Instance.SetUi(UiType.Fade, true, 0.25f, () => SceneManager.LoadScene(0));
     }
 }

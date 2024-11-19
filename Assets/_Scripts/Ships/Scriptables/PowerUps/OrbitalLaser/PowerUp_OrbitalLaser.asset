@@ -15,7 +15,7 @@ MonoBehaviour:
   shipBase: {fileID: 0}
   type: 14
   powerName: Orbital Laser
-  sprite: {fileID: 1346643922, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
+  sprite: {fileID: 21300000, guid: 5498e6b53df07cf4aa84c4a1c9038ff0, type: 3}
   description: Devastating laser that clears the entire screen of enemies, has pre-charge
     time
   currentAmount: 0

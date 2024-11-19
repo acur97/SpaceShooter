@@ -46,7 +46,7 @@ public class PlayerProgress
 
         if (scriptable.progress.powerUpIndex >= 0)
         {
-            scriptable.selectedPowerUp = scriptable.powerUps[scriptable.progress.powerUpIndex];
+            PowerUpsManager.Instance.SelectPowerUp(scriptable.powerUps[scriptable.progress.powerUpIndex]);
         }
     }
 

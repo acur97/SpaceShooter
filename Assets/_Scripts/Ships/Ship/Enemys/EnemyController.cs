@@ -102,7 +102,7 @@ public class EnemyController : ShipBaseController
 
         if (timer <= 0)
         {
-            shoot.Shoot(shootRoot, _properties);
+            shoot.Shoot(shootRoot1, shootRoot2, shootRoot3, _properties);
 
             timer = _properties.coolDown;
         }

@@ -116,6 +116,7 @@ public class UiManager : MonoBehaviour
 
     private void FadeCanvas(CanvasGroup canvas, bool active, float duration, Action callback = null)
     {
+        canvas.interactable = active;
         canvas.alpha = active ? 0 : 1;
         canvas.gameObject.SetActive(true);
 

@@ -15,7 +15,7 @@ MonoBehaviour:
   shipBase: {fileID: 0}
   type: 6
   powerName: Time Slower
-  sprite: {fileID: 2098772786, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
+  sprite: {fileID: 21300000, guid: 517274eafaed98649b77139a5a111b12, type: 3}
   description: Slow motion for 5 seconds
   currentAmount: 0
   cost: 10

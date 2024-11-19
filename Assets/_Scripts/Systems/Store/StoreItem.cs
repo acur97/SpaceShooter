@@ -6,6 +6,8 @@ public class StoreItem : MonoBehaviour
 {
     [SerializeField] private Image spriteImg;
     [SerializeField] private TextMeshProUGUI countTxt;
+    [SerializeField] private Color haveColor;
+    [SerializeField] private Color dontColor;
     [SerializeField] private TextMeshProUGUI titleTxt;
     [SerializeField] private TextMeshProUGUI priceTxt;
     [SerializeField] private Button selectBtn;
@@ -33,6 +35,7 @@ public class StoreItem : MonoBehaviour
     private void UpdateBtn()
     {
         countTxt.text = powerUp.currentAmount.ToString();
+        countTxt.color = powerUp.currentAmount > 0 ? haveColor : dontColor;
         selected.enabled = GameManager.Instance.gameplayScriptable.selectedPowerUp == powerUp;
     }
 

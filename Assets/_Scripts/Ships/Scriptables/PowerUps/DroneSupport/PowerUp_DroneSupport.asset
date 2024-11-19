@@ -15,7 +15,7 @@ MonoBehaviour:
   shipBase: {fileID: 0}
   type: 11
   powerName: Support Dron
-  sprite: {fileID: 821985148, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
+  sprite: {fileID: 21300000, guid: 6d1a2afc272d701498fab6497498d8c5, type: 3}
   description: Drone that shoots next to you, lasts 40 seconds
   currentAmount: 0
   cost: 30

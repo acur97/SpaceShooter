@@ -22,27 +22,19 @@ public class BulletsPool : PoolBaseController
         }
     }
 
-    public void InitBullet(Transform _position, float _speed, bool _double, Bullet.TypeBullet type)
+    public void InitBullet(Transform _position, float _speed, Bullet.TypeBullet type)
     {
         AudioManager.Instance.PlaySound(AudioManager.AudioType.Zap, 0.2f);
 
-        if (_double)
-        {
-            if (_position.parent.localEulerAngles.z == 0)
-            {
-                Init(new Vector2(_position.position.x + 0.157f, _position.position.y), _position.rotation, _speed, type);
-                Init(new Vector2(_position.position.x - 0.157f, _position.position.y), _position.rotation, _speed, type);
-            }
-            else
-            {
-                Init(new Vector2(_position.position.x, _position.position.y + 0.157f), _position.rotation, _speed, type);
-                Init(new Vector2(_position.position.x, _position.position.y - 0.157f), _position.rotation, _speed, type);
-            }
-        }
-        else
-        {
-            Init(_position.position, _position.rotation, _speed, type);
-        }
+        Init(_position.position, _position.rotation, _speed, type);
+    }
+
+    public void InitBullet(Transform _position1, Transform _position2, float _speed, Bullet.TypeBullet type)
+    {
+        AudioManager.Instance.PlaySound(AudioManager.AudioType.Zap, 0.2f);
+
+        Init(_position1.position, _position1.rotation, _speed, type);
+        Init(_position2.position, _position2.rotation, _speed, type);
     }
 
     private void Init(Vector2 _position, Quaternion _rotation, float _speed, Bullet.TypeBullet type)

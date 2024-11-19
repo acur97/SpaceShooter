@@ -15,7 +15,7 @@ MonoBehaviour:
   shipBase: {fileID: 0}
   type: 5
   powerName: Electric Field
-  sprite: {fileID: 1142201859, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
+  sprite: {fileID: 21300000, guid: 5341165ce833ae142b2d610459300a9b, type: 3}
   description: Electric shield that does not protect but deals damage when touched
     by the enemy, lasts 40 seconds
   currentAmount: 0

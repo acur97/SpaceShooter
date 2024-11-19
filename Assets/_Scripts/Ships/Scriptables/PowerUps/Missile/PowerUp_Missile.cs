@@ -56,9 +56,11 @@ public class PowerUp_Missile : PowerUpBase
     {
         missileInstance = Object.Instantiate(prefab).GetComponent<PowerUp_MissileBehaviour>();
         PoolsUpdateManager.PoolUpdate += missileInstance.OnUpdate;
-        missileInstance.transform.position = shipBase.shootRoot.position;
+        missileInstance.transform.position = shipBase.shootRoot2.position;
 
         missileInstance.Init(damage, initialSpeed, speedUp);
+
+        PowerUpsManager.Instance.slider.value -= 0.5f;
 
         currentCount--;
         if (currentCount <= 0)

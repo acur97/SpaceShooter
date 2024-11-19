@@ -15,7 +15,7 @@ MonoBehaviour:
   shipBase: {fileID: 0}
   type: 15
   powerName: Extract Life
-  sprite: {fileID: -400897349, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
+  sprite: {fileID: 21300000, guid: 48d0c4a78699b6847987e6d477c49a32, type: 3}
   description: Steals the total life of 1 enemy you destroy
   currentAmount: 0
   cost: 10

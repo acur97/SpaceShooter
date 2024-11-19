@@ -15,7 +15,7 @@ MonoBehaviour:
   shipBase: {fileID: 0}
   type: 9
   powerName: Life Steal
-  sprite: {fileID: -1636013377, guid: 0d58eebea82981e418272aacbb8849c1, type: 3}
+  sprite: {fileID: 21300000, guid: 5e8760be3c7c5e74aa79bd10884cb6c5, type: 3}
   description: Each hit to the enemy regenerates your life (10% maximum life), lasts
     10 seconds
   currentAmount: 0
