@@ -48,6 +48,10 @@ public class PlayerProgress
         {
             PowerUpsManager.Instance.SelectPowerUp(scriptable.powerUps[scriptable.progress.powerUpIndex]);
         }
+        else
+        {
+            PowerUpsManager.Instance.SelectPowerUp(null);
+        }
     }
 
     private static void InitCustoms()

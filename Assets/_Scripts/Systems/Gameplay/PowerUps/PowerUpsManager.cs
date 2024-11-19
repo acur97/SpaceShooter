@@ -65,13 +65,13 @@ public class PowerUpsManager : MonoBehaviour
 
         if (powerUp == null)
         {
-            icon.enabled = false;
-            slider.enabled = false;
+            icon.gameObject.SetActive(false);
+            slider.gameObject.SetActive(false);
         }
         else
         {
-            icon.enabled = true;
-            slider.enabled = true;
+            icon.gameObject.SetActive(true);
+            slider.gameObject.SetActive(true);
 
             icon.sprite = powerUp.sprite;
 
