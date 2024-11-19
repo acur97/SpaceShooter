@@ -22,29 +22,29 @@ public class BulletsPool : PoolBaseController
         }
     }
 
-    public void InitBullet(Transform _position, float _speed, Bullet.TypeBullet type)
+    public void InitBullet(Transform _position, ShipScriptable _properties, Bullet.TypeBullet type)
     {
         AudioManager.Instance.PlaySound(AudioManager.AudioType.Zap, 0.2f);
 
-        Init(_position.position, _position.rotation, _speed, type);
+        Init(_position.position, _position.rotation, _properties, type);
     }
 
-    public void InitBullet(Transform _position1, Transform _position2, float _speed, Bullet.TypeBullet type)
+    public void InitBullet(Transform _position1, Transform _position2, ShipScriptable _properties, Bullet.TypeBullet type)
     {
         AudioManager.Instance.PlaySound(AudioManager.AudioType.Zap, 0.2f);
 
-        Init(_position1.position, _position1.rotation, _speed, type);
-        Init(_position2.position, _position2.rotation, _speed, type);
+        Init(_position1.position, _position1.rotation, _properties, type);
+        Init(_position2.position, _position2.rotation, _properties, type);
     }
 
-    private void Init(Vector2 _position, Quaternion _rotation, float _speed, Bullet.TypeBullet type)
+    private void Init(Vector2 _position, Quaternion _rotation, ShipScriptable _properties, Bullet.TypeBullet type)
     {
         for (int i = 0; i < size; i++)
         {
             if (!bullets[i].gameObject.activeSelf)
             {
                 bullets[i].transform.SetPositionAndRotation(_position, _rotation);
-                bullets[i].speed = _speed;
+                bullets[i].speed = _properties.bulletSpeed;
                 bullets[i].bulletType = type;
 
                 if (type == Bullet.TypeBullet.player)
@@ -55,6 +55,12 @@ public class BulletsPool : PoolBaseController
                 {
                     bullets[i].renderer.material.SetColor(_Color, SetColor(PlayerController.Instance._properties.color));
                 }
+
+                if (_properties._bulletTime)
+                {
+                    bullets[i].SetLifetime(_properties.bulletTime);
+                }
+
                 bullets[i].gameObject.SetActive(true);
                 break;
             }

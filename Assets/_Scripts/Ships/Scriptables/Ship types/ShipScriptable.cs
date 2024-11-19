@@ -22,6 +22,9 @@ public class ShipScriptable : ScriptableObject
     [Space]
     public bool _spaceCoolDown = false;
     public float spaceCooldown = -1;
+    [Space]
+    public bool _bulletTime = false;
+    public float bulletTime = -1;
 
     // Enemy
     public enum Attack { continuous, continuousDouble, none }

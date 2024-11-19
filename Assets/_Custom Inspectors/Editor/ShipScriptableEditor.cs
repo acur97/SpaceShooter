@@ -11,6 +11,7 @@ public class ShipScriptableEditor : Editor
 
     private VisualElement _sprite;
     private FloatField _spaceCoolDown;
+    private FloatField _bulletTime;
     private FloatField _timeToContinue;
 
     public override VisualElement CreateInspectorGUI()
@@ -29,6 +30,10 @@ public class ShipScriptableEditor : Editor
         _spaceCoolDown = inspector.Q<FloatField>("Field_spaceCoolDown");
         toggle_SpaceCoolDown_Field.RegisterValueChangedCallback(OnToggle_SpaceCoolDown_Change);
 
+        Toggle toggle_BulletTime_Field = inspector.Q<Toggle>("Toggle_bulletTime");
+        _bulletTime = inspector.Q<FloatField>("Field_bulletTime");
+        toggle_BulletTime_Field.RegisterValueChangedCallback(OnToggle_BulletTime_Change);
+
         Toggle toggle_timeToContinue_Field = inspector.Q<Toggle>("Toggle_timeToContinue");
         _timeToContinue = inspector.Q<FloatField>("Field_timeToContinue");
         toggle_timeToContinue_Field.RegisterValueChangedCallback(OnToggle_timeToContinue_Change);
@@ -43,11 +48,16 @@ public class ShipScriptableEditor : Editor
 
     private void OnToggle_SpaceCoolDown_Change(ChangeEvent<bool> evt)
     {
-        _spaceCoolDown.SetEnabled(evt.newValue);
+        _spaceCoolDown?.SetEnabled(evt.newValue);
+    }
+
+    private void OnToggle_BulletTime_Change(ChangeEvent<bool> evt)
+    {
+        _bulletTime?.SetEnabled(evt.newValue);
     }
 
     private void OnToggle_timeToContinue_Change(ChangeEvent<bool> evt)
     {
-        _timeToContinue.SetEnabled(evt.newValue);
+        _timeToContinue?.SetEnabled(evt.newValue);
     }
 }

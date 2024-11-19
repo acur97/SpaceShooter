@@ -8,6 +8,8 @@ public class Bullet : MonoBehaviour
     public new SpriteRenderer renderer;
     public new Collider2D collider;
 
+    private float lifetime = -1f;
+
     private void Awake()
     {
         PoolsUpdateManager.PoolUpdate += OnUpdate;
@@ -18,11 +20,32 @@ public class Bullet : MonoBehaviour
         PoolsUpdateManager.PoolUpdate -= OnUpdate;
     }
 
+    public void SetLifetime(float time)
+    {
+        lifetime = time;
+    }
+
+    private void OnDisable()
+    {
+        lifetime = -1f;
+    }
+
     private void OnUpdate()
     {
         if (!gameObject.activeSelf || !GameManager.Instance.isPlaying)
         {
             return;
+        }
+
+        if (lifetime > 0)
+        {
+            lifetime -= Time.deltaTime;
+
+            if (lifetime <= 0)
+            {
+                gameObject.SetActive(false);
+                return;
+            }
         }
 
         transform.position += speed * Time.deltaTime * transform.up;

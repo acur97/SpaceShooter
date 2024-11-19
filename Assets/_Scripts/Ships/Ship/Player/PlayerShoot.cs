@@ -61,6 +61,6 @@ public class PlayerShoot : MonoBehaviour
             return;
         }
 
-        BulletsPool.Instance.InitBullet(controller.shootRoot2, controller._properties.bulletSpeed, Bullet.TypeBullet.player);
+        BulletsPool.Instance.InitBullet(controller.shootRoot2, controller._properties, Bullet.TypeBullet.player);
     }
 }

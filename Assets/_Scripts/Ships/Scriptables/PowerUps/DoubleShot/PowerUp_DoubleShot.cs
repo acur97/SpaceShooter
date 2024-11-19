@@ -42,6 +42,6 @@ public class PowerUp_DoubleShot : PowerUpBase
 
     public override void OnPlayerShoot()
     {
-        BulletsPool.Instance.InitBullet(shipBase.shootRoot1, shipBase.shootRoot3, shipBase._properties.bulletSpeed, Bullet.TypeBullet.player);
+        BulletsPool.Instance.InitBullet(shipBase.shootRoot1, shipBase.shootRoot3, shipBase._properties, Bullet.TypeBullet.player);
     }
 }

@@ -21,11 +21,11 @@ public class EnemyShoot : MonoBehaviour
 
     private void Continuous(ShipScriptable properties, Transform root)
     {
-        BulletsPool.Instance.InitBullet(root, properties.bulletSpeed, Bullet.TypeBullet.enemy);
+        BulletsPool.Instance.InitBullet(root, properties, Bullet.TypeBullet.enemy);
     }
 
     private void ContinuousDouble(ShipScriptable properties, Transform root1, Transform root2)
     {
-        BulletsPool.Instance.InitBullet(root1, root2, properties.bulletSpeed, Bullet.TypeBullet.enemy);
+        BulletsPool.Instance.InitBullet(root1, root2, properties, Bullet.TypeBullet.enemy);
     }
 }

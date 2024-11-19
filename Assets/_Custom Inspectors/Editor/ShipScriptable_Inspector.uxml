@@ -22,9 +22,13 @@
         <ui:FloatField label="Speed" value="10" binding-path="bulletSpeed" tooltip="Speed of the Bullets (0 means the bullets spaws static) (For enemies, the attack type must be set to None so that it does not shoot)" />
         <ui:Label text="Cool Downs" emoji-fallback-support="false" enable-rich-text="false" style="margin-top: 6px; -unity-font-style: bold; padding-left: 3px;" />
         <ui:FloatField label="Shoot cool down" value="0.1" binding-path="coolDown" tooltip="Time between bullet shots" />
-        <ui:VisualElement style="flex-grow: 1; flex-direction: row; margin-bottom: 4px;">
+        <ui:VisualElement name="VisualElement" style="flex-grow: 1; flex-direction: row; margin-bottom: 4px; align-self: auto; align-items: flex-start; align-content: auto;">
             <ui:Toggle label="Time between shots" binding-path="_spaceCoolDown" tooltip="Time between bursts of fire" name="Toggle_spaceCoolDown" style="align-items: flex-end;" />
             <ui:FloatField value="-1" binding-path="spaceCooldown" name="Field_spaceCoolDown" style="flex-grow: 100; margin-left: 8px;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; flex-direction: row; margin-bottom: 4px; align-items: flex-start; align-content: auto; align-self: auto;">
+            <ui:Toggle label="Life time" binding-path="_bulletTime" tooltip="How long the bullet lasts before disappearing (they usually disappear when they leave the screen)" name="Toggle_bulletTime" style="align-items: flex-end;" />
+            <ui:FloatField value="-1" binding-path="bulletTime" name="Field_bulletTime" style="flex-grow: 100; margin-left: 8px;" />
         </ui:VisualElement>
     </ui:Foldout>
     <ui:Foldout text="Enemy Only" style="margin-top: 0; margin-bottom: 10px; background-color: rgba(255, 255, 255, 0.05); padding-right: 6px;">
