@@ -82,7 +82,7 @@ public class PlayerController : ShipBaseController
 
     private void Update()
     {
-        if (GameManager.Instance.isPlaying)
+        if (GameManager.Instance.isPlaying && gameObject.activeSelf)
         {
             movement.OnUpdate();
             shoot.OnUpdate();

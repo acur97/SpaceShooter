@@ -42,4 +42,5 @@
             <ui:FloatField value="-1" binding-path="timeToContinue" enabled="true" name="Field_timeToContinue" style="flex-grow: 100; margin-left: 8px;" />
         </ui:VisualElement>
     </ui:Foldout>
+    <ui:TextField placeholder-text="filler text" multiline="true" />
 </ui:UXML>
