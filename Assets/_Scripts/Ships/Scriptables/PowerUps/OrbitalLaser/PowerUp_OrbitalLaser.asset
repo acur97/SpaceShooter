@@ -25,11 +25,11 @@ MonoBehaviour:
   duration: -1
   clip_activate:
     audioClip: {fileID: 8300000, guid: 09da66bbbfaf82547be74d942c73ea12, type: 3}
-    audioVolume: 1
-  clip_deactivate:
+    audioVolume: 2
+  clip_constant:
     audioClip: {fileID: 0}
     audioVolume: 0
-  clip_constant:
+  clip_deactivate:
     audioClip: {fileID: 0}
     audioVolume: 0
   waitForActivate: 0

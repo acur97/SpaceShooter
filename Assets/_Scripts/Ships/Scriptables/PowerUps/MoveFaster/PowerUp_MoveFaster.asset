@@ -21,16 +21,16 @@ MonoBehaviour:
   cost: 40
   useDuration: 1
   durationRange: {x: 8, y: 10}
-  duration: -1
+  duration: 9.327988
   clip_activate:
     audioClip: {fileID: 8300000, guid: c717388d7bd785343afccda284c15881, type: 3}
-    audioVolume: 1
-  clip_deactivate:
-    audioClip: {fileID: 8300000, guid: 911b1a1bbfb7d0440a05cb0a863bf315, type: 3}
     audioVolume: 1
   clip_constant:
     audioClip: {fileID: 0}
     audioVolume: 0
+  clip_deactivate:
+    audioClip: {fileID: 8300000, guid: 911b1a1bbfb7d0440a05cb0a863bf315, type: 3}
+    audioVolume: 2.5
   waitForActivate: 0
   clip_shoot:
     audioClip: {fileID: 0}

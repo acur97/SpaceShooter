@@ -4,6 +4,7 @@ using UnityEngine;
 public class PowerUp_ExtractLife : PowerUpBase
 {
     [Space]
+    [SerializeField] private GameObject prefab;
     [SerializeField] private uint steals = 1;
 
     private uint stolen = 0;
@@ -36,6 +37,7 @@ public class PowerUp_ExtractLife : PowerUpBase
             shipBase.health = Mathf.Clamp(shipBase.health, 0, shipBase._properties.health);
 
             PlayerController.Instance.UpdateHealthUi();
+            Object.Instantiate(prefab, PlayerController.Instance.transform);
         }
 
         stolen++;

@@ -24,13 +24,13 @@ MonoBehaviour:
   duration: 20
   clip_activate:
     audioClip: {fileID: 8300000, guid: 0b0f8cc964df8c140b6d761869c33fd9, type: 3}
-    audioVolume: 0.75
-  clip_deactivate:
-    audioClip: {fileID: 8300000, guid: 5c47e1d4af485ae43b2d8f22541a8c6b, type: 3}
     audioVolume: 1
   clip_constant:
     audioClip: {fileID: 0}
     audioVolume: 0
+  clip_deactivate:
+    audioClip: {fileID: 8300000, guid: 5c47e1d4af485ae43b2d8f22541a8c6b, type: 3}
+    audioVolume: 1.5
   waitForActivate: 0
   clip_shoot:
     audioClip: {fileID: 0}

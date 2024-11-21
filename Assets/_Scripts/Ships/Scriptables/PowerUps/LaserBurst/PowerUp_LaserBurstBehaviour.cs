@@ -42,7 +42,7 @@ public class PowerUp_LaserBurstBehaviour : MonoBehaviour
 
         PostProcessingController.Instance.ImpactFrame().Forget();
 
-        AudioManager.Instance.PlaySound(boomSound);
+        AudioManager.Instance.PlaySound(boomSound, 2f);
 
         startSpeedCurve.mode = ParticleSystemCurveMode.Constant;
         startSpeedCurve.constant = 1f;

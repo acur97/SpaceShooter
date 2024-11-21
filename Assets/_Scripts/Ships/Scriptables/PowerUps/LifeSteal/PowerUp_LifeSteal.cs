@@ -4,6 +4,7 @@ using UnityEngine;
 public class PowerUp_LifeSteal : PowerUpBase
 {
     [Space]
+    [SerializeField] private GameObject prefab;
     [SerializeField, Range(0f, 1f)] private float maxLifeSteal = 0.1f;
 
     private int maxPercent;
@@ -34,6 +35,7 @@ public class PowerUp_LifeSteal : PowerUpBase
             percent++;
 
             PlayerController.Instance.UpdateHealthUi();
+            Object.Instantiate(prefab, PlayerController.Instance.transform);
 
             if (percent >= maxPercent)
             {

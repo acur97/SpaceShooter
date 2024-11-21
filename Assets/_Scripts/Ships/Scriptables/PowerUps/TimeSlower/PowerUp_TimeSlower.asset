@@ -16,21 +16,21 @@ MonoBehaviour:
   type: 6
   powerName: Time Slower
   sprite: {fileID: 21300000, guid: 517274eafaed98649b77139a5a111b12, type: 3}
-  description: Slow motion for 5 seconds
   currentAmount: 0
+  description: Slow motion for 10 seconds
   cost: 10
   useDuration: 1
-  durationRange: {x: 10, y: 10}
-  duration: 10
+  durationRange: {x: 5, y: 5}
+  duration: 5
   clip_activate:
     audioClip: {fileID: 8300000, guid: d8d2f97349979a644944371419dcdebe, type: 3}
-    audioVolume: 1
-  clip_deactivate:
-    audioClip: {fileID: 8300000, guid: 142251e9641ffaa4aa5852b9e301cf32, type: 3}
-    audioVolume: 1
+    audioVolume: 1.5
   clip_constant:
     audioClip: {fileID: 0}
     audioVolume: 0
+  clip_deactivate:
+    audioClip: {fileID: 8300000, guid: 142251e9641ffaa4aa5852b9e301cf32, type: 3}
+    audioVolume: 2
   waitForActivate: 0
   clip_shoot:
     audioClip: {fileID: 0}

@@ -5,6 +5,7 @@ public class PowerUp_Shield : PowerUpBase
 {
     [Space]
     [SerializeField] private GameObject prefab;
+    [SerializeField] private float radius = 0.5f;
     [SerializeField] private uint bulletAbsortion = 5;
 
     private GameObject shieldObject;
@@ -22,7 +23,7 @@ public class PowerUp_Shield : PowerUpBase
         shieldObject = Instantiate(prefab, shipBase.transform);
         playerShield = shieldObject.GetComponent<PowerUp_ShieldBehaviour>();
 
-        playerShield.Init((int)bulletAbsortion);
+        playerShield.Init((int)bulletAbsortion, radius);
     }
 
     public override void OnDeactivate()

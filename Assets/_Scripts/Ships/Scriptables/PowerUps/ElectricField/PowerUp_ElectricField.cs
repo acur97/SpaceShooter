@@ -5,6 +5,7 @@ public class PowerUp_ElectricField : PowerUpBase
 {
     [Space]
     [SerializeField] private GameObject prefab;
+    [SerializeField] private float radius = 1f;
     [SerializeField] private uint enemyDamage = 5;
 
     private GameObject electricShieldObject;
@@ -22,7 +23,7 @@ public class PowerUp_ElectricField : PowerUpBase
         electricShieldObject = Instantiate(prefab, shipBase.transform);
         playerElectricShield = electricShieldObject.GetComponent<PowerUp_ElectricFieldBehaviour>();
 
-        playerElectricShield.Init((int)enemyDamage);
+        playerElectricShield.Init((int)enemyDamage, radius);
     }
 
     public override void OnDeactivate()

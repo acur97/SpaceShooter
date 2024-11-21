@@ -3,17 +3,23 @@ using UnityEngine;
 
 public class PowerUp_ElectricFieldBehaviour : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem particles;
+    [SerializeField] private CircleCollider2D circle;
+    [SerializeField] private ParticleSystem mainParticle;
+    private ParticleSystem.ShapeModule shapeModule;
 
     private bool active = false;
     private int enemyDamage = 0;
 
     private const string _Enemy = "Enemy";
 
-    public void Init(int damage)
+    public void Init(int damage, float range)
     {
         enemyDamage = damage;
         active = true;
+
+        shapeModule = mainParticle.shape;
+        shapeModule.radius = range;
+        circle.radius = range;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -35,9 +41,9 @@ public class PowerUp_ElectricFieldBehaviour : MonoBehaviour
     public async UniTaskVoid Disable()
     {
         active = false;
-        particles.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+        mainParticle.Stop(false, ParticleSystemStopBehavior.StopEmitting);
 
-        await UniTask.WaitUntil(() => particles.isStopped);
+        await UniTask.WaitUntil(() => mainParticle.isStopped);
 
         Destroy(gameObject);
     }

@@ -14548,7 +14548,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3336e7f0b6d6d0e48b02bb4e99eb3579, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particles: {fileID: 3637823839693521067}
+  circle: {fileID: 3774629907516152070}
+  mainParticle: {fileID: 3637823839693521067}
+  particles:
+  - {fileID: 3637823839693521067}
+  - {fileID: 2239265844573464743}
+  - {fileID: 3002999641914476276}
 --- !u!58 &3774629907516152070
 CircleCollider2D:
   m_ObjectHideFlags: 0

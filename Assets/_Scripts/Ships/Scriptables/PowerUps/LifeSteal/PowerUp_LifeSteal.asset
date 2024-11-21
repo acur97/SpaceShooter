@@ -26,12 +26,12 @@ MonoBehaviour:
   clip_activate:
     audioClip: {fileID: 8300000, guid: 59de91a90eeac3c4b8aef3843a8e67e0, type: 3}
     audioVolume: 1
-  clip_deactivate:
-    audioClip: {fileID: 8300000, guid: 2568d45576b07004db1683b43b7d26da, type: 3}
-    audioVolume: 1
   clip_constant:
     audioClip: {fileID: 0}
     audioVolume: 0
+  clip_deactivate:
+    audioClip: {fileID: 8300000, guid: 2568d45576b07004db1683b43b7d26da, type: 3}
+    audioVolume: 1
   waitForActivate: 0
   clip_shoot:
     audioClip: {fileID: 0}
@@ -45,4 +45,5 @@ MonoBehaviour:
   clip_enemyDeath:
     audioClip: {fileID: 0}
     audioVolume: 0
+  prefab: {fileID: 7042420193141323986, guid: 931e1c3b03c3abf4e86be2b3582c9880, type: 3}
   maxLifeSteal: 0.1

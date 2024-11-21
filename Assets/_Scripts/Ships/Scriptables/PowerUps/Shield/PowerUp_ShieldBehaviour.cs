@@ -3,17 +3,24 @@ using UnityEngine;
 
 public class PowerUp_ShieldBehaviour : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem particles;
+    [SerializeField] private CircleCollider2D circle;
+    [SerializeField] private ParticleSystem mainParticle;
+    private ParticleSystem.ShapeModule shapeModule;
+    [SerializeField] private ParticleSystem[] particles;
 
     private bool active = false;
     private int bulletAbsortion = 0;
 
     private const string _Bullet = "Bullet";
 
-    public void Init(int absortion)
+    public void Init(int absortion, float range)
     {
         bulletAbsortion = absortion;
         active = true;
+
+        shapeModule = mainParticle.shape;
+        shapeModule.radius = range;
+        circle.radius = range;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -42,9 +49,15 @@ public class PowerUp_ShieldBehaviour : MonoBehaviour
     public async UniTaskVoid Disable()
     {
         active = false;
-        particles.Stop(false, ParticleSystemStopBehavior.StopEmitting);
 
-        await UniTask.WaitUntil(() => particles.isStopped);
+        for (int i = 0; i < particles.Length; i++)
+        {
+            particles[i].Stop(false, ParticleSystemStopBehavior.StopEmitting);
+        }
+        for (int i = 0; i < particles.Length; i++)
+        {
+            await UniTask.WaitUntil(() => particles[i].isStopped);
+        }
 
         Destroy(gameObject);
     }

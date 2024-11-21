@@ -45,5 +45,6 @@ MonoBehaviour:
   clip_enemyDeath:
     audioClip: {fileID: 0}
     audioVolume: 0
-  prefab: {fileID: 7042420193141323986, guid: 7d55612c4b7e5784892fd597f8fe0233, type: 3}
+  prefab: {fileID: 7042420193141323986, guid: 52832364ff91bea4ca6f4b235820fdcb, type: 3}
+  radius: 1
   enemyDamage: 5

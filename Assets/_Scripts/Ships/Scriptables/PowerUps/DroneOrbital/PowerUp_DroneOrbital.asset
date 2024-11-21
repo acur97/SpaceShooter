@@ -24,10 +24,10 @@ MonoBehaviour:
   duration: 20
   clip_activate:
     audioClip: {fileID: 8300000, guid: 80caadda59f8dd542a239e8845fc77ff, type: 3}
-    audioVolume: 1
+    audioVolume: 2
   clip_constant:
     audioClip: {fileID: 8300000, guid: 25c3861daa91f3c48aac026bd65f7a8b, type: 3}
-    audioVolume: 0.5
+    audioVolume: 0.3
   clip_deactivate:
     audioClip: {fileID: 8300000, guid: 40854bec2b4f4104e9721dc8c0d124e8, type: 3}
     audioVolume: 1

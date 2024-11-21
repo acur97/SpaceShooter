@@ -313,7 +313,7 @@ public class GameManager : MonoBehaviour
     {
         if (isPlaying)
         {
-            AudioManager.Instance.source.volume = 0.5f;
+            AudioManager.Instance.source.volume = 0.25f;
 
             UiManager.Instance.SetUi(UiType.Pause, true);
 

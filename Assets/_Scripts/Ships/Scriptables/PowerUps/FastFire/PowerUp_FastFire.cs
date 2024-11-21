@@ -50,4 +50,10 @@ public class PowerUp_FastFire : PowerUpBase
     {
 
     }
+
+    public override void Dispose()
+    {
+        shipBase._properties.bulletSpeed = prevBulletSpeed;
+        base.Dispose();
+    }
 }

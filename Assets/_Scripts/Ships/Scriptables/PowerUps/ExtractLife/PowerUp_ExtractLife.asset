@@ -25,10 +25,10 @@ MonoBehaviour:
   clip_activate:
     audioClip: {fileID: 8300000, guid: 59de91a90eeac3c4b8aef3843a8e67e0, type: 3}
     audioVolume: 1
-  clip_deactivate:
+  clip_constant:
     audioClip: {fileID: 0}
     audioVolume: 0
-  clip_constant:
+  clip_deactivate:
     audioClip: {fileID: 0}
     audioVolume: 0
   waitForActivate: 0
@@ -44,4 +44,5 @@ MonoBehaviour:
   clip_enemyDeath:
     audioClip: {fileID: 8300000, guid: 0c419ce58baa73d47973dcd37847fc83, type: 3}
     audioVolume: 1
+  prefab: {fileID: 7042420193141323986, guid: 931e1c3b03c3abf4e86be2b3582c9880, type: 3}
   steals: 1

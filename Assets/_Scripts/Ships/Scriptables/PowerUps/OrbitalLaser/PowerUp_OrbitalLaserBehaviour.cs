@@ -29,7 +29,7 @@ public class PowerUp_OrbitalLaserBehaviour : MonoBehaviour
         PostProcessingController.Instance.ScreenShake(counter, 0.1f).Forget();
         PostProcessingController.Instance.VolumePunch();
 
-        AudioManager.Instance.PlaySound(boomSound);
+        AudioManager.Instance.PlaySound(boomSound, 2f);
 
         while (circle2.localScale.x < 150f)
         {
