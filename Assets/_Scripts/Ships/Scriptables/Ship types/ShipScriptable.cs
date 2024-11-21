@@ -3,6 +3,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Ship ", menuName = "Gameplay/Level design/Ship", order = 2)]
 public class ShipScriptable : ScriptableObject
 {
+    // Editor
+    public bool editorCustom = true;
+    public bool editorStore = true;
+    public bool editorShip = true;
+    public bool editorBullet = true;
+    public bool editorEnemy = true;
+    public bool editorNotes = true;
+    public string notes;
+
     // Custom
     public Color color = Color.white;
     public new string name;

@@ -27,11 +27,15 @@ public class PlayerProgress
 
         if (!PlayerPrefs.HasKey(_progress))
         {
-            scriptable.progress = new Player_Progress();
-            return;
+            scriptable.progress = new Player_Progress
+            {
+                powerUpIndex = -1
+            };
         }
-
-        scriptable.progress = JsonUtility.FromJson<Player_Progress>(PlayerPrefs.GetString(_progress));
+        else
+        {
+            scriptable.progress = JsonUtility.FromJson<Player_Progress>(PlayerPrefs.GetString(_progress));
+        }
 
         InitPowerUps();
         InitCustoms();
@@ -44,7 +48,7 @@ public class PlayerProgress
             scriptable.powerUps[i].currentAmount = scriptable.progress.powerUpAmounts[i];
         }
 
-        if (scriptable.progress.powerUpIndex >= 0)
+        if (scriptable.progress.powerUpIndex >= 0 && scriptable.powerUps[scriptable.progress.powerUpIndex].currentAmount > 0)
         {
             PowerUpsManager.Instance.SelectPowerUp(scriptable.powerUps[scriptable.progress.powerUpIndex]);
         }
