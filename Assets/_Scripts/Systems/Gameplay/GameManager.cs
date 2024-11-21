@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.LowLevel;
@@ -71,6 +72,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerController playerController;
 
     private const string _Cancel = "Cancel";
+    private const string _MasterVolume = "MasterVolume";
 
     [ContextMenu("Delete PlayerProgress")]
     public void DeletePlayerProgress()
@@ -214,6 +216,7 @@ public class GameManager : MonoBehaviour
         playerController.Init();
 
         Time.timeScale = 1;
+        AudioManager.Instance.mixer.SetFloat(_MasterVolume, 0f);
 
         PlayerProgress.Init(gameplayScriptable);
         SetCustoms(gameplayScriptable.selectedCustoms);
@@ -299,6 +302,7 @@ public class GameManager : MonoBehaviour
 
             endScore.SetText(postScore + score);
             endCoins.SetText(preCoins + PlayerProgress.GetCoins());
+
             AudioManager.Instance.PlaySound(AudioManager.AudioType.End, 2.5f);
 
             Time.timeScale = 0.5f;
@@ -306,13 +310,21 @@ public class GameManager : MonoBehaviour
             leftForNextGroup = -1;
 
             PlayerProgress.SaveAll();
+
+#if !UNITY_EDITOR && UNITY_WEBGL
+            Vibrate(1000);
+#endif
         }
     }
+
+    [DllImport("__Internal")]
+    private static extern void Vibrate(int ms);
 
     public void Pause()
     {
         if (isPlaying)
         {
+            AudioManager.Instance.mixer.SetFloat(_MasterVolume, -15f);
             AudioManager.Instance.source.volume = 0.25f;
 
             UiManager.Instance.SetUi(UiType.Pause, true);
@@ -324,6 +336,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            AudioManager.Instance.mixer.SetFloat(_MasterVolume, 0f);
             AudioManager.Instance.source.volume = 1f;
 
             UiManager.Instance.SetUi(UiType.Pause, false);

@@ -31,7 +31,7 @@ public class PowerUp_ElectricFieldBehaviour : MonoBehaviour
 
         if (collision.CompareTag(_Enemy) && collision.TryGetComponent(out EnemyController enemyController) && enemyController._properties.enemyCollision)
         {
-            //PostProcessingController.Instance.VolumePunch();
+            PostProcessingController.Instance.VolumePunch();
             VfxPool.Instance.InitVfx(collision.transform.position);
 
             enemyController.DoDamage(enemyDamage);

@@ -1,11 +1,11 @@
 using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
+using UnityEngine.Audio;
 
 [Serializable]
 public struct AudioPart
 {
-    //public bool active;
     public AudioClip audioClip;
     public float audioVolume;
 }
@@ -13,6 +13,8 @@ public struct AudioPart
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
+
+    public AudioMixer mixer;
 
     [Header("Sources")]
     public AudioSource source;
