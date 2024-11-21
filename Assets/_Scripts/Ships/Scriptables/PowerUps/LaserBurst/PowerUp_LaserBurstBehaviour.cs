@@ -8,6 +8,7 @@ public class PowerUp_LaserBurstBehaviour : MonoBehaviour
     [SerializeField] private ParticleSystemRenderer particlesRenderer;
     [SerializeField] private ParticleSystem particles;
     [SerializeField] private ParticleSystem[] extraParticles;
+    [SerializeField] private AudioClip boomSound;
 
     private uint damage = 0;
     private ParticleSystem.MainModule mainModule;
@@ -40,6 +41,8 @@ public class PowerUp_LaserBurstBehaviour : MonoBehaviour
         await UniTask.WaitForSeconds(startDelay);
 
         PostProcessingController.Instance.ImpactFrame().Forget();
+
+        AudioManager.Instance.PlaySound(boomSound);
 
         startSpeedCurve.mode = ParticleSystemCurveMode.Constant;
         startSpeedCurve.constant = 1f;

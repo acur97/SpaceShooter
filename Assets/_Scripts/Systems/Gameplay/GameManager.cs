@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [Space]
     public bool hasStarted = false;
     public bool isPlaying = false;
+    private float currentTimeScale = 1f;
     public int leftForNextGroup = 0;
 
     [Header("Score")]
@@ -293,6 +294,7 @@ public class GameManager : MonoBehaviour
             isPlaying = false;
             hasStarted = false;
 
+            UiManager.Instance.SetUi(UiType.Pause, false);
             UiManager.Instance.SetUi(UiType.End, true, 1, () => UiManager.Instance.SetUi(UiType.Gameplay, false));
 
             endScore.SetText(postScore + score);
@@ -311,14 +313,23 @@ public class GameManager : MonoBehaviour
     {
         if (isPlaying)
         {
+            AudioManager.Instance.source.volume = 0.5f;
+
             UiManager.Instance.SetUi(UiType.Pause, true);
+
+            currentTimeScale = Time.timeScale;
             Time.timeScale = 0;
+
             isPlaying = false;
         }
         else
         {
+            AudioManager.Instance.source.volume = 1f;
+
             UiManager.Instance.SetUi(UiType.Pause, false);
-            Time.timeScale = 1;
+
+            Time.timeScale = currentTimeScale;
+
             isPlaying = true;
         }
     }

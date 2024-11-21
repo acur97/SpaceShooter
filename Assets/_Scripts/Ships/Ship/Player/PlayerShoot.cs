@@ -5,7 +5,7 @@ public class PlayerShoot : MonoBehaviour
     private PlayerController controller;
     private ControlsManager controls;
 
-    public bool shootPowerUp = false;
+    [ReadOnly] public bool shootPowerUp = false;
 
     private bool inited = false;
     private bool hold = false;

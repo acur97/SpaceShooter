@@ -3,7 +3,7 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-[CustomEditor(typeof(ShipScriptable))]
+[CustomEditor(typeof(ShipScriptable)), CanEditMultipleObjects]
 public class ShipScriptableEditor : Editor
 {
     private VisualTreeAsset m_InspectorXML;

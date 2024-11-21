@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public abstract class PowerUpBase : ScriptableObject
 {
@@ -20,6 +21,16 @@ public abstract class PowerUpBase : ScriptableObject
     public bool useDuration = false;
     public Vector2 durationRange = new(-1f, -1f);
     [ReadOnly] public float duration = -1f;
+
+    [Header("Audios")]
+    public AudioPart clip_activate;
+    public AudioPart clip_constant;
+    public AudioPart clip_deactivate;
+    public bool waitForActivate = false;
+    public AudioPart clip_shoot;
+    public AudioPart clip_playerDamage;
+    public AudioPart clip_enemyDamage;
+    public AudioPart clip_enemyDeath;
 
     public float InitDuration()
     {

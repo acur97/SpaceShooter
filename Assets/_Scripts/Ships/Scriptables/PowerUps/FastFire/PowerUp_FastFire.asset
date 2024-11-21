@@ -22,4 +22,26 @@ MonoBehaviour:
   useDuration: 1
   durationRange: {x: 10, y: 10}
   duration: -0.0014981306
+  clip_activate:
+    audioClip: {fileID: 8300000, guid: 59de91a90eeac3c4b8aef3843a8e67e0, type: 3}
+    audioVolume: 0
+  clip_deactivate:
+    audioClip: {fileID: 8300000, guid: 2568d45576b07004db1683b43b7d26da, type: 3}
+    audioVolume: 0
+  clip_constant:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  waitForActivate: 0
+  clip_shoot:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_playerDamage:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_enemyDamage:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_enemyDeath:
+    audioClip: {fileID: 0}
+    audioVolume: 0
   multiplier: 2

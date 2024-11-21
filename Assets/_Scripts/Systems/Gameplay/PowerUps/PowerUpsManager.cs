@@ -39,7 +39,7 @@ public class PowerUpsManager : MonoBehaviour
     [SerializeField] private Image icon;
 
     //public List<PowerUpBase> currentPowerUps = new();
-    private PowerUpBase currentPowerUp;
+    [ReadOnly] public PowerUpBase currentPowerUp;
 
     public void Init()
     {
@@ -98,6 +98,7 @@ public class PowerUpsManager : MonoBehaviour
         //currentPowerUps.Add(type);
         currentPowerUp = type;
         currentPowerUp.currentAmount--;
+        PlayerProgress.SavePowerUps(true);
         gameplayScriptable.selectedPowerUp = null;
 
         type.shipBase = PlayerController.Instance;
@@ -108,6 +109,20 @@ public class PowerUpsManager : MonoBehaviour
         }
 
         type.OnActivate();
+
+        if (type.clip_activate.audioClip != null)
+        {
+            AudioManager.Instance.PlaySound(type.clip_activate.audioClip, type.clip_activate.audioVolume, AudioManager.SourceType.PowerUps);
+        }
+
+        if (type.clip_constant.audioClip != null && type.waitForActivate)
+        {
+            AudioManager.Instance.PlaySoundLoopDelayed(type.clip_constant.audioClip, type.clip_activate.audioClip.length, type.clip_constant.audioVolume, AudioManager.SourceType.PowerUps_Loop).Forget();
+        }
+        else if (type.clip_constant.audioClip != null)
+        {
+            AudioManager.Instance.PlaySoundLoop(type.clip_constant.audioClip, type.clip_constant.audioVolume, AudioManager.SourceType.PowerUps_Loop);
+        }
 
         if (type.useDuration)
         {
@@ -121,6 +136,15 @@ public class PowerUpsManager : MonoBehaviour
 
     public void RemovePowerUp(PowerUpBase type)
     {
+        if (type.clip_deactivate.audioClip != null)
+        {
+            AudioManager.Instance.PlaySound(type.clip_deactivate.audioClip, type.clip_deactivate.audioVolume, AudioManager.SourceType.PowerUps);
+        }
+        if (type.clip_constant.audioClip != null)
+        {
+            AudioManager.Instance.StopSource(AudioManager.SourceType.PowerUps_Loop);
+        }
+
         type.OnDeactivate();
 
         //currentPowerUps.Remove(type);
@@ -134,52 +158,97 @@ public class PowerUpsManager : MonoBehaviour
 
     public void PlayerShoot()
     {
+        if (currentPowerUp == null)
+        {
+            return;
+        }
+
+        if (currentPowerUp.clip_shoot.audioClip != null)
+        {
+            AudioManager.Instance.PlaySound(currentPowerUp.clip_shoot.audioClip, currentPowerUp.clip_shoot.audioVolume, AudioManager.SourceType.PowerUps);
+        }
+
         //for (int i = 0; i < currentPowerUps.Count; i++)
         //{
         //    currentPowerUps[i].OnPlayerShoot();
         //}
 
-        currentPowerUp?.OnPlayerShoot();
+        currentPowerUp.OnPlayerShoot();
     }
 
     public void PlayerDamage()
     {
+        if (currentPowerUp == null)
+        {
+            return;
+        }
+
+        if (currentPowerUp.clip_playerDamage.audioClip != null)
+        {
+            AudioManager.Instance.PlaySound(currentPowerUp.clip_playerDamage.audioClip, currentPowerUp.clip_playerDamage.audioVolume, AudioManager.SourceType.PowerUps);
+        }
+
         //for (int i = 0; i < currentPowerUps.Count; i++)
         //{
         //    currentPowerUps[i].OnPlayerDamage();
         //}
 
-        currentPowerUp?.OnPlayerDamage();
+        currentPowerUp.OnPlayerDamage();
     }
 
     public void EnemyDamage(ShipBaseController enemy)
     {
+        if (currentPowerUp == null)
+        {
+            return;
+        }
+
+        if (currentPowerUp.clip_enemyDamage.audioClip != null)
+        {
+            AudioManager.Instance.PlaySound(currentPowerUp.clip_enemyDamage.audioClip, currentPowerUp.clip_enemyDamage.audioVolume, AudioManager.SourceType.PowerUps);
+        }
+
         //for (int i = 0; i < currentPowerUps.Count; i++)
         //{
         //    currentPowerUps[i].OnEnemyDamage(enemy);
         //}
 
-        currentPowerUp?.OnEnemyDamage(enemy);
+        currentPowerUp.OnEnemyDamage(enemy);
     }
 
     public void EnemyDeath(ShipBaseController enemy)
     {
+        if (currentPowerUp == null)
+        {
+            return;
+        }
+
+        if (currentPowerUp.clip_enemyDeath.audioClip != null)
+        {
+            AudioManager.Instance.PlaySound(currentPowerUp.clip_enemyDeath.audioClip, currentPowerUp.clip_enemyDeath.audioVolume, AudioManager.SourceType.PowerUps);
+        }
+
         //for (int i = 0; i < currentPowerUps.Count; i++)
         //{
         //    currentPowerUps[i].OnEnemyDeath(enemy);
         //}
 
-        currentPowerUp?.OnEnemyDeath(enemy);
+        currentPowerUp.OnEnemyDeath(enemy);
     }
 
     private void Update()
     {
+        if (currentPowerUp == null)
+        {
+            return;
+        }
+
         //for (int i = 0; i < currentPowerUps.Count; i++)
         //{
         //    currentPowerUps[i].OnGameUpdate();
         //}
 
-        currentPowerUp?.OnGameUpdate();
+        currentPowerUp.OnGameUpdate();
 
         if ((currentPowerUp != null && currentPowerUp.useDuration))
         {

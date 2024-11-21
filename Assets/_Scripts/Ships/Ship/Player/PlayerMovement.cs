@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerController controller;
     private ControlsManager controls;
 
-    public float movePowerUp = 1;
+    [ReadOnly] public float movePowerUp = 1;
 
     private bool inited = false;
     private Vector3 inputMove;

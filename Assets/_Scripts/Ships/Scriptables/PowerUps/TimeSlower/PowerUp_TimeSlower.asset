@@ -20,6 +20,28 @@ MonoBehaviour:
   currentAmount: 0
   cost: 10
   useDuration: 1
-  durationRange: {x: 5, y: 5}
-  duration: -1
+  durationRange: {x: 10, y: 10}
+  duration: 10
+  clip_activate:
+    audioClip: {fileID: 8300000, guid: d8d2f97349979a644944371419dcdebe, type: 3}
+    audioVolume: 1
+  clip_deactivate:
+    audioClip: {fileID: 8300000, guid: 142251e9641ffaa4aa5852b9e301cf32, type: 3}
+    audioVolume: 1
+  clip_constant:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  waitForActivate: 0
+  clip_shoot:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_playerDamage:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_enemyDamage:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_enemyDeath:
+    audioClip: {fileID: 0}
+    audioVolume: 0
   timePercent: 0.5

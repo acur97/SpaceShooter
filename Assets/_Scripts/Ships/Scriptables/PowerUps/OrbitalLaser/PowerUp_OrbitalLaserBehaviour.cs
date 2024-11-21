@@ -8,7 +8,7 @@ public class PowerUp_OrbitalLaserBehaviour : MonoBehaviour
     [SerializeField] private Transform circle2;
     [SerializeField] private Animator circle1Anim;
     [SerializeField] private SpriteRenderer sprite;
-    [SerializeField] private AudioClip warmUpSound;
+    [SerializeField] private AudioClip boomSound;
 
     private float counter = 4.5f;
 
@@ -20,7 +20,6 @@ public class PowerUp_OrbitalLaserBehaviour : MonoBehaviour
     private async UniTaskVoid BlindCircle()
     {
         circle2.localScale = Vector3.zero;
-        AudioManager.Instance.PlaySound(warmUpSound, 5f);
 
         await UniTask.WaitUntil(() => circle1Anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
 
@@ -29,6 +28,8 @@ public class PowerUp_OrbitalLaserBehaviour : MonoBehaviour
         PostProcessingController.Instance.ImpactFrame(false).Forget();
         PostProcessingController.Instance.ScreenShake(counter, 0.1f).Forget();
         PostProcessingController.Instance.VolumePunch();
+
+        AudioManager.Instance.PlaySound(boomSound);
 
         while (circle2.localScale.x < 150f)
         {

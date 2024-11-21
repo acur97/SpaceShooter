@@ -138,7 +138,7 @@ MonoBehaviour:
   circle2: {fileID: 3115281521562454141}
   circle1Anim: {fileID: 3114548207455815787}
   sprite: {fileID: 3703041830010878627}
-  warmUpSound: {fileID: 8300000, guid: 329dbff67520ea24bb9499856187f1b8, type: 3}
+  boomSound: {fileID: 8300000, guid: 2ec6a9cec29dc8640abc8f62ea795eda, type: 3}
 --- !u!1 &6177103107579476842
 GameObject:
   m_ObjectHideFlags: 0

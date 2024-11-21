@@ -9723,6 +9723,7 @@ MonoBehaviour:
   extraParticles:
   - {fileID: 6676043421246630157}
   - {fileID: 7409127596330106837}
+  boomSound: {fileID: 8300000, guid: 94042b0bc9c483e4baa335b3ddac2f93, type: 3}
 --- !u!120 &7715951833179897853
 LineRenderer:
   serializedVersion: 2

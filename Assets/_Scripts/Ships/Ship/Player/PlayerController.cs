@@ -160,6 +160,7 @@ public class PlayerController : ShipBaseController
             }
             else
             {
+                PowerUpsManager.Instance.RemovePowerUp(PowerUpsManager.Instance.currentPowerUp);
                 Destroy(gameObject);
             }
         }

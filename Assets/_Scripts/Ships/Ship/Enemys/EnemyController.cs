@@ -138,11 +138,11 @@ public class EnemyController : ShipBaseController
         dead = true;
         gameObject.SetActive(false);
 
-        PowerUpsManager.Enemy_Death?.Invoke(this);
         GameManager.Instance.leftForNextGroup--;
 
         if (!outOfBounds)
         {
+            PowerUpsManager.Enemy_Death?.Invoke(this);
             GameManager.Instance.UpScore(_properties.deathScore);
         }
     }

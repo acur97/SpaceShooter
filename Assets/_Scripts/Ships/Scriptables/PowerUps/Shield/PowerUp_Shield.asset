@@ -21,6 +21,28 @@ MonoBehaviour:
   cost: 10
   useDuration: 1
   durationRange: {x: 10, y: 10}
-  duration: -0.0043281647
+  duration: 10
+  clip_activate:
+    audioClip: {fileID: 8300000, guid: bfb6c465c38416442b84274f145c9579, type: 3}
+    audioVolume: 1
+  clip_constant:
+    audioClip: {fileID: 8300000, guid: 19386a253ee8ffa48a06ab96a00a389a, type: 3}
+    audioVolume: 0.8
+  clip_deactivate:
+    audioClip: {fileID: 8300000, guid: 8c6cea1c564af704c8f24e6829c1a3d9, type: 3}
+    audioVolume: 1
+  waitForActivate: 1
+  clip_shoot:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_playerDamage:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_enemyDamage:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_enemyDeath:
+    audioClip: {fileID: 0}
+    audioVolume: 0
   prefab: {fileID: 8673868457665229473, guid: 46e7898ec58473e4c8b6547da340c5db, type: 3}
   bulletAbsortion: 100

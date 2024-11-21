@@ -22,7 +22,29 @@ MonoBehaviour:
   cost: 200
   useDuration: 1
   durationRange: {x: 6, y: 9}
-  duration: 8.383739
+  duration: 1.4416403
+  clip_activate:
+    audioClip: {fileID: 8300000, guid: 6f21133860233594880def41c93331d8, type: 3}
+    audioVolume: 0.5
+  clip_deactivate:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_constant:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  waitForActivate: 0
+  clip_shoot:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_playerDamage:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_enemyDamage:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_enemyDeath:
+    audioClip: {fileID: 0}
+    audioVolume: 0
   prefab: {fileID: 7956906068790334098, guid: 371c982636414444db270f0e2ee76f8b, type: 3}
   timeToStart: 3
   damage: 25
