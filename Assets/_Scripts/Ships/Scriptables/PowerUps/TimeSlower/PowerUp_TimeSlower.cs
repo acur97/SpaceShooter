@@ -5,6 +5,7 @@ public class PowerUp_TimeSlower : PowerUpBase
 {
     [Space]
     [SerializeField, Range(0f, 1f)] private float timePercent = 0.5f;
+    private float originalTimeScale = 1f;
 
     public PowerUp_TimeSlower() : base()
     {
@@ -15,12 +16,13 @@ public class PowerUp_TimeSlower : PowerUpBase
 
     public override void OnActivate()
     {
-        Time.timeScale = timePercent;
+        originalTimeScale = Time.timeScale;
+        Time.timeScale = originalTimeScale * timePercent;
     }
 
     public override void OnDeactivate()
     {
-        Time.timeScale = 1f;
+        Time.timeScale = originalTimeScale;
     }
 
     public override void OnEnemyDamage(ShipBaseController enemy)

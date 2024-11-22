@@ -19,6 +19,8 @@ public class PlayerController : ShipBaseController
 
     public bool copy = false;
 
+    private int maxHealth = 0;
+
     private readonly int _ColorCapsule = Shader.PropertyToID("_ColorCapsule");
     private readonly int _Color = Shader.PropertyToID("_Color");
     private const string _Bullet = "Bullet";
@@ -38,16 +40,21 @@ public class PlayerController : ShipBaseController
         {
             Instance = this;
 
-            healthBar.maxValue = _properties.health;
-            healthBar.value = _properties.health;
-            healthNormalized = (float)health / _properties.health;
-
             movement.Init(this, controls);
             shoot.Init(this, controls);
         }
 
         SetHealth(_properties.health);
         SetColor();
+    }
+
+    public void SetHealthUi(int _health)
+    {
+        maxHealth = _health;
+
+        healthBar.maxValue = maxHealth;
+        healthBar.value = maxHealth;
+        healthNormalized = (float)health / maxHealth;
     }
 
     public void SetColor()
@@ -173,7 +180,7 @@ public class PlayerController : ShipBaseController
             return;
         }
 
-        healthNormalized = (float)health / _properties.health;
+        healthNormalized = (float)health / maxHealth;
         healthBar.value = health;
     }
 

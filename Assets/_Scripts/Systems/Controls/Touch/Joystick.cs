@@ -7,6 +7,8 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
 {
     [SerializeField] private Image backPanel;
     [SerializeField] private Image knob;
+    [SerializeField] private float knobClamp = 4f;
+    [SerializeField] private float knobOffset = 1f;
 
     public Vector2 InputDirection;
 
@@ -53,7 +55,7 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
             InputDirection = (InputDirection.magnitude > 1) ? InputDirection.normalized : InputDirection;
 
             // Move the knob
-            knob.rectTransform.anchoredPosition = new Vector2(InputDirection.x * (backPanel.rectTransform.sizeDelta.x / 3), InputDirection.y * (backPanel.rectTransform.sizeDelta.y / 3));
+            knob.rectTransform.anchoredPosition = Vector2.ClampMagnitude(InputDirection * (backPanel.rectTransform.sizeDelta / 3) * knobOffset, knobClamp);
 
             // More sensitive input
             InputDirection.x = Math.Clamp(InputDirection.x * 2, -1, 1);

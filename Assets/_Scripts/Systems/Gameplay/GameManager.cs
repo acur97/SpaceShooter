@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using System;
 using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
@@ -8,6 +9,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+
+    public static Action<bool> GameStart;
 
     [Header("Editor")]
     [SerializeField] private bool debugMode = true;
@@ -73,6 +76,7 @@ public class GameManager : MonoBehaviour
 
     private const string _Cancel = "Cancel";
     private const string _MasterVolume = "MasterVolume";
+    private const string _MusicPitch = "MusicPitch";
 
     [ContextMenu("Delete PlayerProgress")]
     public void DeletePlayerProgress()
@@ -173,30 +177,54 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        GameStart?.Invoke(true);
+
         hasStarted = true;
         isPlaying = true;
-        Time.timeScale = 1;
+
+        switch (roundsController.levelType)
+        {
+            case RoundsController.LevelType.Normal:
+
+                Time.timeScale = 1f;
+
+                playerController.SetHealth((int)gameplayScriptable.playerHealth);
+                playerController.SetHealthUi((int)gameplayScriptable.playerHealth);
+
+                playerController.shoot.canShoot = true;
+                break;
+
+            case RoundsController.LevelType.Inifinite:
+
+                Time.timeScale = 1.1f;
+
+                playerController.SetHealth((int)gameplayScriptable.playerHealthInfinite);
+                playerController.SetHealthUi((int)gameplayScriptable.playerHealthInfinite);
+
+                playerController.shoot.canShoot = false;
+                break;
+        }
 
         scoreText.SetText(preScore + score);
         coinsText.SetText(preCoins + PlayerProgress.GetCoins());
 
-        UiManager.Instance.SetUi(UiType.Gameplay, true);
-        UiManager.Instance.SetUi(UiType.Select, false, 1);
+        uiManager.SetUi(UiType.Gameplay, true);
+        uiManager.SetUi(UiType.Select, false, 1);
 
-        RoundsController.Instance.StartRound();
+        roundsController.StartRound();
 
-        AudioManager.Instance.PlaySound(AudioManager.AudioType.Start, 2f);
+        audioManager.PlaySound(AudioManager.AudioType.Start, 2f);
     }
 
     public void OpenWnew(bool on)
     {
-        UiManager.Instance.SetUi(UiType.Select, !on, 0.5f);
-        UiManager.Instance.SetUi(UiType.Wnew, on, 0.5f);
+        uiManager.SetUi(UiType.Select, !on, 0.5f);
+        uiManager.SetUi(UiType.Wnew, on, 0.5f);
     }
 
     public void GodMode(bool on)
     {
-        PlayerController.Instance.SetHealth(on ? 10000000 : PlayerController.Instance._properties.health);
+        playerController.SetHealth(on ? 10000000 : playerController._properties.health);
     }
 
     private void Awake()
@@ -216,7 +244,8 @@ public class GameManager : MonoBehaviour
         playerController.Init();
 
         Time.timeScale = 1;
-        AudioManager.Instance.mixer.SetFloat(_MasterVolume, 0f);
+        audioManager.mixer.SetFloat(_MusicPitch, 1f);
+        audioManager.mixer.SetFloat(_MasterVolume, 0f);
 
         PlayerProgress.Init(gameplayScriptable);
         SetCustoms(gameplayScriptable.selectedCustoms);
@@ -227,8 +256,8 @@ public class GameManager : MonoBehaviour
     public void SetCustoms(ShipScriptable value)
     {
         gameplayScriptable.selectedCustoms = value;
-        PlayerController.Instance._properties.color = gameplayScriptable.selectedCustoms.color; ;
-        PlayerController.Instance.SetColor();
+        playerController._properties.color = gameplayScriptable.selectedCustoms.color; ;
+        playerController.SetColor();
     }
 
     private void Update()
@@ -246,7 +275,7 @@ public class GameManager : MonoBehaviour
             {
                 if (leftForNextGroup <= 0)
                 {
-                    RoundsController.Instance.StartGroup();
+                    roundsController.StartGroup();
                 }
 
                 //DebugMode
@@ -281,11 +310,11 @@ public class GameManager : MonoBehaviour
                 score += value;
                 scoreText.SetText(preScore + score);
             }
-            else if (PlayerController.Instance.health <= PlayerController.Instance._properties.health)
+            else if (playerController.health <= playerController._properties.health)
             {
                 PlayerProgress.UpCoins(value);
                 coinsText.SetText(preCoins + PlayerProgress.GetCoins());
-                AudioManager.Instance.PlaySound(AudioManager.AudioType.Coin);
+                audioManager.PlaySound(AudioManager.AudioType.Coin);
             }
         }
     }
@@ -297,13 +326,16 @@ public class GameManager : MonoBehaviour
             isPlaying = false;
             hasStarted = false;
 
-            UiManager.Instance.SetUi(UiType.Pause, false);
-            UiManager.Instance.SetUi(UiType.End, true, 1, () => UiManager.Instance.SetUi(UiType.Gameplay, false));
+            GameStart?.Invoke(false);
+
+            uiManager.SetUi(UiType.Pause, false);
+            uiManager.SetUi(UiType.End, true, 1, () => uiManager.SetUi(UiType.Gameplay, false));
 
             endScore.SetText(postScore + score);
             endCoins.SetText(preCoins + PlayerProgress.GetCoins());
 
-            AudioManager.Instance.PlaySound(AudioManager.AudioType.End, 2.5f);
+            audioManager.mixer.SetFloat(_MasterVolume, -1f);
+            audioManager.PlaySound(AudioManager.AudioType.End, 2.5f);
 
             Time.timeScale = 0.5f;
 
@@ -312,7 +344,7 @@ public class GameManager : MonoBehaviour
             PlayerProgress.SaveAll();
 
 #if !UNITY_EDITOR && UNITY_WEBGL
-            Vibrate(1000);
+            Vibrate(gameplayScriptable.vibrationDeath);
 #endif
         }
     }
@@ -324,10 +356,9 @@ public class GameManager : MonoBehaviour
     {
         if (isPlaying)
         {
-            AudioManager.Instance.mixer.SetFloat(_MasterVolume, -15f);
-            AudioManager.Instance.source.volume = 0.25f;
+            audioManager.mixer.SetFloat(_MasterVolume, -15f);
 
-            UiManager.Instance.SetUi(UiType.Pause, true);
+            uiManager.SetUi(UiType.Pause, true);
 
             currentTimeScale = Time.timeScale;
             Time.timeScale = 0;
@@ -336,10 +367,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            AudioManager.Instance.mixer.SetFloat(_MasterVolume, 0f);
-            AudioManager.Instance.source.volume = 1f;
+            audioManager.mixer.SetFloat(_MasterVolume, 0f);
 
-            UiManager.Instance.SetUi(UiType.Pause, false);
+            uiManager.SetUi(UiType.Pause, false);
 
             Time.timeScale = currentTimeScale;
 
@@ -351,6 +381,6 @@ public class GameManager : MonoBehaviour
     {
         PlayerProgress.SaveCustoms(true);
 
-        UiManager.Instance.SetUi(UiType.Fade, true, 0.25f, () => SceneManager.LoadScene(0));
+        uiManager.SetUi(UiType.Fade, true, 0.25f, () => SceneManager.LoadScene(0));
     }
 }

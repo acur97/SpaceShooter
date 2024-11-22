@@ -52,6 +52,33 @@ public class AudioManager : MonoBehaviour
     public void Init()
     {
         Instance = this;
+
+        GameManager.GameStart += LoadMainClips;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.GameStart -= LoadMainClips;
+    }
+
+    private void LoadMainClips(bool start)
+    {
+        if (start)
+        {
+            clipBoom.LoadAudioData();
+            clipCoin.LoadAudioData();
+            clipStart.LoadAudioData();
+            clipEnd.LoadAudioData();
+            clipZap.LoadAudioData();
+        }
+        else
+        {
+            clipBoom.UnloadAudioData();
+            clipCoin.UnloadAudioData();
+            clipStart.UnloadAudioData();
+            clipEnd.UnloadAudioData();
+            clipZap.UnloadAudioData();
+        }
     }
 
     public void PlaySound(AudioType type, float volume = 1f)
@@ -156,6 +183,6 @@ public class AudioManager : MonoBehaviour
 
     public void PlayUiClip()
     {
-        PlaySound(clip_ui);
+        PlaySound(clip_ui, 0.5f);
     }
 }

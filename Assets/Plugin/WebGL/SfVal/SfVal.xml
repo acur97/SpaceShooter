@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SfVal</name>
+    </assembly>
+    <members>
+        <member name="T:Med.SafeValue.AntiSpeedHack">
+            <summary>
+            Guards the game from speed hacks (it's not recommanded to use it in an online game as everything would be client side)
+            </summary>
+        </member>
+        <member name="P:Med.SafeValue.AntiSpeedHack.IsRunning">
+            <summary>
+            Returns if the Anti Speed Hack is running.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.AntiSpeedHack.Start(System.Action,System.Single,System.Boolean)">
+            <summary>
+            Starts the Anti Speed Hack process.
+            </summary>
+            <param name="OnTrigger">An action parameter that gets invoked when a speed hack occures.</param>
+            <param name="tolerance">Speed tolerance.</param>
+            /// <param name="runInBackground">Wheather to keep the game running in the background (it is recommanded to leave it true).</param>
+        </member>
+        <member name="M:Med.SafeValue.AntiSpeedHack.Reset">
+            <summary>
+            Resets the Anti Speed Hack timer without stopping the process.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.AntiSpeedHack.Stop">
+            <summary>
+            Stops the Anti Speed Hack and resets its timer.
+            </summary>
+        </member>
+        <member name="T:Med.SafeValue.PlayerSaves">
+            <summary>
+            This class saves and loads various data types and classes using AES encryption to playerprefs.
+            </summary>
+        </member>
+        <member name="P:Med.SafeValue.PlayerSaves.Key">
+            <summary>
+            The encryption key. alwayse use the same key that you used to encrypt with when decrypting otherwise you will get an error.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.PlayerSaves.EncryptInt(System.Int32,System.String)">
+            <summary>
+            Encrypts and saves your integer to playerprefs. 
+            Note: Will use a default key if the Key property is not set.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.PlayerSaves.DecryptInt(System.String,System.Int32)">
+            <summary>
+            Decrypts and loads your integer from playerprefs. 
+            Note: Will use a default key if the Key property is not set.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.PlayerSaves.EncryptBool(System.Boolean,System.String)">
+            <summary>
+            Encrypts and saves your boolean to playerprefs. 
+            Note: Will use a default key if the Key property is not set.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.PlayerSaves.DecryptBool(System.String,System.Boolean)">
+            <summary>
+            Decrypts and loads your boolean from playerprefs. 
+            Note: Will use a default key if the Key property is not set.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.PlayerSaves.EncryptString(System.String,System.String)">
+            <summary>
+            Encrypts and saves your string to playerprefs. 
+            Note: Will use a default key if the Key property is not set.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.PlayerSaves.DecryptString(System.String,System.String)">
+            <summary>
+            Decrypts and loads your string from playerprefs. 
+            Note: Will use a default key if the Key property is not set.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.PlayerSaves.EncryptFloat(System.Single,System.String)">
+            <summary>
+            Encrypts and saves your float to playerprefs. 
+            Note: Will use a default key if the Key property is not set.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.PlayerSaves.DecryptFloat(System.String,System.Single)">
+            <summary>
+            Decrypts and loads your float from playerprefs. 
+            Note: Will use a default key if the Key property is not set.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.PlayerSaves.EncryptChar(System.Char,System.String)">
+            <summary>
+            Encrypts and saves your char to playerprefs. 
+            Note: Will use a default key if the Key property is not set.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.PlayerSaves.DecryptChar(System.String,System.Char)">
+            <summary>
+            Decrypts and loads your char from playerprefs. 
+            Note: Will use a default key if the Key property is not set.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.PlayerSaves.EncryptLong(System.Int64,System.String)">
+            <summary>
+            Encrypts and saves your long to playerprefs. 
+            Note: Will use a default key if the Key property is not set.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.PlayerSaves.DecryptLong(System.String,System.Int64)">
+            <summary>
+            Decrypts and loads your long from playerprefs. 
+            Note: Will use a default key if the Key property is not set.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.PlayerSaves.EncryptDateTime(System.DateTime,System.String)">
+            <summary>
+            Encrypts and saves your DateTime to playerprefs. 
+            Note: Will use a default key if the Key property is not set.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.PlayerSaves.DecryptDateTime(System.String,System.DateTime)">
+            <summary>
+            Decrypts and loads your DateTime from playerprefs. 
+            Note: Will use a default key if the Key property is not set.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.PlayerSaves.EncryptClass``1(``0,System.String)">
+            <summary>
+            Encrypts and saves your public fields of a class (must be Serializable) to playerprefs. 
+            Note: Will use a default key if the Key property is not set.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.PlayerSaves.DecryptClass``1(System.String)">
+            <summary>
+            Decrypts and loads your public fields of a class (must be Serializable) from playerprefs (do not use this with MonoBehaviour or ScriptableObject, use DecryptClassOverwrite instead). 
+            Note: Will use a default key if the Key property is not set.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.PlayerSaves.DecryptClassOverwrite``1(``0,System.String)">
+            <summary>
+            Decrypts and loads your public fields of a class (must be Serializable) from playerprefs to an existing object (do not use this with MonoBehaviour or ScriptableObject, use DecryptClassOverwrite instead). 
+            Note: Will use a default key if the Key property is not set.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.PlayerSaves.HasPrefKey(System.String)">
+            <summary>
+            Returns true if the prefKey provided exists.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.PlayerSaves.MigratePrefKey(System.String,System.String,System.Boolean)">
+            <summary>
+            Migrates the value stored for one key to an other key. This can be useful if you want to
+            rename a PlayerPrefs key, but without existing data stored at the old key from being lost.
+            </summary>
+            <param name="oldKey">The old key to move data from.</param>
+            <param name="newKey">The new key to store the data for.</param>
+            <param name="deleteOldKey">Whether to delete the old key or not.</param>
+            <returns>
+            Returns true if the migration operation is successful.
+            </returns>
+        </member>
+        <member name="M:Med.SafeValue.PlayerSaves.DeletePrefKey(System.String)">
+            <summary>
+            Deletes prefKey and its corresponding value.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.PlayerSaves.DeleteAllPrefKeys">
+            <summary>
+            Deletes all the prefKeys and all their corresponding values.
+            </summary>
+        </member>
+        <member name="T:Med.SafeValue.SafeFloat">
+            <summary>
+            Hides a float from cheating tools by making an offset to the value.
+            </summary>
+        </member>
+        <member name="P:Med.SafeValue.SafeFloat.Value">
+            <summary>
+            The value of this instance.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.SafeFloat.Dispose">
+            <summary>
+            Resets the value and the offset to 0.
+            </summary>
+        </member>
+        <member name="T:Med.SafeValue.SafeInt">
+            <summary>
+            Hides an integer from cheating tools by making an offset to the value.
+            </summary>
+        </member>
+        <member name="P:Med.SafeValue.SafeInt.Value">
+            <summary>
+            The value of this instance.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.SafeInt.Dispose">
+            <summary>
+            Resets the value and the offset to 0.
+            </summary>
+        </member>
+        <member name="T:Med.SafeValue.SafeLong">
+            <summary>
+            Hides a float from cheating tools by making an offset to the value.
+            </summary>
+        </member>
+        <member name="P:Med.SafeValue.SafeLong.Value">
+            <summary>
+            The value of this instance.
+            </summary>
+        </member>
+        <member name="M:Med.SafeValue.SafeLong.Dispose">
+            <summary>
+            Resets the value and the offset to 0.
+            </summary>
+        </member>
+    </members>
+</doc>

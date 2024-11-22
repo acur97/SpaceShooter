@@ -97,7 +97,7 @@ public class PostProcessingController : MonoBehaviour
             }).id;
         }).id;
 
-        AudioManager.Instance.PlaySound(AudioManager.AudioType.Boom, 0.25f);
+        AudioManager.Instance.PlaySound(AudioManager.AudioType.Boom, 0.2f);
     }
 
     public void SetVolumeHealth(float val)

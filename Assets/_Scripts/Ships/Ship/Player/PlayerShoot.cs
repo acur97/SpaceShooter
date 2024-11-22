@@ -6,6 +6,7 @@ public class PlayerShoot : MonoBehaviour
     private ControlsManager controls;
 
     [ReadOnly] public bool shootPowerUp = false;
+    [ReadOnly] public bool canShoot = true;
 
     private bool inited = false;
     private bool hold = false;
@@ -56,7 +57,7 @@ public class PlayerShoot : MonoBehaviour
     {
         PowerUpsManager.Player_Shoot?.Invoke();
 
-        if (shootPowerUp)
+        if (shootPowerUp || !canShoot)
         {
             return;
         }

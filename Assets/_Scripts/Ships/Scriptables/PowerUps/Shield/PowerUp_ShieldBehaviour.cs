@@ -35,7 +35,7 @@ public class PowerUp_ShieldBehaviour : MonoBehaviour
             collision.gameObject.SetActive(false);
 
             VfxPool.Instance.InitVfx(collision.transform.position);
-            AudioManager.Instance.PlaySound(AudioManager.AudioType.Boom, 0.25f);
+            AudioManager.Instance.PlaySound(AudioManager.AudioType.Boom, 0.2f);
 
             bulletAbsortion--;
 

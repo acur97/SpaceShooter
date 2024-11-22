@@ -17,7 +17,7 @@ public class PowerUp_LifeRegen : PowerUpBase
         //if (shipBase.health < shipBase._properties.health)
         {
             shipBase.health += (int)(shipBase._properties.health * regenPercentage);
-            shipBase.health = Mathf.Clamp(shipBase.health, 0, shipBase._properties.health);
+            shipBase.health = Mathf.Min(shipBase.health, shipBase._properties.health);
 
             PlayerController.Instance.UpdateHealthUi();
             Object.Instantiate(prefab, PlayerController.Instance.transform);

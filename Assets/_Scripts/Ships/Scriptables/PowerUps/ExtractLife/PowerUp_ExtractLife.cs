@@ -34,7 +34,7 @@ public class PowerUp_ExtractLife : PowerUpBase
         if (shipBase.health < shipBase._properties.health)
         {
             shipBase.health += enemy._properties.health;
-            shipBase.health = Mathf.Clamp(shipBase.health, 0, shipBase._properties.health);
+            shipBase.health = Mathf.Min(shipBase.health, shipBase._properties.health);
 
             PlayerController.Instance.UpdateHealthUi();
             Object.Instantiate(prefab, PlayerController.Instance.transform);

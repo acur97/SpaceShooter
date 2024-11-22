@@ -13,10 +13,16 @@ MonoBehaviour:
   m_Name: Gameplay Settings
   m_EditorClassIdentifier: 
   coinValue: 5
+  playerHealth: 20
+  playerHealthInfinite: 80
+  timeScaleIncrease: 0.1
   forceTime: 0.1
   force: 10
+  vibrationDeath: 500
   levels:
   - {fileID: 11400000, guid: 2f63fb46e2f815841b152e0343debc7f, type: 2}
+  infiniteLevels:
+  - {fileID: 11400000, guid: 66b5210a10c7f904fb786900aeae9e8c, type: 2}
   customs:
   - {fileID: 11400000, guid: d67d2aeae0e5a4d49b14b6213330bb50, type: 2}
   - {fileID: 11400000, guid: 7b37b7f225a66d946a96ea1acd797e03, type: 2}
@@ -45,8 +51,8 @@ MonoBehaviour:
   selectedPowerUp: {fileID: 0}
   progress:
     playerName: 
-    coins: 0
-    powerUpAmounts: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    coins: 1000865
+    powerUpAmounts: d8030000e4030000e0030000cd030000cb030000de030000e2030000e2030000e4030000e1030000db030000dd030000d5030000d2030000e4030000d1030000
     powerUpIndex: -1
     customsOwneds: 010101010101
-    customsIndex: 1
+    customsIndex: 0
