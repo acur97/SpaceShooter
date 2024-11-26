@@ -14,8 +14,6 @@ public class PowerUp_MissileBehaviour : MonoBehaviour
     //private Collider2D[] objects;
     private ConstraintSource source;
 
-    private const string _Enemy = "Enemy";
-
     public void Init(int _damage, float _speed, float _speedUp)
     {
         damage = _damage;
@@ -104,7 +102,7 @@ public class PowerUp_MissileBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(_Enemy) && collision.TryGetComponent(out EnemyController enemyController))
+        if (collision.CompareTag(Types.tag_Enemy) && collision.TryGetComponent(out EnemyController enemyController))
         {
             PostProcessingController.Instance.VolumePunch();
             VfxPool.Instance.InitVfx(transform.position);

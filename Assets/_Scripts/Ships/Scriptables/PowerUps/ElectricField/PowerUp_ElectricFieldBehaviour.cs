@@ -10,8 +10,6 @@ public class PowerUp_ElectricFieldBehaviour : MonoBehaviour
     private bool active = false;
     private int enemyDamage = 0;
 
-    private const string _Enemy = "Enemy";
-
     public void Init(int damage, float range)
     {
         enemyDamage = damage;
@@ -29,7 +27,7 @@ public class PowerUp_ElectricFieldBehaviour : MonoBehaviour
             return;
         }
 
-        if (collision.CompareTag(_Enemy) && collision.TryGetComponent(out EnemyController enemyController) && enemyController._properties.enemyCollision)
+        if (collision.CompareTag(Types.tag_Enemy) && collision.TryGetComponent(out EnemyController enemyController) && enemyController._properties.enemyCollision)
         {
             PostProcessingController.Instance.VolumePunch();
             VfxPool.Instance.InitVfx(collision.transform.position);

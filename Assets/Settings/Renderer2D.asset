@@ -47,7 +47,7 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: 3144119737873388095}
   - {fileID: -2609331715101256440}
-  m_RendererFeatureMap: 495e4a7806bb42833fd23c4b3e28a22b08953a44a1cac9db
+  m_RendererFeatureMap: 495e4a7806bb42833fd23c4b3e28a22be7398e89d3ee4627
   m_UseNativeRenderPass: 0
   m_TransparencySortMode: 2
   m_TransparencySortAxis: {x: 0, y: 1, z: 0}

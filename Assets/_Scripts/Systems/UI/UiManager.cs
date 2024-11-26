@@ -76,7 +76,6 @@ public class UiManager : MonoBehaviour
                     canvasStore.gameObject.SetActive(active);
                 break;
 
-
             case UiType.Wnew:
                 if (fadeTime > 0)
                     FadeCanvas(canvasWnew, active, fadeTime, callback);

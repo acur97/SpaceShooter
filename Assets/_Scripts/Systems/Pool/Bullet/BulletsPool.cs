@@ -6,8 +6,6 @@ public class BulletsPool : PoolBaseController
 
     public Bullet[] bullets;
 
-    private readonly int _Color = Shader.PropertyToID("_Color");
-
     private new void Awake()
     {
         Instance = this;
@@ -18,7 +16,7 @@ public class BulletsPool : PoolBaseController
         for (int i = 0; i < size; i++)
         {
             bullets[i] = Instantiate(prefab, transform).GetComponent<Bullet>();
-            bullets[i].renderer.material.SetColor(_Color, Color.white);
+            bullets[i].renderer.material.SetColor(Types.material_Color, Color.white);
         }
     }
 
@@ -49,11 +47,11 @@ public class BulletsPool : PoolBaseController
 
                 if (type == Bullet.TypeBullet.player)
                 {
-                    bullets[i].renderer.material.SetColor(_Color, PlayerController.Instance._properties.color);
+                    bullets[i].renderer.material.SetColor(Types.material_Color, PlayerController.Instance._properties.color);
                 }
                 else
                 {
-                    bullets[i].renderer.material.SetColor(_Color, SetColor(PlayerController.Instance._properties.color));
+                    bullets[i].renderer.material.SetColor(Types.material_Color, SetColor(PlayerController.Instance._properties.color));
                 }
 
                 if (_properties._bulletTime)

@@ -11,8 +11,6 @@ public class PowerUp_ShieldBehaviour : MonoBehaviour
     private bool active = false;
     private int bulletAbsortion = 0;
 
-    private const string _Bullet = "Bullet";
-
     public void Init(int absortion, float range)
     {
         bulletAbsortion = absortion;
@@ -30,7 +28,7 @@ public class PowerUp_ShieldBehaviour : MonoBehaviour
             return;
         }
 
-        if (collision.CompareTag(_Bullet) && collision.GetComponent<Bullet>().bulletType == Bullet.TypeBullet.enemy)
+        if (collision.CompareTag(Types.tag_Bullet) && collision.GetComponent<Bullet>().bulletType == Bullet.TypeBullet.enemy)
         {
             collision.gameObject.SetActive(false);
 

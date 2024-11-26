@@ -16,8 +16,6 @@ public class StoreItem : MonoBehaviour
     private StoreManager store;
     private PowerUpBase powerUp;
 
-    private const string _free = "free";
-
     public void Init(StoreManager _store, PowerUpBase _powerUp)
     {
         store = _store;
@@ -25,7 +23,7 @@ public class StoreItem : MonoBehaviour
 
         spriteImg.sprite = powerUp.sprite;
         titleTxt.text = powerUp.powerName;
-        priceTxt.text = powerUp.cost == 0 ? _free : $"${powerUp.cost}";
+        priceTxt.text = powerUp.cost == 0 ? Types.ui_Free : $"${powerUp.cost}";
 
         StoreManager.onRefresh += UpdateBtn;
 

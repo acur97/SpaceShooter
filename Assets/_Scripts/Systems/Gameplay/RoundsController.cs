@@ -1,15 +1,32 @@
+using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class RoundsController : MonoBehaviour
 {
     public static RoundsController Instance { get; private set; }
 
+    [Header("Start UI")]
+    [SerializeField] private TextMeshProUGUI modeText;
+    [SerializeField] private Image modeTextLine;
+    [SerializeField] private Color normalColor;
+    [SerializeField] private Color infiniteColor;
+    private Color bGColor;
+
+    [Header("Leaderboard UI")]
+    [SerializeField] private Toggle leaderboardInfiniteTgl;
+    [SerializeField] private Image leaderboardBg;
+    [SerializeField] private GameObject modesPanel;
+    [SerializeField] private RectTransform tablePanel;
+
     public enum LevelType
     {
         Normal,
         Inifinite
     }
+    [Header("Level")]
     public LevelType levelType;
     [SerializeField] private GameplayScriptable gameplayScriptable;
 
@@ -18,10 +35,75 @@ public class RoundsController : MonoBehaviour
     [SerializeField, ReadOnly] private int groupCount = -1;
 
     private const string _MusicPitch = "MusicPitch";
+    private const string _Normal = "Normal";
+    private const string _Infinite = "Infinite";
+    private const string lastLevelType = "LastLevelType";
 
     public void Init()
     {
         Instance = this;
+
+        SetMode(Convert.ToBoolean(PlayerPrefs.GetInt(lastLevelType, 0)));
+
+        GameManager.GameStart += DisableLeaderboardModes;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.GameStart -= DisableLeaderboardModes;
+    }
+
+    private void DisableLeaderboardModes(bool on)
+    {
+        if (on)
+        {
+            modesPanel.SetActive(false);
+            tablePanel.anchorMax = new Vector2(0.5f, 0.878f);
+        }
+    }
+
+    public void ChangeMode()
+    {
+        if (levelType == LevelType.Normal)
+        {
+            SetMode(true);
+        }
+        else
+        {
+            SetMode(false);
+        }
+    }
+
+    public void SetMode(bool infinite)
+    {
+        if (infinite)
+        {
+            bGColor = infiniteColor;
+            modeTextLine.color = bGColor;
+            modeText.color = bGColor;
+            modeText.text = _Infinite;
+
+            bGColor.a = 0.1f;
+            leaderboardBg.color = bGColor;
+
+            levelType = LevelType.Inifinite;
+            PlayerPrefs.SetInt(lastLevelType, 1);
+        }
+        else
+        {
+            bGColor = normalColor;
+            modeTextLine.color = bGColor;
+            modeText.color = bGColor;
+            modeText.text = _Normal;
+
+            bGColor.a = 0.1f;
+            leaderboardBg.color = bGColor;
+
+            levelType = LevelType.Normal;
+            PlayerPrefs.SetInt(lastLevelType, 0);
+        }
+
+        leaderboardInfiniteTgl.SetIsOnWithoutNotify(infinite);
     }
 
     public void StartRound()

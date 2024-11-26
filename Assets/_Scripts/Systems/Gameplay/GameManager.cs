@@ -23,14 +23,16 @@ public class GameManager : MonoBehaviour
 
     [Header("Score")]
     [SerializeField] private TextMeshProUGUI scoreText;
-    private const string preScore = "Score: ";
+    private const string preScore = "Score: {0}";
     public int score = 0;
+    private float accumulatedScore = 0f;
+    private int pointsToAdd = 0;
     [SerializeField] private TextMeshProUGUI endScore;
-    private const string postScore = "Final score:\n ";
+    private const string postScore = "Final score:\n {0}";
 
     [Header("Coins")]
     [SerializeField] private TextMeshProUGUI coinsText;
-    private const string preCoins = "Coins: ";
+    private const string preCoins = "Coins: {0}";
     [SerializeField] private TextMeshProUGUI endCoins;
 
     [Header("Ui")]
@@ -205,8 +207,8 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        scoreText.SetText(preScore + score);
-        coinsText.SetText(preCoins + PlayerProgress.GetCoins());
+        scoreText.SetText(preScore, score);
+        coinsText.SetText(preCoins, PlayerProgress.GetCoins());
 
         uiManager.SetUi(UiType.Gameplay, true);
         uiManager.SetUi(UiType.Select, false, 1);
@@ -278,6 +280,19 @@ public class GameManager : MonoBehaviour
                     roundsController.StartGroup();
                 }
 
+                if (roundsController.levelType == RoundsController.LevelType.Inifinite)
+                {
+                    accumulatedScore += gameplayScriptable.scoreScaleIncrease * Time.deltaTime * Time.timeScale;
+
+                    if (accumulatedScore >= 1f)
+                    {
+                        pointsToAdd = Mathf.FloorToInt(accumulatedScore);
+                        accumulatedScore -= pointsToAdd;
+
+                        UpScore(pointsToAdd);
+                    }
+                }
+
                 //DebugMode
                 //if (Input.GetKeyDown(KeyCode.P))
                 //{
@@ -301,22 +316,20 @@ public class GameManager : MonoBehaviour
         horizontalInvertedMultiplier = horizontalMultiplier.Remap(1, 0, 0, 1) + 1;
     }
 
-    public void UpScore(int value, bool enemy = true)
+    public void UpScore(int value)
     {
         if (isPlaying)
         {
-            if (enemy)
-            {
-                score += value;
-                scoreText.SetText(preScore + score);
-            }
-            else if (playerController.health <= playerController._properties.health)
-            {
-                PlayerProgress.UpCoins(value);
-                coinsText.SetText(preCoins + PlayerProgress.GetCoins());
-                audioManager.PlaySound(AudioManager.AudioType.Coin);
-            }
+            score += value;
+            scoreText.SetText(preScore, score);
         }
+    }
+
+    public void UpCoins(int value)
+    {
+        PlayerProgress.UpCoins(value);
+        coinsText.SetText(preCoins, PlayerProgress.GetCoins());
+        audioManager.PlaySound(AudioManager.AudioType.Coin);
     }
 
     public void EndLevel()
@@ -331,8 +344,8 @@ public class GameManager : MonoBehaviour
             uiManager.SetUi(UiType.Pause, false);
             uiManager.SetUi(UiType.End, true, 1, () => uiManager.SetUi(UiType.Gameplay, false));
 
-            endScore.SetText(postScore + score);
-            endCoins.SetText(preCoins + PlayerProgress.GetCoins());
+            endScore.SetText(postScore, score);
+            endCoins.SetText(preCoins, PlayerProgress.GetCoins());
 
             audioManager.mixer.SetFloat(_MasterVolume, -1f);
             audioManager.PlaySound(AudioManager.AudioType.End, 2.5f);

@@ -22,10 +22,6 @@ public class PlayerController : ShipBaseController
     private int maxHealth = 0;
 
     private readonly int _ColorCapsule = Shader.PropertyToID("_ColorCapsule");
-    private readonly int _Color = Shader.PropertyToID("_Color");
-    private const string _Bullet = "Bullet";
-    private const string _Enemy = "Enemy";
-    private const string _Collectable = "Collectable";
 
     public void Init(bool _copy = false)
     {
@@ -62,7 +58,7 @@ public class PlayerController : ShipBaseController
         if (!copy)
         {
             renderer.material.SetColor(_ColorCapsule, _properties.color);
-            renderer.material.SetColor(_Color, ConvertColor(_properties.color));
+            renderer.material.SetColor(Types.material_Color, ConvertColor(_properties.color));
         }
         else
         {
@@ -103,7 +99,7 @@ public class PlayerController : ShipBaseController
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(_Bullet) && collision.GetComponent<Bullet>().bulletType == Bullet.TypeBullet.enemy)
+        if (collision.CompareTag(Types.tag_Bullet) && collision.GetComponent<Bullet>().bulletType == Bullet.TypeBullet.enemy)
         {
             collision.gameObject.SetActive(false);
 
@@ -117,13 +113,13 @@ public class PlayerController : ShipBaseController
 
             DoDamage();
         }
-        else if (collision.CompareTag(_Collectable))
+        else if (collision.CompareTag(Types.tag_Collectable))
         {
             collision.gameObject.SetActive(false);
 
-            GameManager.Instance.UpScore(GameManager.Instance.gameplayScriptable.coinValue, false);
+            GameManager.Instance.UpCoins(GameManager.Instance.gameplayScriptable.coinValue);
         }
-        else if (collision.CompareTag(_Enemy) && collision.TryGetComponent(out EnemyController enemyController) && enemyController._properties.enemyCollision)
+        else if (collision.CompareTag(Types.tag_Enemy) && collision.TryGetComponent(out EnemyController enemyController) && enemyController._properties.enemyCollision)
         {
             PostProcessingController.Instance.VolumePunch();
             VfxPool.Instance.InitVfx(collision.transform.position);
@@ -136,7 +132,7 @@ public class PlayerController : ShipBaseController
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag(_Enemy) && collision.TryGetComponent(out EnemyController enemyController) && enemyController._properties.enemyCollision)
+        if (collision.CompareTag(Types.tag_Enemy) && collision.TryGetComponent(out EnemyController enemyController) && enemyController._properties.enemyCollision)
         {
             transform.position += new Vector3(
                 (transform.position.x - collision.transform.position.x) * 0.5f,

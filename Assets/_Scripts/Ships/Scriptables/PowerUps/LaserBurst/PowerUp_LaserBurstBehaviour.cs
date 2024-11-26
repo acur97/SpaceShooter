@@ -13,8 +13,6 @@ public class PowerUp_LaserBurstBehaviour : MonoBehaviour
     private uint damage = 0;
     private ParticleSystem.MainModule mainModule;
     private ParticleSystem.MinMaxCurve startSpeedCurve;
-    private readonly int _Color = Shader.PropertyToID("_Color");
-    private const string _Enemy = "Enemy";
 
     private Vector3 laserPoint = Vector3.zero;
     private float range = 0;
@@ -29,8 +27,8 @@ public class PowerUp_LaserBurstBehaviour : MonoBehaviour
         mainModule = particles.main;
         mainModule.duration = startDelay;
 
-        line.material.SetColor(_Color, color);
-        particlesRenderer.material.SetColor(_Color, color);
+        line.material.SetColor(Types.material_Color, color);
+        particlesRenderer.material.SetColor(Types.material_Color, color);
 
         startSpeedCurve = mainModule.startSpeed;
         startSpeedCurve.mode = ParticleSystemCurveMode.Curve;
@@ -102,7 +100,7 @@ public class PowerUp_LaserBurstBehaviour : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag(_Enemy) && collision.TryGetComponent(out EnemyController enemyController))
+        if (collision.CompareTag(Types.tag_Enemy) && collision.TryGetComponent(out EnemyController enemyController))
         {
             PostProcessingController.Instance.VolumePunch();
             VfxPool.Instance.InitVfx(collision.transform.position);

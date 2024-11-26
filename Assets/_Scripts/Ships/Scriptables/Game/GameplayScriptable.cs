@@ -11,6 +11,7 @@ public class GameplayScriptable : ScriptableObject
     [Header("Infinite Level Type")]
     public uint playerHealthInfinite = 40;
     public float timeScaleIncrease = 0.1f;
+    public float scoreScaleIncrease = 2f;
 
     [Header("Player Explosion Feedback")]
     public float forceTime = 0.1f;

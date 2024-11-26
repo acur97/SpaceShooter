@@ -4,16 +4,26 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class FirestoreManager : MonoBehaviour
 {
-    [SerializeField] private string firestoreUrl = "https://firestore.googleapis.com/v1/projects/polygonus-spaceshooter/databases/(default)/documents/Leaderboard/Tt5KB3zN015943sAcR5Q";
+    [SerializeField, TextArea] private string firestoreUrl = "https://firestore.googleapis.com/v1/projects/polygonus-spaceshooter/databases/(default)/documents/Leaderboard/Normal_Scores";
+    [SerializeField, TextArea] private string firestoreInfiniteUrl = "https://firestore.googleapis.com/v1/projects/polygonus-spaceshooter/databases/(default)/documents/Leaderboard/Infinite_Scores";
+    private string CurrentUrl => RoundsController.Instance.levelType == RoundsController.LevelType.Normal ? firestoreUrl : firestoreInfiniteUrl;
     private const string _patch = "PATCH";
+    private bool downloading = false;
 
     [Space]
     [SerializeField] private Document leaderboard;
 
-    [Header("UI")]
+    [Header("Leaderboard UI")]
+    [SerializeField] private GameObject recordPrefab;
+    [SerializeField] private Transform recordContainer;
+    [SerializeField] private Toggle normalTgl;
+    [SerializeField] private Toggle infiniteTgl;
+
+    [Header("Final UI")]
     [SerializeField] private GameObject panelEnd;
     [SerializeField] private GameObject panelSubmit;
     [SerializeField] private GameObject panelSubmiting;
@@ -22,10 +32,6 @@ public class FirestoreManager : MonoBehaviour
 
     [Space]
     [SerializeField] private TMP_InputField nameInput;
-
-    [Space]
-    [SerializeField] private GameObject recordPrefab;
-    [SerializeField] private Transform recordContainer;
 
     private const char scoreSeparator = '_';
     private const string scorePoint = ".";
@@ -48,31 +54,61 @@ public class FirestoreManager : MonoBehaviour
 
     public void SetLeaderboardStatus(bool on)
     {
-        if (on && isOn)
+        if (!on)
+        {
+            isOn = false;
+            UiManager.Instance.SetUi(UiType.Leaderboard, false, 0.5f);
+            return;
+        }
+
+        if (isOn)
         {
             return;
         }
 
-        Leaderboard(on).Forget();
+        isOn = true;
+        UiManager.Instance.SetUi(UiType.Leaderboard, true, 0.5f);
+        DownloadLeaderboardVoid().Forget();
     }
 
-    public async UniTaskVoid Leaderboard(bool on)
+    public void SetDownloadLeaderboard()
     {
-        isOn = on;
-
-        if (on)
+        if (downloading)
         {
-            await DownloadLeaderboard();
-
-            SetLeaderboardRecords();
+            return;
         }
 
-        UiManager.Instance.SetUi(UiType.Leaderboard, on, 0.5f);
+        DownloadLeaderboardVoid().Forget();
+    }
+
+    private async UniTaskVoid DownloadLeaderboardVoid()
+    {
+        downloading = true;
+        normalTgl.interactable = false;
+        infiniteTgl.interactable = false;
+
+        ClearLeaderboard();
+
+        await DownloadLeaderboard();
+
+        SetLeaderboardRecords();
+
+        downloading = false;
+        normalTgl.interactable = true;
+        infiniteTgl.interactable = true;
+    }
+
+    private void ClearLeaderboard()
+    {
+        for (int i = 0; i < recordContainer.childCount; i++)
+        {
+            Destroy(recordContainer.GetChild(i).gameObject);
+        }
     }
 
     private async UniTask DownloadLeaderboard()
     {
-        using UnityWebRequest webRequest = UnityWebRequest.Get(firestoreUrl);
+        using UnityWebRequest webRequest = UnityWebRequest.Get(CurrentUrl);
         await webRequest.SendWebRequest();
 
         if (webRequest.result == UnityWebRequest.Result.Success && webRequest.isDone)
@@ -83,11 +119,6 @@ public class FirestoreManager : MonoBehaviour
 
     private void SetLeaderboardRecords()
     {
-        for (int i = 0; i < recordContainer.childCount; i++)
-        {
-            Destroy(recordContainer.GetChild(i).gameObject);
-        }
-
         for (int i = 0; i < leaderboard.fields.Scores.arrayValue.values.Count; i++)
         {
             playerStats = leaderboard.fields.Scores.arrayValue.values[i].stringValue.Split(scoreSeparator);
@@ -146,7 +177,7 @@ public class FirestoreManager : MonoBehaviour
             }
         }
 
-        using UnityWebRequest webRequest = UnityWebRequest.Put(firestoreUrl, JsonUtility.ToJson(leaderboard));
+        using UnityWebRequest webRequest = UnityWebRequest.Put(CurrentUrl, JsonUtility.ToJson(leaderboard));
         webRequest.method = _patch;
         await webRequest.SendWebRequest();
 

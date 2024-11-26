@@ -8,8 +8,6 @@ public class EnemyController : ShipBaseController
 
     private bool dead = true;
 
-    private const string _Bullet = "Bullet";
-
     private void Awake()
     {
         PoolsUpdateManager.PoolUpdate += OnUpdate;
@@ -110,7 +108,7 @@ public class EnemyController : ShipBaseController
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(_Bullet) && collision.GetComponent<Bullet>().bulletType == Bullet.TypeBullet.player)
+        if (collision.CompareTag(Types.tag_Bullet) && collision.GetComponent<Bullet>().bulletType == Bullet.TypeBullet.player)
         {
             collision.gameObject.SetActive(false);
 
@@ -137,13 +135,16 @@ public class EnemyController : ShipBaseController
     {
         dead = true;
         gameObject.SetActive(false);
-
         GameManager.Instance.leftForNextGroup--;
 
         if (!outOfBounds)
         {
             PowerUpsManager.Enemy_Death?.Invoke(this);
-            GameManager.Instance.UpScore(_properties.deathScore);
+
+            if (RoundsController.Instance.levelType == RoundsController.LevelType.Normal)
+            {
+                GameManager.Instance.UpScore(_properties.deathScore);
+            }
         }
     }
 }

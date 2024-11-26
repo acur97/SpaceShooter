@@ -13,9 +13,6 @@ public class StoreItemCustom : MonoBehaviour
     private StoreManager store;
     private ShipScriptable ship;
 
-    private const string _free = "free";
-    private const string _owned = "owned";
-
     public void Init(StoreManager _store, ShipScriptable _ship)
     {
         store = _store;
@@ -23,7 +20,7 @@ public class StoreItemCustom : MonoBehaviour
 
         spriteImg.sprite = _ship.sprite;
         titleTxt.text = _ship.name;
-        priceTxt.text = _ship.owned ? _owned : _ship.cost == 0 ? _free : $"${_ship.cost}";
+        priceTxt.text = _ship.owned ? Types.ui_Owned : _ship.cost == 0 ? Types.ui_Free : $"${_ship.cost}";
 
         StoreManager.onRefresh += UpdateBtn;
 
@@ -32,7 +29,7 @@ public class StoreItemCustom : MonoBehaviour
 
     private void UpdateBtn()
     {
-        priceTxt.text = ship.owned ? _owned : _free;
+        priceTxt.text = ship.owned ? Types.ui_Owned : Types.ui_Free;
         selected.enabled = GameManager.Instance.gameplayScriptable.selectedCustoms == ship;
     }
 

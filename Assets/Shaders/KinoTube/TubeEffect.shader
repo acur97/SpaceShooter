@@ -11,10 +11,10 @@ Shader "Hidden/TubeEffect"
 
         // Declare several half properties that will be used to control the behavior of the shader.        
         half _bleeding;
-        uint _bleedingSteps;
+        int _bleedingSteps;
         half _fringing;
 
-        uint _BleedTaps;  // The number of bleed taps to use.
+        int _BleedTaps;  // The number of bleed taps to use.
         half _BleedDelta;  // The bleed delta value.
         half _FringeDelta;  // The fringe delta value.
         half _Scanline;  // The scanline value.
@@ -63,11 +63,9 @@ Shader "Hidden/TubeEffect"
         // This function samples the YIQ color at a given UV coordinate and offset.
         half3 SampleYIQ(half2 uv, half du)
         {
-            // Offset the UV coordinate by the du value.
-            uv.x += du;
-
+            // Offset the UV coordinate by the du value and
             // Sample the texture at the offset UV coordinate and convert the result to YIQ.
-            return RGB2YIQ(SAMPLE_TEXTURE2D(_BlitTexture, sampler_LinearClamp, uv).rgb);
+            return RGB2YIQ(SAMPLE_TEXTURE2D(_BlitTexture, sampler_LinearClamp, uv + half2(du, 0)).rgb);
         }
 
         // This is the frag function which is called for each pixel in the fragment shader.
@@ -81,37 +79,33 @@ Shader "Hidden/TubeEffect"
             half3 yiq = SampleYIQ(uv, 0);
 
             // Setup values
-            half bleedWidth = 0.04 * _bleeding;  // width of bleeding
+            half bleedWidth = 0.04 * _bleeding; // width of bleeding
             half bleedStep = 2.5 / _bleedingSteps; // max interval of taps
-            uint bleedTaps = ceil(bleedWidth / bleedStep);
-            uint _BleedTaps = bleedTaps;
-            half _BleedDelta = bleedWidth / bleedTaps;;
-            half _FringeDelta = 0.0025 * _fringing; // width of fringing
-
+            int bleedTaps = ceil(bleedWidth / bleedStep);
+            half bleedDelta = bleedWidth / bleedTaps;
+            half fringeDelta = 0.0025 * _fringing; // width of fringing
+            
             // Perform bleeding effect by sampling the YIQ color at neighboring UV coordinates and adding them to the current YIQ color.
-            // The number of taps and the distance between taps are controlled by the _BleedTaps and _BleedDelta variables.
-            for (uint i = 0; i < _BleedTaps; i++)
+            for (int i = 0; i < bleedTaps; i++)
             {
-                yiq.y += SampleYIQ(uv, -_BleedDelta * i).y;
-                yiq.z += SampleYIQ(uv, +_BleedDelta * i).z;
+                half3 sample = SampleYIQ(uv, -bleedDelta * i);
+                yiq.y += sample.y;
+                yiq.z += SampleYIQ(uv, +bleedDelta * i).z;
             }
-
-            // Normalize the Y and Z components of the YIQ color by dividing them by the total number of taps plus one.
-            yiq.yz /= _BleedTaps + 1;
-
-            // Perform fringing effect by sampling the YIQ color at neighboring UV coordinates and subtracting the two samples.
-            // The distance between samples is controlled by the _FringeDelta variable.
-            half y1 = SampleYIQ(uv, -_FringeDelta).x;
-            half y2 = SampleYIQ(uv, +_FringeDelta).x;
-            yiq.yz += y2 - y1;
-
+            
+            // Normalize the Y and Z components of the YIQ color
+            yiq.yz /= (bleedTaps + 1);
+            
+            // Perform fringing effect by sampling the YIQ color at neighboring UV coordinates and subtracting the samples.
+            half y1 = SampleYIQ(uv, -fringeDelta).x;
+            half y2 = SampleYIQ(uv, +fringeDelta).x;
+            yiq.yz += (y2 - y1);
+            
             // Perform scanline effect by generating a sine wave based on the Y coordinate of the UV and scaling it.
-            // The scanline effect is controlled by the _Scanline variable.
             uv.y += _Time * _ScalineSpeed;
-            half scan = sin(uv.y * _ScalineScale * UNITY_PI);
-            scan = lerp(1, (scan + 1) / 2, _Scanline);
+            half scan = lerp(1, (sin(uv.y * _ScalineScale * UNITY_PI) * 0.5 + 0.5), _Scanline);
 
-            // Convert the YIQ color to RGB and multiply it by the scanline effect.
+            // Convert the YIQ color to RGB and multiply it by the scanline effect
             return half4(YIQ2RGB(yiq * scan), 1);
         }
         
@@ -135,6 +129,7 @@ Shader "Hidden/TubeEffect"
         Pass
         {
             Name "Tube Pass"
+            ColorMask RGB
 
             HLSLPROGRAM
             

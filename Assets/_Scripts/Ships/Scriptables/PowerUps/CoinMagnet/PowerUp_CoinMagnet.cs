@@ -17,8 +17,6 @@ public class PowerUp_CoinMagnet : PowerUpBase
     private ContactFilter2D contactFilter = new();
     private readonly List<Collider2D> colliders = new();
 
-    private const string _Collectable = "Collectable";
-
     public PowerUp_CoinMagnet() : base()
     {
         type = PowerUpsManager.PowerUpType.CoinMagnet;
@@ -30,7 +28,7 @@ public class PowerUp_CoinMagnet : PowerUpBase
     {
         contactFilter.useTriggers = true;
         contactFilter.useLayerMask = true;
-        contactFilter.layerMask = LayerMask.GetMask(_Collectable);
+        contactFilter.layerMask = Types.layer_Collectable;
 
         particles = Instantiate(prefab, PlayerController.Instance.transform).GetComponent<ParticleSystem>();
 
