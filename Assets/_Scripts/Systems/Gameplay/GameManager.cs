@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PowerUpsManager powerUpsManager;
     [SerializeField] private PlayerController playerController;
 
-    private const string _Cancel = "Cancel";
+    private const string _Pause = "Pause";
     private const string _MasterVolume = "MasterVolume";
     private const string _MusicPitch = "MusicPitch";
 
@@ -268,7 +268,7 @@ public class GameManager : MonoBehaviour
 
         if (hasStarted)
         {
-            if (Input.GetButtonDown(_Cancel))
+            if (Input.GetButtonDown(_Pause))
             {
                 Pause();
             }

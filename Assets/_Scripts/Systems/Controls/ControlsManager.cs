@@ -119,18 +119,18 @@ public class ControlsManager : MonoBehaviour
         }
         else
         {
-            switch (RoundsController.Instance.levelType)
-            {
-                case RoundsController.LevelType.Normal:
-                    move.x = Input.GetAxis(_Horizontal);
-                    move.y = Input.GetAxis(_Vertical);
-                    break;
+            //switch (RoundsController.Instance.levelType)
+            //{
+            //    case RoundsController.LevelType.Normal:
+            //        move.x = Input.GetAxis(_Horizontal);
+            //        move.y = Input.GetAxis(_Vertical);
+            //        break;
 
-                case RoundsController.LevelType.Inifinite:
+            //    case RoundsController.LevelType.Inifinite:
                     move.x = Input.GetAxisRaw(_Horizontal);
                     move.y = Input.GetAxisRaw(_Vertical);
-                    break;
-            }
+                    //break;
+            //}
 
             fireDown = Input.GetButtonDown(_Fire);
             fireUp = Input.GetButtonUp(_Fire);
