@@ -359,7 +359,7 @@ public class GameManager : MonoBehaviour
 #if !UNITY_EDITOR && UNITY_WEBGL
             Vibrate(gameplayScriptable.vibrationDeath);
 #else
-            // xInput vibration
+            Handheld.Vibrate();
 #endif
         }
     }
