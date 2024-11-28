@@ -112,16 +112,16 @@ public class PowerUpsManager : MonoBehaviour
 
         if (type.clip_activate.audioClip != null)
         {
-            AudioManager.Instance.PlaySound(type.clip_activate.audioClip, type.clip_activate.audioVolume, AudioManager.SourceType.PowerUps);
+            AudioManager.Instance.PlaySound(type.clip_activate.audioClip, type.clip_activate.audioVolume, Enums.SourceType.PowerUps);
         }
 
         if (type.clip_constant.audioClip != null && type.waitForActivate)
         {
-            AudioManager.Instance.PlaySoundLoopDelayed(type.clip_constant.audioClip, type.clip_activate.audioClip.length, type.clip_constant.audioVolume, AudioManager.SourceType.PowerUps_Loop).Forget();
+            AudioManager.Instance.PlaySoundLoopDelayed(type.clip_constant.audioClip, type.clip_activate.audioClip.length, type.clip_constant.audioVolume, Enums.SourceType.PowerUpsLoop).Forget();
         }
         else if (type.clip_constant.audioClip != null)
         {
-            AudioManager.Instance.PlaySoundLoop(type.clip_constant.audioClip, type.clip_constant.audioVolume, AudioManager.SourceType.PowerUps_Loop);
+            AudioManager.Instance.PlaySoundLoop(type.clip_constant.audioClip, type.clip_constant.audioVolume, Enums.SourceType.PowerUpsLoop);
         }
 
         if (type.useDuration)
@@ -138,11 +138,11 @@ public class PowerUpsManager : MonoBehaviour
     {
         if (type.clip_deactivate.audioClip != null)
         {
-            AudioManager.Instance.PlaySound(type.clip_deactivate.audioClip, type.clip_deactivate.audioVolume, AudioManager.SourceType.PowerUps);
+            AudioManager.Instance.PlaySound(type.clip_deactivate.audioClip, type.clip_deactivate.audioVolume, Enums.SourceType.PowerUps);
         }
         if (type.clip_constant.audioClip != null)
         {
-            AudioManager.Instance.StopSource(AudioManager.SourceType.PowerUps_Loop);
+            AudioManager.Instance.StopSource(Enums.SourceType.PowerUpsLoop);
         }
 
         type.OnDeactivate();
@@ -165,7 +165,7 @@ public class PowerUpsManager : MonoBehaviour
 
         if (currentPowerUp.clip_shoot.audioClip != null)
         {
-            AudioManager.Instance.PlaySound(currentPowerUp.clip_shoot.audioClip, currentPowerUp.clip_shoot.audioVolume, AudioManager.SourceType.PowerUps);
+            AudioManager.Instance.PlaySound(currentPowerUp.clip_shoot.audioClip, currentPowerUp.clip_shoot.audioVolume, Enums.SourceType.PowerUps);
         }
 
         //for (int i = 0; i < currentPowerUps.Count; i++)
@@ -185,7 +185,7 @@ public class PowerUpsManager : MonoBehaviour
 
         if (currentPowerUp.clip_playerDamage.audioClip != null)
         {
-            AudioManager.Instance.PlaySound(currentPowerUp.clip_playerDamage.audioClip, currentPowerUp.clip_playerDamage.audioVolume, AudioManager.SourceType.PowerUps);
+            AudioManager.Instance.PlaySound(currentPowerUp.clip_playerDamage.audioClip, currentPowerUp.clip_playerDamage.audioVolume, Enums.SourceType.PowerUps);
         }
 
         //for (int i = 0; i < currentPowerUps.Count; i++)
@@ -205,7 +205,7 @@ public class PowerUpsManager : MonoBehaviour
 
         if (currentPowerUp.clip_enemyDamage.audioClip != null)
         {
-            AudioManager.Instance.PlaySound(currentPowerUp.clip_enemyDamage.audioClip, currentPowerUp.clip_enemyDamage.audioVolume, AudioManager.SourceType.PowerUps);
+            AudioManager.Instance.PlaySound(currentPowerUp.clip_enemyDamage.audioClip, currentPowerUp.clip_enemyDamage.audioVolume, Enums.SourceType.PowerUps);
         }
 
         //for (int i = 0; i < currentPowerUps.Count; i++)
@@ -225,7 +225,7 @@ public class PowerUpsManager : MonoBehaviour
 
         if (currentPowerUp.clip_enemyDeath.audioClip != null)
         {
-            AudioManager.Instance.PlaySound(currentPowerUp.clip_enemyDeath.audioClip, currentPowerUp.clip_enemyDeath.audioVolume, AudioManager.SourceType.PowerUps);
+            AudioManager.Instance.PlaySound(currentPowerUp.clip_enemyDeath.audioClip, currentPowerUp.clip_enemyDeath.audioVolume, Enums.SourceType.PowerUps);
         }
 
         //for (int i = 0; i < currentPowerUps.Count; i++)

@@ -9,22 +9,17 @@ public class ControlsManager : MonoBehaviour
 #endif
 
     [Header("Controls")]
-    public bool fireDown;
-    public bool fireUp;
-    public Vector2 move;
-    public bool power;
+    [ReadOnly] public bool fireDown;
+    [ReadOnly] public bool fireUp;
+    [ReadOnly] public Vector2 move;
+    [ReadOnly] public bool power;
 
     [Header("Touch Controls")]
-    [SerializeField] private bool touchControls;
+    private bool touchControls;
     [SerializeField] private GameObject touchUi;
     [SerializeField] private EventTrigger fireBtn;
     [SerializeField] private EventTrigger powerBtn;
     [SerializeField] private Joystick joystick;
-
-    private const string _Horizontal = "Horizontal";
-    private const string _Vertical = "Vertical";
-    private const string _Fire = "Fire1";
-    private const string _Jump = "Jump";
 
     [Header("Tutorial")]
     [SerializeField] private GameObject tutorialMobile;
@@ -119,23 +114,13 @@ public class ControlsManager : MonoBehaviour
         }
         else
         {
-            //switch (RoundsController.Instance.levelType)
-            //{
-            //    case RoundsController.LevelType.Normal:
-            //        move.x = Input.GetAxis(_Horizontal);
-            //        move.y = Input.GetAxis(_Vertical);
-            //        break;
+            move.x = Input.GetAxisRaw(Inputs.Horizontal);
+            move.y = Input.GetAxisRaw(Inputs.Vertical);
 
-            //    case RoundsController.LevelType.Inifinite:
-                    move.x = Input.GetAxisRaw(_Horizontal);
-                    move.y = Input.GetAxisRaw(_Vertical);
-                    //break;
-            //}
+            fireDown = Input.GetButtonDown(Inputs.Fire);
+            fireUp = Input.GetButtonUp(Inputs.Fire);
 
-            fireDown = Input.GetButtonDown(_Fire);
-            fireUp = Input.GetButtonUp(_Fire);
-
-            power = Input.GetButtonDown(_Jump);
+            power = Input.GetButtonDown(Inputs.Jump);
         }
     }
 }

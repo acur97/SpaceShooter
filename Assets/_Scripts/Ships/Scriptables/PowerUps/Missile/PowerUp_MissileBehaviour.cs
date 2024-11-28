@@ -102,7 +102,7 @@ public class PowerUp_MissileBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(Types.tag_Enemy) && collision.TryGetComponent(out EnemyController enemyController))
+        if (collision.CompareTag(Tags.Enemy) && collision.TryGetComponent(out EnemyController enemyController))
         {
             PostProcessingController.Instance.VolumePunch();
             VfxPool.Instance.InitVfx(transform.position);

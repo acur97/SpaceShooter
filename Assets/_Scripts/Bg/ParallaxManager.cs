@@ -10,8 +10,6 @@ public class ParallaxManager : MonoBehaviour
     private Material[] materials;
     private Vector2 offset = Vector2.zero;
 
-    private readonly int _Offset = Shader.PropertyToID("_Offset");
-
     private void Awake()
     {
         materialsCount = transform.childCount;
@@ -28,8 +26,8 @@ public class ParallaxManager : MonoBehaviour
     {
         for (int i = 0; i < materialsCount; i++)
         {
-            offset.y = materials[i].GetVector(_Offset).y - (speed * (i + 1) * Time.deltaTime);
-            materials[i].SetVector(_Offset, offset);
+            offset.y = materials[i].GetVector(MaterialProperties.Offset).y - (speed * (i + 1) * Time.deltaTime);
+            materials[i].SetVector(MaterialProperties.Offset, offset);
         }
     }
 }

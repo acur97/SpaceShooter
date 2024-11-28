@@ -28,7 +28,7 @@ public class PowerUp_CoinMagnet : PowerUpBase
     {
         contactFilter.useTriggers = true;
         contactFilter.useLayerMask = true;
-        contactFilter.layerMask = Types.layer_Collectable;
+        contactFilter.layerMask = Layers.Collectable;
 
         particles = Instantiate(prefab, PlayerController.Instance.transform).GetComponent<ParticleSystem>();
 

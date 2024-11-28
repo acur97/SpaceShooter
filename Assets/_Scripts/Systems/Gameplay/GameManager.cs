@@ -16,10 +16,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool debugMode = true;
 
     [Space]
-    public bool hasStarted = false;
-    public bool isPlaying = false;
+    [ReadOnly] public bool hasStarted = false;
+    [ReadOnly] public bool isPlaying = false;
+    [ReadOnly] public bool hasEnded = false;
     private float currentTimeScale = 1f;
-    public int leftForNextGroup = 0;
+    [ReadOnly] public int leftForNextGroup = 0;
 
     [Header("Score")]
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -40,24 +41,27 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     [SerializeField] private TextMeshProUGUI wNewTxt;
 
-    [Header("Screen Properties")]
-    [SerializeField] private float innerLimit = -1.6f;
+    [Header("Screen Properties Percentage")]
+    [SerializeField, ColorField(0, 0, 1)] private float innerLimit = -1.6f;
     private Vector2 innerLimits = Vector2.zero;
     public static Vector2 InnerLimits => Instance.innerLimits;
 
-    [SerializeField] private float playerLimit = -0.4f;
+    [SerializeField, ColorField(0, 1, 1)] private float playerLimit = -0.5f;
     private Vector2 playerLimits = Vector2.zero;
     public static Vector2 PlayerLimits => Instance.playerLimits;
+    [SerializeField, ColorField(0, 1, 0)] private float playerLimitTop = -1f;
+    private float playerLimitTops = 0f;
+    public static float PlayerLimitTop => Instance.playerLimitTops;
 
-    [SerializeField] private float bulletLimit = 0.1f;
+    [SerializeField, ColorField(1, 0, 0)] private float bulletLimit = 0.05f;
     private Vector2 bulletLimits = Vector2.zero;
     public static Vector2 BulletLimits => Instance.bulletLimits;
 
-    [SerializeField] private float boundsLimit = 0.5f;
+    [SerializeField, ColorField(1, 0, 1)] private float boundsLimit = 0.5f;
     private Vector2 boundsLimits = Vector2.zero;
     public static Vector2 BoundsLimits => Instance.boundsLimits;
 
-    [SerializeField] private float enemyLine = 1.55f;
+    [SerializeField, ColorField(1, 0.92f, 0.016f)] private float enemyLine = 1.55f;
     private float enemyLineLimit;
     public static float EnemyLine => Instance.enemyLineLimit;
 
@@ -75,10 +79,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private PowerUpsManager powerUpsManager;
     [SerializeField] private PlayerController playerController;
-
-    private const string _Pause = "Pause";
-    private const string _MasterVolume = "MasterVolume";
-    private const string _MusicPitch = "MusicPitch";
 
     [ContextMenu("Delete PlayerProgress")]
     public void DeletePlayerProgress()
@@ -115,20 +115,19 @@ public class GameManager : MonoBehaviour
 
         // Player Limits
         Gizmos.color = Color.cyan;
-        Gizmos.DrawLineList(new Vector3[8]
+        Gizmos.DrawLineList(new Vector3[6]
             {
             new(-(canvasBorders.x - playerLimit), canvasBorders.y - playerLimit),
             new(canvasBorders.x - playerLimit, canvasBorders.y - playerLimit),
 
-            new(-(canvasBorders.x - playerLimit), -(canvasBorders.y - playerLimit)),
-            new(canvasBorders.x - playerLimit, -(canvasBorders.y - playerLimit)),
-
-            new(-(canvasBorders.x - playerLimit), -(canvasBorders.y - playerLimit)),
+            new(-(canvasBorders.x - playerLimit), -(canvasBorders.y - playerLimitTop)),
             new(-(canvasBorders.x - playerLimit), canvasBorders.y - playerLimit),
 
-            new(canvasBorders.x - playerLimit, -(canvasBorders.y - playerLimit)),
+            new(canvasBorders.x - playerLimit, -(canvasBorders.y - playerLimitTop)),
             new(canvasBorders.x - playerLimit, canvasBorders.y - playerLimit)
             });
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(new Vector2(-(canvasBorders.x - playerLimit), -(canvasBorders.y - playerLimitTop)), new Vector2(canvasBorders.x - playerLimit, -(canvasBorders.y - playerLimitTop)));
 
 
         // Bullet Limits
@@ -215,7 +214,7 @@ public class GameManager : MonoBehaviour
 
         roundsController.StartRound();
 
-        audioManager.PlaySound(AudioManager.AudioType.Start, 2f);
+        audioManager.PlaySound(Enums.AudioType.Start, 2f);
     }
 
     public void OpenWnew(bool on)
@@ -246,8 +245,8 @@ public class GameManager : MonoBehaviour
         playerController.Init();
 
         Time.timeScale = 1;
-        audioManager.mixer.SetFloat(_MusicPitch, 1f);
-        audioManager.mixer.SetFloat(_MasterVolume, 0f);
+        audioManager.mixer.SetFloat(MixerParameters.MusicPitch, 1f);
+        audioManager.mixer.SetFloat(MixerParameters.MasterVolume, 0f);
 
         PlayerProgress.Init(gameplayScriptable);
         SetCustoms(gameplayScriptable.selectedCustoms);
@@ -268,7 +267,7 @@ public class GameManager : MonoBehaviour
 
         if (hasStarted)
         {
-            if (Input.GetButtonDown(_Pause))
+            if (Input.GetButtonDown(Inputs.Pause))
             {
                 Pause();
             }
@@ -308,6 +307,7 @@ public class GameManager : MonoBehaviour
 
         innerLimits = new Vector2(-canvasBorders.x + innerLimit, -canvasBorders.y + innerLimit);
         playerLimits = new Vector2(-canvasBorders.x + playerLimit, -canvasBorders.y + playerLimit);
+        playerLimitTops = -canvasBorders.y + playerLimitTop;
         bulletLimits = new Vector2(-canvasBorders.x + bulletLimit, -canvasBorders.y + bulletLimit);
         boundsLimits = new Vector2(-canvasBorders.x + boundsLimit, -canvasBorders.y + boundsLimit);
 
@@ -329,15 +329,15 @@ public class GameManager : MonoBehaviour
     {
         PlayerProgress.UpCoins(value);
         coinsText.SetText(preCoins, PlayerProgress.GetCoins());
-        audioManager.PlaySound(AudioManager.AudioType.Coin);
+        audioManager.PlaySound(Enums.AudioType.Coin);
     }
 
     public void EndLevel()
     {
         if (isPlaying)
         {
+            hasEnded = true;
             isPlaying = false;
-            hasStarted = false;
 
             GameStart?.Invoke(false);
 
@@ -347,8 +347,8 @@ public class GameManager : MonoBehaviour
             endScore.SetText(postScore, score);
             endCoins.SetText(preCoins, PlayerProgress.GetCoins());
 
-            audioManager.mixer.SetFloat(_MasterVolume, -1f);
-            audioManager.PlaySound(AudioManager.AudioType.End, 2.5f);
+            audioManager.mixer.SetFloat(MixerParameters.MasterVolume, -1f);
+            audioManager.PlaySound(Enums.AudioType.End, 2.5f);
 
             Time.timeScale = 0.5f;
 
@@ -358,18 +358,27 @@ public class GameManager : MonoBehaviour
 
 #if !UNITY_EDITOR && UNITY_WEBGL
             Vibrate(gameplayScriptable.vibrationDeath);
+#else
+            // xInput vibration
 #endif
         }
     }
 
+#if !UNITY_EDITOR && UNITY_WEBGL
     [DllImport("__Internal")]
     private static extern void Vibrate(int ms);
+#endif
 
     public void Pause()
     {
+        if (hasEnded)
+        {
+            return;
+        }
+
         if (isPlaying)
         {
-            audioManager.mixer.SetFloat(_MasterVolume, -15f);
+            audioManager.mixer.SetFloat(MixerParameters.MasterVolume, -15f);
 
             uiManager.SetUi(UiType.Pause, true);
 
@@ -380,7 +389,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            audioManager.mixer.SetFloat(_MasterVolume, 0f);
+            audioManager.mixer.SetFloat(MixerParameters.MasterVolume, 0f);
 
             uiManager.SetUi(UiType.Pause, false);
 

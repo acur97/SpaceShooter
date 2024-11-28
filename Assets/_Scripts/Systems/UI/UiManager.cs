@@ -117,7 +117,8 @@ public class UiManager : MonoBehaviour
     {
         canvas.interactable = active;
         canvas.alpha = active ? 0 : 1;
-        canvas.gameObject.SetActive(true);
+
+        canvas.gameObject.SetActive(canvas.gameObject.activeSelf || true);
 
         LeanTween.alphaCanvas(canvas, active ? 1 : 0, duration).setOnComplete(() =>
         {

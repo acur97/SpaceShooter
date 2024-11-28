@@ -58,7 +58,7 @@ public class EnemyController : ShipBaseController
             return;
         }
 
-        if (transform.position.y >= -GameManager.PlayerLimits.y && _properties.attack != ShipScriptable.Attack.none)
+        if (transform.position.y >= -GameManager.PlayerLimits.y && _properties.attack != Enums.Attack.None)
         {
             timer -= Time.deltaTime;
 
@@ -108,7 +108,7 @@ public class EnemyController : ShipBaseController
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(Types.tag_Bullet) && collision.GetComponent<Bullet>().bulletType == Bullet.TypeBullet.player)
+        if (collision.CompareTag(Tags.Bullet) && collision.GetComponent<Bullet>().bulletType == Bullet.TypeBullet.player)
         {
             collision.gameObject.SetActive(false);
 

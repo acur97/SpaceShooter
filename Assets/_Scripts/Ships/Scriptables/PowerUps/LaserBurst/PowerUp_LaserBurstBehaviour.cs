@@ -27,8 +27,8 @@ public class PowerUp_LaserBurstBehaviour : MonoBehaviour
         mainModule = particles.main;
         mainModule.duration = startDelay;
 
-        line.material.SetColor(Types.material_Color, color);
-        particlesRenderer.material.SetColor(Types.material_Color, color);
+        line.material.SetColor(MaterialProperties.Color, color);
+        particlesRenderer.material.SetColor(MaterialProperties.Color, color);
 
         startSpeedCurve = mainModule.startSpeed;
         startSpeedCurve.mode = ParticleSystemCurveMode.Curve;
@@ -100,7 +100,7 @@ public class PowerUp_LaserBurstBehaviour : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag(Types.tag_Enemy) && collision.TryGetComponent(out EnemyController enemyController))
+        if (collision.CompareTag(Tags.Enemy) && collision.TryGetComponent(out EnemyController enemyController))
         {
             PostProcessingController.Instance.VolumePunch();
             VfxPool.Instance.InitVfx(collision.transform.position);

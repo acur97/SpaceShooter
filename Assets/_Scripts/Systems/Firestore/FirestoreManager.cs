@@ -20,8 +20,6 @@ public class FirestoreManager : MonoBehaviour
     [Header("Leaderboard UI")]
     [SerializeField] private GameObject recordPrefab;
     [SerializeField] private Transform recordContainer;
-    [SerializeField] private Toggle normalTgl;
-    [SerializeField] private Toggle infiniteTgl;
 
     [Header("Final UI")]
     [SerializeField] private GameObject panelEnd;
@@ -57,6 +55,14 @@ public class FirestoreManager : MonoBehaviour
         if (!on)
         {
             isOn = false;
+            if (!GameManager.Instance.hasEnded)
+            {
+                UiManager.Instance.SetUi(UiType.Select, true, 0.5f);
+            }
+            else
+            {
+                UiManager.Instance.SetUi(UiType.End, true, 0.5f);
+            }
             UiManager.Instance.SetUi(UiType.Leaderboard, false, 0.5f);
             return;
         }
@@ -67,6 +73,14 @@ public class FirestoreManager : MonoBehaviour
         }
 
         isOn = true;
+        if (!GameManager.Instance.hasEnded)
+        {
+            UiManager.Instance.SetUi(UiType.Select, false, 0.5f);
+        }
+        else
+        {
+            UiManager.Instance.SetUi(UiType.End, false, 0.5f);
+        }
         UiManager.Instance.SetUi(UiType.Leaderboard, true, 0.5f);
         DownloadLeaderboardVoid().Forget();
     }
@@ -84,8 +98,6 @@ public class FirestoreManager : MonoBehaviour
     private async UniTaskVoid DownloadLeaderboardVoid()
     {
         downloading = true;
-        normalTgl.interactable = false;
-        infiniteTgl.interactable = false;
 
         ClearLeaderboard();
 
@@ -94,8 +106,6 @@ public class FirestoreManager : MonoBehaviour
         SetLeaderboardRecords();
 
         downloading = false;
-        normalTgl.interactable = true;
-        infiniteTgl.interactable = true;
     }
 
     private void ClearLeaderboard()

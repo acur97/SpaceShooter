@@ -4,7 +4,7 @@ public abstract class PoolBaseController : MonoBehaviour
 {
     public int size = 10;
     public GameObject prefab;
-    public GameObject[] objects;
+    [ReadOnly] public GameObject[] objects;
 
     protected virtual void Awake()
     {

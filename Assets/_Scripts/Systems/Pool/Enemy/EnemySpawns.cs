@@ -6,7 +6,7 @@ public class EnemySpawns : PoolBaseController
 {
     public static EnemySpawns Instance;
 
-    public EnemyController[] enemys;
+    [ReadOnly] public EnemyController[] enemys;
 
     private CancellationToken cancellationToken;
 
@@ -40,7 +40,7 @@ public class EnemySpawns : PoolBaseController
             _group.ship.spawnIndex = i;
             InitEnemy(_group.ship, _group, Random.Range(-GameManager.PlayerLimits.x, GameManager.PlayerLimits.x), _groupRandom);
 
-            if (_group.minTimeBetweenSpawn > 0 || _group.maxTimeBetweenSpawn > 0 || _group.spawnType != Group.SpawnType.allAtOnce)
+            if (_group.minTimeBetweenSpawn > 0 || _group.maxTimeBetweenSpawn > 0 || _group.spawnType != Enums.SpawnType.AllAtOnce)
             {
                 await UniTask.WaitForSeconds(Random.Range(_group.minTimeBetweenSpawn, _group.maxTimeBetweenSpawn), cancellationToken: cancellationToken);
             }
@@ -55,23 +55,23 @@ public class EnemySpawns : PoolBaseController
             {
                 switch (group.spawnType)
                 {
-                    case Group.SpawnType.random:
+                    case Enums.SpawnType.Random:
                         enemys[i].transform.position = new Vector2(random, GameManager.BoundsLimits.y);
                         break;
 
-                    case Group.SpawnType.randomPoint:
+                    case Enums.SpawnType.RandomPoint:
                         enemys[i].transform.position = new Vector2(groupRandom, GameManager.BoundsLimits.y);
                         break;
 
-                    case Group.SpawnType.center:
+                    case Enums.SpawnType.Center:
                         enemys[i].transform.position = new Vector2(0, GameManager.BoundsLimits.y);
                         break;
 
-                    case Group.SpawnType.allAtOnce:
+                    case Enums.SpawnType.AllAtOnce:
                         enemys[i].transform.position = new Vector2(random, GameManager.BoundsLimits.y);
                         break;
 
-                    case Group.SpawnType.specific:
+                    case Enums.SpawnType.Specific:
                         enemys[i].transform.position = new Vector2(group.customFloat, GameManager.BoundsLimits.y);
                         break;
                 }

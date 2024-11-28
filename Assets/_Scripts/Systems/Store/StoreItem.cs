@@ -23,7 +23,7 @@ public class StoreItem : MonoBehaviour
 
         spriteImg.sprite = powerUp.sprite;
         titleTxt.text = powerUp.powerName;
-        priceTxt.text = powerUp.cost == 0 ? Types.ui_Free : $"${powerUp.cost}";
+        priceTxt.text = powerUp.cost == 0 ? UiCommonTexts.Free : $"${powerUp.cost}";
 
         StoreManager.onRefresh += UpdateBtn;
 

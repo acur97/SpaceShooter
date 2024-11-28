@@ -27,7 +27,7 @@ public class PowerUp_ElectricFieldBehaviour : MonoBehaviour
             return;
         }
 
-        if (collision.CompareTag(Types.tag_Enemy) && collision.TryGetComponent(out EnemyController enemyController) && enemyController._properties.enemyCollision)
+        if (collision.CompareTag(Tags.Enemy) && collision.TryGetComponent(out EnemyController enemyController) && enemyController._properties.enemyCollision)
         {
             PostProcessingController.Instance.VolumePunch();
             VfxPool.Instance.InitVfx(collision.transform.position);

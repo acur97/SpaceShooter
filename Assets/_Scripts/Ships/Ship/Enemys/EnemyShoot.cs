@@ -6,15 +6,12 @@ public class EnemyShoot : MonoBehaviour
     {
         switch (properties.attack)
         {
-            case ShipScriptable.Attack.continuous:
+            case Enums.Attack.Continuous:
                 Continuous(properties, root2);
                 break;
 
-            case ShipScriptable.Attack.continuousDouble:
+            case Enums.Attack.ContinuousDouble:
                 ContinuousDouble(properties, root1, root3);
-                break;
-
-            case ShipScriptable.Attack.none:
                 break;
         }
     }

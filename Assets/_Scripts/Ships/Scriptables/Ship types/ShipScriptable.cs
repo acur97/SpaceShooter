@@ -36,22 +36,10 @@ public class ShipScriptable : ScriptableObject
     public float bulletTime = -1;
 
     // Enemy
-    public enum Attack { continuous, continuousDouble, none }
-    public Attack attack;
+    public Enums.Attack attack;
     public bool enemyCollision = true;
     public int deathScore = 8;
-    public enum Behaviour
-    {
-        linear,
-        direct,
-        waves,
-        wavesDirect,
-        diagonal,
-        wave8,
-        borders,
-        chase
-    }
-    public Behaviour behaviour;
+    public Enums.Behaviour behaviour;
     public float behaviourMathfSin = 1.5f;
     [Space]
     public bool _timeToContinue = false;

@@ -32,23 +32,6 @@ public class AudioManager : MonoBehaviour
     [Header("Common Clips")]
     [SerializeField] private AudioClip clip_ui;
 
-    public enum AudioType
-    {
-        Boom,
-        Coin,
-        Start,
-        End,
-        Zap
-    }
-
-    public enum SourceType
-    {
-        Main,
-        Main_Loop,
-        PowerUps,
-        PowerUps_Loop
-    }
-
     public void Init()
     {
         Instance = this;
@@ -81,57 +64,57 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlaySound(AudioType type, float volume = 1f)
+    public void PlaySound(Enums.AudioType type, float volume = 1f)
     {
         switch (type)
         {
-            case AudioType.Boom:
+            case Enums.AudioType.Boom:
                 PlaySound(clipBoom, volume);
                 break;
 
-            case AudioType.Coin:
+            case Enums.AudioType.Coin:
                 PlaySound(clipCoin, volume);
                 break;
 
-            case AudioType.Start:
+            case Enums.AudioType.Start:
                 PlaySound(clipStart, volume);
                 break;
 
-            case AudioType.End:
+            case Enums.AudioType.End:
                 PlaySound(clipEnd, volume);
                 break;
 
-            case AudioType.Zap:
+            case Enums.AudioType.Zap:
                 PlaySound(clipZap, volume);
                 break;
         }
     }
 
-    public void PlaySound(AudioClip clip, float volume = 1f, SourceType sourceType = SourceType.Main)
+    public void PlaySound(AudioClip clip, float volume = 1f, Enums.SourceType sourceType = Enums.SourceType.Main)
     {
         switch (sourceType)
         {
-            case SourceType.Main:
+            case Enums.SourceType.Main:
                 source.PlayOneShot(clip, volume);
                 break;
 
-            case SourceType.PowerUps:
+            case Enums.SourceType.PowerUps:
                 sourcePowerUps.PlayOneShot(clip, volume);
                 break;
         }
     }
 
-    public void PlaySoundLoop(AudioClip clip, float volume = 1f, SourceType sourceType = SourceType.Main)
+    public void PlaySoundLoop(AudioClip clip, float volume = 1f, Enums.SourceType sourceType = Enums.SourceType.Main)
     {
         switch (sourceType)
         {
-            case SourceType.Main_Loop:
+            case Enums.SourceType.MainLoop:
                 sourceLoop.clip = clip;
                 sourceLoop.volume = volume;
                 sourceLoop.Play();
                 break;
 
-            case SourceType.PowerUps_Loop:
+            case Enums.SourceType.PowerUpsLoop:
                 sourcePowerUpsLoop.clip = clip;
                 sourcePowerUpsLoop.volume = volume;
                 sourcePowerUpsLoop.Play();
@@ -139,19 +122,19 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public async UniTaskVoid PlaySoundLoopDelayed(AudioClip clip, float delay, float volume = 1f, SourceType sourceType = SourceType.Main)
+    public async UniTaskVoid PlaySoundLoopDelayed(AudioClip clip, float delay, float volume = 1f, Enums.SourceType sourceType = Enums.SourceType.Main)
     {
         await UniTask.WaitForSeconds(delay);
 
         switch (sourceType)
         {
-            case SourceType.Main_Loop:
+            case Enums.SourceType.MainLoop:
                 sourceLoop.clip = clip;
                 sourceLoop.volume = volume;
                 sourceLoop.Play();
                 break;
 
-            case SourceType.PowerUps_Loop:
+            case Enums.SourceType.PowerUpsLoop:
                 sourcePowerUpsLoop.clip = clip;
                 sourcePowerUpsLoop.volume = volume;
                 sourcePowerUpsLoop.Play();
@@ -159,23 +142,23 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void StopSource(SourceType sourceType)
+    public void StopSource(Enums.SourceType sourceType)
     {
         switch (sourceType)
         {
-            case SourceType.Main:
+            case Enums.SourceType.Main:
                 source.Stop();
                 break;
 
-            case SourceType.Main_Loop:
+            case Enums.SourceType.MainLoop:
                 sourceLoop.Stop();
                 break;
 
-            case SourceType.PowerUps:
+            case Enums.SourceType.PowerUps:
                 sourcePowerUps.Stop();
                 break;
 
-            case SourceType.PowerUps_Loop:
+            case Enums.SourceType.PowerUpsLoop:
                 sourcePowerUpsLoop.Stop();
                 break;
         }

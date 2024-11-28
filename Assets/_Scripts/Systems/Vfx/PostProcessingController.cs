@@ -38,10 +38,6 @@ public class PostProcessingController : MonoBehaviour
     [SerializeField] private Material impactFrameMaterial;
     [SerializeField] private float impactFrameSpacing = 0.1f;
 
-    private readonly int _invert = Shader.PropertyToID("_invert");
-    private readonly int _frecuency = Shader.PropertyToID("_frecuency");
-    private readonly int _Offset = Shader.PropertyToID("_Offset");
-
     public void Init()
     {
         Instance = this;
@@ -97,7 +93,7 @@ public class PostProcessingController : MonoBehaviour
             }).id;
         }).id;
 
-        AudioManager.Instance.PlaySound(AudioManager.AudioType.Boom, 0.2f);
+        AudioManager.Instance.PlaySound(Enums.AudioType.Boom, 0.2f);
     }
 
     public void SetVolumeHealth(float val)
@@ -133,25 +129,25 @@ public class PostProcessingController : MonoBehaviour
 
     public async UniTaskVoid ImpactFrame(bool lastFrame = true, Action onComplete = null)
     {
-        impactFrameMaterial.SetInt(_invert, 0);
-        impactFrameMaterial.SetVector(_frecuency, new Vector2(100, 100));
-        impactFrameMaterial.SetVector(_Offset, cam.WorldToViewportPoint(PlayerController.Instance.transform.position));
+        impactFrameMaterial.SetInt(MaterialProperties.Invert, 0);
+        impactFrameMaterial.SetVector(MaterialProperties.Frecuency, new Vector2(100, 100));
+        impactFrameMaterial.SetVector(MaterialProperties.Offset, cam.WorldToViewportPoint(PlayerController.Instance.transform.position));
 
         renderer2DData.rendererFeatures[1].SetActive(true);
 
         await UniTask.WaitForSeconds(impactFrameSpacing);
 
-        impactFrameMaterial.SetInt(_invert, 1);
+        impactFrameMaterial.SetInt(MaterialProperties.Invert, 1);
 
         await UniTask.WaitForSeconds(impactFrameSpacing);
 
-        impactFrameMaterial.SetVector(_frecuency, new Vector2(-100, -100));
+        impactFrameMaterial.SetVector(MaterialProperties.Frecuency, new Vector2(-100, -100));
 
         await UniTask.WaitForSeconds(impactFrameSpacing);
 
         if (lastFrame)
         {
-            impactFrameMaterial.SetInt(_invert, 0);
+            impactFrameMaterial.SetInt(MaterialProperties.Invert, 0);
 
             await UniTask.WaitForSeconds(impactFrameSpacing);
         }

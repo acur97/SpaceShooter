@@ -8,30 +8,30 @@ public class EnemyMovement : MonoBehaviour
     private bool customBool = false;
     private Vector2 startPosition;
 
-    public void Init(ShipScriptable.Behaviour properties, bool boolToContinue, float timeToContinue, int customInt)
+    public void Init(Enums.Behaviour properties, bool boolToContinue, float timeToContinue, int customInt)
     {
         _boolToContinue = boolToContinue;
         _timeToContinue = timeToContinue;
 
         switch (properties)
         {
-            case ShipScriptable.Behaviour.linear:
+            case Enums.Behaviour.Linear:
                 break;
 
-            case ShipScriptable.Behaviour.direct:
+            case Enums.Behaviour.Direct:
                 break;
 
-            case ShipScriptable.Behaviour.waves:
+            case Enums.Behaviour.Waves:
                 LimitX();
                 startPosition = transform.localPosition;
                 break;
 
-            case ShipScriptable.Behaviour.wavesDirect:
+            case Enums.Behaviour.WavesDirect:
                 LimitX();
                 startPosition = transform.localPosition;
                 break;
 
-            case ShipScriptable.Behaviour.diagonal:
+            case Enums.Behaviour.Diagonal:
                 if (transform.localPosition.x > 0)
                 {
                     transform.localEulerAngles = new Vector3(0, 0, 225);
@@ -42,12 +42,12 @@ public class EnemyMovement : MonoBehaviour
                 }
                 break;
 
-            case ShipScriptable.Behaviour.wave8:
+            case Enums.Behaviour.Wave8:
                 transform.localPosition = new Vector2(0, GameManager.BoundsLimits.y);
                 startPosition = transform.localPosition;
                 break;
 
-            case ShipScriptable.Behaviour.borders:
+            case Enums.Behaviour.Borders:
                 if (customInt % 2 == 0)
                 {
                     transform.localPosition = new Vector2(GameManager.PlayerLimits.x + 0.25f, transform.localPosition.y);
@@ -91,35 +91,35 @@ public class EnemyMovement : MonoBehaviour
 
         switch (properties.behaviour)
         {
-            case ShipScriptable.Behaviour.linear:
+            case Enums.Behaviour.Linear:
                 Linear(properties);
                 break;
 
-            case ShipScriptable.Behaviour.direct:
+            case Enums.Behaviour.Direct:
                 Direct(properties);
                 break;
 
-            case ShipScriptable.Behaviour.waves:
+            case Enums.Behaviour.Waves:
                 Waves(properties);
                 break;
 
-            case ShipScriptable.Behaviour.wavesDirect:
+            case Enums.Behaviour.WavesDirect:
                 WavesDirect(properties);
                 break;
 
-            case ShipScriptable.Behaviour.diagonal:
+            case Enums.Behaviour.Diagonal:
                 Diagonal(properties);
                 break;
 
-            case ShipScriptable.Behaviour.wave8:
+            case Enums.Behaviour.Wave8:
                 Wave8(properties);
                 break;
 
-            case ShipScriptable.Behaviour.borders:
+            case Enums.Behaviour.Borders:
                 Borders(properties);
                 break;
 
-            case ShipScriptable.Behaviour.chase:
+            case Enums.Behaviour.Chase:
                 Chase(properties);
                 break;
         }

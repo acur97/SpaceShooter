@@ -28,12 +28,12 @@ public class PowerUp_ShieldBehaviour : MonoBehaviour
             return;
         }
 
-        if (collision.CompareTag(Types.tag_Bullet) && collision.GetComponent<Bullet>().bulletType == Bullet.TypeBullet.enemy)
+        if (collision.CompareTag(Tags.Bullet) && collision.GetComponent<Bullet>().bulletType == Bullet.TypeBullet.enemy)
         {
             collision.gameObject.SetActive(false);
 
             VfxPool.Instance.InitVfx(collision.transform.position);
-            AudioManager.Instance.PlaySound(AudioManager.AudioType.Boom, 0.2f);
+            AudioManager.Instance.PlaySound(Enums.AudioType.Boom, 0.2f);
 
             bulletAbsortion--;
 

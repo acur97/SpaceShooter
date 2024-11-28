@@ -4,7 +4,7 @@ public class BulletsPool : PoolBaseController
 {
     public static BulletsPool Instance;
 
-    public Bullet[] bullets;
+    [ReadOnly] public Bullet[] bullets;
 
     private new void Awake()
     {
@@ -16,20 +16,20 @@ public class BulletsPool : PoolBaseController
         for (int i = 0; i < size; i++)
         {
             bullets[i] = Instantiate(prefab, transform).GetComponent<Bullet>();
-            bullets[i].renderer.material.SetColor(Types.material_Color, Color.white);
+            bullets[i].renderer.material.SetColor(MaterialProperties.Color, Color.white);
         }
     }
 
     public void InitBullet(Transform _position, ShipScriptable _properties, Bullet.TypeBullet type)
     {
-        AudioManager.Instance.PlaySound(AudioManager.AudioType.Zap, 0.2f);
+        AudioManager.Instance.PlaySound(Enums.AudioType.Zap, 0.2f);
 
         Init(_position.position, _position.rotation, _properties, type);
     }
 
     public void InitBullet(Transform _position1, Transform _position2, ShipScriptable _properties, Bullet.TypeBullet type)
     {
-        AudioManager.Instance.PlaySound(AudioManager.AudioType.Zap, 0.2f);
+        AudioManager.Instance.PlaySound(Enums.AudioType.Zap, 0.2f);
 
         Init(_position1.position, _position1.rotation, _properties, type);
         Init(_position2.position, _position2.rotation, _properties, type);
@@ -47,11 +47,11 @@ public class BulletsPool : PoolBaseController
 
                 if (type == Bullet.TypeBullet.player)
                 {
-                    bullets[i].renderer.material.SetColor(Types.material_Color, PlayerController.Instance._properties.color);
+                    bullets[i].renderer.material.SetColor(MaterialProperties.Color, PlayerController.Instance._properties.color);
                 }
                 else
                 {
-                    bullets[i].renderer.material.SetColor(Types.material_Color, SetColor(PlayerController.Instance._properties.color));
+                    bullets[i].renderer.material.SetColor(MaterialProperties.Color, SetColor(PlayerController.Instance._properties.color));
                 }
 
                 if (_properties._bulletTime)

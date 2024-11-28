@@ -34,7 +34,6 @@ public class RoundsController : MonoBehaviour
     [SerializeField, ReadOnly] private int roundCount = -1;
     [SerializeField, ReadOnly] private int groupCount = -1;
 
-    private const string _MusicPitch = "MusicPitch";
     private const string _Normal = "Normal";
     private const string _Infinite = "Infinite";
     private const string lastLevelType = "LastLevelType";
@@ -177,8 +176,8 @@ public class RoundsController : MonoBehaviour
                 //Time.timeScale = Mathf.Min(Time.timeScale + gameplayScriptable.timeScaleIncrease, 2f);
                 Time.timeScale += gameplayScriptable.timeScaleIncrease;
 
-                AudioManager.Instance.mixer.GetFloat(_MusicPitch, out float pitch);
-                AudioManager.Instance.mixer.SetFloat(_MusicPitch, Mathf.Min(pitch + 0.02f, 1.2f));
+                AudioManager.Instance.mixer.GetFloat(MixerParameters.MusicPitch, out float pitch);
+                AudioManager.Instance.mixer.SetFloat(MixerParameters.MusicPitch, Mathf.Min(pitch + 0.02f, 1.2f));
             }
         }
         else
