@@ -15,7 +15,7 @@ public class ControlsManager : MonoBehaviour
     [ReadOnly] public bool power;
 
     [Header("Touch Controls")]
-    private bool touchControls;
+    public static bool hasTouch;
     [SerializeField] private GameObject touchUi;
     [SerializeField] private EventTrigger fireBtn;
     [SerializeField] private EventTrigger powerBtn;
@@ -39,10 +39,10 @@ public class ControlsManager : MonoBehaviour
     // This method will be called from JavaScript
     public void OnDeviceCheck(int isMobile)
     {
-        touchControls = isMobile == 1;
-        touchUi.SetActive(touchControls);
+        hasTouch = isMobile == 1;
+        touchUi.SetActive(hasTouch);
 
-        if (touchControls)
+        if (hasTouch)
         {
             // fire btn
             EventTrigger.Entry fireEntryDown = new()
@@ -81,7 +81,7 @@ public class ControlsManager : MonoBehaviour
     {
         if (on)
         {
-            if (touchControls)
+            if (hasTouch)
             {
                 tutorialMobile.SetActive(true);
                 tutorialPC.SetActive(false);
@@ -99,7 +99,7 @@ public class ControlsManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (touchControls)
+        if (hasTouch)
         {
             move = joystick.InputDirection;
 

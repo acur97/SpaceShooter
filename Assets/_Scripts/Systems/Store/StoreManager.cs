@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class StoreManager : MonoBehaviour
@@ -13,6 +15,15 @@ public class StoreManager : MonoBehaviour
     [SerializeField] private GameObject prefabPowerUps;
     [SerializeField] private GameObject prefabCustoms;
     [SerializeField] private Transform content;
+
+    private GameObject instenciatedPrefab;
+    private List<GameObject> instanciatedPrefabs = new();
+    [SerializeField] private EventSystem eventSystem;
+    [SerializeField] private Transform first;
+    [SerializeField] private Transform top;
+    [SerializeField] private Transform bottom;
+    [SerializeField] private Transform last;
+    private bool canMoveFromSelected = true;
 
     [Header("UI")]
     [SerializeField] private Camera cam;
@@ -71,6 +82,7 @@ public class StoreManager : MonoBehaviour
 
     private void InitPrefabs()
     {
+        instanciatedPrefabs.Clear();
         for (int i = 0; i < content.childCount; i++)
         {
             Destroy(content.GetChild(i).gameObject);
@@ -80,16 +92,22 @@ public class StoreManager : MonoBehaviour
         {
             for (int i = 0; i < gameplayScriptable.powerUps.Count; i++)
             {
-                Instantiate(prefabPowerUps, content).GetComponent<StoreItem>().Init(this, gameplayScriptable.powerUps[i]);
+                instenciatedPrefab = Instantiate(prefabPowerUps, content);
+                instenciatedPrefab.GetComponent<StoreItem>().Init(this, gameplayScriptable.powerUps[i]);
+                instanciatedPrefabs.Add(instenciatedPrefab);
             }
         }
         else
         {
             for (int i = 0; i < gameplayScriptable.customs.Count; i++)
             {
-                Instantiate(prefabCustoms, content).GetComponent<StoreItemCustom>().Init(this, gameplayScriptable.customs[i]);
+                instenciatedPrefab = Instantiate(prefabCustoms, content);
+                instenciatedPrefab.GetComponent<StoreItemCustom>().Init(this, gameplayScriptable.customs[i]);
+                instanciatedPrefabs.Add(instenciatedPrefab);
             }
         }
+
+        instenciatedPrefab = null;
 
         onRefresh?.Invoke();
     }
@@ -235,6 +253,11 @@ public class StoreManager : MonoBehaviour
         onRefresh?.Invoke();
     }
 
+    public void SetMoveFromSelected(bool on)
+    {
+        canMoveFromSelected = on;
+    }
+
     private void Update()
     {
         cameraAspect = cam.aspect;
@@ -256,6 +279,46 @@ public class StoreManager : MonoBehaviour
 
             panel2.anchorMin = new Vector2(0.04f, 0.06f);
             panel2.anchorMax = new Vector2(0.96f, 0.4f);
+        }
+
+        if (!canMoveFromSelected || ControlsManager.hasTouch)
+        {
+            return;
+        }
+
+        if (instanciatedPrefabs.Count > 4)
+        {
+            if (eventSystem.currentSelectedGameObject == instanciatedPrefabs[0])
+            {
+                if (instanciatedPrefabs[0].transform.position.y > first.position.y)
+                {
+                    content.localPosition -= 1000f * Time.deltaTime * Vector3.up;
+                }
+            }
+            else if (eventSystem.currentSelectedGameObject == instanciatedPrefabs[^1])
+            {
+                if (instanciatedPrefabs[^1].transform.position.y < last.position.y)
+                {
+                    content.localPosition += 1000f * Time.deltaTime * Vector3.up;
+                }
+            }
+            else
+            {
+                for (int i = 1; i < instanciatedPrefabs.Count - 1; i++)
+                {
+                    if (eventSystem.currentSelectedGameObject == instanciatedPrefabs[i])
+                    {
+                        if (instanciatedPrefabs[i].transform.position.y > top.position.y)
+                        {
+                            content.localPosition -= 1000f * Time.deltaTime * Vector3.up;
+                        }
+                        else if (instanciatedPrefabs[i].transform.position.y < bottom.position.y)
+                        {
+                            content.localPosition += 1000f * Time.deltaTime * Vector3.up;
+                        }
+                    }
+                }
+            }
         }
     }
 }
