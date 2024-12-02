@@ -5,6 +5,7 @@ public class Tags
     public const string Enemy = "Enemy";
     public const string Bullet = "Bullet";
     public const string Collectable = "Collectable";
+    public const string Ad = "Ad";
 }
 
 public class Layers

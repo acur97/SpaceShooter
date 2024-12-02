@@ -1,8 +1,12 @@
+using System;
 using UnityEngine;
 
 //[ExecuteInEditMode]
 public class RectSafeArea : MonoBehaviour
 {
+    public static Action<bool, float> RefreshAdSafeArea;
+    public static Action onApplySafeArea;
+
     [SerializeField] private RectTransform parentRectTransform;
     [SerializeField] private RectTransform rectTransform;
 
@@ -12,9 +16,29 @@ public class RectSafeArea : MonoBehaviour
     private float left;
     private float right;
     private float top;
-    private float bottom;
+    public static float bottom;
+    private bool bottomAd = false;
+    private float adSpace = 0f;
 
 #if UNITY_ANDROID || UNITY_IOS || UNITY_EDITOR
+
+    private void OnEnable()
+    {
+        RefreshAdSafeArea += InitAdSpace;
+    }
+
+    private void OnDisable()
+    {
+        RefreshAdSafeArea -= InitAdSpace;
+    }
+
+    private void InitAdSpace(bool addOn, float _adSpace)
+    {
+        bottomAd = addOn;
+        adSpace = addOn ? _adSpace : 0f;
+        ApplySafeArea();
+    }
+
     private void Update()
     {
         if (lastSafeArea != Screen.safeArea)
@@ -32,12 +56,16 @@ public class RectSafeArea : MonoBehaviour
         left = safeAreaRect.xMin * scaleRatio;
         right = -(Screen.width - safeAreaRect.xMax) * scaleRatio;
         bottom = safeAreaRect.yMin * scaleRatio;
+        bottom += bottomAd ? adSpace : 0;
         top = -(Screen.height - safeAreaRect.yMax) * scaleRatio;
 
         rectTransform.offsetMin = new Vector2(left, bottom);
         rectTransform.offsetMax = new Vector2(right, top);
 
         lastSafeArea = Screen.safeArea;
+
+        onApplySafeArea?.Invoke();
     }
+
 #endif
 }
