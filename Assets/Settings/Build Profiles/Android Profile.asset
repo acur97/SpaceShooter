@@ -20,7 +20,8 @@ MonoBehaviour:
     rid: 6266636406338880098
   m_OverrideGlobalSceneList: 0
   m_Scenes: []
-  m_ScriptingDefines: []
+  m_ScriptingDefines:
+  - Platform_Mobile
   m_PlayerSettingsYaml:
     m_Settings: []
   references:
@@ -30,7 +31,7 @@ MonoBehaviour:
       type: {class: AndroidPlatformBuildSettings, ns: UnityEditor.Android, asm: UnityEditor.Android.Extensions}
       data:
         m_Development: 0
-        m_ConnectProfiler: 0
+        m_ConnectProfiler: 1
         m_BuildWithDeepProfilingSupport: 0
         m_AllowDebugging: 0
         m_WaitForManagedDebugger: 0
@@ -45,8 +46,8 @@ MonoBehaviour:
         m_ExportAsGoogleAndroidProject: 0
         m_DebugSymbolLevel: 1
         m_DebugSymbolFormat: 5
-        m_CurrentDeploymentTargetId: __builtin__target_default
+        m_CurrentDeploymentTargetId: 192.168.1.3:5555
         m_BuildType: 2
         m_BuildAppBundle: 0
-        m_IPAddressToConnect: 
+        m_IPAddressToConnect: 192.168.1.3
         m_SymlinkSources: 0

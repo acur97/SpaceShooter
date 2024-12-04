@@ -42,6 +42,10 @@ public class PostProcessingController : MonoBehaviour
     {
         Instance = this;
 
+#if Platform_Mobile && UNITY_ANDROID && !UNITY_EDITOR
+        Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
+#endif
+
         renderer2DData.rendererFeatures[1].SetActive(false);
 
         cam = Camera.main;

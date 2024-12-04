@@ -24,7 +24,7 @@ public class RoundsController : MonoBehaviour
     public enum LevelType
     {
         Normal,
-        Inifinite
+        Infinite
     }
     [Header("Level")]
     public LevelType levelType;
@@ -52,9 +52,9 @@ public class RoundsController : MonoBehaviour
         GameManager.GameStart -= DisableLeaderboardModes;
     }
 
-    private void DisableLeaderboardModes(bool on)
+    private void DisableLeaderboardModes(bool start)
     {
-        if (on)
+        if (start)
         {
             modesPanel.SetActive(false);
             tablePanel.anchorMax = new Vector2(0.5f, 0.878f);
@@ -85,7 +85,7 @@ public class RoundsController : MonoBehaviour
             bGColor.a = 0.1f;
             leaderboardBg.color = bGColor;
 
-            levelType = LevelType.Inifinite;
+            levelType = LevelType.Infinite;
             PlayerPrefs.SetInt(lastLevelType, 1);
         }
         else
@@ -113,7 +113,7 @@ public class RoundsController : MonoBehaviour
                 StartNormalRound();
                 break;
 
-            case LevelType.Inifinite:
+            case LevelType.Infinite:
                 StartInfinite();
                 break;
         }
@@ -126,7 +126,7 @@ public class RoundsController : MonoBehaviour
             return levelType switch
             {
                 LevelType.Normal => gameplayScriptable.levels,
-                LevelType.Inifinite => gameplayScriptable.infiniteLevels,
+                LevelType.Infinite => gameplayScriptable.infiniteLevels,
                 _ => null,
             };
         }
@@ -171,7 +171,7 @@ public class RoundsController : MonoBehaviour
                 }
             }
 
-            if (levelType == LevelType.Inifinite)
+            if (levelType == LevelType.Infinite)
             {
                 //Time.timeScale = Mathf.Min(Time.timeScale + gameplayScriptable.timeScaleIncrease, 2f);
                 Time.timeScale += gameplayScriptable.timeScaleIncrease;

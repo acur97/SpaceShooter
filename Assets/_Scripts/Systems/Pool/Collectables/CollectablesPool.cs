@@ -42,7 +42,7 @@ public class CollectablesPool : PoolBaseController
                 {
                     objects[i].transform.position -= speed * Time.deltaTime * transform.up;
 
-                    if (objects[i].transform.position.y <= -GameManager.BoundsLimits.y)
+                    if (objects[i].transform.position.y <= GameManager.BoundsLimits.y)
                     {
                         objects[i].SetActive(false);
                     }
@@ -61,7 +61,7 @@ public class CollectablesPool : PoolBaseController
         {
             if (!objects[i].activeSelf)
             {
-                objects[i].transform.localPosition = new Vector2(Random.Range(-GameManager.PlayerLimits.x, GameManager.PlayerLimits.x), GameManager.BoundsLimits.y);
+                objects[i].transform.localPosition = new Vector2(Random.Range(GameManager.PlayerLimits.z, GameManager.PlayerLimits.w), GameManager.BoundsLimits.x);
                 objects[i].SetActive(true);
                 break;
             }

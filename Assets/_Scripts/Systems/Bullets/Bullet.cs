@@ -50,10 +50,10 @@ public class Bullet : MonoBehaviour
 
         transform.position += speed * Time.deltaTime * transform.up;
 
-        if (transform.position.x >= GameManager.BulletLimits.x ||
-            transform.position.x <= -GameManager.BulletLimits.x ||
-            transform.position.y >= GameManager.BulletLimits.y ||
-            transform.position.y <= -GameManager.BulletLimits.y)
+        if (transform.position.x >= GameManager.BulletLimits.w ||
+            transform.position.x <= GameManager.BulletLimits.z ||
+            transform.position.y >= GameManager.BulletLimits.x ||
+            transform.position.y <= GameManager.BulletLimits.y)
         {
             gameObject.SetActive(false);
         }

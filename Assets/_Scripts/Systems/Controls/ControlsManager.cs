@@ -25,18 +25,60 @@ public class ControlsManager : MonoBehaviour
     [SerializeField] private GameObject tutorialMobile;
     [SerializeField] private GameObject tutorialPC;
 
+    private void OnEnable()
+    {
+        GameManager.GameStart += SetLevelTypeBtns;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.GameStart -= SetLevelTypeBtns;
+    }
+
     [System.Obsolete]
     private void Start()
     {
-#if UNITY_WEBGL && !UNITY_EDITOR
+#if Platform_Web && !UNITY_EDITOR
         // Call the JavaScript function to check the device
         Application.ExternalCall("CheckDevice");
 #elif UNITY_EDITOR
         OnDeviceCheck(editorTouch ? 1 : 0);
+
+#elif Platform_Mobile
+        OnDeviceCheck(1);
 #endif
     }
 
-    // This method will be called from JavaScript
+    private void SetLevelTypeBtns(bool start)
+    {
+        if (start)
+        {
+            switch (RoundsController.Instance.levelType)
+            {
+                case RoundsController.LevelType.Normal:
+                    fireBtn.gameObject.SetActive(true);
+                    powerBtn.gameObject.SetActive(GameManager.Instance.gameplayScriptable.selectedPowerUp != null);
+
+                    if (GameManager.Instance.gameplayScriptable.selectedPowerUp != null)
+                    {
+                        powerBtn.GetComponent<RectTransform>().anchoredPosition = new Vector2(-60, 260);
+                    }
+                    break;
+
+                case RoundsController.LevelType.Infinite:
+                    fireBtn.gameObject.SetActive(false);
+                    powerBtn.gameObject.SetActive(GameManager.Instance.gameplayScriptable.selectedPowerUp != null);
+
+                    if (GameManager.Instance.gameplayScriptable.selectedPowerUp != null)
+                    {
+                        powerBtn.GetComponent<RectTransform>().anchoredPosition = new Vector2(-60, 60);
+                    }
+                    break;
+            }
+        }
+    }
+
+    // This method will be called from JavaScript for WebGl builds
     public void OnDeviceCheck(int isMobile)
     {
         hasTouch = isMobile == 1;

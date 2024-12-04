@@ -48,17 +48,17 @@ public class EnemyController : ShipBaseController
 
         movement.Move(_properties);
 
-        if (transform.position.x >= GameManager.BoundsLimits.x ||
-            transform.position.x <= -GameManager.BoundsLimits.x ||
-            transform.position.y >= GameManager.BoundsLimits.y ||
-            transform.position.y <= -GameManager.BoundsLimits.y)
+        if (transform.position.x >= GameManager.BoundsLimits.w ||
+            transform.position.x <= GameManager.BoundsLimits.z ||
+            transform.position.y >= GameManager.BoundsLimits.x ||
+            transform.position.y <= GameManager.BoundsLimits.y)
         //if (transform.position.y <= -GameManager.BoundsLimits.y || transform.position.y >= GameManager.BoundsLimits.y)
         {
             Dead(true);
             return;
         }
 
-        if (transform.position.y >= -GameManager.PlayerLimits.y && _properties.attack != Enums.Attack.None)
+        if (transform.position.y >= GameManager.PlayerLimits.y && _properties.attack != Enums.Attack.None)
         {
             timer -= Time.deltaTime;
 

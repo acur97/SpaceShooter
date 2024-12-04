@@ -81,8 +81,8 @@ public class PowerUp_OrbitalLaserBehaviour : MonoBehaviour
             counter -= Time.deltaTime;
 
             VfxPool.Instance.InitVfx(new Vector2(
-                Random.Range(-GameManager.BulletLimits.x, GameManager.BulletLimits.x),
-                Random.Range(-GameManager.BulletLimits.y, GameManager.BulletLimits.y)));
+                Random.Range(GameManager.BulletLimits.z, GameManager.BulletLimits.w),
+                Random.Range(GameManager.BulletLimits.y, GameManager.BulletLimits.x)));
         }
 
         Destroy(gameObject);

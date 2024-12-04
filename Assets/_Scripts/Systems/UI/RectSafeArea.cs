@@ -5,10 +5,11 @@ using UnityEngine;
 public class RectSafeArea : MonoBehaviour
 {
     public static Action<bool, float> RefreshAdSafeArea;
-    public static Action onApplySafeArea;
 
     [SerializeField] private RectTransform parentRectTransform;
     [SerializeField] private RectTransform rectTransform;
+
+#if Platform_Mobile || UNITY_EDITOR
 
     private Rect lastSafeArea;
     private Rect safeAreaRect;
@@ -19,8 +20,6 @@ public class RectSafeArea : MonoBehaviour
     public static float bottom;
     private bool bottomAd = false;
     private float adSpace = 0f;
-
-#if UNITY_ANDROID || UNITY_IOS || UNITY_EDITOR
 
     private void OnEnable()
     {
@@ -56,15 +55,16 @@ public class RectSafeArea : MonoBehaviour
         left = safeAreaRect.xMin * scaleRatio;
         right = -(Screen.width - safeAreaRect.xMax) * scaleRatio;
         bottom = safeAreaRect.yMin * scaleRatio;
-        bottom += bottomAd ? adSpace : 0;
+        if (bottomAd)
+        {
+            bottom += adSpace - bottom;
+        }
         top = -(Screen.height - safeAreaRect.yMax) * scaleRatio;
 
         rectTransform.offsetMin = new Vector2(left, bottom);
         rectTransform.offsetMax = new Vector2(right, top);
 
         lastSafeArea = Screen.safeArea;
-
-        onApplySafeArea?.Invoke();
     }
 
 #endif

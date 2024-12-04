@@ -11,15 +11,15 @@ public class GameManager : MonoBehaviour
 
     public static Action<bool> GameStart;
 
-    [Header("Editor")]
-    [SerializeField] private bool debugMode = true;
-
     [Space]
     [ReadOnly] public bool hasStarted = false;
     [ReadOnly] public bool isPlaying = false;
     [ReadOnly] public bool hasEnded = false;
     private float currentTimeScale = 1f;
     [ReadOnly] public int leftForNextGroup = 0;
+    private float prevTimeScale;
+    private int prevLeftForNextGroup;
+    private int adRevivals;
 
     [Header("Score")]
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -36,33 +36,35 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI endCoins;
 
     [Header("Ui")]
-    [SerializeField] private RectTransform uiRect;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private TextMeshProUGUI wNewTxt;
+    [SerializeField] private GameObject adLifeBtn;
 
-    [Header("Screen Properties Percentage")]
-    [SerializeField, ColorField(0, 0, 1)] private float innerLimit = -1.6f;
-    private Vector2 innerLimits = Vector2.zero;
-    public static Vector2 InnerLimits => Instance.innerLimits;
+    [Header("Screen Borders")]
+    [SerializeField] private Transform borders_top;
+    [SerializeField] private Transform borders_bottom;
+    [SerializeField] private Transform borders_left;
+    [SerializeField] private Transform borders_right;
 
-    [SerializeField, ColorField(0, 1, 1)] private float playerLimit = -0.5f;
-    private Vector2 playerLimits = Vector2.zero;
-    public static Vector2 PlayerLimits => Instance.playerLimits;
-    [SerializeField, ColorField(0, 1, 0)] private float playerLimitTop = -1f;
-    private float playerLimitTops = 0f;
-    public static float PlayerLimitTop => Instance.playerLimitTops;
+    private Vector4 innerLimits = Vector2.zero;
+    /// <summary> x = top, y = bottom, z = left, w = right </summary>
+    public static Vector4 InnerLimits => Instance.innerLimits;
 
-    [SerializeField, ColorField(1, 0, 0)] private float bulletLimit = 0.05f;
-    private Vector2 bulletLimits = Vector2.zero;
-    public static Vector2 BulletLimits => Instance.bulletLimits;
+    private Vector4 playerLimits = Vector2.zero;
+    /// <summary> x = top, y = bottom, z = left, w = right </summary>
+    public static Vector4 PlayerLimits => Instance.playerLimits;
 
-    [SerializeField, ColorField(1, 0, 1)] private float boundsLimit = 0.5f;
-    private Vector2 boundsLimits = Vector2.zero;
-    public static Vector2 BoundsLimits => Instance.boundsLimits;
-
-    [SerializeField, ColorField(1, 0.92f, 0.016f)] private float enemyLine = 1.55f;
     private float enemyLineLimit;
+    /// <summary> float = top </summary>
     public static float EnemyLine => Instance.enemyLineLimit;
+
+    private Vector4 bulletLimits = Vector2.zero;
+    /// <summary> x = top, y = bottom, z = left, w = right </summary>
+    public static Vector4 BulletLimits => Instance.bulletLimits;
+
+    private Vector4 boundsLimits = Vector2.zero;
+    /// <summary> x = top, y = bottom, z = left, w = right </summary>
+    public static Vector4 BoundsLimits => Instance.boundsLimits;
 
     private float horizontalMultiplier = 1f;
     public static float HorizontalMultiplier => Instance.horizontalMultiplier;
@@ -85,65 +87,76 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.DeleteKey("PlayerProgress");
     }
 
-    private void OnDrawGizmosSelected()
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
     {
-        if (!debugMode)
+        if (!gameplayScriptable.debugEditorLimits)
         {
             return;
         }
-
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(uiRect, uiRect.position, mainCamera, out Vector3 canvasBorders);
 
         // Inner Limits
         Gizmos.color = Color.blue;
         Gizmos.DrawLineList(new Vector3[8]
             {
-            new(-(canvasBorders.x - innerLimit), canvasBorders.y - innerLimit),
-            new(canvasBorders.x - innerLimit, canvasBorders.y - innerLimit),
+                // top
+                new(borders_left.position.x * gameplayScriptable.innerLimit.w, borders_top.position.y * gameplayScriptable.innerLimit.x),
+                new(borders_right.position.x * gameplayScriptable.innerLimit.z, borders_top.position.y * gameplayScriptable.innerLimit.x),
 
-            new(-(canvasBorders.x - innerLimit), -(canvasBorders.y - innerLimit)),
-            new(canvasBorders.x - innerLimit, -(canvasBorders.y - innerLimit)),
+                // bottom
+                new(borders_left.position.x * gameplayScriptable.innerLimit.w, borders_bottom.position.y * gameplayScriptable.innerLimit.y),
+                new(borders_right.position.x * gameplayScriptable.innerLimit.z, borders_bottom.position.y * gameplayScriptable.innerLimit.y),
 
-            new(-(canvasBorders.x - innerLimit), -(canvasBorders.y - innerLimit)),
-            new(-(canvasBorders.x - innerLimit), canvasBorders.y - innerLimit),
+                // left
+                new(borders_left.position.x * gameplayScriptable.innerLimit.w, borders_top.position.y * gameplayScriptable.innerLimit.x),
+                new(borders_left.position.x * gameplayScriptable.innerLimit.w, borders_bottom.position.y * gameplayScriptable.innerLimit.y),
 
-            new(canvasBorders.x - innerLimit, -(canvasBorders.y - innerLimit)),
-            new(canvasBorders.x - innerLimit, canvasBorders.y - innerLimit)
+                // right
+                new(borders_right.position.x * gameplayScriptable.innerLimit.z, borders_top.position.y * gameplayScriptable.innerLimit.x),
+                new(borders_right.position.x * gameplayScriptable.innerLimit.z, borders_bottom.position.y * gameplayScriptable.innerLimit.y)
             });
 
 
         // Player Limits
         Gizmos.color = Color.cyan;
-        Gizmos.DrawLineList(new Vector3[6]
+        Gizmos.DrawLineList(new Vector3[8]
             {
-            new(-(canvasBorders.x - playerLimit), canvasBorders.y - playerLimit),
-            new(canvasBorders.x - playerLimit, canvasBorders.y - playerLimit),
+                // top
+                new(borders_left.position.x * gameplayScriptable.playerLimit.w, borders_top.position.y * gameplayScriptable.playerLimit.x),
+                new(borders_right.position.x * gameplayScriptable.playerLimit.z, borders_top.position.y * gameplayScriptable.playerLimit.x),
 
-            new(-(canvasBorders.x - playerLimit), -(canvasBorders.y - playerLimitTop)),
-            new(-(canvasBorders.x - playerLimit), canvasBorders.y - playerLimit),
+                // bottom
+                new(borders_left.position.x * gameplayScriptable.playerLimit.w, borders_bottom.position.y * gameplayScriptable.playerLimit.y),
+                new(borders_right.position.x * gameplayScriptable.playerLimit.z, borders_bottom.position.y * gameplayScriptable.playerLimit.y),
 
-            new(canvasBorders.x - playerLimit, -(canvasBorders.y - playerLimitTop)),
-            new(canvasBorders.x - playerLimit, canvasBorders.y - playerLimit)
+                // left
+                new(borders_left.position.x * gameplayScriptable.playerLimit.w, borders_top.position.y * gameplayScriptable.playerLimit.x),
+                new(borders_left.position.x * gameplayScriptable.playerLimit.w, borders_bottom.position.y * gameplayScriptable.playerLimit.y),
+
+                // right
+                new(borders_right.position.x * gameplayScriptable.playerLimit.z, borders_top.position.y * gameplayScriptable.playerLimit.x),
+                new(borders_right.position.x * gameplayScriptable.playerLimit.z, borders_bottom.position.y * gameplayScriptable.playerLimit.y)
             });
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(new Vector2(-(canvasBorders.x - playerLimit), -(canvasBorders.y - playerLimitTop)), new Vector2(canvasBorders.x - playerLimit, -(canvasBorders.y - playerLimitTop)));
-
 
         // Bullet Limits
         Gizmos.color = Color.red;
         Gizmos.DrawLineList(new Vector3[8]
             {
-            new(-(canvasBorders.x - bulletLimit), canvasBorders.y - bulletLimit),
-            new(canvasBorders.x - bulletLimit, canvasBorders.y - bulletLimit),
+                // top
+                new(borders_left.position.x * gameplayScriptable.bulletLimit.w, borders_top.position.y * gameplayScriptable.bulletLimit.x),
+                new(borders_right.position.x * gameplayScriptable.bulletLimit.z, borders_top.position.y * gameplayScriptable.bulletLimit.x),
 
-            new(-(canvasBorders.x - bulletLimit), -(canvasBorders.y - bulletLimit)),
-            new(canvasBorders.x - bulletLimit, -(canvasBorders.y - bulletLimit)),
+                // bottom
+                new(borders_left.position.x * gameplayScriptable.bulletLimit.w, borders_bottom.position.y * gameplayScriptable.bulletLimit.y),
+                new(borders_right.position.x * gameplayScriptable.bulletLimit.z, borders_bottom.position.y * gameplayScriptable.bulletLimit.y),
 
-            new(-(canvasBorders.x - bulletLimit), -(canvasBorders.y - bulletLimit)),
-            new(-(canvasBorders.x - bulletLimit), canvasBorders.y - bulletLimit),
+                // left
+                new(borders_left.position.x * gameplayScriptable.bulletLimit.w, borders_top.position.y * gameplayScriptable.bulletLimit.x),
+                new(borders_left.position.x * gameplayScriptable.bulletLimit.w, borders_bottom.position.y * gameplayScriptable.bulletLimit.y),
 
-            new(canvasBorders.x - bulletLimit, -(canvasBorders.y - bulletLimit)),
-            new(canvasBorders.x - bulletLimit, canvasBorders.y - bulletLimit)
+                // right
+                new(borders_right.position.x * gameplayScriptable.bulletLimit.z, borders_top.position.y * gameplayScriptable.bulletLimit.x),
+                new(borders_right.position.x * gameplayScriptable.bulletLimit.z, borders_bottom.position.y * gameplayScriptable.bulletLimit.y)
             });
 
 
@@ -151,24 +164,30 @@ public class GameManager : MonoBehaviour
         Gizmos.color = Color.blue + Color.red;
         Gizmos.DrawLineList(new Vector3[8]
             {
-            new(-(canvasBorders.x - boundsLimit), canvasBorders.y - boundsLimit),
-            new(canvasBorders.x - boundsLimit, canvasBorders.y - boundsLimit),
+                // top
+                new(borders_left.position.x * gameplayScriptable.boundsLimit.w, borders_top.position.y * gameplayScriptable.boundsLimit.x),
+                new(borders_right.position.x * gameplayScriptable.boundsLimit.z, borders_top.position.y * gameplayScriptable.boundsLimit.x),
 
-            new(-(canvasBorders.x - boundsLimit), -(canvasBorders.y - boundsLimit)),
-            new(canvasBorders.x - boundsLimit, -(canvasBorders.y - boundsLimit)),
+                // bottom
+                new(borders_left.position.x * gameplayScriptable.boundsLimit.w, borders_bottom.position.y * gameplayScriptable.boundsLimit.y),
+                new(borders_right.position.x * gameplayScriptable.boundsLimit.z, borders_bottom.position.y * gameplayScriptable.boundsLimit.y),
 
-            new(-(canvasBorders.x - boundsLimit), -(canvasBorders.y - boundsLimit)),
-            new(-(canvasBorders.x - boundsLimit), canvasBorders.y - boundsLimit),
+                // left
+                new(borders_left.position.x * gameplayScriptable.boundsLimit.w, borders_top.position.y * gameplayScriptable.boundsLimit.x),
+                new(borders_left.position.x * gameplayScriptable.boundsLimit.w, borders_bottom.position.y * gameplayScriptable.boundsLimit.y),
 
-            new(canvasBorders.x - boundsLimit, -(canvasBorders.y - boundsLimit)),
-            new(canvasBorders.x - boundsLimit, canvasBorders.y - boundsLimit)
+                // right
+                new(borders_right.position.x * gameplayScriptable.boundsLimit.z, borders_top.position.y * gameplayScriptable.boundsLimit.x),
+                new(borders_right.position.x * gameplayScriptable.boundsLimit.z, borders_bottom.position.y * gameplayScriptable.boundsLimit.y)
             });
 
 
         // Enemy Line
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(new Vector2(canvasBorders.x, canvasBorders.y - (enemyLine * canvasBorders.y)), new Vector2(-canvasBorders.x, canvasBorders.y - (enemyLine * canvasBorders.y)));
+        Gizmos.DrawLine(new Vector2(borders_left.position.x * gameplayScriptable.playerLimit.w, borders_top.position.y * gameplayScriptable.enemyLine),
+            new Vector2(borders_right.position.x * gameplayScriptable.playerLimit.z, borders_top.position.y * gameplayScriptable.enemyLine));
     }
+#endif
 
     public void StartGame()
     {
@@ -194,7 +213,7 @@ public class GameManager : MonoBehaviour
                 playerController.shoot.canShoot = true;
                 break;
 
-            case RoundsController.LevelType.Inifinite:
+            case RoundsController.LevelType.Infinite:
 
                 Time.timeScale = 1.1f;
 
@@ -204,6 +223,8 @@ public class GameManager : MonoBehaviour
                 playerController.shoot.canShoot = false;
                 break;
         }
+
+        adRevivals = (int)gameplayScriptable.numberOfAdRevivals;
 
         scoreText.SetText(preScore, score);
         coinsText.SetText(preCoins, PlayerProgress.GetCoins());
@@ -253,6 +274,11 @@ public class GameManager : MonoBehaviour
         wNewTxt.text = $"What's new    {Application.version}";
     }
 
+    private void Start()
+    {
+        AdsManager.Init();
+    }
+
     public void SetCustoms(ShipScriptable value)
     {
         gameplayScriptable.selectedCustoms = value;
@@ -278,7 +304,7 @@ public class GameManager : MonoBehaviour
                     roundsController.StartGroup();
                 }
 
-                if (roundsController.levelType == RoundsController.LevelType.Inifinite)
+                if (roundsController.levelType == RoundsController.LevelType.Infinite)
                 {
                     accumulatedScore += gameplayScriptable.scoreScaleIncrease * Time.deltaTime * Time.timeScale;
 
@@ -291,7 +317,7 @@ public class GameManager : MonoBehaviour
                     }
                 }
 
-                //DebugMode
+                // Debug
                 //if (Input.GetKeyDown(KeyCode.P))
                 //{
                 //    leftForNextGroup = 0;
@@ -302,15 +328,32 @@ public class GameManager : MonoBehaviour
 
     private void UpdateBorders()
     {
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(uiRect, uiRect.position, mainCamera, out Vector3 canvasBorders);
+        innerLimits = new Vector4(
+            borders_top.position.y * gameplayScriptable.innerLimit.x,
+            borders_bottom.position.y * gameplayScriptable.innerLimit.y,
+            borders_left.position.x * gameplayScriptable.innerLimit.w,
+            borders_right.position.x * gameplayScriptable.innerLimit.z);
 
-        innerLimits = new Vector2(-canvasBorders.x + innerLimit, -canvasBorders.y + innerLimit);
-        playerLimits = new Vector2(-canvasBorders.x + playerLimit, -canvasBorders.y + playerLimit);
-        playerLimitTops = -canvasBorders.y + playerLimitTop;
-        bulletLimits = new Vector2(-canvasBorders.x + bulletLimit, -canvasBorders.y + bulletLimit);
-        boundsLimits = new Vector2(-canvasBorders.x + boundsLimit, -canvasBorders.y + boundsLimit);
+        playerLimits = new Vector4(
+            borders_top.position.y * gameplayScriptable.playerLimit.x,
+            borders_bottom.position.y * gameplayScriptable.playerLimit.y,
+            borders_left.position.x * gameplayScriptable.playerLimit.w,
+            borders_right.position.x * gameplayScriptable.playerLimit.z);
 
-        enemyLineLimit = canvasBorders.y - (enemyLine * canvasBorders.y);
+        bulletLimits = new Vector4(
+            borders_top.position.y * gameplayScriptable.bulletLimit.x,
+            borders_bottom.position.y * gameplayScriptable.bulletLimit.y,
+            borders_left.position.x * gameplayScriptable.bulletLimit.w,
+            borders_right.position.x * gameplayScriptable.bulletLimit.z);
+
+        boundsLimits = new Vector4(
+            borders_top.position.y * gameplayScriptable.boundsLimit.x,
+            borders_bottom.position.y * gameplayScriptable.boundsLimit.y,
+            borders_left.position.x * gameplayScriptable.boundsLimit.w,
+            borders_right.position.x * gameplayScriptable.boundsLimit.z);
+
+        enemyLineLimit = borders_top.position.y * gameplayScriptable.enemyLine;
+
         horizontalMultiplier = mainCamera.aspect * 0.5625f;
         horizontalInvertedMultiplier = horizontalMultiplier.Remap(1, 0, 0, 1) + 1;
     }
@@ -349,24 +392,57 @@ public class GameManager : MonoBehaviour
             audioManager.mixer.SetFloat(MixerParameters.MasterVolume, -1f);
             audioManager.PlaySound(Enums.AudioType.End, 2.5f);
 
+            prevTimeScale = Time.timeScale;
             Time.timeScale = 0.5f;
 
+            prevLeftForNextGroup = leftForNextGroup;
             leftForNextGroup = -1;
 
             PlayerProgress.SaveAll();
 
-#if !UNITY_EDITOR && UNITY_WEBGL
-            Vibrate(gameplayScriptable.vibrationDeath);
-#else
-            Handheld.Vibrate();
-#endif
+            Vibration.VibrateMs(gameplayScriptable.vibrationDeath);
         }
     }
 
-#if !UNITY_EDITOR && UNITY_WEBGL
-    [DllImport("__Internal")]
-    private static extern void Vibrate(int ms);
-#endif
+    public void WatchAdForLife()
+    {
+        AdsManager.OnRewardedAdCompleted += OnAdViewed;
+        AdsManager.InitRewardedAd();
+    }
+
+    private void OnAdViewed(bool rewarded)
+    {
+        AdsManager.OnRewardedAdCompleted -= OnAdViewed;
+
+        if (rewarded)
+        {
+            adRevivals--;
+
+            if (adRevivals <= 0)
+            {
+                adLifeBtn.SetActive(false);
+            }
+
+            playerController.SetHealth((int)gameplayScriptable.playerHealthRevival);
+            playerController.SetHealthUi((int)gameplayScriptable.playerHealthRevival);
+            playerController.gameObject.SetActive(true);
+
+            audioManager.mixer.SetFloat(MixerParameters.MasterVolume, 0f);
+
+            uiManager.SetUi(UiType.End, false);
+            uiManager.SetUi(UiType.Gameplay, true);
+
+            Time.timeScale = prevTimeScale;
+            leftForNextGroup = prevLeftForNextGroup;
+
+            hasEnded = false;
+            isPlaying = true;
+
+            GameStart?.Invoke(true);
+
+            Vibration.VibrateMs(gameplayScriptable.vibrationDeath);
+        }
+    }
 
     public void Pause()
     {

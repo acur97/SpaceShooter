@@ -12,14 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e62e3eec107bc64e90ae53e34a3f549, type: 3}
   m_Name: Gameplay Settings
   m_EditorClassIdentifier: 
+  debugEditorLimits: 0
+  innerLimit: {x: 0.45, y: 0.45, z: 0.675, w: 0.675}
+  playerLimit: {x: 0.68, y: 0.87, z: 0.9, w: 0.9}
+  enemyLine: 0.56
+  bulletLimit: {x: 1.02, y: 1.02, z: 1.05, w: 1.05}
+  boundsLimit: {x: 1.15, y: 1.15, z: 1.2, w: 1.2}
+  forceTime: 0.1
+  force: 10
+  vibrationDeathMs: 500
   coinValue: 5
   playerHealth: 20
   playerHealthInfinite: 80
   timeScaleIncrease: 0.1
   scoreScaleIncrease: 2
-  forceTime: 0.1
-  force: 10
-  vibrationDeath: 500
   levels:
   - {fileID: 11400000, guid: 2f63fb46e2f815841b152e0343debc7f, type: 2}
   infiniteLevels:

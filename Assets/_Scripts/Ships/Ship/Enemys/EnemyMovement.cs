@@ -43,19 +43,19 @@ public class EnemyMovement : MonoBehaviour
                 break;
 
             case Enums.Behaviour.Wave8:
-                transform.localPosition = new Vector2(0, GameManager.BoundsLimits.y);
+                transform.localPosition = new Vector2(0, GameManager.BoundsLimits.x);
                 startPosition = transform.localPosition;
                 break;
 
             case Enums.Behaviour.Borders:
                 if (customInt % 2 == 0)
                 {
-                    transform.localPosition = new Vector2(GameManager.PlayerLimits.x + 0.25f, transform.localPosition.y);
+                    transform.localPosition = new Vector2(GameManager.PlayerLimits.w + 0.25f, transform.localPosition.y);
                     transform.localEulerAngles = new Vector3(0, 0, 90);
                 }
                 else
                 {
-                    transform.localPosition = new Vector2(-GameManager.PlayerLimits.x - 0.25f, transform.localPosition.y);
+                    transform.localPosition = new Vector2(GameManager.PlayerLimits.z - 0.25f, transform.localPosition.y);
                     transform.localEulerAngles = new Vector3(0, 0, 270);
                 }
                 break;
@@ -67,13 +67,13 @@ public class EnemyMovement : MonoBehaviour
 
     private void LimitX()
     {
-        if (transform.localPosition.x > GameManager.InnerLimits.x)
+        if (transform.localPosition.x > GameManager.InnerLimits.w)
         {
-            transform.localPosition = new Vector2(GameManager.InnerLimits.x, transform.localPosition.y);
+            transform.localPosition = new Vector2(GameManager.InnerLimits.w, transform.localPosition.y);
         }
-        else if (transform.localPosition.x < -GameManager.InnerLimits.x)
+        else if (transform.localPosition.x < GameManager.InnerLimits.z)
         {
-            transform.localPosition = new Vector2(-GameManager.InnerLimits.x, transform.localPosition.y);
+            transform.localPosition = new Vector2(-GameManager.InnerLimits.z, transform.localPosition.y);
         }
     }
 
@@ -208,16 +208,16 @@ public class EnemyMovement : MonoBehaviour
     {
         transform.position += properties.speed * Time.deltaTime * transform.up;
 
-        //if (transform.position.y < PlayerController.Instance.transform.position.y)
-        //{
-        //    return;
-        //}
+        if (transform.position.y < PlayerController.Instance.transform.position.y)
+        {
+            return;
+        }
 
-        if (transform.position.x > PlayerController.Instance.transform.position.x)
+        if (transform.position.x >= PlayerController.Instance.transform.position.x)
         {
             transform.position = new Vector2(transform.position.x - (properties.speed * Time.deltaTime * properties.behaviourMathfSin), transform.position.y);
         }
-        else if (transform.position.x < PlayerController.Instance.transform.position.x)
+        else
         {
             transform.position = new Vector2(transform.position.x + (properties.speed * Time.deltaTime * properties.behaviourMathfSin), transform.position.y);
         }

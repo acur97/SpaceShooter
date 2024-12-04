@@ -4,21 +4,35 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Gameplay Settings", menuName = "Gameplay/Settings", order = 0)]
 public class GameplayScriptable : ScriptableObject
 {
-    [Header("Normal Level Type")]
+    [Header("Screen Properties Percentages")]
+#if UNITY_EDITOR
+    public bool debugEditorLimits = false;
+#endif
+    public Vector4 innerLimit = Vector4.one;
+    public Vector4 playerLimit = Vector4.one;
+    public float enemyLine = 0f;
+    public Vector4 bulletLimit = Vector4.one;
+    public Vector4 boundsLimit = Vector4.one;
+
+    [Header("Player Explosion Feedback")]
+    public float forceTime = 0.1f;
+    public float force = 10;
+
+    [Header("Vibrations Miliseconds")]
+    public int vibrationDeath = 500;
+
+    [Header("Common Values")]
     public int coinValue = 5;
+    public uint playerHealthRevival = 10;
+    public uint numberOfAdRevivals = 1;
+
+    [Header("Normal Level Type")]
     public uint playerHealth = 20;
 
     [Header("Infinite Level Type")]
     public uint playerHealthInfinite = 40;
     public float timeScaleIncrease = 0.1f;
     public float scoreScaleIncrease = 2f;
-
-    [Header("Player Explosion Feedback")]
-    public float forceTime = 0.1f;
-    public float force = 10;
-
-    [Header("Vibrations")]
-    public int vibrationDeath = 500;
 
     [Header("Levels (only level 0 enabled for now)")]
     public LevelScriptable[] levels;

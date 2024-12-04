@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     public void ClampPosition()
     {
         transform.localPosition = new Vector2(
-            Mathf.Clamp(transform.localPosition.x + inputMove.x, -GameManager.PlayerLimits.x, GameManager.PlayerLimits.x),
-            Mathf.Clamp(transform.localPosition.y + inputMove.y, -GameManager.PlayerLimits.y, GameManager.PlayerLimitTop));
+            Mathf.Clamp(transform.localPosition.x + inputMove.x, GameManager.PlayerLimits.z, GameManager.PlayerLimits.w),
+            Mathf.Clamp(transform.localPosition.y + inputMove.y, GameManager.PlayerLimits.y, GameManager.PlayerLimits.x));
     }
 }
