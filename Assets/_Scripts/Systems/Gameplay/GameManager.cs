@@ -279,6 +279,12 @@ public class GameManager : MonoBehaviour
         AdsManager.Init();
     }
 
+    [ContextMenu("Destroy BannerAd")]
+    public void DestroyBannerAd()
+    {
+        AdsManager.DestroyBottomBannerAd();
+    }
+
     public void SetCustoms(ShipScriptable value)
     {
         gameplayScriptable.selectedCustoms = value;
@@ -400,7 +406,7 @@ public class GameManager : MonoBehaviour
 
             PlayerProgress.SaveAll();
 
-            Vibration.VibrateMs(gameplayScriptable.vibrationDeath);
+            Vibration.InitVibrate();
         }
     }
 
@@ -423,8 +429,18 @@ public class GameManager : MonoBehaviour
                 adLifeBtn.SetActive(false);
             }
 
-            playerController.SetHealth((int)gameplayScriptable.playerHealthRevival);
-            playerController.SetHealthUi((int)gameplayScriptable.playerHealthRevival);
+
+            switch (roundsController.levelType)
+            {
+                case RoundsController.LevelType.Normal:
+                    playerController.SetHealth((int)(gameplayScriptable.playerHealth * 0.5f));
+                    break;
+
+                case RoundsController.LevelType.Infinite:
+                    playerController.SetHealth((int)(gameplayScriptable.playerHealthInfinite * 0.5f));
+                    break;
+            }
+            playerController.UpdateHealthUi();
             playerController.gameObject.SetActive(true);
 
             audioManager.mixer.SetFloat(MixerParameters.MasterVolume, 0f);
@@ -440,7 +456,7 @@ public class GameManager : MonoBehaviour
 
             GameStart?.Invoke(true);
 
-            Vibration.VibrateMs(gameplayScriptable.vibrationDeath);
+            Vibration.InitVibrate();
         }
     }
 

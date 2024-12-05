@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 222779771472130718}
   - component: {fileID: 114916822656868938}
   - component: {fileID: 114959255499348754}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 224233332446998570}
   - component: {fileID: 222910655472497136}
   - component: {fileID: 114193057462813808}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 223985404539061306}
   - component: {fileID: 114034781880355044}
   - component: {fileID: 114616652852970184}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: SMART_BANNER
   m_TagString: Ad
   m_Icon: {fileID: 0}

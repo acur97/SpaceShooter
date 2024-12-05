@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 223611447948025624}
   - component: {fileID: 114814154768417776}
   - component: {fileID: 114782070117714080}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: ADAPTIVE
   m_TagString: Ad
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 224568288566307878}
   - component: {fileID: 222163316230224026}
   - component: {fileID: 114350348470438990}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 222908399171909076}
   - component: {fileID: 114302043590274744}
   - component: {fileID: 114573167377799528}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

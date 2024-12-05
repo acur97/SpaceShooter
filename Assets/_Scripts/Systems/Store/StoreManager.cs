@@ -281,7 +281,7 @@ public class StoreManager : MonoBehaviour
             panel2.anchorMax = new Vector2(0.96f, 0.4f);
         }
 
-        if (!canMoveFromSelected || ControlsManager.hasTouch)
+        if (ControlsManager.hasTouch || !canMoveFromSelected)
         {
             return;
         }

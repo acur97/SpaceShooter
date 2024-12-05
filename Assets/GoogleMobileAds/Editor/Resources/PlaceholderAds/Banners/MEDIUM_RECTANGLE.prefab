@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 223629559242470952}
   - component: {fileID: 114983991128439442}
   - component: {fileID: 114372880593303924}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: MEDIUM_RECTANGLE
   m_TagString: Ad
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 222075172098901274}
   - component: {fileID: 114038968471933872}
   - component: {fileID: 114975822294336148}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}

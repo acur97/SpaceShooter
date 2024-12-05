@@ -18,12 +18,8 @@ public class GameplayScriptable : ScriptableObject
     public float forceTime = 0.1f;
     public float force = 10;
 
-    [Header("Vibrations Miliseconds")]
-    public int vibrationDeath = 500;
-
     [Header("Common Values")]
     public int coinValue = 5;
-    public uint playerHealthRevival = 10;
     public uint numberOfAdRevivals = 1;
 
     [Header("Normal Level Type")]

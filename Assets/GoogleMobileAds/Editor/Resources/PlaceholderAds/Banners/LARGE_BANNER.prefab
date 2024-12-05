@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 222213910864577190}
   - component: {fileID: 114252159333637556}
   - component: {fileID: 114791891126826622}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 223744438911749882}
   - component: {fileID: 114831681655494918}
   - component: {fileID: 114428819205255628}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: LARGE_BANNER
   m_TagString: Ad
   m_Icon: {fileID: 0}

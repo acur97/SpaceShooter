@@ -12,11 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57881a7a4b18dff4b82ce561559b9591, type: 3}
   m_Name: Player Ship Blue
   m_EditorClassIdentifier: 
+  editorCustom: 1
+  editorStore: 1
+  editorShip: 1
+  editorBullet: 1
+  editorEnemy: 1
+  editorNotes: 1
+  notes: 
   color: {r: 0, g: 0, b: 4.237095, a: 1}
   name: Blue color
   description: ship and bullets in <color=#0000ff>blue</color>, enemy bullets in
-    <color=#ff0080>magenta
-  owned: 1
+    <color=#ff0080>pink
+  owned: 0
   cost: 0
   sprite: {fileID: 21300000, guid: d79c261e869253a4c9b9a8645e894178, type: 3}
   material: {fileID: 0}
@@ -26,6 +33,8 @@ MonoBehaviour:
   coolDown: 0.1
   _spaceCoolDown: 0
   spaceCooldown: -1
+  _bulletTime: 0
+  bulletTime: -1
   attack: 0
   enemyCollision: 0
   deathScore: 8

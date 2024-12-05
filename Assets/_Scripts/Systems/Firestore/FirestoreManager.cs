@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -35,6 +36,8 @@ public class FirestoreManager : MonoBehaviour
     private string[] playerStats = new string[2];
     private string playerName;
     private string playerScore;
+
+    private CancellationTokenSource cancellationToken;
 
     private void Awake()
     {
@@ -96,14 +99,18 @@ public class FirestoreManager : MonoBehaviour
 
     private async UniTaskVoid DownloadLeaderboardVoid()
     {
+        UiManager.Instance.SetUi(UiType.Loading, true, 0.2f);
         downloading = true;
 
         ClearLeaderboard();
 
-        await DownloadLeaderboard();
+        cancellationToken?.Cancel();
+        cancellationToken = new CancellationTokenSource();
+        await DownloadLeaderboard(cancellationToken);
 
         SetLeaderboardRecords();
 
+        UiManager.Instance.SetUi(UiType.Loading, false, 0.2f);
         downloading = false;
     }
 
@@ -115,12 +122,12 @@ public class FirestoreManager : MonoBehaviour
         }
     }
 
-    private async UniTask DownloadLeaderboard()
+    private async UniTask DownloadLeaderboard(CancellationTokenSource cancellationToken)
     {
         using UnityWebRequest webRequest = UnityWebRequest.Get(CurrentUrl);
         await webRequest.SendWebRequest();
 
-        if (webRequest.result == UnityWebRequest.Result.Success && webRequest.isDone)
+        if (!cancellationToken.IsCancellationRequested && webRequest.result == UnityWebRequest.Result.Success && webRequest.isDone)
         {
             leaderboard = JsonUtility.FromJson<Document>(webRequest.downloadHandler.text);
         }
@@ -168,7 +175,9 @@ public class FirestoreManager : MonoBehaviour
 
     private async UniTaskVoid UploadLeaderboard()
     {
-        await DownloadLeaderboard();
+        cancellationToken?.Cancel();
+        cancellationToken = new CancellationTokenSource();
+        await DownloadLeaderboard(cancellationToken);
 
         for (int i = 0; i < leaderboard.fields.Scores.arrayValue.values.Count; i++)
         {
