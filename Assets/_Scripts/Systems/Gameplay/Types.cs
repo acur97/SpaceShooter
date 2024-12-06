@@ -51,13 +51,6 @@ public class Inputs
 }
 
 [Preserve]
-public class MixerParameters
-{
-    public const string MasterVolume = "MasterVolume";
-    public const string MusicPitch = "MusicPitch";
-}
-
-[Preserve]
 public class Enums
 {
     public enum SpawnType

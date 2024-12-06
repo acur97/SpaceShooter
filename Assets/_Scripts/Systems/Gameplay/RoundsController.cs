@@ -176,8 +176,7 @@ public class RoundsController : MonoBehaviour
                 //Time.timeScale = Mathf.Min(Time.timeScale + gameplayScriptable.timeScaleIncrease, 2f);
                 Time.timeScale += gameplayScriptable.timeScaleIncrease;
 
-                AudioManager.Instance.mixer.GetFloat(MixerParameters.MusicPitch, out float pitch);
-                AudioManager.Instance.mixer.SetFloat(MixerParameters.MusicPitch, Mathf.Min(pitch + 0.02f, 1.2f));
+                AudioManager.Instance.MusicPitch = Mathf.Min(AudioManager.Instance.MusicPitch + 0.02f, 1.2f);
             }
         }
         else

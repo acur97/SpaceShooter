@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class AdsManager
 {
+#if Platform_Mobile
     private static readonly RequestConfiguration requestConfiguration = new()
     {
         TestDeviceIds = new()
             {
                 AdRequest.TestDeviceSimulator,
-                #if UNITY_IPHONE
+#if UNITY_IPHONE
                 ""
-                #elif UNITY_ANDROID
+#elif UNITY_ANDROID
                 "bcbb08c53d80435abd0fbe4d9f37daed" // my "moto e(7) plus" ads id
-                #endif
+#endif
             }
     };
 
@@ -49,6 +50,7 @@ public class AdsManager
     private static RewardedAd _rewardedAd;
     public static Action<bool> OnRewardedAdCompleted;
     #endregion
+#endif
 
     public static void Init()
     {

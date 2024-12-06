@@ -5,7 +5,7 @@ public class Vibration
 {
     public static void InitVibrate()
     {
-#if Platform_Web
+#if Platform_Web && !UNITY_EDITOR
         Vibrate(500);
 #else
         Handheld.Vibrate();

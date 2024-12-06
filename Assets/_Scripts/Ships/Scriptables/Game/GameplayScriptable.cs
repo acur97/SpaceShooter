@@ -21,6 +21,7 @@ public class GameplayScriptable : ScriptableObject
     [Header("Common Values")]
     public int coinValue = 5;
     public uint numberOfAdRevivals = 1;
+    public uint numberOfCoinsRevivals = 100;
 
     [Header("Normal Level Type")]
     public uint playerHealth = 20;

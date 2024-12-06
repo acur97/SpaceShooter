@@ -39,6 +39,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     [SerializeField] private TextMeshProUGUI wNewTxt;
     [SerializeField] private GameObject adLifeBtn;
+    [SerializeField] private TextMeshProUGUI adLifeTxt;
+    private const string adLifeMovile = "Need a Life? Watch Ad!";
+    private const string adLifeWebGl = "Need a Life? Use {0} Coins!";
 
     [Header("Screen Borders")]
     [SerializeField] private Transform borders_top;
@@ -235,6 +238,8 @@ public class GameManager : MonoBehaviour
         roundsController.StartRound();
 
         audioManager.PlaySound(Enums.AudioType.Start, 2f);
+
+        AdsManager.DestroyBottomBannerAd();
     }
 
     public void OpenWnew(bool on)
@@ -265,8 +270,8 @@ public class GameManager : MonoBehaviour
         playerController.Init();
 
         Time.timeScale = 1;
-        audioManager.mixer.SetFloat(MixerParameters.MusicPitch, 1f);
-        audioManager.mixer.SetFloat(MixerParameters.MasterVolume, 0f);
+        audioManager.SetMasterVolume(1f);
+        audioManager.SetMusicPitch(1f);
 
         PlayerProgress.Init(gameplayScriptable);
         SetCustoms(gameplayScriptable.selectedCustoms);
@@ -375,7 +380,7 @@ public class GameManager : MonoBehaviour
 
     public void UpCoins(int value)
     {
-        PlayerProgress.UpCoins(value);
+        PlayerProgress.SetCoins(value);
         coinsText.SetText(preCoins, PlayerProgress.GetCoins());
         audioManager.PlaySound(Enums.AudioType.Coin);
     }
@@ -395,7 +400,7 @@ public class GameManager : MonoBehaviour
             endScore.SetText(postScore, score);
             endCoins.SetText(preCoins, PlayerProgress.GetCoins());
 
-            audioManager.mixer.SetFloat(MixerParameters.MasterVolume, -1f);
+            audioManager.SetMasterVolume(0.5f);
             audioManager.PlaySound(Enums.AudioType.End, 2.5f);
 
             prevTimeScale = Time.timeScale;
@@ -403,6 +408,28 @@ public class GameManager : MonoBehaviour
 
             prevLeftForNextGroup = leftForNextGroup;
             leftForNextGroup = -1;
+
+#if Platform_Mobile
+            if (adRevivals > 0)
+            {
+                adLifeBtn.SetActive(true);
+                adLifeTxt.SetText(adLifeMovile);
+            }
+            else
+            {
+                adLifeBtn.SetActive(false);
+            }
+#else
+            if (adRevivals > 0 && PlayerProgress.GetCoins() >= gameplayScriptable.numberOfCoinsRevivals)
+            {
+                adLifeBtn.SetActive(true);
+                adLifeTxt.SetText(adLifeWebGl, gameplayScriptable.numberOfCoinsRevivals);
+            }
+            else
+            {
+                adLifeBtn.SetActive(false);
+            }
+#endif
 
             PlayerProgress.SaveAll();
 
@@ -412,23 +439,24 @@ public class GameManager : MonoBehaviour
 
     public void WatchAdForLife()
     {
+#if Platform_Mobile
         AdsManager.OnRewardedAdCompleted += OnAdViewed;
         AdsManager.InitRewardedAd();
+#else
+        UpCoins(-(int)gameplayScriptable.numberOfCoinsRevivals);
+        OnAdViewed(true);
+#endif
     }
 
     private void OnAdViewed(bool rewarded)
     {
+#if Platform_Mobile
         AdsManager.OnRewardedAdCompleted -= OnAdViewed;
+#endif
 
         if (rewarded)
         {
             adRevivals--;
-
-            if (adRevivals <= 0)
-            {
-                adLifeBtn.SetActive(false);
-            }
-
 
             switch (roundsController.levelType)
             {
@@ -443,7 +471,7 @@ public class GameManager : MonoBehaviour
             playerController.UpdateHealthUi();
             playerController.gameObject.SetActive(true);
 
-            audioManager.mixer.SetFloat(MixerParameters.MasterVolume, 0f);
+            audioManager.SetMasterVolume(1f);
 
             uiManager.SetUi(UiType.End, false);
             uiManager.SetUi(UiType.Gameplay, true);
@@ -469,7 +497,7 @@ public class GameManager : MonoBehaviour
 
         if (isPlaying)
         {
-            audioManager.mixer.SetFloat(MixerParameters.MasterVolume, -15f);
+            audioManager.SetMasterVolume(0.25f);
 
             uiManager.SetUi(UiType.Pause, true);
 
@@ -480,7 +508,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            audioManager.mixer.SetFloat(MixerParameters.MasterVolume, 0f);
+            audioManager.SetMasterVolume(1f);
 
             uiManager.SetUi(UiType.Pause, false);
 

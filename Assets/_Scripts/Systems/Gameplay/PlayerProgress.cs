@@ -136,7 +136,7 @@ public class PlayerProgress
         return scriptable.progress.playerName;
     }
 
-    public static int UpCoins(int value)
+    public static int SetCoins(int value)
     {
         return scriptable.progress.coins += value;
     }

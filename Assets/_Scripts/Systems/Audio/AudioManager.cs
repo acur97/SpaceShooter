@@ -1,7 +1,6 @@
 using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
-using UnityEngine.Audio;
 
 [Serializable]
 public struct AudioPart
@@ -14,13 +13,12 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-    public AudioMixer mixer;
-
     [Header("Sources")]
-    public AudioSource source;
-    public AudioSource sourceLoop;
-    public AudioSource sourcePowerUps;
-    public AudioSource sourcePowerUpsLoop;
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioSource source;
+    [SerializeField] private AudioSource sourceLoop;
+    [SerializeField] private AudioSource sourcePowerUps;
+    [SerializeField] private AudioSource sourcePowerUpsLoop;
 
     [Header("Main Clips")]
     [SerializeField] private AudioClip clipBoom;
@@ -167,5 +165,31 @@ public class AudioManager : MonoBehaviour
     public void PlayUiClip()
     {
         PlaySound(clip_ui, 0.5f);
+    }
+
+    public void SetMasterVolume(float volume)
+    {
+        musicSource.volume = volume;
+        source.volume = volume;
+        sourceLoop.volume = volume;
+        sourcePowerUps.volume = volume;
+        sourcePowerUpsLoop.volume = volume;
+    }
+
+    public float MusicPitch
+    {
+        get
+        {
+            return musicSource.pitch;
+        }
+        set
+        {
+            musicSource.pitch = value;
+        }
+    }
+
+    public void SetMusicPitch(float pitch)
+    {
+        musicSource.pitch = pitch;
     }
 }

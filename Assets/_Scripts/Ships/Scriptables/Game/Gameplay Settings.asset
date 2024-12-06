@@ -20,8 +20,9 @@ MonoBehaviour:
   boundsLimit: {x: 1.15, y: 1.15, z: 1.2, w: 1.2}
   forceTime: 0.1
   force: 10
-  vibrationDeathMs: 500
   coinValue: 5
+  numberOfAdRevivals: 1
+  numberOfCoinsRevivals: 100
   playerHealth: 20
   playerHealthInfinite: 80
   timeScaleIncrease: 0.1
@@ -37,7 +38,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b3613040e6c9af04a93b789a0b9caaf3, type: 2}
   - {fileID: 11400000, guid: c92af78e6d93f574385b108a12590052, type: 2}
   - {fileID: 11400000, guid: 4e3b12753f29d7b4190c16e2592e9b7f, type: 2}
-  selectedCustoms: {fileID: 11400000, guid: 7b37b7f225a66d946a96ea1acd797e03, type: 2}
+  selectedCustoms: {fileID: 11400000, guid: d67d2aeae0e5a4d49b14b6213330bb50, type: 2}
   powerUps:
   - {fileID: 11400000, guid: 2f5b416c7307fdd449a39ac6d6daa6c1, type: 2}
   - {fileID: 11400000, guid: 0c12553f632fcbb4ea13d2c948d5502b, type: 2}
@@ -57,9 +58,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6cd785201aceb1e4a94957e463fb0bd7, type: 2}
   selectedPowerUp: {fileID: 0}
   progress:
-    playerName: 
-    coins: 1000865
-    powerUpAmounts: d8030000e4030000e0030000cd030000cb030000de030000e2030000e2030000e4030000e1030000db030000dd030000d5030000d2030000e4030000d1030000
+    playerName: Test
+    coins: 120
+    powerUpAmounts: 00000000000000000000000003000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
     powerUpIndex: -1
-    customsOwneds: 010101010101
+    customsOwneds: 010000000000
     customsIndex: 0

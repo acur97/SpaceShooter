@@ -14,7 +14,8 @@ public class StoreManager : MonoBehaviour
     [Header("Store")]
     [SerializeField] private GameObject prefabPowerUps;
     [SerializeField] private GameObject prefabCustoms;
-    [SerializeField] private Transform content;
+    [SerializeField] private ScrollRect scrollRect;
+    //[SerializeField] private Transform content;
 
     private GameObject instenciatedPrefab;
     private List<GameObject> instanciatedPrefabs = new();
@@ -29,6 +30,8 @@ public class StoreManager : MonoBehaviour
     [SerializeField] private Camera cam;
     [SerializeField] private RectTransform panel1;
     [SerializeField] private RectTransform panel2;
+    [SerializeField] private RectTransform tgl1;
+    [SerializeField] private RectTransform tgl2;
 
     [Space]
     [SerializeField] private Toggle customTgl;
@@ -49,7 +52,7 @@ public class StoreManager : MonoBehaviour
     [Space]
     [SerializeField] private TextMeshProUGUI coinsTxt;
 
-    private const float limit = 0.746988f;
+    private const float limit = 1.050505f;
     private float cameraAspect = 1.777778f;
 
     private void Awake()
@@ -83,16 +86,16 @@ public class StoreManager : MonoBehaviour
     private void InitPrefabs()
     {
         instanciatedPrefabs.Clear();
-        for (int i = 0; i < content.childCount; i++)
+        for (int i = 0; i < scrollRect.content.childCount; i++)
         {
-            Destroy(content.GetChild(i).gameObject);
+            Destroy(scrollRect.content.GetChild(i).gameObject);
         }
 
         if (powerUpsMode)
         {
             for (int i = 0; i < gameplayScriptable.powerUps.Count; i++)
             {
-                instenciatedPrefab = Instantiate(prefabPowerUps, content);
+                instenciatedPrefab = Instantiate(prefabPowerUps, scrollRect.content);
                 instenciatedPrefab.GetComponent<StoreItem>().Init(this, gameplayScriptable.powerUps[i]);
                 instanciatedPrefabs.Add(instenciatedPrefab);
             }
@@ -101,7 +104,7 @@ public class StoreManager : MonoBehaviour
         {
             for (int i = 0; i < gameplayScriptable.customs.Count; i++)
             {
-                instenciatedPrefab = Instantiate(prefabCustoms, content);
+                instenciatedPrefab = Instantiate(prefabCustoms, scrollRect.content);
                 instenciatedPrefab.GetComponent<StoreItemCustom>().Init(this, gameplayScriptable.customs[i]);
                 instanciatedPrefabs.Add(instenciatedPrefab);
             }
@@ -203,7 +206,7 @@ public class StoreManager : MonoBehaviour
 
     private void BuyPowerUp()
     {
-        PlayerProgress.UpCoins(-(int)showingPowerUp.cost);
+        PlayerProgress.SetCoins(-(int)showingPowerUp.cost);
         showingPowerUp.currentAmount++;
         buyBtn.interactable = PlayerProgress.GetCoins() >= showingPowerUp.cost;
         selectTgl.interactable = showingPowerUp.currentAmount > 0;
@@ -245,7 +248,7 @@ public class StoreManager : MonoBehaviour
 
     public void BuyCustom()
     {
-        PlayerProgress.UpCoins(-(int)showingShip.cost);
+        PlayerProgress.SetCoins(-(int)showingShip.cost);
         showingShip.owned = true;
         buyBtn.interactable = !showingShip.owned;
         selectTgl.interactable = showingShip.owned;
@@ -270,15 +273,25 @@ public class StoreManager : MonoBehaviour
 
             panel2.anchorMin = new Vector2(0.51f, 0.06f);
             panel2.anchorMax = new Vector2(0.96f, 0.9f);
+
+            tgl1.offsetMin = new Vector2(8f, 16f);
+            tgl1.offsetMax = new Vector2(-8f, -16f);
+            tgl2.offsetMin = new Vector2(8f, 16f);
+            tgl2.offsetMax = new Vector2(-8f, -16f);
         }
         else
         {
             // vertical
-            panel1.anchorMin = new Vector2(0.04f, 0.4f);
+            panel1.anchorMin = new Vector2(0.04f, 0.41f);
             panel1.anchorMax = new Vector2(0.96f, 0.9f);
 
-            panel2.anchorMin = new Vector2(0.04f, 0.06f);
-            panel2.anchorMax = new Vector2(0.96f, 0.4f);
+            panel2.anchorMin = new Vector2(0.04f, 0f);
+            panel2.anchorMax = new Vector2(0.96f, 0.41f);
+
+            tgl1.offsetMin = new Vector2(8f, 8f);
+            tgl1.offsetMax = new Vector2(-8f, -8f);
+            tgl2.offsetMin = new Vector2(8f, 8f);
+            tgl2.offsetMax = new Vector2(-8f, -8f);
         }
 
         if (ControlsManager.hasTouch || !canMoveFromSelected)
@@ -292,14 +305,16 @@ public class StoreManager : MonoBehaviour
             {
                 if (instanciatedPrefabs[0].transform.position.y > first.position.y)
                 {
-                    content.localPosition -= 1000f * Time.deltaTime * Vector3.up;
+                    scrollRect.StopMovement();
+                    scrollRect.content.localPosition -= 1000f * Time.deltaTime * Vector3.up;
                 }
             }
             else if (eventSystem.currentSelectedGameObject == instanciatedPrefabs[^1])
             {
                 if (instanciatedPrefabs[^1].transform.position.y < last.position.y)
                 {
-                    content.localPosition += 1000f * Time.deltaTime * Vector3.up;
+                    scrollRect.StopMovement();
+                    scrollRect.content.localPosition += 1000f * Time.deltaTime * Vector3.up;
                 }
             }
             else
@@ -310,11 +325,13 @@ public class StoreManager : MonoBehaviour
                     {
                         if (instanciatedPrefabs[i].transform.position.y > top.position.y)
                         {
-                            content.localPosition -= 1000f * Time.deltaTime * Vector3.up;
+                            scrollRect.StopMovement();
+                            scrollRect.content.localPosition -= 1000f * Time.deltaTime * Vector3.up;
                         }
                         else if (instanciatedPrefabs[i].transform.position.y < bottom.position.y)
                         {
-                            content.localPosition += 1000f * Time.deltaTime * Vector3.up;
+                            scrollRect.StopMovement();
+                            scrollRect.content.localPosition += 1000f * Time.deltaTime * Vector3.up;
                         }
                     }
                 }
