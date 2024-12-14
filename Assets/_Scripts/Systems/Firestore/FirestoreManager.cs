@@ -206,6 +206,8 @@ public class FirestoreManager : MonoBehaviour
             panelSubmiting.SetActive(false);
             panelSubmited.SetActive(true);
 
+            SetLeaderboardStatus(true);
+
             PlayerProgress.SavePlayerName(nameInput.text);
         }
     }

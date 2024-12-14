@@ -60,7 +60,7 @@ public class PowerUp_Missile : PowerUpBase
         missileInstance.transform.position = shipBase.shootRoot2.position;
         missileInstance.Init(damage, initialSpeed, speedUp);
 
-        PowerUpsManager.Instance.slider.value -= 0.5f;
+        PowerUpsManager.Instance.PowerUp_UiFill -= 0.5f;
 
         currentCount--;
         if (currentCount <= 0)

@@ -58,9 +58,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6cd785201aceb1e4a94957e463fb0bd7, type: 2}
   selectedPowerUp: {fileID: 0}
   progress:
-    playerName: Test
-    coins: 120
+    playerName: Nombrezaso
+    coins: 999945
     powerUpAmounts: 00000000000000000000000003000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-    powerUpIndex: -1
+    powerUpIndex: 3
     customsOwneds: 010000000000
     customsIndex: 0

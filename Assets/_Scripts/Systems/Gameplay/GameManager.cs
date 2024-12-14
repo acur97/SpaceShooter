@@ -38,10 +38,15 @@ public class GameManager : MonoBehaviour
     [Header("Ui")]
     [SerializeField] private Camera mainCamera;
     [SerializeField] private TextMeshProUGUI wNewTxt;
-    [SerializeField] private GameObject adLifeBtn;
+    [SerializeField] private GameObject adLifePanel;
+    [SerializeField] private GameObject adIcon;
+    [SerializeField] private GameObject adLifeEndPanel;
     [SerializeField] private TextMeshProUGUI adLifeTxt;
-    private const string adLifeMovile = "Need a Life? Watch Ad!";
-    private const string adLifeWebGl = "Need a Life? Use {0} Coins!";
+    private const string adLifeMovile = "Need a Life? <color=#FFFFFF>Watch Ad!";
+    private const string adLifeWebGl = "Need a Life? <color=#FFFFFF>Use <b>{0}</b> Coins!";
+    [Header("Gameplay")]
+    [SerializeField] private Animator anim_count;
+    private const string _init = "Init";
 
     [Header("Screen Borders")]
     [SerializeField] private Transform borders_top;
@@ -192,17 +197,12 @@ public class GameManager : MonoBehaviour
     }
 #endif
 
-    public void StartGame()
+    public void StartGameplayUi()
     {
         if (hasStarted)
         {
             return;
         }
-
-        GameStart?.Invoke(true);
-
-        hasStarted = true;
-        isPlaying = true;
 
         switch (roundsController.levelType)
         {
@@ -233,13 +233,23 @@ public class GameManager : MonoBehaviour
         coinsText.SetText(preCoins, PlayerProgress.GetCoins());
 
         uiManager.SetUi(UiType.Gameplay, true);
-        uiManager.SetUi(UiType.Select, false, 1);
+        uiManager.SetUi(UiType.Select, false, 1, () => anim_count.SetTrigger(_init));
 
         roundsController.StartRound();
 
         audioManager.PlaySound(Enums.AudioType.Start, 2f);
 
         AdsManager.DestroyBottomBannerAd();
+    }
+
+    public void StartGame()
+    {
+        GameStart?.Invoke(true);
+
+        hasStarted = true;
+        isPlaying = true;
+
+        Vibration.InitVibrate();
     }
 
     public void OpenWnew(bool on)
@@ -412,24 +422,27 @@ public class GameManager : MonoBehaviour
 #if Platform_Mobile
             if (adRevivals > 0)
             {
-                adLifeBtn.SetActive(true);
+                adLifePanel.SetActive(true);
+                adLifeEndPanel.SetActive(false);
+
+                adIcon.SetActive(true);
                 adLifeTxt.SetText(adLifeMovile);
-            }
-            else
-            {
-                adLifeBtn.SetActive(false);
             }
 #else
             if (adRevivals > 0 && PlayerProgress.GetCoins() >= gameplayScriptable.numberOfCoinsRevivals)
             {
-                adLifeBtn.SetActive(true);
+                adLifePanel.SetActive(true);
+                adLifeEndPanel.SetActive(false);
+
+                adIcon.SetActive(false);
                 adLifeTxt.SetText(adLifeWebGl, gameplayScriptable.numberOfCoinsRevivals);
             }
+#endif
             else
             {
-                adLifeBtn.SetActive(false);
+                adLifePanel.SetActive(false);
+                adLifeEndPanel.SetActive(true);
             }
-#endif
 
             PlayerProgress.SaveAll();
 
@@ -479,12 +492,7 @@ public class GameManager : MonoBehaviour
             Time.timeScale = prevTimeScale;
             leftForNextGroup = prevLeftForNextGroup;
 
-            hasEnded = false;
-            isPlaying = true;
-
-            GameStart?.Invoke(true);
-
-            Vibration.InitVibrate();
+            anim_count.SetTrigger(_init);
         }
     }
 

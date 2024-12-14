@@ -35,8 +35,8 @@ public class PowerUpsManager : MonoBehaviour
     [SerializeField] private GameplayScriptable gameplayScriptable;
 
     [Header("UI")]
-    public Slider slider;
     [SerializeField] private Image icon;
+    private float maxValue;
 
     //public List<PowerUpBase> currentPowerUps = new();
     [ReadOnly] public PowerUpBase currentPowerUp;
@@ -59,6 +59,18 @@ public class PowerUpsManager : MonoBehaviour
         Enemy_Death -= EnemyDeath;
     }
 
+    public float PowerUp_UiFill
+    {
+        get
+        {
+            return icon.fillAmount;
+        }
+        set
+        {
+            icon.fillAmount = value;
+        }
+    }
+
     public void SelectPowerUp(PowerUpBase powerUp)
     {
         gameplayScriptable.selectedPowerUp = powerUp;
@@ -66,24 +78,22 @@ public class PowerUpsManager : MonoBehaviour
         if (powerUp == null)
         {
             icon.gameObject.SetActive(false);
-            slider.gameObject.SetActive(false);
         }
         else
         {
             icon.gameObject.SetActive(true);
-            slider.gameObject.SetActive(true);
 
             icon.sprite = powerUp.sprite;
 
             if (powerUp.useDuration)
             {
-                slider.maxValue = powerUp.InitDuration();
-                slider.value = powerUp.duration;
+                maxValue = powerUp.InitDuration();
+                icon.fillAmount = powerUp.duration.Remap(0, maxValue, 0, 1);
             }
             else
             {
-                slider.maxValue = 1;
-                slider.value = 1;
+                maxValue = 1;
+                icon.fillAmount = 1;
             }
         }
     }
@@ -126,11 +136,11 @@ public class PowerUpsManager : MonoBehaviour
 
         if (type.useDuration)
         {
-            slider.maxValue = type.duration;
+            maxValue = type.duration;
         }
         else
         {
-            slider.maxValue = 1;
+            icon.fillAmount = 1;
         }
     }
 
@@ -152,7 +162,7 @@ public class PowerUpsManager : MonoBehaviour
 
         type.Dispose();
 
-        slider.value = 0;
+        icon.fillAmount = 0;
         icon.enabled = false;
     }
 
@@ -252,7 +262,7 @@ public class PowerUpsManager : MonoBehaviour
 
         if ((currentPowerUp != null && currentPowerUp.useDuration))
         {
-            slider.value = currentPowerUp.duration;
+            icon.fillAmount = currentPowerUp.duration.Remap(0, maxValue, 0, 1);
         }
     }
 }
