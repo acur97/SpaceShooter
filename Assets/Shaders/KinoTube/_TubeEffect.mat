@@ -25,11 +25,11 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _ScalineScale: 100
-    - _ScalineSpeed: -0.4
-    - _Scanline: 0.2
+    - _ScalineScale: 120
+    - _ScalineSpeed: -0.2
+    - _Scanline: 0.25
     - _bleeding: 0.2
-    - _bleedingSteps: 720
+    - _bleedingSteps: 480
     - _fringing: 0.1
     - _sourceWidth: 720
     m_Colors: []
