@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ff081e92a01842a44832d8ec66c1c98e
+guid: 0da3ffbca1666964ab08aac9a84d0f1b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4922383024749233501
-    second: lcd 4_0
+      213: -7690108994556281769
+    second: enemy 8 ship 64pixels_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -152,13 +152,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: lcd 4_0
+      name: enemy 8 ship 64pixels_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 12
-        height: 12
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3aab86908be20bbb0800000000000000
-      internalID: -4922383024749233501
+      spriteID: 75cbf670d9e374590800000000000000
+      internalID: -7690108994556281769
       vertices: []
       indices: 
       edges: []
@@ -186,8 +186,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      lcd 4_0: -4922383024749233501
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
