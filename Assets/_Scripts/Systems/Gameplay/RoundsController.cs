@@ -10,7 +10,7 @@ public class RoundsController : MonoBehaviour
 
     [Header("Start UI")]
     [SerializeField] private TextMeshProUGUI modeText;
-    [SerializeField] private Image modeTextLine;
+    //[SerializeField] private Image modeTextLine;
     [SerializeField] private Color normalColor;
     [SerializeField] private Color infiniteColor;
     private Color bGColor;
@@ -78,7 +78,7 @@ public class RoundsController : MonoBehaviour
         if (infinite)
         {
             bGColor = infiniteColor;
-            modeTextLine.color = bGColor;
+            //modeTextLine.color = bGColor;
             modeText.color = bGColor;
             modeText.text = _Infinite;
 
@@ -91,7 +91,7 @@ public class RoundsController : MonoBehaviour
         else
         {
             bGColor = normalColor;
-            modeTextLine.color = bGColor;
+            //modeTextLine.color = bGColor;
             modeText.color = bGColor;
             modeText.text = _Normal;
 

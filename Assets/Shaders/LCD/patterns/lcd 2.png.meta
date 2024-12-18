@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d9197b0a756b26e43a779c8ac1782e39
+guid: 62e3d4af6571aff4e919dc5aa10ce8a6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2764668512825024977
-    second: btn_0
+      213: -9119436199158703426
+    second: lcd 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,9 +51,9 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 8
-  spriteBorder: {x: 3, y: 4, z: 3, w: 4}
-  spriteGenerateFallbackPhysicsShape: 0
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -74,7 +74,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 1
+    textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -152,23 +152,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: btn_0
+      name: lcd 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 6
-        height: 24
+        width: 8
+        height: 5
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1d1a4a45d531e5620800000000000000
-      internalID: 2764668512825024977
+      spriteID: eba9e4df711417180800000000000000
+      internalID: -9119436199158703426
       vertices: []
       indices: 
       edges: []
@@ -178,7 +178,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 8ac580ca9e9494dcbba186d77211d718
-    internalID: 1766320633
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -187,7 +187,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      btn_0: 2764668512825024977
+      lcd 1_0: -9119436199158703426
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

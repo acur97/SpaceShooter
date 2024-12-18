@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _TubeEffect
+  m_Name: _TubeEffect_backup
   m_Shader: {fileID: 4800000, guid: e41913b424825ca4daa891fd2745f687, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -30,7 +30,7 @@ Material:
     - _Scanline: 0.2
     - _bleeding: 0.25
     - _bleedingSteps: 720
-    - _fringing: 0.1
+    - _fringing: 0.2
     - _sourceWidth: 720
     m_Colors: []
   m_BuildTextureStacks: []
