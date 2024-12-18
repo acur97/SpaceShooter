@@ -32,13 +32,14 @@ MonoBehaviour:
   infiniteLevels:
   - {fileID: 11400000, guid: 66b5210a10c7f904fb786900aeae9e8c, type: 2}
   customs:
-  - {fileID: 11400000, guid: d67d2aeae0e5a4d49b14b6213330bb50, type: 2}
-  - {fileID: 11400000, guid: 7b37b7f225a66d946a96ea1acd797e03, type: 2}
-  - {fileID: 11400000, guid: 9396716e18b09c445a5d80e70b81a1fe, type: 2}
-  - {fileID: 11400000, guid: b3613040e6c9af04a93b789a0b9caaf3, type: 2}
-  - {fileID: 11400000, guid: c92af78e6d93f574385b108a12590052, type: 2}
-  - {fileID: 11400000, guid: 4e3b12753f29d7b4190c16e2592e9b7f, type: 2}
-  selectedCustoms: {fileID: 11400000, guid: d67d2aeae0e5a4d49b14b6213330bb50, type: 2}
+  - {fileID: 11400000, guid: bf566af108c065646bec685895b21a22, type: 2}
+  - {fileID: 11400000, guid: b6c96e38cd1d7aa4e8f32e39e4412a8f, type: 2}
+  - {fileID: 11400000, guid: 31b487c0d5d742948add83cadf9276d4, type: 2}
+  - {fileID: 11400000, guid: 2fbb4672a44243846989a7b854d7ad6d, type: 2}
+  - {fileID: 11400000, guid: b7eb3c78d89dc704cb74cb73c3f70915, type: 2}
+  - {fileID: 11400000, guid: 90abd9d671ceb00468dbe6445babe6b5, type: 2}
+  - {fileID: 11400000, guid: 9ec9fa9ef84aac9439e8b369827bb023, type: 2}
+  selectedCustoms: {fileID: 11400000, guid: 31b487c0d5d742948add83cadf9276d4, type: 2}
   powerUps:
   - {fileID: 11400000, guid: 2f5b416c7307fdd449a39ac6d6daa6c1, type: 2}
   - {fileID: 11400000, guid: 0c12553f632fcbb4ea13d2c948d5502b, type: 2}
@@ -56,11 +57,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ca120ee2daf3ccf48ad037f431e3d983, type: 2}
   - {fileID: 11400000, guid: 5210848e21cfca049b1c30ab5e862492, type: 2}
   - {fileID: 11400000, guid: 6cd785201aceb1e4a94957e463fb0bd7, type: 2}
-  selectedPowerUp: {fileID: 0}
+  selectedPowerUp: {fileID: 11400000, guid: 0718980e695f00a42a860890628ab9c4, type: 2}
   progress:
-    playerName: Nombrezaso
-    coins: 999945
-    powerUpAmounts: 00000000000000000000000003000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    playerName: Dieci
+    coins: 999840
+    powerUpAmounts: 00000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
     powerUpIndex: 3
     customsOwneds: 010000000000
     customsIndex: 0

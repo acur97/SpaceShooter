@@ -12,13 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57881a7a4b18dff4b82ce561559b9591, type: 3}
   m_Name: Enemy type 5
   m_EditorClassIdentifier: 
+  editorCustom: 1
+  editorStore: 1
+  editorShip: 1
+  editorBullet: 1
+  editorEnemy: 1
+  editorNotes: 1
+  notes: 
   color: {r: 1, g: 0, b: 0.8166666, a: 1}
   name: 
   description: 
   owned: 0
   cost: 0
-  sprite: {fileID: 21300000, guid: 08a41882fc06e5046addc8dca77c17d9, type: 3}
-  material: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 1f4f4209b0d0c794ea3c4d133cb59caf, type: 3}
+  spriteScale: {x: 0.2, y: 0.2, z: 1}
+  material: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   speed: 1
   health: 5
   bulletSpeed: 7

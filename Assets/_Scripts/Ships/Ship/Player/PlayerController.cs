@@ -21,7 +21,7 @@ public class PlayerController : ShipBaseController
 
     private int maxHealth = 0;
 
-    public void Init(bool _copy = false)
+    public void Init(ShipScriptable properties, bool _copy = false)
     {
         copy = _copy;
 
@@ -38,8 +38,8 @@ public class PlayerController : ShipBaseController
             shoot.Init(this, controls);
         }
 
-        SetHealth(_properties.health);
-        SetColor();
+        SetHealth(properties.health);
+        SetColor(properties);
     }
 
     public void SetHealthUi(int _health)
@@ -51,30 +51,25 @@ public class PlayerController : ShipBaseController
         healthNormalized = (float)health / maxHealth;
     }
 
-    public void SetColor()
+    public void SetColor(ShipScriptable shipBaseController)
     {
-        if (!copy)
-        {
-            renderer.material.SetColor(MaterialProperties.ColorCapsule, _properties.color);
-            renderer.material.SetColor(MaterialProperties.Color, ConvertColor(_properties.color));
-        }
-        else
-        {
-            renderer.material = _properties.material;
-            renderer.sprite = _properties.sprite;
-        }
+        _properties = shipBaseController;
+
+        renderer.material = shipBaseController.material;
+        renderer.sprite = shipBaseController.sprite;
+        renderer.transform.localScale = shipBaseController.spriteScale;
 
         module = engine1.main;
-        module.startColor = _properties.color;
+        module.startColor = shipBaseController.color;
         module = engine2.main;
-        module.startColor = _properties.color;
+        module.startColor = shipBaseController.color;
     }
 
-    private Color ConvertColor(Color col)
-    {
-        Color.RGBToHSV(col, out float h, out float s, out float v);
-        return Color.HSVToRGB(h, s * 0.25f, v);
-    }
+    //private Color ConvertColor(Color col)
+    //{
+    //    Color.RGBToHSV(col, out float h, out float s, out float v);
+    //    return Color.HSVToRGB(h, s * 0.25f, v);
+    //}
 
     public void SetHealth(int value)
     {

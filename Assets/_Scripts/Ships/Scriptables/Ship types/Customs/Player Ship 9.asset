@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57881a7a4b18dff4b82ce561559b9591, type: 3}
-  m_Name: Player Ship Cyan
+  m_Name: Player Ship 9
   m_EditorClassIdentifier: 
   editorCustom: 1
   editorStore: 1
@@ -19,16 +19,17 @@ MonoBehaviour:
   editorEnemy: 1
   editorNotes: 1
   notes: 
-  color: {r: 0, g: 4.237095, b: 3.2484393, a: 1}
-  name: Cyan color
-  description: ship and bullets in <color=#00ffc3>cyan</color>, enemy bullets in
-    <color=#4400ff>purple
+  color: {r: 4.237095, g: 0.2168264, b: 0, a: 1}
+  name: Orange
+  description: ship and bullets in <color=#FFAA00>orange</color>, enemy bullets in
+    <color=#00ffc3>cyan
   owned: 1
   cost: 0
-  sprite: {fileID: 21300000, guid: b9794a9ca2b44994daace79c2ec59027, type: 3}
-  material: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 4bfa45c1335980b46994236388fb0859, type: 3}
+  spriteScale: {x: 0.2, y: 0.2, z: 1}
+  material: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   speed: 4
-  health: 40
+  health: 0
   bulletSpeed: 10
   coolDown: 0.1
   _spaceCoolDown: 0

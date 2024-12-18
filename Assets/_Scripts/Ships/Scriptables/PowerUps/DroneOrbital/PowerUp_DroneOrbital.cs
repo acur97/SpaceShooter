@@ -26,7 +26,7 @@ public class PowerUp_DroneOrbital : PowerUpBase
         dronObject = Object.Instantiate(prefab);
         playerDron = dronObject.GetComponent<PlayerController>();
 
-        playerDron.Init(true);
+        playerDron.Init(playerDron._properties, true);
         playerDron.shoot.Init(playerDron, playerDron.controls);
         //playerDron.movement.Init(playerDron, playerDron.controls);
     }

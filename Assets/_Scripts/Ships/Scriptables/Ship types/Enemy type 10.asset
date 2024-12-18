@@ -12,16 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57881a7a4b18dff4b82ce561559b9591, type: 3}
   m_Name: Enemy type 10
   m_EditorClassIdentifier: 
+  editorCustom: 1
+  editorStore: 1
+  editorShip: 1
+  editorBullet: 1
+  editorEnemy: 1
+  editorNotes: 1
+  notes: 
   color: {r: 0.50888145, g: 1, b: 0.009134057, a: 1}
-  sprite: {fileID: 21300000, guid: d2fabf4bbadb42b438c5e7f75b67e80f, type: 3}
+  name: 
+  description: 
+  owned: 0
+  cost: 0
+  sprite: {fileID: 21300000, guid: 22bae07e139710849b540a4c99fc4841, type: 3}
+  spriteScale: {x: 0.2, y: 0.2, z: 1}
+  material: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   speed: 0.7
   health: 8
   bulletSpeed: 4
   coolDown: 0.5
   _spaceCoolDown: 1
   spaceCooldown: 2
+  _bulletTime: 0
+  bulletTime: -1
   attack: 0
   enemyCollision: 1
+  deathScore: 8
   behaviour: 4
   behaviourMathfSin: 1.5
   _timeToContinue: 0

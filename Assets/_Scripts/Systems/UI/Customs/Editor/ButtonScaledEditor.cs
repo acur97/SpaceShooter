@@ -1,5 +1,5 @@
-using UnityEditor.UI;
 using UnityEditor;
+using UnityEditor.UI;
 
 [CustomEditor(typeof(ButtonScaled), true)]
 [CanEditMultipleObjects]

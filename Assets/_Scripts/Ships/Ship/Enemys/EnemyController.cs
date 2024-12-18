@@ -18,6 +18,8 @@ public class EnemyController : ShipBaseController
         dead = false;
 
         renderer.sprite = _properties.sprite;
+        renderer.transform.localScale = _properties.spriteScale;
+
         health = _properties.health;
 
         module = engine1.main;

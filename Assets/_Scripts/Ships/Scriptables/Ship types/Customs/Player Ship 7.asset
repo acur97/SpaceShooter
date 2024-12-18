@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57881a7a4b18dff4b82ce561559b9591, type: 3}
-  m_Name: Player Ship
+  m_Name: Player Ship 7
   m_EditorClassIdentifier: 
   editorCustom: 1
   editorStore: 1
@@ -19,15 +19,17 @@ MonoBehaviour:
   editorEnemy: 1
   editorNotes: 1
   notes: 
-  color: {r: 0, g: 4.237095, b: 3.2484393, a: 1}
-  name: 
-  description: 
+  color: {r: 0, g: 0, b: 4.237095, a: 1}
+  name: Blue
+  description: ship and bullets in <color=#0000ff>blue</color>, enemy bullets in
+    <color=#ff0080>pink
   owned: 0
   cost: 0
-  sprite: {fileID: 0}
-  material: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 7acce72f27351e74fb41158d63708752, type: 3}
+  spriteScale: {x: 0.2, y: 0.2, z: 1}
+  material: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   speed: 4
-  health: 20
+  health: 0
   bulletSpeed: 10
   coolDown: 0.1
   _spaceCoolDown: 0

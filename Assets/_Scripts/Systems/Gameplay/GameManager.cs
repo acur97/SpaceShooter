@@ -258,10 +258,10 @@ public class GameManager : MonoBehaviour
         uiManager.SetUi(UiType.Wnew, on, 0.5f);
     }
 
-    public void GodMode(bool on)
-    {
-        playerController.SetHealth(on ? 10000000 : playerController._properties.health);
-    }
+    //public void GodMode(bool on)
+    //{
+    //    playerController.SetHealth(on ? 10000000 : playerController._properties.health);
+    //}
 
     private void Awake()
     {
@@ -277,7 +277,7 @@ public class GameManager : MonoBehaviour
         audioManager.Init();
         postProcessingController.Init();
         powerUpsManager.Init();
-        playerController.Init();
+        playerController.Init(gameplayScriptable.selectedCustoms);
 
         Time.timeScale = 1;
         audioManager.SetMasterVolume(1f);
@@ -303,8 +303,7 @@ public class GameManager : MonoBehaviour
     public void SetCustoms(ShipScriptable value)
     {
         gameplayScriptable.selectedCustoms = value;
-        playerController._properties.color = gameplayScriptable.selectedCustoms.color; ;
-        playerController.SetColor();
+        playerController.SetColor(value);
     }
 
     private void Update()

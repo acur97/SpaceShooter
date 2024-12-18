@@ -21,6 +21,7 @@ public class ShipScriptable : ScriptableObject
 
     // Ship Parameters
     public Sprite sprite;
+    public Vector3 spriteScale = Vector3.one;
     public Material material;
     public float speed = 4;
     public int health = 100;
