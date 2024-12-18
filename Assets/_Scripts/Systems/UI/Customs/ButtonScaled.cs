@@ -1,10 +1,10 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class ToggleScaled : Toggle
+public class ButtonScaled : Button
 {
-    private const float scale = 1.02f;
+    public float scale = 1.02f;
 
     private Vector3 initialScale;
 

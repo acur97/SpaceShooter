@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 844970828650698671, guid: 8165eb589c62127438fe97ff88b64749, type: 3}
       propertyPath: m_Name
-      value: Store item Variant
+      value: Store item Custom
       objectReference: {fileID: 0}
     - target: {fileID: 4883964330199774920, guid: 8165eb589c62127438fe97ff88b64749, type: 3}
       propertyPath: m_Pivot.x
@@ -38,7 +38,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4883964330199774920, guid: 8165eb589c62127438fe97ff88b64749, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 556
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4883964330199774920, guid: 8165eb589c62127438fe97ff88b64749, type: 3}
       propertyPath: m_SizeDelta.y
