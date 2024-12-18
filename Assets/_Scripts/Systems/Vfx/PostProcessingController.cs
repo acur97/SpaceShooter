@@ -134,7 +134,7 @@ public class PostProcessingController : MonoBehaviour
     public async UniTaskVoid ImpactFrame(bool lastFrame = true, Action onComplete = null)
     {
         impactFrameMaterial.SetInt(MaterialProperties.Invert, 0);
-        impactFrameMaterial.SetVector(MaterialProperties.Frecuency, new Vector2(100, 100));
+        impactFrameMaterial.SetVector(MaterialProperties.Frecuency, new Vector2(5, 100));
         impactFrameMaterial.SetVector(MaterialProperties.Offset, cam.WorldToViewportPoint(PlayerController.Instance.transform.position));
 
         renderer2DData.rendererFeatures[1].SetActive(true);
@@ -145,7 +145,7 @@ public class PostProcessingController : MonoBehaviour
 
         await UniTask.WaitForSeconds(impactFrameSpacing);
 
-        impactFrameMaterial.SetVector(MaterialProperties.Frecuency, new Vector2(-100, -100));
+        impactFrameMaterial.SetVector(MaterialProperties.Frecuency, new Vector2(-5, -100));
 
         await UniTask.WaitForSeconds(impactFrameSpacing);
 

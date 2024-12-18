@@ -22481,7 +22481,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   renderer2DData: {fileID: 11400000, guid: 424799608f7334c24bf367e4bbfa7f9a, type: 2}
   impactFrameMaterial: {fileID: 2100000, guid: 6313e6d5b4f5d7a4d81a11e246d445be, type: 2}
-  impactFrameSpacing: 0.075
+  impactFrameSpacing: 0.08
 --- !u!114 &1758410998
 MonoBehaviour:
   m_ObjectHideFlags: 0

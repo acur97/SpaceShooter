@@ -248,6 +248,7 @@ public class GameManager : MonoBehaviour
 
         hasStarted = true;
         isPlaying = true;
+        hasEnded = false;
 
         Vibration.InitVibrate();
     }
