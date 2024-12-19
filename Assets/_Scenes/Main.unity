@@ -2043,7 +2043,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 120}
+  m_SizeDelta: {x: 0, y: 104}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &196942542
 MonoBehaviour:
@@ -4837,8 +4837,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 288, y: -29}
-  m_SizeDelta: {x: 576, y: 58}
+  m_AnchoredPosition: {x: 288, y: -25}
+  m_SizeDelta: {x: 576, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &453699901
 MonoBehaviour:
@@ -8822,7 +8822,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: 7bfe2df9ad40bc54d8fb761f0116ebb1, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.6745098}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.32156864}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -9447,8 +9447,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 288, y: -91}
-  m_SizeDelta: {x: 576, y: 58}
+  m_AnchoredPosition: {x: 288, y: -79}
+  m_SizeDelta: {x: 576, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &791201456
 MonoBehaviour:
@@ -9843,7 +9843,7 @@ Transform:
   m_GameObject: {fileID: 800530116}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.008675813, y: -0.08741156, z: -1}
+  m_LocalPosition: {x: 0.017397802, y: 0.015680162, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10276,28 +10276,29 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- <color=#FFFC00>New!</color> Infinite Mode, in this game mode you don''t
-    shoot, <color=#FFAB80>but you can use PowerUps!</color>, you can only move, the
-    levels are faster, see how far you can go!
+  m_text: '- New UI and Ship assets!
+
+    - <color=#FFFC00>New!</color> Infinite
+    Mode, in this game mode you don''t shoot, <color=#FFAB80>but you can use PowerUps!</color>,
+    you can only move, the levels are faster, see how far you can go!
 
     - <color=#FFFC00>New!</color>
     Powers and customization shop!. In the shop you can buy powers that will help
     you advance further in the levels
 
-    - You can also buy skins or colors to
-    customize your ship
+    - You can also buy skins to customize
+    your ship
 
-    - Before starting each level, select the power you are
-    going to fight with (Activate it with the Space key or the second button on the
-    cell phone)
+    - Before starting each level, select the power you are going
+    to fight with (Activate it with the Space key or the second button on the cell
+    phone)
 
-    - <color=#FF654E>Important: </color>The coins are separated
-    from the final score, the score table has been reset by this move, get back to
-    the best position with the new powers!
+    - <color=#FF654E>Important: </color>The coins are separated from
+    the final score, get back to the best position with the new powers!
 
-    - Your progress will be saved on
-    the local device (coins, purchased powers), that means that if you play on another
-    device, you will not have your progress for the moment.'
+    - Your
+    progress will be saved on the local device (coins, purchased powers), that means
+    that if you play on another device, you will not have your progress for the moment.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a7cbdc551fa347647a57275572cb1ff5, type: 2}
   m_sharedMaterial: {fileID: 4968741006095056168, guid: a7cbdc551fa347647a57275572cb1ff5, type: 2}
@@ -14560,8 +14561,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -119.999725}
-  m_SizeDelta: {x: 0, y: -120}
+  m_AnchoredPosition: {x: 0, y: -103.99997}
+  m_SizeDelta: {x: 0, y: -103.999985}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1158498691
 MonoBehaviour:
@@ -15374,7 +15375,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 162}
+  m_AnchoredPosition: {x: 0, y: 116}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1001 &1199566753
@@ -16380,7 +16381,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -162}
+  m_AnchoredPosition: {x: 0, y: -116}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1001 &1268877716
@@ -18107,7 +18108,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 657bce30b2f0d0548989000f041ab5c0, type: 3}
-  m_Color: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  m_Color: {r: 0.496, g: 0.496, b: 0.496, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -27614,7 +27615,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 14942041
-  m_fontColor: {r: 0.3492064, g: 1, b: 0.8915343, a: 1}
+  m_fontColor: {r: 1, g: 0.25, b: 0.37500024, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -27891,7 +27892,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4293132121
-  m_fontColor: {r: 0.3492064, g: 1, b: 0.8915343, a: 1}
+  m_fontColor: {r: 1, g: 0.25, b: 0.37500024, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -28051,7 +28052,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4293132121
-  m_fontColor: {r: 0.3492064, g: 1, b: 0.8915343, a: 1}
+  m_fontColor: {r: 1, g: 0.25, b: 0.37500024, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -28328,8 +28329,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4293132121
-  m_fontColor: {r: 0.3492064, g: 1, b: 0.8915343, a: 1}
+    rgba: 4284498175
+  m_fontColor: {r: 1, g: 0.25, b: 0.37500024, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

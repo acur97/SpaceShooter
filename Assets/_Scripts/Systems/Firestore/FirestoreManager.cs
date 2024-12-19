@@ -127,7 +127,7 @@ public class FirestoreManager : MonoBehaviour
         using UnityWebRequest webRequest = UnityWebRequest.Get(CurrentUrl);
         await webRequest.SendWebRequest();
 
-        if (!cancellationToken.IsCancellationRequested && webRequest.result == UnityWebRequest.Result.Success && webRequest.isDone)
+        if (!cancellationToken.IsCancellationRequested && webRequest.result == UnityWebRequest.Result.Success)
         {
             leaderboard = JsonUtility.FromJson<Document>(webRequest.downloadHandler.text);
         }

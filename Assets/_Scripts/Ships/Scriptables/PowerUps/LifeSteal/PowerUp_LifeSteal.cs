@@ -9,6 +9,7 @@ public class PowerUp_LifeSteal : PowerUpBase
 
     private int maxPercent;
     private int percent = 0;
+    private uint lifeToAdd;
 
     public PowerUp_LifeSteal() : base()
     {
@@ -19,7 +20,18 @@ public class PowerUp_LifeSteal : PowerUpBase
 
     public override void OnActivate()
     {
-        maxPercent = (int)(shipBase._properties.health * maxLifeSteal);
+        switch (RoundsController.Instance.levelType)
+        {
+            case RoundsController.LevelType.Normal:
+                lifeToAdd = GameManager.Instance.gameplayScriptable.playerHealth;
+                break;
+
+            case RoundsController.LevelType.Infinite:
+                lifeToAdd = GameManager.Instance.gameplayScriptable.playerHealthInfinite;
+                break;
+        }
+
+        maxPercent = (int)(lifeToAdd * maxLifeSteal);
     }
 
     public override void OnDeactivate()
@@ -29,7 +41,7 @@ public class PowerUp_LifeSteal : PowerUpBase
 
     public override void OnEnemyDamage(ShipBaseController enemy)
     {
-        if (shipBase.health < shipBase._properties.health)
+        if (shipBase.health < lifeToAdd)
         {
             shipBase.health++;
             percent++;

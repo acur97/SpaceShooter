@@ -140,7 +140,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 0.4.55
+  bundleVersion: 0.5.01
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -164,7 +164,7 @@ PlayerSettings:
   androidMinAspectRatio: 1
   applicationIdentifier:
     Android: com.PolygonUs.SpaceShooter
-    Standalone: com.Urrego.PolygonUs-PruebaTecnica
+    Standalone: com.PolygonUs.SpaceShooter
     iPhone: com.PolygonUs.SpaceShooter
   buildNumber:
     Standalone: 0
@@ -554,7 +554,7 @@ PlayerSettings:
   m_BuildTargetDefaultTextureCompressionFormat:
   - serializedVersion: 3
     m_BuildTarget: WebGL
-    m_Formats: 03000000
+    m_Formats: 05000000
   - serializedVersion: 3
     m_BuildTarget: Android
     m_Formats: 030000000200000001000000

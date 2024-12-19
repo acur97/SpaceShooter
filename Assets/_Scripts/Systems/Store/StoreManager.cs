@@ -294,7 +294,9 @@ public class StoreManager : MonoBehaviour
             tgl2.offsetMax = new Vector2(-8f, -8f);
         }
 
-        if (ControlsManager.hasTouch || !canMoveFromSelected)
+        if (ControlsManager.hasTouch ||
+            !canMoveFromSelected ||
+            top.position.y <= bottom.position.y)
         {
             return;
         }

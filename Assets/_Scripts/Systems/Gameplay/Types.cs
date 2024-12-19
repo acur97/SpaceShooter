@@ -13,11 +13,11 @@ public class Tags
 [Preserve]
 public class Layers
 {
-    public const int Player = 6;
-    public const int Enemy = 7;
-    public const int Bullet = 8;
-    public const int Collectable = 9;
-    public const int PowerUp = 10;
+    public static readonly int Player = LayerMask.GetMask("Player");
+    public static readonly int Enemy = LayerMask.GetMask("Enemy");
+    public static readonly int Bullet = LayerMask.GetMask("Bullet");
+    public static readonly int Collectable = LayerMask.GetMask("Collectable");
+    public static readonly int PowerUp = LayerMask.GetMask("PowerUp");
 }
 
 [Preserve]

@@ -8,6 +8,7 @@ public class PowerUp_ExtractLife : PowerUpBase
     [SerializeField] private uint steals = 1;
 
     private uint stolen = 0;
+    private int lifeToAdd;
 
     public PowerUp_ExtractLife() : base()
     {
@@ -16,7 +17,16 @@ public class PowerUp_ExtractLife : PowerUpBase
 
     public override void OnActivate()
     {
+        switch (RoundsController.Instance.levelType)
+        {
+            case RoundsController.LevelType.Normal:
+                lifeToAdd = (int)GameManager.Instance.gameplayScriptable.playerHealth;
+                break;
 
+            case RoundsController.LevelType.Infinite:
+                lifeToAdd = (int)GameManager.Instance.gameplayScriptable.playerHealthInfinite;
+                break;
+        }
     }
 
     public override void OnDeactivate()
@@ -31,14 +41,11 @@ public class PowerUp_ExtractLife : PowerUpBase
 
     public override void OnEnemyDeath(ShipBaseController enemy)
     {
-        if (shipBase.health < shipBase._properties.health)
-        {
-            shipBase.health += enemy._properties.health;
-            shipBase.health = Mathf.Min(shipBase.health, shipBase._properties.health);
+        shipBase.health += enemy._properties.health;
+        shipBase.health = Mathf.Min(shipBase.health, lifeToAdd);
 
-            PlayerController.Instance.UpdateHealthUi();
-            Object.Instantiate(prefab, PlayerController.Instance.transform);
-        }
+        PlayerController.Instance.UpdateHealthUi();
+        Object.Instantiate(prefab, PlayerController.Instance.transform);
 
         stolen++;
         if (stolen >= steals)
