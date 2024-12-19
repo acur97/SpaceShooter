@@ -377,6 +377,8 @@ public class GameManager : MonoBehaviour
 
         horizontalMultiplier = mainCamera.aspect * 0.5625f;
         horizontalInvertedMultiplier = horizontalMultiplier.Remap(1, 0, 0, 1) + 1;
+
+        mainCamera.orthographicSize = 2.8125f * horizontalInvertedMultiplier;
     }
 
     public void UpScore(int value)

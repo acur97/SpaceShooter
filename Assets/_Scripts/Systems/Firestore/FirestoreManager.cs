@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Threading;
 using TMPro;
 using UnityEngine;
@@ -32,7 +33,8 @@ public class FirestoreManager : MonoBehaviour
     [SerializeField] private TMP_InputField nameInput;
 
     private const char scoreSeparator = '_';
-    private const string scorePoint = ".";
+    private const string scorePattern = @"(\d)(?=(\d{3})+$)";
+    private const string scoreReplacement = "$1.";
     private string[] playerStats = new string[2];
     private string playerName;
     private string playerScore;
@@ -146,16 +148,7 @@ public class FirestoreManager : MonoBehaviour
 
     private string FormatNumber(string input)
     {
-        if (input.Length > 3)
-        {
-            input = input.Insert(1, scorePoint);
-        }
-        if (input.Length > 7)
-        {
-            input = input.Insert(4, scorePoint);
-        }
-
-        return input;
+        return Regex.Replace(input, scorePattern, scoreReplacement);
     }
 
     public void StartUploadScore()

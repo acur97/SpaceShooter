@@ -296,45 +296,43 @@ public class StoreManager : MonoBehaviour
 
         if (ControlsManager.hasTouch ||
             !canMoveFromSelected ||
-            top.position.y <= bottom.position.y)
+            top.position.y <= bottom.position.y ||
+            instanciatedPrefabs.Count <= 4)
         {
             return;
         }
 
-        if (instanciatedPrefabs.Count > 4)
+        if (eventSystem.currentSelectedGameObject == instanciatedPrefabs[0])
         {
-            if (eventSystem.currentSelectedGameObject == instanciatedPrefabs[0])
+            if (instanciatedPrefabs[0].transform.position.y > first.position.y)
             {
-                if (instanciatedPrefabs[0].transform.position.y > first.position.y)
-                {
-                    scrollRect.StopMovement();
-                    scrollRect.content.localPosition -= 1000f * Time.deltaTime * Vector3.up;
-                }
+                scrollRect.StopMovement();
+                scrollRect.content.localPosition -= 1000f * Time.deltaTime * Vector3.up;
             }
-            else if (eventSystem.currentSelectedGameObject == instanciatedPrefabs[^1])
+        }
+        else if (eventSystem.currentSelectedGameObject == instanciatedPrefabs[^1])
+        {
+            if (instanciatedPrefabs[^1].transform.position.y < last.position.y)
             {
-                if (instanciatedPrefabs[^1].transform.position.y < last.position.y)
-                {
-                    scrollRect.StopMovement();
-                    scrollRect.content.localPosition += 1000f * Time.deltaTime * Vector3.up;
-                }
+                scrollRect.StopMovement();
+                scrollRect.content.localPosition += 1000f * Time.deltaTime * Vector3.up;
             }
-            else
+        }
+        else
+        {
+            for (int i = 1; i < instanciatedPrefabs.Count - 1; i++)
             {
-                for (int i = 1; i < instanciatedPrefabs.Count - 1; i++)
+                if (eventSystem.currentSelectedGameObject == instanciatedPrefabs[i])
                 {
-                    if (eventSystem.currentSelectedGameObject == instanciatedPrefabs[i])
+                    if (instanciatedPrefabs[i].transform.position.y > top.position.y)
                     {
-                        if (instanciatedPrefabs[i].transform.position.y > top.position.y)
-                        {
-                            scrollRect.StopMovement();
-                            scrollRect.content.localPosition -= 1000f * Time.deltaTime * Vector3.up;
-                        }
-                        else if (instanciatedPrefabs[i].transform.position.y < bottom.position.y)
-                        {
-                            scrollRect.StopMovement();
-                            scrollRect.content.localPosition += 1000f * Time.deltaTime * Vector3.up;
-                        }
+                        scrollRect.StopMovement();
+                        scrollRect.content.localPosition -= 1000f * Time.deltaTime * Vector3.up;
+                    }
+                    else if (instanciatedPrefabs[i].transform.position.y < bottom.position.y)
+                    {
+                        scrollRect.StopMovement();
+                        scrollRect.content.localPosition += 1000f * Time.deltaTime * Vector3.up;
                     }
                 }
             }
