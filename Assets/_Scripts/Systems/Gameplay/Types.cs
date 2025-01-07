@@ -30,6 +30,8 @@ public class MaterialProperties
 
     public static readonly int Invert = Shader.PropertyToID("_invert");
     public static readonly int Frecuency = Shader.PropertyToID("_frecuency");
+
+    public static readonly int Mobile = Shader.PropertyToID("_Mobile");
 }
 
 [Preserve]

@@ -25,6 +25,9 @@ public class ControlsManager : MonoBehaviour
     [SerializeField] private GameObject tutorialMobile;
     [SerializeField] private GameObject tutorialPC;
 
+    [Header("Shader")]
+    [SerializeField] private Material lcdMaterial;
+
     private void OnEnable()
     {
         GameManager.GameStart += SetLevelTypeBtns;
@@ -83,6 +86,7 @@ public class ControlsManager : MonoBehaviour
     {
         hasTouch = isMobile == 1;
         touchUi.SetActive(hasTouch);
+        lcdMaterial.SetInt(MaterialProperties.Mobile, isMobile);
 
         if (hasTouch)
         {

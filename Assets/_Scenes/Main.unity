@@ -10289,16 +10289,16 @@ MonoBehaviour:
     - You can also buy skins to customize
     your ship
 
-    - Before starting each level, select the power you are going
-    to fight with (Activate it with the Space key or the second button on the cell
-    phone)
+    - Before starting each level, select the power you are going to
+    fight with (Activate it with the Space key or the second button on the cell phone)
 
-    - <color=#FF654E>Important: </color>The coins are separated from
-    the final score, get back to the best position with the new powers!
+    -
+    <color=#FF654E>Important: </color>The coins are separated from the final score,
+    get back to the best position with the new powers!
 
-    - Your
-    progress will be saved on the local device (coins, purchased powers), that means
-    that if you play on another device, you will not have your progress for the moment.'
+    - Your progress will
+    be saved on the local device (coins, purchased powers), that means that if you
+    play on another device, you will not have your progress for the moment.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a7cbdc551fa347647a57275572cb1ff5, type: 2}
   m_sharedMaterial: {fileID: 4968741006095056168, guid: a7cbdc551fa347647a57275572cb1ff5, type: 2}
@@ -22391,6 +22391,7 @@ MonoBehaviour:
   joystick: {fileID: 817877360}
   tutorialMobile: {fileID: 1650733496}
   tutorialPC: {fileID: 1080317686}
+  lcdMaterial: {fileID: 2100000, guid: 54c00d76e10265949b74a5ef6f9bde53, type: 2}
 --- !u!114 &1758410996
 MonoBehaviour:
   m_ObjectHideFlags: 0

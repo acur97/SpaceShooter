@@ -41,11 +41,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Black_Limit: 0.25
+    - _Blend: 1
     - _Float: 1
     - _Float_1: 0.25
     - _Float_2: 0.02
     - _Intensity: 5
     - _Light: 0
+    - _Mobile: 0
+    - _Offset: 0.02
     - _Repetition: 0.1
     - _contrast: 2
     - _edge1: -0.5
