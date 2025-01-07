@@ -140,7 +140,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 0.5.06
+  bundleVersion: 0.5.07
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -554,7 +554,7 @@ PlayerSettings:
   m_BuildTargetDefaultTextureCompressionFormat:
   - serializedVersion: 3
     m_BuildTarget: WebGL
-    m_Formats: 05000000
+    m_Formats: 02000000
   - serializedVersion: 3
     m_BuildTarget: Android
     m_Formats: 030000000200000001000000
@@ -836,7 +836,7 @@ PlayerSettings:
     WebGL: 2
   il2cppCodeGeneration:
     Android: 0
-    WebGL: 1
+    WebGL: 0
   il2cppStacktraceInformation: {}
   managedStrippingLevel:
     Android: 4
