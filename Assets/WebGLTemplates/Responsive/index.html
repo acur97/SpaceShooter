@@ -71,6 +71,10 @@
       const script = document.createElement("script");
       script.src = loaderUrl;
       script.onload = () => {
+        config['webglContextAttributes'] = {
+          preserveDrawingBuffer: false,
+          powerPreference: {{{ WEBGL_POWER_PREFERENCE }}}
+        };
         createUnityInstance(canvas, config, (progress) => {
           spinner.style.display = "none";
           progressBarEmpty.style.display = "";
