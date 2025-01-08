@@ -41,7 +41,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Black_Limit: 0.25
+    - _Black_Limit: 0.3
     - _Blend: 1
     - _Float: 1
     - _Float_1: 0.25

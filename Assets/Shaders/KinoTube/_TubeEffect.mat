@@ -29,7 +29,7 @@ Material:
     - _ScalineSpeed: -0.2
     - _Scanline: 0.25
     - _bleeding: 0.2
-    - _bleedingSteps: 480
+    - _bleedingSteps: 320
     - _fringing: 0.1
     - _sourceWidth: 720
     m_Colors: []
