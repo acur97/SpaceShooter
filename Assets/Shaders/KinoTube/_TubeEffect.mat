@@ -27,7 +27,7 @@ Material:
     m_Floats:
     - _ScalineScale: 90
     - _ScalineSpeed: -0.2
-    - _Scanline: 0.25
+    - _Scanline: 0.2
     - _bleeding: 0.2
     - _bleedingSteps: 320
     - _fringing: 0.1

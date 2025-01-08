@@ -9786,7 +9786,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8446570600989465726}
@@ -9814,7 +9814,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2bb2c1a66def19b459c9f412153a4d9f, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9835,7 +9835,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: 14e8c8df02407bd4b8aa044eedeb5630, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 31db2e56e5697f54aa4fd084328ee41e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -14825,14 +14825,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.03, y: 0.22}
-      - {x: -0.25, y: 0.14}
-      - {x: -0.25, y: -0.06}
+    - - {x: -0.09, y: 0.2}
+      - {x: -0.22, y: 0.06}
+      - {x: -0.22, y: -0.06}
       - {x: -0.09, y: -0.22}
       - {x: 0.09, y: -0.22}
-      - {x: 0.25, y: -0.06}
-      - {x: 0.25, y: 0.14}
-      - {x: 0.03, y: 0.22}
+      - {x: 0.22, y: -0.06}
+      - {x: 0.22, y: 0.06}
+      - {x: 0.09, y: 0.2}
   m_UseDelaunayMesh: 0
 --- !u!50 &442501581250349005
 Rigidbody2D:
