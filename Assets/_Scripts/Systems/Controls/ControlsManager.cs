@@ -27,12 +27,12 @@ public class ControlsManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.GameStart += SetLevelTypeBtns;
+        GameManager.GamePreStart += SetLevelTypeBtns;
     }
 
     private void OnDisable()
     {
-        GameManager.GameStart -= SetLevelTypeBtns;
+        GameManager.GamePreStart -= SetLevelTypeBtns;
     }
 
     [System.Obsolete]
@@ -49,32 +49,29 @@ public class ControlsManager : MonoBehaviour
 #endif
     }
 
-    private void SetLevelTypeBtns(bool start)
+    private void SetLevelTypeBtns()
     {
-        if (start)
+        switch (RoundsController.Instance.levelType)
         {
-            switch (RoundsController.Instance.levelType)
-            {
-                case RoundsController.LevelType.Normal:
-                    fireBtn.gameObject.SetActive(true);
-                    powerBtn.gameObject.SetActive(GameManager.Instance.gameplayScriptable.selectedPowerUp != null);
+            case RoundsController.LevelType.Normal:
+                fireBtn.gameObject.SetActive(true);
+                powerBtn.gameObject.SetActive(GameManager.Instance.gameplayScriptable.selectedPowerUp != null);
 
-                    if (GameManager.Instance.gameplayScriptable.selectedPowerUp != null)
-                    {
-                        powerBtn.GetComponent<RectTransform>().anchoredPosition = new Vector2(-60, 260);
-                    }
-                    break;
+                if (GameManager.Instance.gameplayScriptable.selectedPowerUp != null)
+                {
+                    powerBtn.GetComponent<RectTransform>().anchoredPosition = new Vector2(-60, 260);
+                }
+                break;
 
-                case RoundsController.LevelType.Infinite:
-                    fireBtn.gameObject.SetActive(false);
-                    powerBtn.gameObject.SetActive(GameManager.Instance.gameplayScriptable.selectedPowerUp != null);
+            case RoundsController.LevelType.Infinite:
+                fireBtn.gameObject.SetActive(false);
+                powerBtn.gameObject.SetActive(GameManager.Instance.gameplayScriptable.selectedPowerUp != null);
 
-                    if (GameManager.Instance.gameplayScriptable.selectedPowerUp != null)
-                    {
-                        powerBtn.GetComponent<RectTransform>().anchoredPosition = new Vector2(-60, 60);
-                    }
-                    break;
-            }
+                if (GameManager.Instance.gameplayScriptable.selectedPowerUp != null)
+                {
+                    powerBtn.GetComponent<RectTransform>().anchoredPosition = new Vector2(-60, 60);
+                }
+                break;
         }
     }
 

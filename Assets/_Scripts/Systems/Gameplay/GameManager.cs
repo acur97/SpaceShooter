@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    public static Action GamePreStart;
     public static Action<bool> GameStart;
 
     [Space]
@@ -203,6 +204,8 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
+
+        GamePreStart?.Invoke();
 
         switch (roundsController.levelType)
         {
