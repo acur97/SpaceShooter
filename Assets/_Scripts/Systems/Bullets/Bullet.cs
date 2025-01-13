@@ -2,11 +2,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 1;
-    public enum TypeBullet { player, enemy }
-    public TypeBullet bulletType;
-    public new SpriteRenderer renderer;
-    public new Collider2D collider;
+    public BulletBase bulletBase;
 
     private float lifetime = -1f;
 
@@ -48,7 +44,7 @@ public class Bullet : MonoBehaviour
             }
         }
 
-        transform.position += speed * Time.deltaTime * transform.up;
+        transform.position += bulletBase.speed * Time.deltaTime * transform.up;
 
         if (transform.position.x >= GameManager.BulletLimits.w ||
             transform.position.x <= GameManager.BulletLimits.z ||

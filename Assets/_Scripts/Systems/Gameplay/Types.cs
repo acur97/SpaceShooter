@@ -97,4 +97,10 @@ public class Enums
         End,
         Zap
     }
+
+    public enum TypeBullet
+    {
+        player,
+        enemy
+    }
 }

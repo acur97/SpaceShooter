@@ -16,18 +16,17 @@ public class BulletsPool : PoolBaseController
         for (int i = 0; i < size; i++)
         {
             bullets[i] = Instantiate(prefab, transform).GetComponent<Bullet>();
-            bullets[i].renderer.material.SetColor(MaterialProperties.Color, Color.white);
         }
     }
 
-    public void InitBullet(Transform _position, ShipScriptable _properties, Bullet.TypeBullet type)
+    public void InitBullet(Transform _position, ShipScriptable _properties, Enums.TypeBullet type)
     {
         AudioManager.Instance.PlaySound(Enums.AudioType.Zap, 0.2f);
 
         Init(_position.position, _position.rotation, _properties, type);
     }
 
-    public void InitBullet(Transform _position1, Transform _position2, ShipScriptable _properties, Bullet.TypeBullet type)
+    public void InitBullet(Transform _position1, Transform _position2, ShipScriptable _properties, Enums.TypeBullet type)
     {
         AudioManager.Instance.PlaySound(Enums.AudioType.Zap, 0.2f);
 
@@ -35,23 +34,23 @@ public class BulletsPool : PoolBaseController
         Init(_position2.position, _position2.rotation, _properties, type);
     }
 
-    private void Init(Vector2 _position, Quaternion _rotation, ShipScriptable _properties, Bullet.TypeBullet type)
+    private void Init(Vector2 _position, Quaternion _rotation, ShipScriptable _properties, Enums.TypeBullet type)
     {
         for (int i = 0; i < size; i++)
         {
             if (!bullets[i].gameObject.activeSelf)
             {
                 bullets[i].transform.SetPositionAndRotation(_position, _rotation);
-                bullets[i].speed = _properties.bulletSpeed;
-                bullets[i].bulletType = type;
+                bullets[i].bulletBase.speed = _properties.bulletSpeed;
+                bullets[i].bulletBase.bulletType = type;
 
-                if (type == Bullet.TypeBullet.player)
+                if (type == Enums.TypeBullet.player)
                 {
-                    bullets[i].renderer.material.SetColor(MaterialProperties.Color, PlayerController.Instance._properties.color);
+                    bullets[i].GetComponent<SpriteRenderer>().color = PlayerController.Instance._properties.color;
                 }
                 else
                 {
-                    bullets[i].renderer.material.SetColor(MaterialProperties.Color, SetColor(PlayerController.Instance._properties.color));
+                    bullets[i].GetComponent<SpriteRenderer>().color = SetColor(PlayerController.Instance._properties.color);
                 }
 
                 if (_properties._bulletTime)

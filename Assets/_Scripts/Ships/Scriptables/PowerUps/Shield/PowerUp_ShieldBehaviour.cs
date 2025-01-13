@@ -28,7 +28,7 @@ public class PowerUp_ShieldBehaviour : MonoBehaviour
             return;
         }
 
-        if (collision.CompareTag(Tags.Bullet) && collision.GetComponent<Bullet>().bulletType == Bullet.TypeBullet.enemy)
+        if (collision.CompareTag(Tags.Bullet) && collision.GetComponent<Bullet>().bulletBase.bulletType == Enums.TypeBullet.enemy)
         {
             collision.gameObject.SetActive(false);
 

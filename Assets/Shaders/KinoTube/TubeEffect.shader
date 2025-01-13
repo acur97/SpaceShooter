@@ -66,7 +66,6 @@ Shader "Hidden/TubeEffect"
             // Offset the UV coordinate by the du value and
             // Sample the texture at the offset UV coordinate and convert the result to YIQ.
             return RGB2YIQ(SAMPLE_TEXTURE2D(_BlitTexture, sampler_LinearClamp, uv + half2(du, 0)).rgb);
-            // return RGB2YIQ(SAMPLE_TEXTURE2D(_CameraOpaqueTexture, sampler_LinearClamp, uv + half2(du, 0)).rgb);
         }
 
         // This is the frag function which is called for each pixel in the fragment shader.
@@ -130,7 +129,6 @@ Shader "Hidden/TubeEffect"
         Pass
         {
             Name "Tube Pass"
-            ColorMask RGB
 
             HLSLPROGRAM
             

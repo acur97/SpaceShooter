@@ -46,7 +46,7 @@ public class PostProcessingController : MonoBehaviour
         Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
 #endif
 
-        renderer2DData.rendererFeatures[1].SetActive(false);
+        renderer2DData.rendererFeatures[2].SetActive(false);
 
         cam = Camera.main;
         camT = cam.transform;
@@ -137,7 +137,7 @@ public class PostProcessingController : MonoBehaviour
         impactFrameMaterial.SetVector(MaterialProperties.Frecuency, new Vector2(5, 100));
         impactFrameMaterial.SetVector(MaterialProperties.Offset, cam.WorldToViewportPoint(PlayerController.Instance.transform.position));
 
-        renderer2DData.rendererFeatures[1].SetActive(true);
+        renderer2DData.rendererFeatures[2].SetActive(true);
 
         await UniTask.WaitForSeconds(impactFrameSpacing);
 
@@ -156,7 +156,7 @@ public class PostProcessingController : MonoBehaviour
             await UniTask.WaitForSeconds(impactFrameSpacing);
         }
 
-        renderer2DData.rendererFeatures[1].SetActive(false);
+        renderer2DData.rendererFeatures[2].SetActive(false);
 
         onComplete?.Invoke();
     }
