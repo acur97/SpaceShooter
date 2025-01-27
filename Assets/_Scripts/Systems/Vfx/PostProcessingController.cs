@@ -109,7 +109,7 @@ public class PostProcessingController : MonoBehaviour
     {
         shakeDuration = duration;
 
-        while (shakeDuration > 0)
+        while (shakeDuration > 0 && camT != null)
         {
             shake = cameraOrigin + shakeAmount * shakeCurve.Evaluate(shakeDuration.Remap(0, duration, 1, 0)) * Random.insideUnitSphere;
             shake.z = -1f;

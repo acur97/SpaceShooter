@@ -341,6 +341,18 @@ public class GameManager : MonoBehaviour
                     }
                 }
 
+                if (playerController.transform.position.x <= PlayerLimits.z + gameplayScriptable.borderLimit ||
+                    playerController.transform.position.x >= PlayerLimits.w - gameplayScriptable.borderLimit)
+                {
+                    gameplayScriptable.countBorders += Time.deltaTime;
+
+                    if (gameplayScriptable.countBorders >= gameplayScriptable.timeInBorder)
+                    {
+                        roundsController.InitBorderShip();
+                        gameplayScriptable.countBorders = 0f;
+                    }
+                }
+
                 // Debug
                 //if (Input.GetKeyDown(KeyCode.P))
                 //{
@@ -400,7 +412,7 @@ public class GameManager : MonoBehaviour
         audioManager.PlaySound(Enums.AudioType.Coin);
     }
 
-    public void EndLevel()
+    public void EndLevel(bool hasRevival)
     {
         if (isPlaying)
         {
@@ -425,7 +437,7 @@ public class GameManager : MonoBehaviour
             leftForNextGroup = -1;
 
 #if Platform_Mobile
-            if (adRevivals > 0)
+            if (hasRevival && adRevivals > 0)
             {
                 adLifePanel.SetActive(true);
                 adLifeEndPanel.SetActive(false);
@@ -434,7 +446,7 @@ public class GameManager : MonoBehaviour
                 adLifeTxt.SetText(adLifeMovile);
             }
 #else
-            if (adRevivals > 0 && PlayerProgress.GetCoins() >= gameplayScriptable.numberOfCoinsRevivals)
+            if (hasRevival && adRevivals > 0 && PlayerProgress.GetCoins() >= gameplayScriptable.numberOfCoinsRevivals)
             {
                 adLifePanel.SetActive(true);
                 adLifeEndPanel.SetActive(false);

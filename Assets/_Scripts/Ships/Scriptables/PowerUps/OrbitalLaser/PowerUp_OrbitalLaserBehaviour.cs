@@ -64,7 +64,7 @@ public class PowerUp_OrbitalLaserBehaviour : MonoBehaviour
             }
         }
 
-        while (sprite.color.a > 0f)
+        while (sprite.color.a > 0f && sprite != null)
         {
             await UniTask.Yield();
 
@@ -74,7 +74,7 @@ public class PowerUp_OrbitalLaserBehaviour : MonoBehaviour
 
     private async UniTaskVoid Sparkles()
     {
-        while (counter > 0)
+        while (counter > 0 && this != null)
         {
             await UniTask.Yield();
 

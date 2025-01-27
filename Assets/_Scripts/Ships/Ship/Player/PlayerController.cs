@@ -117,9 +117,8 @@ public class PlayerController : ShipBaseController
             PostProcessingController.Instance.VolumePunch();
             VfxPool.Instance.InitVfx(collision.transform.position);
 
+            DoDamage(enemyController.health);
             enemyController.DoDamage();
-
-            DoDamage();
         }
     }
 
@@ -150,7 +149,7 @@ public class PlayerController : ShipBaseController
         {
             if (!copy)
             {
-                GameManager.Instance.EndLevel();
+                GameManager.Instance.EndLevel(true);
                 PostProcessingController.Instance.ScreenShake(0.5f).Forget();
                 gameObject.SetActive(false);
             }

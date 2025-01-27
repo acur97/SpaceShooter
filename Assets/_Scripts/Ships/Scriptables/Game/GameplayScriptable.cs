@@ -35,6 +35,12 @@ public class GameplayScriptable : ScriptableObject
     public LevelScriptable[] levels;
     public LevelScriptable[] infiniteLevels;
 
+    [Header("Borders")]
+    public ShipScriptable bordersShip;
+    public float timeInBorder;
+    public float borderLimit;
+    [HideInInspector] public float countBorders = 0f;
+
     [Header("Customs")]
     public List<ShipScriptable> customs;
     public ShipScriptable selectedCustoms;

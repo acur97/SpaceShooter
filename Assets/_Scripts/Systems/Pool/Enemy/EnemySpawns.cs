@@ -38,7 +38,7 @@ public class EnemySpawns : PoolBaseController
         for (int i = 0; i < _group.count; i++)
         {
             _group.ship.spawnIndex = i;
-            InitEnemy(_group.ship, _group, Random.Range(GameManager.PlayerLimits.z, GameManager.PlayerLimits.w), _groupRandom);
+            InitEnemy(_group.ship, _group.spawnType, Random.Range(GameManager.PlayerLimits.z, GameManager.PlayerLimits.w), _groupRandom, _group.customFloat);
 
             if (_group.minTimeBetweenSpawn > 0 || _group.maxTimeBetweenSpawn > 0 || _group.spawnType != Enums.SpawnType.AllAtOnce)
             {
@@ -47,13 +47,13 @@ public class EnemySpawns : PoolBaseController
         }
     }
 
-    public void InitEnemy(ShipScriptable properties, Group group, float random, float groupRandom)
+    public void InitEnemy(ShipScriptable properties, Enums.SpawnType spawn, float random = 0, float groupRandom = 0, float customValue = 0)
     {
         for (int i = 0; i < size; i++)
         {
             if (!enemys[i].gameObject.activeSelf)
             {
-                switch (group.spawnType)
+                switch (spawn)
                 {
                     case Enums.SpawnType.Random:
                         enemys[i].transform.position = new Vector2(random, GameManager.BoundsLimits.x);
@@ -72,7 +72,7 @@ public class EnemySpawns : PoolBaseController
                         break;
 
                     case Enums.SpawnType.Specific:
-                        enemys[i].transform.position = new Vector2(group.customFloat, GameManager.BoundsLimits.x);
+                        enemys[i].transform.position = new Vector2(customValue, GameManager.BoundsLimits.x);
                         break;
                 }
 

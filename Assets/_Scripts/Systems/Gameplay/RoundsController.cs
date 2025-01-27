@@ -10,7 +10,6 @@ public class RoundsController : MonoBehaviour
 
     [Header("Start UI")]
     [SerializeField] private TextMeshProUGUI modeText;
-    //[SerializeField] private Image modeTextLine;
     [SerializeField] private Color normalColor;
     [SerializeField] private Color infiniteColor;
     private Color bGColor;
@@ -78,7 +77,6 @@ public class RoundsController : MonoBehaviour
         if (infinite)
         {
             bGColor = infiniteColor;
-            //modeTextLine.color = bGColor;
             modeText.color = bGColor;
             modeText.text = _Infinite;
 
@@ -91,7 +89,6 @@ public class RoundsController : MonoBehaviour
         else
         {
             bGColor = normalColor;
-            //modeTextLine.color = bGColor;
             modeText.color = bGColor;
             modeText.text = _Normal;
 
@@ -143,7 +140,7 @@ public class RoundsController : MonoBehaviour
         }
         else
         {
-            GameManager.Instance.EndLevel();
+            GameManager.Instance.EndLevel(false);
         }
     }
 
@@ -173,7 +170,6 @@ public class RoundsController : MonoBehaviour
 
             if (levelType == LevelType.Infinite)
             {
-                //Time.timeScale = Mathf.Min(Time.timeScale + gameplayScriptable.timeScaleIncrease, 2f);
                 Time.timeScale += gameplayScriptable.timeScaleIncrease;
 
                 AudioManager.Instance.MusicPitch = Mathf.Min(AudioManager.Instance.MusicPitch + 0.02f, 1.2f);
@@ -201,5 +197,10 @@ public class RoundsController : MonoBehaviour
         }
 
         StartGroup();
+    }
+
+    public void InitBorderShip()
+    {
+        EnemySpawns.Instance.InitEnemy(gameplayScriptable.bordersShip, Enums.SpawnType.Specific, 0, 0, PlayerController.Instance.transform.position.x);
     }
 }
