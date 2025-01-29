@@ -45,5 +45,5 @@ MonoBehaviour:
   clip_enemyDeath:
     audioClip: {fileID: 0}
     audioVolume: 0
-  prefab: {fileID: 7042420193141323986, guid: 931e1c3b03c3abf4e86be2b3582c9880, type: 3}
+  prefab: {fileID: 7042420193141323986, guid: 2cacc734a7eb6d842a7cba652294f87c, type: 3}
   maxLifeSteal: 0.1

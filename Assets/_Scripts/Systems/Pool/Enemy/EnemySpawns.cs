@@ -38,6 +38,7 @@ public class EnemySpawns : PoolBaseController
         for (int i = 0; i < _group.count; i++)
         {
             _group.ship.spawnIndex = i;
+            await UniTask.Yield();
             InitEnemy(_group.ship, _group.spawnType, Random.Range(GameManager.PlayerLimits.z, GameManager.PlayerLimits.w), _groupRandom, _group.customFloat);
 
             if (_group.minTimeBetweenSpawn > 0 || _group.maxTimeBetweenSpawn > 0 || _group.spawnType != Enums.SpawnType.AllAtOnce)

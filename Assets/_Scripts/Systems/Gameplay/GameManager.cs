@@ -498,6 +498,7 @@ public class GameManager : MonoBehaviour
                     playerController.SetHealth((int)(gameplayScriptable.playerHealthInfinite * 0.5f));
                     break;
             }
+
             playerController.UpdateHealthUi();
             playerController.gameObject.SetActive(true);
 

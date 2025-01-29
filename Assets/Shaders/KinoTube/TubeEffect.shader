@@ -29,9 +29,9 @@ Shader "Hidden/TubeEffect"
             rgb = saturate(rgb);
 
             // If the color space is not gamma, convert the RGB color to gamma space.
-            #ifndef UNITY_COLORSPACE_GAMMA
-                rgb = LinearToGammaSpace(rgb);
-            #endif
+            // #ifndef UNITY_COLORSPACE_GAMMA
+            //     rgb = LinearToGammaSpace(rgb);
+            // #endif
 
             // Convert the RGB color to YIQ using a matrix multiplication.
             // The matrix is a standard YIQ conversion matrix.
@@ -53,9 +53,9 @@ Shader "Hidden/TubeEffect"
             rgb = saturate(rgb);
 
             // If the color space is not gamma, convert the RGB color to linear space.
-            #ifndef UNITY_COLORSPACE_GAMMA
-                rgb = GammaToLinearSpace(rgb);
-            #endif
+            // #ifndef UNITY_COLORSPACE_GAMMA
+            //     rgb = GammaToLinearSpace(rgb);
+            // #endif
 
             return rgb;
         }

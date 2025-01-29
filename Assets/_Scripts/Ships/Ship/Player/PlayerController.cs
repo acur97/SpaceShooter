@@ -143,7 +143,6 @@ public class PlayerController : ShipBaseController
 
         health -= damage;
         UpdateHealthUi();
-        PostProcessingController.Instance.SetVolumeHealth(healthNormalized.Remap(0, 1, PostProcessingController.Instance.maxVignette, 0));
 
         if (health <= 0)
         {
@@ -170,6 +169,8 @@ public class PlayerController : ShipBaseController
 
         healthNormalized = (float)health / maxHealth;
         healthBar.value = health;
+
+        PostProcessingController.Instance.SetVolumeHealth(healthNormalized.Remap(0, 1, PostProcessingController.Instance.maxVignette, 0));
     }
 
     private async UniTaskVoid CollisionForce(float _time, Vector3 direction)
