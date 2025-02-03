@@ -146,6 +146,11 @@ public class RoundsController : MonoBehaviour
 
     public void StartGroup()
     {
+        if (CurrentLevels[0].rounds[roundCount] == null)
+        {
+            StartRound();
+            return;
+        }
         if (groupCount < CurrentLevels[0].rounds[roundCount].groups.Length - 1)
         {
             groupCount++;

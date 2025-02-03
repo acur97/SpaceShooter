@@ -15,9 +15,9 @@ MonoBehaviour:
   shipBase: {fileID: 0}
   type: 10
   powerName: Life Regen
-  sprite: {fileID: 21300000, guid: 38ae9a6682d353b4fb75e95d8f17d5bd, type: 3}
+  sprite: {fileID: 21300000, guid: 20d325ed4793ba440b023824eaa228a8, type: 3}
   description: Restores 30% of life instantly
-  currentAmount: 0
+  currentAmount: 8
   cost: 20
   useDuration: 0
   durationRange: {x: -1, y: -1}

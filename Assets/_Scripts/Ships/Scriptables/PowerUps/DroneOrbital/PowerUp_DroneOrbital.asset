@@ -15,9 +15,9 @@ MonoBehaviour:
   shipBase: {fileID: 0}
   type: 12
   powerName: Orbital Dron
-  sprite: {fileID: 21300000, guid: 45171d6f375888941bdfd1237a9424ec, type: 3}
-  currentAmount: 0
+  sprite: {fileID: 21300000, guid: 18f0df9dbc2aba74f8735ecfda6e646e, type: 3}
   description: Drone orbiting around you, lasts 20 seconds
+  currentAmount: 6
   cost: 30
   useDuration: 1
   durationRange: {x: 20, y: 20}

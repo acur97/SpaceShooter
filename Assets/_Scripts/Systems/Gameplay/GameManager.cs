@@ -459,6 +459,8 @@ public class GameManager : MonoBehaviour
             {
                 adLifePanel.SetActive(false);
                 adLifeEndPanel.SetActive(true);
+
+                PostProcessingController.Instance.SetVolumeHealth(0f);
             }
 
             PlayerProgress.SaveAll();

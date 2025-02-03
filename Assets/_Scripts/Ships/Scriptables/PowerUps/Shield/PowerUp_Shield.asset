@@ -15,9 +15,9 @@ MonoBehaviour:
   shipBase: {fileID: 0}
   type: 4
   powerName: Shield
-  sprite: {fileID: 21300000, guid: fae237276efd13f488b53ded8047496e, type: 3}
+  sprite: {fileID: 21300000, guid: d42e27be39c9f73488241f32700f3f5d, type: 3}
   description: Shield that absorbs 100 impacts or lasts 10 seconds
-  currentAmount: 0
+  currentAmount: 3
   cost: 10
   useDuration: 1
   durationRange: {x: 10, y: 10}

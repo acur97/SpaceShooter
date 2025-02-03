@@ -15,7 +15,7 @@ MonoBehaviour:
   shipBase: {fileID: 0}
   type: 14
   powerName: Orbital Blast
-  sprite: {fileID: 21300000, guid: 5498e6b53df07cf4aa84c4a1c9038ff0, type: 3}
+  sprite: {fileID: 21300000, guid: 5e7bc6f4287b6244d80a82b61620ef02, type: 3}
   description: Devastating explosion that clears the entire screen of enemies, has
     pre-charge time
   currentAmount: 10

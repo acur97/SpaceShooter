@@ -21,7 +21,7 @@ public class PlayerShoot : MonoBehaviour
 
     public void OnUpdate()
     {
-        if (!inited)
+        if (!inited || GameManager.Instance.hasEnded)
         {
             return;
         }

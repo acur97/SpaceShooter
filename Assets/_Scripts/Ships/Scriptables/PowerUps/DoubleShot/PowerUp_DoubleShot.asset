@@ -15,9 +15,9 @@ MonoBehaviour:
   shipBase: {fileID: 0}
   type: 1
   powerName: Double Shot
-  sprite: {fileID: 21300000, guid: bc239956c81777f41ae6285c278913b3, type: 3}
+  sprite: {fileID: 21300000, guid: bc90b6923f917b84d933bcb4916273c0, type: 3}
   description: Double shot that lasts 20 seconds
-  currentAmount: 0
+  currentAmount: 7
   cost: 10
   useDuration: 1
   durationRange: {x: 20, y: 20}
