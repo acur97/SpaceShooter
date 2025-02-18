@@ -21,7 +21,7 @@ public class AdsManager
     private static bool isInitialized = false;
 
     #region BottomBannerAd
-    //private const string bannerUnitId = "ca-app-pub-3531643773215390/6859179168"; // my banner id
+    //private const string bannerUnitId = "ca-app-pub-8907326292508524/3533112980"; // my banner id
 
     // These ad units are configured to always serve test ads.
 #if UNITY_ANDROID
@@ -36,7 +36,7 @@ public class AdsManager
     #endregion
 
     #region RewardedAd
-    //private const string rewardedAdUnitId = "ca-app-pub-3531643773215390/3453049523"; // my rewarded ad id
+    //private const string rewardedAdUnitId = "ca-app-pub-8907326292508524/9668982787"; // my rewarded ad id
 
     // These ad units are configured to always serve test ads.
 #if UNITY_ANDROID
