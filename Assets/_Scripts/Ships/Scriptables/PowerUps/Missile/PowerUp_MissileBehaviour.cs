@@ -113,4 +113,9 @@ public class PowerUp_MissileBehaviour : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnDestroy()
+    {
+        PoolsUpdateManager.PoolUpdate -= OnUpdate;
+    }
 }

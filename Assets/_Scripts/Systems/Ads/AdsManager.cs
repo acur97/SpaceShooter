@@ -110,7 +110,7 @@ public class AdsManager
 #if Platform_Mobile
         _bannerView.OnBannerAdLoaded += () =>
         {
-            Debug.LogWarning($"Banner view loaded an ad with response : {_bannerView.GetResponseInfo()}");
+            //Debug.LogWarning($"Banner view loaded an ad with response : {_bannerView.GetResponseInfo()}");
 
             RectSafeArea.RefreshAdSafeArea(true, _bannerView.GetHeightInPixels());
 
