@@ -19,6 +19,7 @@ public class GameplayScriptable : ScriptableObject
     public float force = 10;
 
     [Header("Common Values")]
+    [TextArea(10, 20)] public string wNew;
     public int coinValue = 5;
     public uint numberOfAdRevivals = 1;
     public uint numberOfCoinsRevivals = 100;

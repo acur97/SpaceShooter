@@ -39,12 +39,15 @@ public class GameManager : MonoBehaviour
     [Header("Ui")]
     [SerializeField] private Camera mainCamera;
     [SerializeField] private TextMeshProUGUI wNewTxt;
+    [SerializeField] private TextMeshProUGUI wNewParagraph;
     [SerializeField] private GameObject adLifePanel;
     [SerializeField] private GameObject adIcon;
     [SerializeField] private GameObject adLifeEndPanel;
     [SerializeField] private TextMeshProUGUI adLifeTxt;
     private const string adLifeMovile = "Need a Life? <color=#FFFFFF>Watch Ad!";
     private const string adLifeWebGl = "Need a Life? <color=#FFFFFF>Use <b>{0}</b> Coins!";
+
+
     [Header("Gameplay")]
     [SerializeField] private Animator anim_count;
     private const string _init = "Init";
@@ -90,11 +93,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PowerUpsManager powerUpsManager;
     [SerializeField] private PlayerController playerController;
 
-    [ContextMenu("Delete PlayerProgress")]
-    public void DeletePlayerProgress()
-    {
-        PlayerPrefs.DeleteKey("PlayerProgress");
-    }
+    //[ContextMenu("Delete PlayerProgress")]
+    //public void DeletePlayerProgress()
+    //{
+    //    PlayerPrefs.DeleteKey("PlayerProgress");
+    //}
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()
@@ -291,6 +294,7 @@ public class GameManager : MonoBehaviour
         SetCustoms(gameplayScriptable.selectedCustoms);
 
         wNewTxt.text = $"What's new    {Application.version}";
+        wNewParagraph.text = gameplayScriptable.wNew;
     }
 
     private void Start()

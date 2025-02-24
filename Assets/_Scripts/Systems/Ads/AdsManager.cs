@@ -115,6 +115,11 @@ public class AdsManager
             RectSafeArea.RefreshAdSafeArea(true, _bannerView.GetHeightInPixels());
 
             GC.Collect();
+
+            if (GameManager.Instance.hasStarted)
+            {
+                DestroyBottomBannerAd();
+            }
         };
 
         _bannerView.OnBannerAdLoadFailed += (LoadAdError error) =>

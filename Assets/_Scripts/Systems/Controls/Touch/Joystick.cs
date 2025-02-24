@@ -7,6 +7,7 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
 {
     [SerializeField] private Image backPanel;
     [SerializeField] private Image knob;
+    [SerializeField] private float multiplier = 2f;
     [SerializeField] private float knobClamp = 4f;
     [SerializeField] private float knobOffset = 1f;
 
@@ -21,6 +22,11 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
     private void Awake()
     {
         OnPointerUp(null);
+    }
+
+    public virtual void OnPointerDown(PointerEventData pointerEventData)
+    {
+        OnDrag(pointerEventData);
     }
 
     public virtual void OnDrag(PointerEventData pointerEventData)
@@ -51,24 +57,20 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
             };
 
             // Get the input position
-            InputDirection = new Vector2(x, y);
+            InputDirection.x = x;
+            InputDirection.y = y;
             InputDirection = (InputDirection.magnitude > 1) ? InputDirection.normalized : InputDirection;
 
             // Move the knob
             knob.rectTransform.anchoredPosition = Vector2.ClampMagnitude(InputDirection * (backPanel.rectTransform.sizeDelta / 3) * knobOffset, knobClamp);
 
             // More sensitive input
-            InputDirection.x = Math.Clamp(InputDirection.x * 2, -1, 1);
-            InputDirection.y = Math.Clamp(InputDirection.y * 2, -1, 1);
+            InputDirection.x = Math.Clamp(InputDirection.x * multiplier, -1, 1);
+            InputDirection.y = Math.Clamp(InputDirection.y * multiplier, -1, 1);
         }
     }
 
-    public virtual void OnPointerDown(PointerEventData pointerEventData)
-    {
-        OnDrag(pointerEventData);
-    }
-
-    public virtual void OnPointerUp(PointerEventData pointerEventData)
+    public virtual void OnPointerUp(PointerEventData _)
     {
         InputDirection = Vector2.zero;
         knob.rectTransform.anchoredPosition = Vector2.zero;
