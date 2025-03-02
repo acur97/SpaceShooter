@@ -1,6 +1,8 @@
 using GoogleMobileAds.Api;
+#if Platform_Mobile
 using System;
 using UnityEngine;
+#endif
 
 public class AdsManager
 {
@@ -50,6 +52,17 @@ public class AdsManager
     private static RewardedAd _rewardedAd;
     public static Action<bool> OnRewardedAdCompleted;
     #endregion
+#endif
+
+#if Platform_Mobile
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        isInitialized = false;
+        _bannerView = null;
+        _rewardedAd = null;
+        OnRewardedAdCompleted = null;
+    }
 #endif
 
     public static void Init()

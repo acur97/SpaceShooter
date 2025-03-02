@@ -30,6 +30,12 @@ public class AudioManager : MonoBehaviour
     [Header("Common Clips")]
     [SerializeField] private AudioClip clip_ui;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        Instance = null;
+    }
+
     public void Init()
     {
         Instance = this;
@@ -37,7 +43,7 @@ public class AudioManager : MonoBehaviour
         GameManager.GameStart += LoadMainClips;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         GameManager.GameStart -= LoadMainClips;
     }

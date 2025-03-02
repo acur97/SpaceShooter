@@ -37,6 +37,7 @@ public class UiCommonTexts
 {
     public const string Free = "free";
     public const string Owned = "owned";
+    public const string PriceFormat = "${0}";
 }
 
 [Preserve]

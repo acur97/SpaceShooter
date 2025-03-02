@@ -21,6 +21,12 @@ public class PlayerController : ShipBaseController
 
     private int maxHealth = 0;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        Instance = null;
+    }
+
     public void Init(ShipScriptable properties, bool _copy = false)
     {
         copy = _copy;

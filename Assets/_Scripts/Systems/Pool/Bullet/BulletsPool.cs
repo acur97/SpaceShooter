@@ -6,6 +6,12 @@ public class BulletsPool : PoolBaseController
 
     [ReadOnly] public Bullet[] bullets;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        Instance = null;
+    }
+
     private new void Awake()
     {
         Instance = this;

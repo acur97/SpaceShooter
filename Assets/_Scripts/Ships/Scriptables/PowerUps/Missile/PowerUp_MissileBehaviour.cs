@@ -1,4 +1,3 @@
-//using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 
@@ -10,8 +9,6 @@ public class PowerUp_MissileBehaviour : MonoBehaviour
     private float initialSpeed;
     private float speed = 0f;
     private float speedUp = 0f;
-    //private LayerMask defaultLayer;
-    //private Collider2D[] objects;
     private ConstraintSource source;
 
     public void Init(int _damage, float _speed, float _speedUp)
@@ -20,8 +17,6 @@ public class PowerUp_MissileBehaviour : MonoBehaviour
         initialSpeed = _speed;
         speed = _speed;
         speedUp = _speedUp;
-
-        //defaultLayer = LayerMask.GetMask("Default");
 
         SetAimSource();
     }
@@ -34,21 +29,6 @@ public class PowerUp_MissileBehaviour : MonoBehaviour
         {
             aim.RemoveSource(0);
         }
-
-        //objects = Physics2D.OverlapCircleAll(transform.position, 25f, defaultLayer);
-
-        //for (int i = 0; i < objects.Length; i++)
-        //{
-        //    if (objects[i].gameObject.activeSelf && objects[i].CompareTag(_Enemy))
-        //    {
-        //        Debug.LogWarning($"source selected: {i} - {objects[i].name}", objects[i].gameObject);
-        //        source.sourceTransform = objects[i].transform;
-        //        source.weight = 1f;
-
-        //        aim.AddSource(source);
-        //        break;
-        //    }
-        //}
 
         int strongestEnemyIndex = -1;
 

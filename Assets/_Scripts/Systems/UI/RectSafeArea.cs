@@ -4,12 +4,12 @@ using UnityEngine;
 //[ExecuteInEditMode]
 public class RectSafeArea : MonoBehaviour
 {
-    public static Action<bool, float> RefreshAdSafeArea;
-
     [SerializeField] private RectTransform parentRectTransform;
     [SerializeField] private RectTransform rectTransform;
 
 #if Platform_Mobile || UNITY_EDITOR
+
+    public static Action<bool, float> RefreshAdSafeArea;
 
     private Rect lastSafeArea;
     private Rect safeAreaRect;
@@ -21,12 +21,19 @@ public class RectSafeArea : MonoBehaviour
     private bool bottomAd = false;
     private float adSpace = 0f;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        RefreshAdSafeArea = null;
+        bottom = 0;
+    }
+
     private void OnEnable()
     {
         RefreshAdSafeArea += InitAdSpace;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         RefreshAdSafeArea -= InitAdSpace;
     }

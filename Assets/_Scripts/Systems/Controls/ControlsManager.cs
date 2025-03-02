@@ -25,12 +25,18 @@ public class ControlsManager : MonoBehaviour
     [SerializeField] private GameObject tutorialMobile;
     [SerializeField] private GameObject tutorialPC;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        hasTouch = false;
+    }
+
     private void OnEnable()
     {
         GameManager.GamePreStart += SetLevelTypeBtns;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         GameManager.GamePreStart -= SetLevelTypeBtns;
     }
@@ -39,7 +45,6 @@ public class ControlsManager : MonoBehaviour
     private void Start()
     {
 #if Platform_Web && !UNITY_EDITOR
-        // Call the JavaScript function to check the device
         Application.ExternalCall("CheckDevice");
 #elif UNITY_EDITOR
         OnDeviceCheck(editorTouch ? 1 : 0);

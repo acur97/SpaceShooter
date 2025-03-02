@@ -1,3 +1,4 @@
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,7 +21,19 @@ public class StoreItemCustom : MonoBehaviour
 
         spriteImg.sprite = _ship.sprite;
         titleTxt.text = _ship.name;
-        priceTxt.text = _ship.owned ? UiCommonTexts.Owned : _ship.cost == 0 ? UiCommonTexts.Free : $"${_ship.cost}";
+
+        if (_ship.owned)
+        {
+            priceTxt.text = UiCommonTexts.Owned;
+        }
+        else if (_ship.cost == 0)
+        {
+            priceTxt.text = UiCommonTexts.Free;
+        }
+        else
+        {
+            priceTxt.SetTextFormat(UiCommonTexts.PriceFormat, _ship.cost);
+        }
 
         StoreManager.onRefresh += UpdateBtn;
 

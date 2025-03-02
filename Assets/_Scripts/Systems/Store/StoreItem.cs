@@ -1,3 +1,4 @@
+using Cysharp.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,8 @@ public class StoreItem : MonoBehaviour
     private StoreManager store;
     private PowerUpBase powerUp;
 
+    private const string countFormat = "x{0:00}";
+
     public void Init(StoreManager _store, PowerUpBase _powerUp)
     {
         store = _store;
@@ -23,7 +26,15 @@ public class StoreItem : MonoBehaviour
 
         spriteImg.sprite = powerUp.sprite;
         titleTxt.text = powerUp.powerName;
-        priceTxt.text = powerUp.cost == 0 ? UiCommonTexts.Free : $"${powerUp.cost}";
+
+        if (powerUp.cost == 0)
+        {
+            priceTxt.text = UiCommonTexts.Free;
+        }
+        else
+        {
+            priceTxt.SetTextFormat(UiCommonTexts.PriceFormat, powerUp.cost);
+        }
 
         StoreManager.onRefresh += UpdateBtn;
 
@@ -32,7 +43,7 @@ public class StoreItem : MonoBehaviour
 
     private void UpdateBtn()
     {
-        countTxt.text = $"x{powerUp.currentAmount:00}";
+        countTxt.SetTextFormat(countFormat, powerUp.currentAmount);
         countTxt.color = powerUp.currentAmount > 0 ? haveColor : dontColor;
         selected.enabled = GameManager.Instance.gameplayScriptable.selectedPowerUp == powerUp;
     }

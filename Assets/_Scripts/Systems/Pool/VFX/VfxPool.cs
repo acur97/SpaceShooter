@@ -4,6 +4,12 @@ public class VfxPool : PoolBaseController
 {
     public static VfxPool Instance;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        Instance = null;
+    }
+
     protected override void Awake()
     {
         Instance = this;

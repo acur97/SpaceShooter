@@ -46,7 +46,7 @@ public class RoundsController : MonoBehaviour
         GameManager.GameStart += DisableLeaderboardModes;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         GameManager.GameStart -= DisableLeaderboardModes;
     }

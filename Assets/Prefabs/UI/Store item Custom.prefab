@@ -92,10 +92,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5653993139469277056, guid: 8165eb589c62127438fe97ff88b64749, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 14e8c8df02407bd4b8aa044eedeb5630, type: 3}
+    - target: {fileID: 5810436098106769002, guid: 8165eb589c62127438fe97ff88b64749, type: 3}
+      propertyPath: m_fontSize
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7818649749965008951, guid: 8165eb589c62127438fe97ff88b64749, type: 3}
     m_RemovedGameObjects:
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5503719139441715085}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 2574d4f9ccca83c4691b622a4222c176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5503719139441715085 stripped

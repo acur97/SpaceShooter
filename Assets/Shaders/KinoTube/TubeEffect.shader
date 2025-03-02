@@ -1,7 +1,7 @@
 // KinoTube - Old TV/video artifacts simulation https://github.com/keijiro/KinoTube
 // Updated for Unity 6 by @acur97 https://github.com/acur97
 
-Shader "Hidden/TubeEffect"
+Shader "Custom/TubeEffect"
 {
     HLSLINCLUDE
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
@@ -74,7 +74,6 @@ Shader "Hidden/TubeEffect"
             // Sample the YIQ color at the current UV coordinate.
             half3 yiq = SampleYIQ(uv, 0);
 
-            #ifndef SHADER_API_GLES3
             // Setup values
             half bleedWidth = 0.04h * _bleeding; // width of bleeding
             half bleedStep = 2.5h / _bleedingSteps; // max interval of taps
@@ -91,7 +90,6 @@ Shader "Hidden/TubeEffect"
             
             // Normalize the Y and Z components of the YIQ color
             yiq.yz /= (bleedTaps + 1);
-            #endif
             
             // Perform fringing effect by sampling the YIQ color at neighboring UV coordinates and subtracting the samples.
             half fringeDelta = 0.0025h * _fringing; // width of fringing

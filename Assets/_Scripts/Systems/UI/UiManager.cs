@@ -18,6 +18,12 @@ public class UiManager : MonoBehaviour
     [SerializeField] private CanvasGroup canvasFade;
     [SerializeField] private CanvasGroup canvasLoading;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        Instance = null;
+    }
+
     public void Init()
     {
         Instance = this;

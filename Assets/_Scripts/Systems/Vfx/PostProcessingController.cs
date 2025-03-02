@@ -34,9 +34,15 @@ public class PostProcessingController : MonoBehaviour
     private Vector3 shake;
 
     [Header("Renderer Control")]
-    [SerializeField] private Renderer2DData renderer2DData;
+    [SerializeField] private ScriptableRendererFeature[] impactFrameFeature;
     [SerializeField] private Material impactFrameMaterial;
     [SerializeField] private float impactFrameSpacing = 0.1f;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        Instance = null;
+    }
 
     public void Init()
     {
@@ -46,7 +52,7 @@ public class PostProcessingController : MonoBehaviour
         Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
 #endif
 
-        renderer2DData.rendererFeatures[2].SetActive(false);
+        SetImpactFrameFeature(false);
 
         cam = Camera.main;
         camT = cam.transform;
@@ -57,6 +63,14 @@ public class PostProcessingController : MonoBehaviour
         profile.TryGet(out colorAdjustments);
         profile.TryGet(out chromaticAberration);
         profile.TryGet(out vignette);
+    }
+
+    private void SetImpactFrameFeature(bool on)
+    {
+        for (int i = 0; i < impactFrameFeature.Length; i++)
+        {
+            impactFrameFeature[i].SetActive(on);
+        }
     }
 
     private void ResetCameraPosition()
@@ -137,7 +151,7 @@ public class PostProcessingController : MonoBehaviour
         impactFrameMaterial.SetVector(MaterialProperties.Frecuency, new Vector2(5, 100));
         impactFrameMaterial.SetVector(MaterialProperties.Offset, cam.WorldToViewportPoint(PlayerController.Instance.transform.position));
 
-        renderer2DData.rendererFeatures[2].SetActive(true);
+        SetImpactFrameFeature(true);
 
         await UniTask.WaitForSeconds(impactFrameSpacing);
 
@@ -156,7 +170,7 @@ public class PostProcessingController : MonoBehaviour
             await UniTask.WaitForSeconds(impactFrameSpacing);
         }
 
-        renderer2DData.rendererFeatures[2].SetActive(false);
+        SetImpactFrameFeature(false);
 
         onComplete?.Invoke();
     }

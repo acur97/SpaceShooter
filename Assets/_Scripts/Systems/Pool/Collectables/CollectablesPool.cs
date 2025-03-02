@@ -11,6 +11,12 @@ public class CollectablesPool : PoolBaseController
 
     private float timer = 0;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        Instance = null;
+    }
+
     protected override void Awake()
     {
         Instance = this;

@@ -1,3 +1,4 @@
+using Cysharp.Text;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -15,7 +16,6 @@ public class StoreManager : MonoBehaviour
     [SerializeField] private GameObject prefabPowerUps;
     [SerializeField] private GameObject prefabCustoms;
     [SerializeField] private ScrollRect scrollRect;
-    //[SerializeField] private Transform content;
 
     private GameObject instenciatedPrefab;
     private List<GameObject> instanciatedPrefabs = new();
@@ -54,6 +54,13 @@ public class StoreManager : MonoBehaviour
 
     private const float limit = 1.050505f;
     private float cameraAspect = 1.777778f;
+    private const string _coinsUi = "Coins: {0}";
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        onRefresh = null;
+    }
 
     private void Awake()
     {
@@ -81,6 +88,11 @@ public class StoreManager : MonoBehaviour
         selectTgl.onValueChanged.AddListener(UpdateToggle);
 
         SelectPowerUp(null);
+    }
+
+    private void OnDestroy()
+    {
+        onRefresh -= UpdateUi;
     }
 
     private void InitPrefabs()
@@ -153,7 +165,7 @@ public class StoreManager : MonoBehaviour
 
     private void UpdateUi()
     {
-        coinsTxt.text = $"Coins: {PlayerProgress.GetCoins()}";
+        coinsTxt.SetTextFormat(_coinsUi, PlayerProgress.GetCoins());
     }
 
     public void SetUi(bool on)

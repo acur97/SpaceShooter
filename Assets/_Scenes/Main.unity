@@ -10080,7 +10080,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2025
+    m_Bits: 2017
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -10132,12 +10132,12 @@ MonoBehaviour:
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
   m_Antialiasing: 0
-  m_AntialiasingQuality: 2
+  m_AntialiasingQuality: 0
   m_StopNaN: 0
   m_Dithering: 0
-  m_ClearDepth: 1
-  m_AllowXRRendering: 1
-  m_AllowHDROutput: 1
+  m_ClearDepth: 0
+  m_AllowXRRendering: 0
+  m_AllowHDROutput: 0
   m_UseScreenCoordOverride: 0
   m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
@@ -10145,7 +10145,7 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    m_Quality: 3
+    m_Quality: 0
     m_FrameInfluence: 0.1
     m_JitterScale: 1
     m_MipBias: 0
@@ -20844,7 +20844,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5341165ce833ae142b2d610459300a9b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: da9aba4e2e454de4d8e32933e3fc7c05, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -22851,7 +22851,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  renderer2DData: {fileID: 11400000, guid: 424799608f7334c24bf367e4bbfa7f9a, type: 2}
+  impactFrameFeature:
+  - {fileID: -2609331715101256440, guid: 424799608f7334c24bf367e4bbfa7f9a, type: 2}
+  - {fileID: -2609331715101256440, guid: 7c3b8a46f48030c41bea70b3e65cc423, type: 2}
   impactFrameMaterial: {fileID: 2100000, guid: 6313e6d5b4f5d7a4d81a11e246d445be, type: 2}
   impactFrameSpacing: 0.08
 --- !u!114 &1758410998

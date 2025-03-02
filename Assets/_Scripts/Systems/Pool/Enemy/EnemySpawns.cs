@@ -10,6 +10,12 @@ public class EnemySpawns : PoolBaseController
 
     private CancellationToken cancellationToken;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        Instance = null;
+    }
+
     private new void Awake()
     {
         Instance = this;

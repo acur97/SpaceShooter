@@ -41,6 +41,16 @@ public class PowerUpsManager : MonoBehaviour
     //public List<PowerUpBase> currentPowerUps = new();
     [ReadOnly] public PowerUpBase currentPowerUp;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        Instance = null;
+        Player_Shoot = null;
+        Player_Damage = null;
+        Enemy_Damage = null;
+        Enemy_Death = null;
+    }
+
     public void Init()
     {
         Instance = this;
@@ -51,7 +61,7 @@ public class PowerUpsManager : MonoBehaviour
         Enemy_Death += EnemyDeath;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         Player_Shoot -= PlayerShoot;
         Player_Damage -= PlayerDamage;

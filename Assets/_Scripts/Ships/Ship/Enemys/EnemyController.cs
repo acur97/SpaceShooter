@@ -54,7 +54,6 @@ public class EnemyController : ShipBaseController
             transform.position.x <= GameManager.BoundsLimits.z ||
             transform.position.y >= GameManager.BoundsLimits.x ||
             transform.position.y <= GameManager.BoundsLimits.y)
-        //if (transform.position.y <= -GameManager.BoundsLimits.y || transform.position.y >= GameManager.BoundsLimits.y)
         {
             Dead(true);
             return;

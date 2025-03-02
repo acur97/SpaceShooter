@@ -24,6 +24,12 @@ public class PlayerProgress
 
     private const string _progress = "Player_Progress";
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        scriptable = null;
+    }
+
     public static void Init(GameplayScriptable _scriptable)
     {
         scriptable = _scriptable;

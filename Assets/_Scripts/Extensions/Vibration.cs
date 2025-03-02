@@ -1,4 +1,6 @@
+#if Platform_Web
 using System.Runtime.InteropServices;
+#endif
 using UnityEngine;
 
 public class Vibration

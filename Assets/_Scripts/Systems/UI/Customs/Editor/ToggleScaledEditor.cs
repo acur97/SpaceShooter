@@ -69,7 +69,6 @@ public class ToggleScaledEditor : SelectableEditor
 
         EditorGUILayout.Space();
 
-        // Draw the event notification options
         EditorGUILayout.PropertyField(m_OnValueChangedProperty);
 
         EditorGUILayout.PropertyField(sp_Scale);

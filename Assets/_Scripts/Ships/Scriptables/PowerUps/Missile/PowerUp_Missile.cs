@@ -68,4 +68,9 @@ public class PowerUp_Missile : PowerUpBase
             PowerUpsManager.Instance.RemovePowerUp(this);
         }
     }
+
+    private void OnDestroy()
+    {
+        PoolsUpdateManager.PoolUpdate -= missileInstance.OnUpdate;
+    }
 }

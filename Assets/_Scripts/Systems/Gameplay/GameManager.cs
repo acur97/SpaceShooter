@@ -1,3 +1,4 @@
+using Cysharp.Text;
 using Cysharp.Threading.Tasks;
 using System;
 using TMPro;
@@ -40,12 +41,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     [SerializeField] private TextMeshProUGUI wNewTxt;
     [SerializeField] private TextMeshProUGUI wNewParagraph;
+    private const string wNewFormat = "What's new    {0}";
     [SerializeField] private GameObject adLifePanel;
     [SerializeField] private GameObject adIcon;
     [SerializeField] private GameObject adLifeEndPanel;
     [SerializeField] private TextMeshProUGUI adLifeTxt;
-    private const string adLifeMovile = "Need a Life? <color=#FFFFFF>Watch Ad!";
+#if Platform_Web
     private const string adLifeWebGl = "Need a Life? <color=#FFFFFF>Use <b>{0}</b> Coins!";
+#else
+    private const string adLifeMovile = "Need a Life? <color=#FFFFFF>Watch Ad!";
+#endif
 
 
     [Header("Gameplay")]
@@ -98,6 +103,14 @@ public class GameManager : MonoBehaviour
     //{
     //    PlayerPrefs.DeleteKey("PlayerProgress");
     //}
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        Instance = null;
+        GamePreStart = null;
+        GameStart = null;
+    }
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()
@@ -235,8 +248,8 @@ public class GameManager : MonoBehaviour
 
         adRevivals = (int)gameplayScriptable.numberOfAdRevivals;
 
-        scoreText.SetText(preScore, score);
-        coinsText.SetText(preCoins, PlayerProgress.GetCoins());
+        scoreText.SetTextFormat(preScore, score);
+        coinsText.SetTextFormat(preCoins, PlayerProgress.GetCoins());
 
         uiManager.SetUi(UiType.Gameplay, true);
         uiManager.SetUi(UiType.Select, false, 1, () => anim_count.SetTrigger(_init));
@@ -293,7 +306,7 @@ public class GameManager : MonoBehaviour
         PlayerProgress.Init(gameplayScriptable);
         SetCustoms(gameplayScriptable.selectedCustoms);
 
-        wNewTxt.text = $"What's new    {Application.version}";
+        wNewTxt.SetTextFormat(wNewFormat, Application.version);
         wNewParagraph.text = gameplayScriptable.wNew;
     }
 
@@ -405,14 +418,14 @@ public class GameManager : MonoBehaviour
         if (isPlaying)
         {
             score += value;
-            scoreText.SetText(preScore, score);
+            scoreText.SetTextFormat(preScore, score);
         }
     }
 
     public void UpCoins(int value)
     {
         PlayerProgress.SetCoins(value);
-        coinsText.SetText(preCoins, PlayerProgress.GetCoins());
+        coinsText.SetTextFormat(preCoins, PlayerProgress.GetCoins());
         audioManager.PlaySound(Enums.AudioType.Coin);
     }
 
@@ -428,8 +441,8 @@ public class GameManager : MonoBehaviour
             uiManager.SetUi(UiType.Pause, false);
             uiManager.SetUi(UiType.End, true, 1, () => uiManager.SetUi(UiType.Gameplay, false));
 
-            endScore.SetText(postScore, score);
-            endCoins.SetText(preCoins, PlayerProgress.GetCoins());
+            endScore.SetTextFormat(postScore, score);
+            endCoins.SetTextFormat(preCoins, PlayerProgress.GetCoins());
 
             audioManager.SetMasterVolume(0.5f);
             audioManager.PlaySound(Enums.AudioType.End, 2.5f);
@@ -456,7 +469,7 @@ public class GameManager : MonoBehaviour
                 adLifeEndPanel.SetActive(false);
 
                 adIcon.SetActive(false);
-                adLifeTxt.SetText(adLifeWebGl, gameplayScriptable.numberOfCoinsRevivals);
+                adLifeTxt.SetTextFormat(adLifeWebGl, gameplayScriptable.numberOfCoinsRevivals);
             }
 #endif
             else
@@ -483,6 +496,13 @@ public class GameManager : MonoBehaviour
         OnAdViewed(true);
 #endif
     }
+
+#if Platform_Mobile
+    private void OnDestroy()
+    {
+        AdsManager.OnRewardedAdCompleted -= OnAdViewed;
+    }
+#endif
 
     private void OnAdViewed(bool rewarded)
     {
