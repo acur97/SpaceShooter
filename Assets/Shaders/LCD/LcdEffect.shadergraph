@@ -933,7 +933,7 @@
     "m_FunctionName": "Vector4to3",
     "m_FunctionSource": "",
     "m_FunctionSourceUsePragmas": true,
-    "m_FunctionBody": "_out = _in;"
+    "m_FunctionBody": "_out.rgb = _in.rgb;"
 }
 
 {
