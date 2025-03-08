@@ -77,3 +77,4 @@ crashlytics-build.properties
 
 # rest of .gitignore
 .utmp/
+Windows build/
