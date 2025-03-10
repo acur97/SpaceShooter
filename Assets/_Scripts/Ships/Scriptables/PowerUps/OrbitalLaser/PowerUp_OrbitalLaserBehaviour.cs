@@ -50,9 +50,9 @@ public class PowerUp_OrbitalLaserBehaviour : MonoBehaviour
 
         for (int i = 0; i < BulletsPool.Instance.bullets.Length; i++)
         {
-            if (BulletsPool.Instance.bullets[i].gameObject.activeSelf)
+            if (BulletsPool.Instance.bullets[i].transform.gameObject.activeSelf)
             {
-                BulletsPool.Instance.bullets[i].gameObject.SetActive(false);
+                BulletsPool.Instance.bullets[i].transform.gameObject.SetActive(false);
             }
         }
 

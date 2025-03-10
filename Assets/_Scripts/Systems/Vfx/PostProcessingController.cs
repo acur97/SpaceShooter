@@ -87,31 +87,37 @@ public class PostProcessingController : MonoBehaviour
     {
         LeanTween.cancel(tweenPostExposure1);
         LeanTween.cancel(tweenPostExposure2);
-        tweenPostExposure1 = LeanTween.value(colorAdjustments.postExposure.value, exposureRange.y, volumeSpeed).setOnUpdate((float value) =>
-        {
-            colorAdjustments.saturation.value = value;
-        }).setOnComplete(() =>
-        {
-            tweenPostExposure2 = LeanTween.value(colorAdjustments.postExposure.value, exposureRange.x, volumeSpeed).setOnUpdate((float value) =>
-            {
-                colorAdjustments.saturation.value = value;
-            }).id;
-        }).id;
+        tweenPostExposure1 = LeanTween.value(colorAdjustments.postExposure.value, exposureRange.y, volumeSpeed)
+            .setOnUpdate(OnUpdatePostExposure)
+            .setOnComplete(OnCompletePostExposure).id;
 
         LeanTween.cancel(tweenChromaticAberration1);
         LeanTween.cancel(tweenChromaticAberration2);
-        tweenChromaticAberration1 = LeanTween.value(chromaticAberration.intensity.value, chromaticAberrationRange.y, volumeSpeed).setOnUpdate((float value) =>
-        {
-            chromaticAberration.intensity.value = value;
-        }).setOnComplete(() =>
-        {
-            tweenChromaticAberration2 = LeanTween.value(chromaticAberration.intensity.value, chromaticAberrationRange.x, volumeSpeed).setOnUpdate((float value) =>
-            {
-                chromaticAberration.intensity.value = value;
-            }).id;
-        }).id;
+        tweenChromaticAberration1 = LeanTween.value(chromaticAberration.intensity.value, chromaticAberrationRange.y, volumeSpeed)
+            .setOnUpdate(OnUpdateChromaticAberration)
+            .setOnComplete(OnCompleteChromaticAberration).id;
 
         AudioManager.Instance.PlaySound(Enums.AudioType.Boom, 0.2f);
+    }
+
+    private void OnUpdatePostExposure(float value)
+    {
+        colorAdjustments.saturation.value = value;
+    }
+
+    private void OnCompletePostExposure()
+    {
+        tweenPostExposure2 = LeanTween.value(colorAdjustments.postExposure.value, exposureRange.x, volumeSpeed).setOnUpdate(OnUpdatePostExposure).id;
+    }
+
+    private void OnUpdateChromaticAberration(float value)
+    {
+        chromaticAberration.intensity.value = value;
+    }
+
+    private void OnCompleteChromaticAberration()
+    {
+        tweenChromaticAberration2 = LeanTween.value(chromaticAberration.intensity.value, chromaticAberrationRange.x, volumeSpeed).setOnUpdate(OnUpdateChromaticAberration).id;
     }
 
     public void SetVolumeHealth(float val)

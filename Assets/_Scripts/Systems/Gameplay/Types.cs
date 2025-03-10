@@ -5,9 +5,10 @@ using UnityEngine.Scripting;
 public class Tags
 {
     public const string Enemy = "Enemy";
-    public const string Bullet = "Bullet";
     public const string Collectable = "Collectable";
     public const string Ad = "Ad";
+    public const string Bullet_Player = "Bullet_Player";
+    public const string Bullet_Enemy = "Bullet_Enemy";
 }
 
 [Preserve]

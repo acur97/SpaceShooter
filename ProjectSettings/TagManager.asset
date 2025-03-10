@@ -8,6 +8,8 @@ TagManager:
   - Bullet
   - Collectable
   - Ad
+  - Bullet_Player
+  - Bullet_Enemy
   layers:
   - Default
   - TransparentFX

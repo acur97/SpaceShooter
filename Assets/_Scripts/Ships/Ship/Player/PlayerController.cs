@@ -98,7 +98,7 @@ public class PlayerController : ShipBaseController
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(Tags.Bullet) && collision.GetComponent<Bullet>().bulletBase.bulletType == Enums.TypeBullet.enemy)
+        if (collision.CompareTag(Tags.Bullet_Enemy))
         {
             collision.gameObject.SetActive(false);
 
