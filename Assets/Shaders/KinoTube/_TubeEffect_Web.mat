@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: _TubeEffectMobile
-  m_Shader: {fileID: 4800000, guid: fe591af8524c7864b9da5644b64e4da2, type: 3}
+  m_Name: _TubeEffect_Web
+  m_Shader: {fileID: 4800000, guid: e41913b424825ca4daa891fd2745f687, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []

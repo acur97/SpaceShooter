@@ -124,7 +124,7 @@ public class BulletsPool : PoolBaseController
 
                 if (bullets[i].data.lifetime <= 0)
                 {
-                    gameObject.SetActive(false);
+                    bullets[i].transform.gameObject.SetActive(false);
                     continue;
                 }
             }
