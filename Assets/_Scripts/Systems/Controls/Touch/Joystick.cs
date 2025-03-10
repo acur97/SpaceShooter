@@ -14,6 +14,7 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
     public Vector2 InputDirection;
 
     private Vector2 position;
+    private float ScreenPointToLocalPointInRectangle;
     private Vector2 sizeDelta;
     private Vector2 pivot;
     private float x;
@@ -22,6 +23,9 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
     private void Awake()
     {
         OnPointerUp(null);
+
+        // the scale needs to be equal in xyz
+        ScreenPointToLocalPointInRectangle = transform.localScale.x;
     }
 
     public virtual void OnPointerDown(PointerEventData pointerEventData)
@@ -31,43 +35,39 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
 
     public virtual void OnDrag(PointerEventData pointerEventData)
     {
-        position = Vector2.zero;
+        position = pointerEventData.position / ScreenPointToLocalPointInRectangle;
 
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(backPanel.rectTransform, pointerEventData.position, pointerEventData.pressEventCamera, out position))
+        sizeDelta = backPanel.rectTransform.sizeDelta;
+        pivot = backPanel.rectTransform.pivot;
+
+        // Get the touch position
+        position /= sizeDelta;
+
+        // Calculate the move position
+        x = pivot.x switch
         {
-            sizeDelta = backPanel.rectTransform.sizeDelta;
-            pivot = backPanel.rectTransform.pivot;
+            0 => position.x * 2 - 1,
+            1 => position.x * 2 + 1,
+            _ => position.x * 2
+        };
+        y = pivot.y switch
+        {
+            0 => position.y * 2 - 1,
+            1 => position.y * 2 + 1,
+            _ => position.y * 2
+        };
 
-            // Get the touch position
-            position.x /= sizeDelta.x;
-            position.y /= sizeDelta.y;
+        // Get the input position
+        InputDirection.x = x;
+        InputDirection.y = y;
+        InputDirection = (InputDirection.magnitude > 1) ? InputDirection.normalized : InputDirection;
 
-            // Calculate the move position
-            x = pivot.x switch
-            {
-                0 => position.x * 2 - 1,
-                1 => position.x * 2 + 1,
-                _ => position.x * 2
-            };
-            y = pivot.y switch
-            {
-                0 => position.y * 2 - 1,
-                1 => position.y * 2 + 1,
-                _ => position.y * 2
-            };
+        // Move the knob
+        knob.rectTransform.anchoredPosition = Vector2.ClampMagnitude(InputDirection * (backPanel.rectTransform.sizeDelta / 3) * knobOffset, knobClamp);
 
-            // Get the input position
-            InputDirection.x = x;
-            InputDirection.y = y;
-            InputDirection = (InputDirection.magnitude > 1) ? InputDirection.normalized : InputDirection;
-
-            // Move the knob
-            knob.rectTransform.anchoredPosition = Vector2.ClampMagnitude(InputDirection * (backPanel.rectTransform.sizeDelta / 3) * knobOffset, knobClamp);
-
-            // More sensitive input
-            InputDirection.x = Math.Clamp(InputDirection.x * multiplier, -1, 1);
-            InputDirection.y = Math.Clamp(InputDirection.y * multiplier, -1, 1);
-        }
+        // More sensitive input
+        InputDirection.x = Math.Clamp(InputDirection.x * multiplier, -1, 1);
+        InputDirection.y = Math.Clamp(InputDirection.y * multiplier, -1, 1);
     }
 
     public virtual void OnPointerUp(PointerEventData _)
