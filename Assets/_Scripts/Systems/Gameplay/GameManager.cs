@@ -283,6 +283,13 @@ public class GameManager : MonoBehaviour
     //    playerController.SetHealth(on ? 10000000 : playerController._properties.health);
     //}
 
+    public void EnableMobileKeyboard(bool on)
+    {
+#if !UNITY_EDITOR && UNITY_WEBGL
+        WebGLInput.mobileKeyboardSupport = on;
+#endif
+    }
+
     private void Awake()
     {
         PlayerLoopSystem loop = PlayerLoop.GetCurrentPlayerLoop();
@@ -308,6 +315,8 @@ public class GameManager : MonoBehaviour
 
         wNewTxt.SetTextFormat(wNewFormat, Application.version);
         wNewParagraph.text = gameplayScriptable.wNew;
+
+        EnableMobileKeyboard(false);
     }
 
     private void Start()

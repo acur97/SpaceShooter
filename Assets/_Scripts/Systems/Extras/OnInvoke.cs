@@ -5,6 +5,7 @@ public class OnInvoke : MonoBehaviour
 {
     public UnityEvent OnInvokeEvent;
     public UnityEvent OnEnableEvent;
+    public UnityEvent OnDisableEvent;
     public UnityEvent OnCancelEvent;
 
     public void Invoke()
@@ -15,6 +16,11 @@ public class OnInvoke : MonoBehaviour
     private void OnEnable()
     {
         OnEnableEvent.Invoke();
+    }
+
+    private void OnDisable()
+    {
+        OnDisableEvent.Invoke();
     }
 
     private void Update()
