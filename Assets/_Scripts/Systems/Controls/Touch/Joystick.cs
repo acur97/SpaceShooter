@@ -14,7 +14,6 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
     public Vector2 InputDirection;
 
     private Vector2 position;
-    private float ScreenPointToLocalPointInRectangle;
     private Vector2 sizeDelta;
     private Vector2 pivot;
     private float x;
@@ -23,9 +22,6 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
     private void Awake()
     {
         OnPointerUp(null);
-
-        // the scale needs to be equal in xyz
-        ScreenPointToLocalPointInRectangle = transform.localScale.x;
     }
 
     public virtual void OnPointerDown(PointerEventData pointerEventData)
@@ -35,7 +31,7 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
 
     public virtual void OnDrag(PointerEventData pointerEventData)
     {
-        position = pointerEventData.position / ScreenPointToLocalPointInRectangle;
+        position = backPanel.rectTransform.InverseTransformPoint(pointerEventData.pointerCurrentRaycast.worldPosition);
 
         sizeDelta = backPanel.rectTransform.sizeDelta;
         pivot = backPanel.rectTransform.pivot;
