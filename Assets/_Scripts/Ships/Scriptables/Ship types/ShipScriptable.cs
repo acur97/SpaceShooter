@@ -22,7 +22,7 @@ public class ShipScriptable : ScriptableObject
     // Ship Parameters
     public Sprite sprite;
     public Vector3 spriteScale = Vector3.one;
-    public Material material;
+    public float hue = 0;
     public float speed = 4;
     public int health = 100;
 
@@ -45,6 +45,7 @@ public class ShipScriptable : ScriptableObject
     [Space]
     public bool _timeToContinue = false;
     public float timeToContinue = -1;
+    [HideInInspector] public bool countForGroup = true;
 
     [HideInInspector] public int spawnIndex;
 }

@@ -26,6 +26,9 @@ public class ShipScriptableEditor : Editor
         _sprite = inspector.Q<VisualElement>("VisualSprite");
         sprite_Field.RegisterValueChangedCallback(OnSpriteChange);
 
+        //Slider Slider_hue = inspector.Q<Slider>("Slider_hue");
+        //Slider_hue.RegisterValueChangedCallback(OnSlider_hue_Change);
+
         Toggle toggle_SpaceCoolDown_Field = inspector.Q<Toggle>("Toggle_spaceCoolDown");
         _spaceCoolDown = inspector.Q<FloatField>("Field_spaceCoolDown");
         toggle_SpaceCoolDown_Field.RegisterValueChangedCallback(OnToggle_SpaceCoolDown_Change);
@@ -45,6 +48,11 @@ public class ShipScriptableEditor : Editor
     {
         _sprite.style.backgroundImage = new StyleBackground(evt.newValue as Sprite);
     }
+
+    //private void OnSlider_hue_Change(ChangeEvent<float> evt)
+    //{
+    //    _sprite.style.unityBackgroundImageTintColor = Color.HSVToRGB(evt.newValue, 1, 1);
+    //}
 
     private void OnToggle_SpaceCoolDown_Change(ChangeEvent<bool> evt)
     {

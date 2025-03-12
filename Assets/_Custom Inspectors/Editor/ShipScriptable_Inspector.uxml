@@ -16,7 +16,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:Vector3Field label="Scale" binding-path="spriteScale" tooltip="Sprite scale" value="1,1,1" />
-        <uie:ObjectField label="Material" binding-path="material" type="UnityEngine.Material, UnityEngine.CoreModule" style="margin-bottom: 8px; -unity-font-style: normal;" />
+        <ui:Slider label="Hue" value="0" high-value="1" binding-path="hue" tooltip="H component of HSV color variation of Sprite (0.5 means +180 of Hue, like inverted colors)" name="Slider_hue" show-input-field="true" />
         <ui:FloatField label="Speed" value="4" tooltip="Speed/Movement of the Ship" binding-path="speed" style="-unity-font-style: normal;" />
         <ui:UnsignedIntegerField label="Health" value="10" binding-path="health" tooltip="Health of the Ship" style="margin-bottom: 4px; -unity-font-style: normal;" />
     </ui:Foldout>

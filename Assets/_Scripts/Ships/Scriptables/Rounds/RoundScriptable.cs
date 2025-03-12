@@ -15,6 +15,7 @@ public struct Group
     [Space]
     public int count;
     public ShipScriptable ship;
+    public PowerUpBase spawnPowerUp;
 }
 
 [CreateAssetMenu(fileName = "Round ", menuName = "Gameplay/Level design/Round", order = 1)]

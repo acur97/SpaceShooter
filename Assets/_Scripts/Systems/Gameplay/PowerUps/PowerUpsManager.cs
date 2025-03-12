@@ -38,8 +38,8 @@ public class PowerUpsManager : MonoBehaviour
     [SerializeField] private Image icon;
     private float maxValue;
 
-    //public List<PowerUpBase> currentPowerUps = new();
     [ReadOnly] public PowerUpBase currentPowerUp;
+    private bool fromStore = true;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Initialize()
@@ -81,9 +81,10 @@ public class PowerUpsManager : MonoBehaviour
         }
     }
 
-    public void SelectPowerUp(PowerUpBase powerUp)
+    public void SelectPowerUp(PowerUpBase powerUp, bool _fromStore = true)
     {
         gameplayScriptable.selectedPowerUp = powerUp;
+        fromStore = _fromStore;
 
         if (powerUp == null)
         {
@@ -115,10 +116,12 @@ public class PowerUpsManager : MonoBehaviour
             return;
         }
 
-        //currentPowerUps.Add(type);
         currentPowerUp = type;
-        currentPowerUp.currentAmount--;
-        PlayerProgress.SavePowerUps(true);
+        if (fromStore)
+        {
+            currentPowerUp.currentAmount--;
+            PlayerProgress.SavePowerUps(true);
+        }
         gameplayScriptable.selectedPowerUp = null;
 
         type.shipBase = PlayerController.Instance;
@@ -167,7 +170,6 @@ public class PowerUpsManager : MonoBehaviour
 
         type.OnDeactivate();
 
-        //currentPowerUps.Remove(type);
         currentPowerUp = null;
 
         type.Dispose();
@@ -188,11 +190,6 @@ public class PowerUpsManager : MonoBehaviour
             AudioManager.Instance.PlaySound(currentPowerUp.clip_shoot.audioClip, currentPowerUp.clip_shoot.audioVolume, Enums.SourceType.PowerUps);
         }
 
-        //for (int i = 0; i < currentPowerUps.Count; i++)
-        //{
-        //    currentPowerUps[i].OnPlayerShoot();
-        //}
-
         currentPowerUp.OnPlayerShoot();
     }
 
@@ -207,11 +204,6 @@ public class PowerUpsManager : MonoBehaviour
         {
             AudioManager.Instance.PlaySound(currentPowerUp.clip_playerDamage.audioClip, currentPowerUp.clip_playerDamage.audioVolume, Enums.SourceType.PowerUps);
         }
-
-        //for (int i = 0; i < currentPowerUps.Count; i++)
-        //{
-        //    currentPowerUps[i].OnPlayerDamage();
-        //}
 
         currentPowerUp.OnPlayerDamage();
     }
@@ -228,11 +220,6 @@ public class PowerUpsManager : MonoBehaviour
             AudioManager.Instance.PlaySound(currentPowerUp.clip_enemyDamage.audioClip, currentPowerUp.clip_enemyDamage.audioVolume, Enums.SourceType.PowerUps);
         }
 
-        //for (int i = 0; i < currentPowerUps.Count; i++)
-        //{
-        //    currentPowerUps[i].OnEnemyDamage(enemy);
-        //}
-
         currentPowerUp.OnEnemyDamage(enemy);
     }
 
@@ -248,11 +235,6 @@ public class PowerUpsManager : MonoBehaviour
             AudioManager.Instance.PlaySound(currentPowerUp.clip_enemyDeath.audioClip, currentPowerUp.clip_enemyDeath.audioVolume, Enums.SourceType.PowerUps);
         }
 
-        //for (int i = 0; i < currentPowerUps.Count; i++)
-        //{
-        //    currentPowerUps[i].OnEnemyDeath(enemy);
-        //}
-
         currentPowerUp.OnEnemyDeath(enemy);
     }
 
@@ -263,16 +245,16 @@ public class PowerUpsManager : MonoBehaviour
             return;
         }
 
-        //for (int i = 0; i < currentPowerUps.Count; i++)
-        //{
-        //    currentPowerUps[i].OnGameUpdate();
-        //}
-
         currentPowerUp.OnGameUpdate();
 
-        if ((currentPowerUp != null && currentPowerUp.useDuration))
+        if (currentPowerUp != null && currentPowerUp.useDuration)
         {
             icon.fillAmount = currentPowerUp.duration.Remap(0, maxValue, 0, 1);
         }
+    }
+
+    public void InstantiatePowerUp(PowerUpBase powerUp)
+    {
+        PowerUpsPool.Instance.InitPowerUp(powerUp);
     }
 }
