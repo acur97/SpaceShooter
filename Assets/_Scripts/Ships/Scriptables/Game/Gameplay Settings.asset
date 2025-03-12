@@ -20,34 +20,18 @@ MonoBehaviour:
   boundsLimit: {x: 1.15, y: 1.15, z: 1.2, w: 1.2}
   forceTime: 0.1
   force: 10
-  wNew: '- <color=#FFFC00>We are now in the Google Play Store!</color>
-
-    - <color=#FFFC00>New!</color>
-    In touch/mobile devices, the movement and shoot is now with Swipes!
-
-    - New
-    UI and Sprites
-
-    - Infinite Mode, in this game mode you don''t shoot, <color=#FFAB80>but
+  wNew: "- <color=#FFFC00>\xA1We are now in the Google Play Store!</color>\n- <color=#FFFC00>New!</color>
+    In touch/mobile devices, the movement and shoot is now with Swipes!\n- New UI
+    and Sprites\n- Infinite Mode, in this game mode you don't shoot, <color=#FFAB80>but
     you can use PowerUps</color>, you can only move, the levels are faster, see how
-    far you can go!
-
-    - Powers and customization. In the shop you can buy powers
-    that will help you advance further in the levels
-
-    - You can also buy skins
-    to customize your ship
-
-    - Before starting each level, select the power you
-    are going to fight with (Activate it with the Space key or the second button
-    on the cell phone)
-
-    - <color=#FF654E>Important: </color>The coins are separated
-    from the final score.
-
-    - Your progress will be saved on the local device
-    (coins, purchased powers), that means that if you play on another device, you
-    will not have your progress for the moment.'
+    far you can go!\n- Powers and customization. In the shop you can buy powers that
+    will help you advance further in the levels\n- You can also buy skins to customize
+    your ship\n- Before starting each level, select the power you are going to fight
+    with (Activate it with the Space key or the second button on the cell phone)\n-
+    <color=#FF654E>Important: </color>The coins are separated from the final score.\n-
+    Your progress will be saved on the local device (coins, purchased powers), that
+    means that if you play on another device, you will not have your progress for
+    the moment."
   coinValue: 5
   numberOfAdRevivals: 1
   numberOfCoinsRevivals: 100

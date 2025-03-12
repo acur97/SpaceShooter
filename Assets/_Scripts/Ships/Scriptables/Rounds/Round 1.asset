@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groups:
   - chained: 0
-    timeToStart: 2
+    timeToStart: 0
     spawnType: 0
     customFloat: 0
     minTimeBetweenSpawn: 0.5
