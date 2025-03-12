@@ -349,11 +349,6 @@ public class GameManager : MonoBehaviour
 
             if (isPlaying)
             {
-                if (leftForNextGroup <= 0)
-                {
-                    roundsController.StartGroup();
-                }
-
                 if (roundsController.levelType == RoundsController.LevelType.Infinite)
                 {
                     accumulatedScore += gameplayScriptable.scoreScaleIncrease * Time.deltaTime * Time.timeScale;

@@ -61,7 +61,7 @@ public class PlayerController : ShipBaseController
     {
         _properties = shipBaseController;
 
-        renderer.material = shipBaseController.material;
+        renderer.material.SetFloat(MaterialProperties.Hue, shipBaseController.hue);
         renderer.sprite = shipBaseController.sprite;
         renderer.transform.localScale = shipBaseController.spriteScale;
 
@@ -125,6 +125,11 @@ public class PlayerController : ShipBaseController
 
             DoDamage(enemyController.health);
             enemyController.DoDamage();
+        }
+        else if (collision.CompareTag(Tags.PowerUp) && collision.TryGetComponent(out PowerUpCollectable powerUp))
+        {
+            PowerUpsManager.Instance.SelectPowerUp(powerUp.powerUp, false);
+            powerUp.Stop();
         }
     }
 

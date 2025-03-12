@@ -5,7 +5,7 @@ public class ControlsManager : MonoBehaviour
 {
 #if UNITY_EDITOR
     [Header("Editor controls")]
-    [SerializeField] private bool editorTouch = false;
+    [SerializeField] private bool editorMobile = false;
 #endif
 
     [Header("Controls")]
@@ -47,7 +47,7 @@ public class ControlsManager : MonoBehaviour
 #if Platform_Web && !UNITY_EDITOR
         Application.ExternalCall("CheckDevice");
 #elif UNITY_EDITOR
-        OnDeviceCheck(editorTouch ? 1 : 0);
+        OnDeviceCheck(editorMobile ? 1 : 0);
 
 #elif Platform_Mobile
         OnDeviceCheck(1);

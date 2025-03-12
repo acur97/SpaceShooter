@@ -10,6 +10,7 @@ TagManager:
   - Ad
   - Bullet_Player
   - Bullet_Enemy
+  - PowerUp
   layers:
   - Default
   - TransparentFX

@@ -43,6 +43,8 @@ public class RoundsController : MonoBehaviour
 
         SetMode(Convert.ToBoolean(PlayerPrefs.GetInt(lastLevelType, 0)));
 
+        gameplayScriptable.bordersShip.countForGroup = false;
+
         GameManager.GameStart += DisableLeaderboardModes;
     }
 
@@ -102,6 +104,19 @@ public class RoundsController : MonoBehaviour
         leaderboardInfiniteTgl.SetIsOnWithoutNotify(infinite);
     }
 
+    private LevelScriptable[] CurrentLevels
+    {
+        get
+        {
+            return levelType switch
+            {
+                LevelType.Normal => gameplayScriptable.levels,
+                LevelType.Infinite => gameplayScriptable.infiniteLevels,
+                _ => null,
+            };
+        }
+    }
+
     public void StartRound()
     {
         switch (levelType)
@@ -116,31 +131,55 @@ public class RoundsController : MonoBehaviour
         }
     }
 
-    private LevelScriptable[] CurrentLevels
-    {
-        get
-        {
-            return levelType switch
-            {
-                LevelType.Normal => gameplayScriptable.levels,
-                LevelType.Infinite => gameplayScriptable.infiniteLevels,
-                _ => null,
-            };
-        }
-    }
-
     private void StartNormalRound()
     {
         if (roundCount < CurrentLevels[0].rounds.Length - 1)
         {
-            roundCount++;
-            groupCount = -1;
+            UpRound();
 
             StartGroup();
         }
         else
         {
             GameManager.Instance.EndLevel(false);
+        }
+    }
+
+    private void StartInfinite()
+    {
+        roundCount = Random.Range(-1, CurrentLevels[0].rounds.Length - 1);
+
+        if (roundCount < CurrentLevels[0].rounds.Length - 1)
+        {
+            UpRound();
+        }
+        else
+        {
+
+            roundCount--;
+        }
+
+        StartGroup();
+    }
+
+    private void UpRound()
+    {
+        roundCount++;
+        groupCount = -1;
+    }
+
+    private void Update()
+    {
+        if (GameManager.Instance.hasStarted &&
+            GameManager.Instance.isPlaying &&
+            GameManager.Instance.leftForNextGroup <= 0)
+        {
+            if (CurrentLevels[0].rounds[roundCount].groups[groupCount].spawnPowerUp != null)
+            {
+                PowerUpsManager.Instance.InstantiatePowerUp(CurrentLevels[0].rounds[roundCount].groups[groupCount].spawnPowerUp);
+            }
+
+            StartGroup();
         }
     }
 
@@ -184,24 +223,6 @@ public class RoundsController : MonoBehaviour
         {
             StartRound();
         }
-    }
-
-    private void StartInfinite()
-    {
-        roundCount = Random.Range(-1, CurrentLevels[0].rounds.Length - 1);
-
-        if (roundCount < CurrentLevels[0].rounds.Length - 1)
-        {
-            roundCount++;
-            groupCount = -1;
-        }
-        else
-        {
-
-            roundCount--;
-        }
-
-        StartGroup();
     }
 
     public void InitBorderShip()

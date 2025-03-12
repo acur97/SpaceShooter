@@ -17,6 +17,7 @@ public class EnemyController : ShipBaseController
     {
         dead = false;
 
+        renderer.material.SetFloat(MaterialProperties.Hue, _properties.hue);
         renderer.sprite = _properties.sprite;
         renderer.transform.localScale = _properties.spriteScale;
 
@@ -136,7 +137,11 @@ public class EnemyController : ShipBaseController
     {
         dead = true;
         gameObject.SetActive(false);
-        GameManager.Instance.leftForNextGroup--;
+
+        if (_properties.countForGroup)
+        {
+            GameManager.Instance.leftForNextGroup--;
+        }
 
         if (!outOfBounds)
         {

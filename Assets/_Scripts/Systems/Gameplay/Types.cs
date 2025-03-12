@@ -9,6 +9,7 @@ public class Tags
     public const string Ad = "Ad";
     public const string Bullet_Player = "Bullet_Player";
     public const string Bullet_Enemy = "Bullet_Enemy";
+    public const string PowerUp = "PowerUp";
 }
 
 [Preserve]
@@ -26,6 +27,7 @@ public class MaterialProperties
 {
     public static readonly int Color = Shader.PropertyToID("_Color");
     public static readonly int ColorCapsule = Shader.PropertyToID("_ColorCapsule");
+    public static readonly int Hue = Shader.PropertyToID("_Hue");
 
     public static readonly int Offset = Shader.PropertyToID("_Offset");
 
