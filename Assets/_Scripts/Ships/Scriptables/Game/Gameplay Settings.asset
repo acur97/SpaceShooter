@@ -54,7 +54,7 @@ MonoBehaviour:
   timeScaleIncrease: 0.1
   scoreScaleIncrease: 2
   levels:
-  - {fileID: 11400000, guid: 2f63fb46e2f815841b152e0343debc7f, type: 2}
+  - {fileID: 11400000, guid: 63ca5c01eb276f143bbd0f2c461c8e89, type: 2}
   infiniteLevels:
   - {fileID: 11400000, guid: 66b5210a10c7f904fb786900aeae9e8c, type: 2}
   bordersShip: {fileID: 11400000, guid: b85fbf50a54681e469b08491e3b0c337, type: 2}
@@ -87,11 +87,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ca120ee2daf3ccf48ad037f431e3d983, type: 2}
   - {fileID: 11400000, guid: 5210848e21cfca049b1c30ab5e862492, type: 2}
   - {fileID: 11400000, guid: 6cd785201aceb1e4a94957e463fb0bd7, type: 2}
-  selectedPowerUp: {fileID: 11400000, guid: 0718980e695f00a42a860890628ab9c4, type: 2}
+  selectedPowerUp: {fileID: 0}
   progress:
-    playerName: Dieci
-    coins: 999840
-    powerUpAmounts: 00000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-    powerUpIndex: 3
-    customsOwneds: 010000000000
-    customsIndex: 0
+    playerName: 
+    coins: 965
+    powerUpAmounts: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    powerUpIndex: -1
+    customsOwneds: 01000100000001
+    customsIndex: 2
