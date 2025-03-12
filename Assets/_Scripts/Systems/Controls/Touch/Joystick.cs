@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
+    [ReadOnly] public Vector2 InputDirection;
+
+    [Space]
     [SerializeField] private Image backPanel;
     [SerializeField] private Image knob;
-    [SerializeField] private float multiplier = 2f;
-    [SerializeField] private float knobClamp = 4f;
-    [SerializeField] private float knobOffset = 1f;
-
-    public Vector2 InputDirection;
+    [SerializeField] private float multiplier = 4;
+    [SerializeField] private float knobClamp = 4;
+    [SerializeField] private float knobOffset = 1.5f;
 
     private Vector2 position;
     private Vector2 sizeDelta;

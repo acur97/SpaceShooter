@@ -51,6 +51,7 @@ public class PostProcessingController : MonoBehaviour
 #if Platform_Mobile && UNITY_ANDROID && !UNITY_EDITOR
         Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
 #endif
+        //QualitySettings.maxQueuedFrames = 1;
 
         SetImpactFrameFeature(false);
 

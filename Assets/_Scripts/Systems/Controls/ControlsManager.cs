@@ -17,9 +17,8 @@ public class ControlsManager : MonoBehaviour
     [Header("Touch Controls")]
     public static bool hasTouch;
     [SerializeField] private GameObject touchUi;
-    [SerializeField] private EventTrigger fireBtn;
     [SerializeField] private EventTrigger powerBtn;
-    [SerializeField] private Joystick joystick;
+    [SerializeField] private Swipe swipe;
 
     [Header("Tutorial")]
     [SerializeField] private GameObject tutorialMobile;
@@ -34,11 +33,6 @@ public class ControlsManager : MonoBehaviour
     private void OnEnable()
     {
         GameManager.GamePreStart += SetLevelTypeBtns;
-    }
-
-    private void OnDestroy()
-    {
-        GameManager.GamePreStart -= SetLevelTypeBtns;
     }
 
     [System.Obsolete]
@@ -59,7 +53,6 @@ public class ControlsManager : MonoBehaviour
         switch (RoundsController.Instance.levelType)
         {
             case RoundsController.LevelType.Normal:
-                fireBtn.gameObject.SetActive(true);
                 powerBtn.gameObject.SetActive(GameManager.Instance.gameplayScriptable.selectedPowerUp != null);
 
                 if (GameManager.Instance.gameplayScriptable.selectedPowerUp != null)
@@ -69,7 +62,6 @@ public class ControlsManager : MonoBehaviour
                 break;
 
             case RoundsController.LevelType.Infinite:
-                fireBtn.gameObject.SetActive(false);
                 powerBtn.gameObject.SetActive(GameManager.Instance.gameplayScriptable.selectedPowerUp != null);
 
                 if (GameManager.Instance.gameplayScriptable.selectedPowerUp != null)
@@ -89,36 +81,45 @@ public class ControlsManager : MonoBehaviour
         if (hasTouch)
         {
             // fire btn
-            EventTrigger.Entry fireEntryDown = new()
-            {
-                eventID = EventTriggerType.PointerDown
-            };
-            fireEntryDown.callback.AddListener((eventData) => { fireDown = true; fireUp = false; });
-            fireBtn.triggers.Add(fireEntryDown);
-
-            EventTrigger.Entry fireEntryUp = new()
-            {
-                eventID = EventTriggerType.PointerUp
-            };
-            fireEntryUp.callback.AddListener((eventData) => { fireDown = false; fireUp = true; });
-            fireBtn.triggers.Add(fireEntryUp);
-
+            swipe.OnTouch += OnTouch;
 
             // power btn
             EventTrigger.Entry powerEntryDown = new()
             {
                 eventID = EventTriggerType.PointerDown
             };
-            powerEntryDown.callback.AddListener((eventData) => power = true);
+            powerEntryDown.callback.AddListener(OnPowerTrue);
             powerBtn.triggers.Add(powerEntryDown);
 
             EventTrigger.Entry powerEntryUp = new()
             {
                 eventID = EventTriggerType.PointerUp
             };
-            powerEntryUp.callback.AddListener((eventData) => power = false);
+            powerEntryUp.callback.AddListener(OnPowerFalse);
             powerBtn.triggers.Add(powerEntryUp);
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.GamePreStart -= SetLevelTypeBtns;
+        swipe.OnTouch -= OnTouch;
+    }
+
+    private void OnTouch(bool value)
+    {
+        fireDown = value;
+        fireUp = !value;
+    }
+
+    private void OnPowerTrue(BaseEventData _)
+    {
+        power = true;
+    }
+
+    private void OnPowerFalse(BaseEventData _)
+    {
+        power = false;
     }
 
     public void OpenTutorial(bool on)
@@ -145,7 +146,8 @@ public class ControlsManager : MonoBehaviour
     {
         if (hasTouch)
         {
-            move = joystick.InputDirection;
+            move = swipe.InputDirection;
+            swipe.InputDirection = Vector2.zero;
 
             if (fireDown == true)
                 fireDown = false;
