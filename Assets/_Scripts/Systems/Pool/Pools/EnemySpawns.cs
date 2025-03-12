@@ -37,9 +37,6 @@ public class EnemySpawns : PoolBaseController
             await UniTask.WaitForSeconds(_group.timeToStart, cancellationToken: cancellationToken);
         }
 
-        //Debug.LogWarning($"Group with enemies type: {_group.ship.name}");
-        //Debug.LogWarning(_group.spawnType);
-
         float _groupRandom = Random.Range(GameManager.PlayerLimits.z, GameManager.PlayerLimits.w);
         for (int i = 0; i < _group.count; i++)
         {

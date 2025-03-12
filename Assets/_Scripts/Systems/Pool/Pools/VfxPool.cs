@@ -4,6 +4,9 @@ public class VfxPool : PoolBaseController
 {
     public static VfxPool Instance;
 
+    [Space]
+    [SerializeField] private float miniOffset = 0.2f;
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Initialize()
     {
@@ -23,7 +26,7 @@ public class VfxPool : PoolBaseController
         {
             if (!objects[i].activeSelf)
             {
-                objects[i].transform.localPosition = new Vector2(_position.x + Random.Range(-0.2f, 0.2f), _position.y + Random.Range(-0.2f, 0.2f));
+                objects[i].transform.localPosition = new Vector2(_position.x + Random.Range(-miniOffset, miniOffset), _position.y + Random.Range(-miniOffset, miniOffset));
                 objects[i].SetActive(true);
                 break;
             }

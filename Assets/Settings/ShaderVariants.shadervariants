@@ -6,7 +6,7 @@ ShaderVariantCollection:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShaderVariants2
+  m_Name: ShaderVariants
   m_Shaders:
   - first: {fileID: 10770, guid: 0000000000000000f000000000000000, type: 0}
     second:
@@ -17,22 +17,7 @@ ShaderVariantCollection:
         passType: 0
       - keywords: UNITY_UI_CLIP_RECT
         passType: 0
-  - first: {fileID: 66, guid: 0000000000000000f000000000000000, type: 0}
-    second:
-      variants:
-      - keywords: 
-        passType: 0
   - first: {fileID: 9101, guid: 0000000000000000f000000000000000, type: 0}
-    second:
-      variants:
-      - keywords: 
-        passType: 0
-  - first: {fileID: 19011, guid: 0000000000000000f000000000000000, type: 0}
-    second:
-      variants:
-      - keywords: 
-        passType: 0
-  - first: {fileID: 4800000, guid: 65df88701913c224d95fc554db28381a, type: 3}
     second:
       variants:
       - keywords: 
@@ -41,16 +26,6 @@ ShaderVariantCollection:
     second:
       variants:
       - keywords: _BLOOM_LQ _CHROMATIC_ABERRATION _DISTORTION _USE_FAST_SRGB_LINEAR_CONVERSION
-        passType: 0
-  - first: {fileID: 4800000, guid: 5f1864addb451f54bae8c86d230f736e, type: 3}
-    second:
-      variants:
-      - keywords: 
-        passType: 0
-  - first: {fileID: 4800000, guid: 93446b5c5339d4f00b85c159e1159b7c, type: 3}
-    second:
-      variants:
-      - keywords: 
         passType: 0
   - first: {fileID: 4800000, guid: 13c02b14c4d048fa9653293d54f6e0e1, type: 3}
     second:
@@ -109,6 +84,11 @@ ShaderVariantCollection:
       - keywords: 
         passType: 0
   - first: {fileID: -6465566751694194690, guid: c52bc25fb68b6af4a967033e015651f5, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: -6465566751694194690, guid: e89a88dbae6d04e4bbf092f6f65bbbb5, type: 3}
     second:
       variants:
       - keywords: 

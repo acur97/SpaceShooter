@@ -8404,7 +8404,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 61.2
+  m_fontSize: 96
   m_fontSizeBase: 59.4
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -17057,6 +17057,7 @@ MonoBehaviour:
   size: 100
   prefab: {fileID: 3979833328471701608, guid: 19be589a6f2f87f4eb472177f5b80dea, type: 3}
   objects: []
+  miniOffset: 0.2
 --- !u!1 &1326117759
 GameObject:
   m_ObjectHideFlags: 0
@@ -22296,7 +22297,7 @@ MonoBehaviour:
   hasStarted: 0
   isPlaying: 0
   hasEnded: 0
-  leftForNextGroup: 0
+  leftForNextGroup: -1
   scoreText: {fileID: 1104863391}
   score: 0
   endScore: {fileID: 1327159356}

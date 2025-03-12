@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     [ReadOnly] public bool isPlaying = false;
     [ReadOnly] public bool hasEnded = false;
     private float currentTimeScale = 1f;
-    [ReadOnly] public int leftForNextGroup = 0;
+    [ReadOnly] public int leftForNextGroup = -1;
     private float prevTimeScale;
     private int prevLeftForNextGroup;
     private int adRevivals;
@@ -267,7 +267,10 @@ public class GameManager : MonoBehaviour
         isPlaying = true;
         hasEnded = false;
 
-        roundsController.StartRound();
+        if (prevLeftForNextGroup != leftForNextGroup)
+        {
+            roundsController.StartRound();
+        }
 
         Vibration.InitVibrate();
     }
