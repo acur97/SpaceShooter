@@ -39,13 +39,22 @@ public class LeanAudioStream
 */
 public class LeanAudio : object
 {
-
     public static float MIN_FREQEUNCY_PERIOD = 0.000115f;
     public static int PROCESSING_ITERATIONS_MAX = 50000;
     public static float[] generatedWaveDistances;
     public static int generatedWaveDistancesCount = 0;
 
     private static float[] longList;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        MIN_FREQEUNCY_PERIOD = 0.000115f;
+        PROCESSING_ITERATIONS_MAX = 50000;
+        generatedWaveDistances = null;
+        generatedWaveDistancesCount = 0;
+        longList = null;
+    }
 
     public static LeanAudioOptions options()
     {

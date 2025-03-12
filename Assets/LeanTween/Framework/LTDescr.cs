@@ -1133,6 +1133,14 @@ public class LTDescr
     public static float dt;
     public static Vector3 newVect;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        val = 0;
+        dt = 0;
+        newVect = Vector3.zero;
+    }
+
     /**
 	* If you need a tween to happen immediately instead of waiting for the next Update call, you can force it with this method
 	* 

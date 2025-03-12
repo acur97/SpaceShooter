@@ -245,7 +245,6 @@ public enum LeanProp
 
 public class LeanTween : MonoBehaviour
 {
-
     public static bool throwErrors = true;
     public static float tau = Mathf.PI * 2.0f;
     public static float PI_DIV2 = Mathf.PI / 2.0f;
@@ -273,6 +272,50 @@ public class LeanTween : MonoBehaviour
     private static int finishedCnt;
     public static AnimationCurve punch = new AnimationCurve(new Keyframe(0.0f, 0.0f), new Keyframe(0.112586f, 0.9976035f), new Keyframe(0.3120486f, -0.1720615f), new Keyframe(0.4316337f, 0.07030682f), new Keyframe(0.5524869f, -0.03141804f), new Keyframe(0.6549395f, 0.003909959f), new Keyframe(0.770987f, -0.009817753f), new Keyframe(0.8838775f, 0.001939224f), new Keyframe(1.0f, 0.0f));
     public static AnimationCurve shake = new AnimationCurve(new Keyframe(0f, 0f), new Keyframe(0.25f, 1f), new Keyframe(0.75f, -1f), new Keyframe(1f, 0f));
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        throwErrors = true;
+        tau = Mathf.PI * 2.0f;
+        PI_DIV2 = Mathf.PI / 2.0f;
+        sequences = null;
+        tweens = null;
+        tweensFinished = null;
+        tweensFinishedIds = null;
+        tween = null;
+        tweenMaxSearch = -1;
+        maxTweens = 400;
+        maxSequences = 400;
+        frameRendered = -1;
+        _tweenEmpty = null;
+        dtEstimated = -1f;
+        dtManual = 0;
+#if UNITY_3_5 || UNITY_4_0 || UNITY_4_0_1 || UNITY_4_1 || UNITY_4_2 || UNITY_4_3 || UNITY_4_5
+    previousRealTime = 0;
+#endif
+        dtActual = 0;
+        global_counter = 0;
+        i = 0;
+        j = 0;
+        finishedCnt = 0;
+        punch = null;
+        shake = null;
+
+        maxTweenReached = 0;
+
+        startSearch = 0;
+        d = null;
+
+        eventListeners = null;
+        goListeners = null;
+        eventsMaxSearch = 0;
+        EVENTS_MAX = 10;
+        LISTENERS_MAX = 10;
+        INIT_LISTENERS_MAX = LISTENERS_MAX;
+
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= onLevelWasLoaded54;
+    }
 
     public static void init()
     {
@@ -3560,6 +3603,13 @@ public class LTSpline
     private int numSections;
     private int currPt;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        DISTANCE_COUNT = 3;
+        SUBLINE_COUNT = 20;
+    }
+
     public LTSpline(Vector3[] pts)
     {
         init(pts, true);
@@ -4074,6 +4124,12 @@ public class LTRect : System.Object
 
     public static bool colorTouched;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        colorTouched = false;
+    }
+
     public LTRect()
     {
         reset();
@@ -4328,6 +4384,24 @@ public class LTGUI
     private static Color color = Color.white;
     private static bool isGUIEnabled = false;
     private static int global_counter = 0;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        RECT_LEVELS = 5;
+        RECTS_PER_LEVEL = 10;
+        BUTTONS_MAX = 24;
+
+        levels = null;
+        levelDepths = null;
+        buttons = null;
+        buttonLevels = null;
+        buttonLastFrame = null;
+        r = null;
+        color = Color.white;
+        isGUIEnabled = false;
+        global_counter = 0;
+    }
 
     public enum Element_Type
     {
