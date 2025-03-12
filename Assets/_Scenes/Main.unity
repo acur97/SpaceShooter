@@ -6194,7 +6194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InputDirection: {x: 0, y: 0}
-  multiplier: 0.19
+  multiplier: 0.1
 --- !u!1 &517712860
 GameObject:
   m_ObjectHideFlags: 0
