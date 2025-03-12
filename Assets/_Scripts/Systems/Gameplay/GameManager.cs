@@ -254,8 +254,6 @@ public class GameManager : MonoBehaviour
         uiManager.SetUi(UiType.Gameplay, true);
         uiManager.SetUi(UiType.Select, false, 1, () => anim_count.SetTrigger(_init));
 
-        roundsController.StartRound();
-
         audioManager.PlaySound(Enums.AudioType.Start, 2f);
 
         AdsManager.DestroyBottomBannerAd();
@@ -268,6 +266,8 @@ public class GameManager : MonoBehaviour
         hasStarted = true;
         isPlaying = true;
         hasEnded = false;
+
+        roundsController.StartRound();
 
         Vibration.InitVibrate();
     }
