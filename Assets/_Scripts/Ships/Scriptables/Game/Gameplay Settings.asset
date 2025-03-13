@@ -43,7 +43,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2f63fb46e2f815841b152e0343debc7f, type: 2}
   infiniteLevels:
   - {fileID: 11400000, guid: 66b5210a10c7f904fb786900aeae9e8c, type: 2}
-  bordersShip: {fileID: 11400000, guid: b85fbf50a54681e469b08491e3b0c337, type: 2}
+  bordersShip: {fileID: 11400000, guid: bb511d2af2e512945b19b053491f12b7, type: 2}
   timeInBorder: 2
   borderLimit: 0.2
   countBorders: 0.98280877

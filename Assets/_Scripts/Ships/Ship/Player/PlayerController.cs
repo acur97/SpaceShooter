@@ -71,12 +71,6 @@ public class PlayerController : ShipBaseController
         module.startColor = shipBaseController.color;
     }
 
-    //private Color ConvertColor(Color col)
-    //{
-    //    Color.RGBToHSV(col, out float h, out float s, out float v);
-    //    return Color.HSVToRGB(h, s * 0.25f, v);
-    //}
-
     public void SetHealth(int value)
     {
         health = value;
