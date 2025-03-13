@@ -31,6 +31,7 @@ public class EnemyController : ShipBaseController
         transform.localEulerAngles = new Vector3(0, 0, 180);
 
         movement.Init(_properties.behaviour, _properties._timeToContinue, _properties.timeToContinue, _properties.spawnIndex);
+        shoot.Init(_properties, shootRoot1, shootRoot2, shootRoot3, shootRoot4, shootRoot5);
 
         timer = _properties.coolDown;
         timer2 = _properties.spaceCooldown;
@@ -102,7 +103,7 @@ public class EnemyController : ShipBaseController
 
         if (timer <= 0)
         {
-            shoot.Shoot(shootRoot1, shootRoot2, shootRoot3, _properties);
+            shoot.Shoot();
 
             timer = _properties.coolDown;
         }

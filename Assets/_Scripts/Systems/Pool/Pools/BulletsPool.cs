@@ -32,19 +32,24 @@ public class BulletsPool : PoolBaseController
         }
     }
 
-    public void InitBullet(Transform _position, ShipScriptable _properties, Enums.TypeBullet type)
+    public void InitBullet(ShipScriptable _properties, Enums.TypeBullet type, params (Vector2 _position, Quaternion _rotation)[] roots)
     {
         AudioManager.Instance.PlaySound(Enums.AudioType.Zap, 0.2f);
 
-        Init(_position.position, _position.rotation, _properties, type);
+        for (int i = 0; i < roots.Length; i++)
+        {
+            Init(roots[i]._position, roots[i]._rotation, _properties, type);
+        }
     }
 
-    public void InitBullet(Transform _position1, Transform _position2, ShipScriptable _properties, Enums.TypeBullet type)
+    public void InitBullet(ShipScriptable _properties, Enums.TypeBullet type, params (Vector2 _position, Vector3 _rotation)[] roots)
     {
         AudioManager.Instance.PlaySound(Enums.AudioType.Zap, 0.2f);
 
-        Init(_position1.position, _position1.rotation, _properties, type);
-        Init(_position2.position, _position2.rotation, _properties, type);
+        for (int i = 0; i < roots.Length; i++)
+        {
+            Init(roots[i]._position, Quaternion.Euler(roots[i]._rotation), _properties, type);
+        }
     }
 
     private void Init(Vector2 _position, Quaternion _rotation, ShipScriptable _properties, Enums.TypeBullet type)

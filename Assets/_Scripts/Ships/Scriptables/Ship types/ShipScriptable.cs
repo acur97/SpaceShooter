@@ -38,6 +38,8 @@ public class ShipScriptable : ScriptableObject
 
     // Enemy
     public Enums.Attack attack;
+    public float startRotation = 0;
+    public float rotationSpeed = 0;
     public bool enemyCollision = true;
     public int deathScore = 8;
     public Enums.Behaviour behaviour;
@@ -45,7 +47,8 @@ public class ShipScriptable : ScriptableObject
     [Space]
     public bool _timeToContinue = false;
     public float timeToContinue = -1;
-    [HideInInspector] public bool countForGroup = true;
 
-    [HideInInspector] public int spawnIndex;
+    [Header("Internal")]
+    public bool countForGroup = true;
+    public int spawnIndex;
 }

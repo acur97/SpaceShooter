@@ -17431,7 +17431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f41b4b1468c7824184fc57589f2e4d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 200
+  size: 250
   prefab: {fileID: 8218654793113664740, guid: 3f3e9fb00d6b20e4fbfa11942d030a8f, type: 3}
   objects: []
   bullets: []
