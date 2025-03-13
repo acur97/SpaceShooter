@@ -79,3 +79,4 @@ crashlytics-build.properties
 .utmp/
 Windows build/
 Linux build/
+Android build/
