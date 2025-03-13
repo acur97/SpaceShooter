@@ -37,6 +37,18 @@ public class LeanTest : object
     public static bool timeoutStarted = false;
     public static bool testsFinished = false;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Initialize()
+    {
+        expected = 0;
+        tests = 0;
+        passes = 0;
+
+        timeout = 15f;
+        timeoutStarted = false;
+        testsFinished = false;
+    }
+
     public static void debug(string name, bool didPass, string failExplaination = null)
     {
         expect(didPass, name, failExplaination);

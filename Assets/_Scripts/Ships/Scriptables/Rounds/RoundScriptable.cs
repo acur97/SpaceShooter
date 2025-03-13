@@ -5,8 +5,6 @@ public struct Group
 {
     public bool chained;
     public float timeToStart;
-
-    [Space]
     public Enums.SpawnType spawnType;
     [Range(-2, 2)] public float customFloat;
     public float minTimeBetweenSpawn;
@@ -15,6 +13,9 @@ public struct Group
     [Space]
     public int count;
     public ShipScriptable ship;
+
+    [Space]
+    public bool randomPowerUp;
     public PowerUpBase spawnPowerUp;
 }
 

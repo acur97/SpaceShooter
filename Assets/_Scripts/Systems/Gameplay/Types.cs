@@ -80,9 +80,15 @@ public class Enums
 
     public enum Attack
     {
-        Continuous,
-        ContinuousDouble,
-        None
+        Unique,
+        Double,
+        None,
+        Triple,
+        Horizontal,
+        HorizontalDouble,
+        HorizontalTriple,
+        Triangle,
+        Xshaped
     }
 
     public enum SourceType

@@ -9,6 +9,9 @@ public class EnemySpawns : PoolBaseController
     [ReadOnly] public EnemyController[] enemys;
 
     private CancellationToken cancellationToken;
+    private float _groupRandom = 0;
+    private float random = 0;
+    private float newRandom = 0;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Initialize()
@@ -37,15 +40,22 @@ public class EnemySpawns : PoolBaseController
             await UniTask.WaitForSeconds(_group.timeToStart, cancellationToken: cancellationToken);
         }
 
-        //Debug.LogWarning($"Group with enemies type: {_group.ship.name}");
-        //Debug.LogWarning(_group.spawnType);
-
-        float _groupRandom = Random.Range(GameManager.PlayerLimits.z, GameManager.PlayerLimits.w);
+        _groupRandom = Random.Range(GameManager.PlayerLimits.z, GameManager.PlayerLimits.w);
         for (int i = 0; i < _group.count; i++)
         {
             _group.ship.spawnIndex = i;
             await UniTask.Yield();
-            InitEnemy(_group.ship, _group.spawnType, Random.Range(GameManager.PlayerLimits.z, GameManager.PlayerLimits.w), _groupRandom, _group.customFloat);
+
+            newRandom = Random.Range(GameManager.PlayerLimits.z, GameManager.PlayerLimits.w);
+
+            if (Mathf.Abs(newRandom - random) <= 0.2f)
+            {
+                newRandom -= Mathf.Sign(newRandom) * 0.4f;
+            }
+
+            random = newRandom;
+
+            InitEnemy(_group.ship, _group.spawnType, random, _groupRandom, _group.customFloat);
 
             if (_group.minTimeBetweenSpawn > 0 || _group.maxTimeBetweenSpawn > 0 || _group.spawnType != Enums.SpawnType.AllAtOnce)
             {

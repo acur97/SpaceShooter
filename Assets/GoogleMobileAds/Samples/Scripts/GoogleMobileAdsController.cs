@@ -11,6 +11,13 @@ namespace GoogleMobileAds.Samples
     [AddComponentMenu("GoogleMobileAds/Samples/GoogleMobileAdsController")]
     public class GoogleMobileAdsController : MonoBehaviour
     {
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void Initialize()
+        {
+            TestDeviceIds = new List<string>();
+            _isInitialized = false;
+        }
+
         // Always use test ads.
         // https://developers.google.com/admob/unity/test-ads
         internal static List<string> TestDeviceIds = new List<string>()

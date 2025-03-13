@@ -17,6 +17,8 @@ public class ShipBaseController : MonoBehaviour
     public Transform shootRoot1;
     public Transform shootRoot2;
     public Transform shootRoot3;
+    public Transform shootRoot4;
+    public Transform shootRoot5;
     [HideInInspector] public float timer = -1;
     [HideInInspector] public float timer2 = -1;
     [HideInInspector] public bool timer2Up = false;
