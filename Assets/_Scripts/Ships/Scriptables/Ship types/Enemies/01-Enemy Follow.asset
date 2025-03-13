@@ -26,9 +26,9 @@ MonoBehaviour:
   cost: 0
   sprite: {fileID: 21300000, guid: 537b7a0a556692241a20d56547a11fca, type: 3}
   spriteScale: {x: 0.2, y: 0.2, z: 1}
-  material: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
-  speed: 0.5
-  health: 10
+  hue: 0.5
+  speed: 2.8
+  health: 3
   bulletSpeed: 20
   coolDown: 0.5
   _spaceCoolDown: 1
@@ -39,7 +39,8 @@ MonoBehaviour:
   enemyCollision: 1
   deathScore: 1
   behaviour: 7
-  behaviourMathfSin: 2
+  behaviourMathfSin: 0.8
   _timeToContinue: 0
   timeToContinue: -1
-  spawnIndex: 19
+  countForGroup: 1
+  spawnIndex: 4

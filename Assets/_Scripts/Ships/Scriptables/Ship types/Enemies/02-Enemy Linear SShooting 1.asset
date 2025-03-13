@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57881a7a4b18dff4b82ce561559b9591, type: 3}
-  m_Name: 02-Enemy Linear SShooting
+  m_Name: 02-Enemy Linear SShooting 1
   m_EditorClassIdentifier: 
   editorCustom: 1
   editorStore: 1
@@ -18,7 +18,9 @@ MonoBehaviour:
   editorBullet: 1
   editorEnemy: 1
   editorNotes: 1
-  notes: Single Shooting
+  notes: 'Single Shooting Increasing burst gunfire 2
+
+'
   color: {r: 0.7379107, g: 0.06480328, b: 0.095307484, a: 1}
   name: 
   description: 
@@ -30,9 +32,9 @@ MonoBehaviour:
   speed: 0.5
   health: 4
   bulletSpeed: 4
-  coolDown: 2
-  _spaceCoolDown: 0
-  spaceCooldown: 2
+  coolDown: 0.8
+  _spaceCoolDown: 1
+  spaceCooldown: 1
   _bulletTime: 0
   bulletTime: -1
   attack: 0
@@ -43,4 +45,4 @@ MonoBehaviour:
   _timeToContinue: 0
   timeToContinue: -1
   countForGroup: 1
-  spawnIndex: 9
+  spawnIndex: 7
