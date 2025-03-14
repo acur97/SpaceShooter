@@ -5,6 +5,7 @@ public class EnemyShoot : MonoBehaviour
     [SerializeField] private Transform rotationRoot;
 
     private ShipScriptable properties;
+
     private Transform root1;
     private Transform root2;
     private Transform root3;

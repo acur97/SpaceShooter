@@ -11,8 +11,10 @@ public class ShipScriptableEditor : Editor
 
     private VisualElement _sprite;
     private FloatField _spaceCoolDown;
+    private FloatField _spaceCoolDown2;
     private FloatField _bulletTime;
     private FloatField _timeToContinue;
+    private Slider _direct;
 
     public override VisualElement CreateInspectorGUI()
     {
@@ -26,16 +28,18 @@ public class ShipScriptableEditor : Editor
         _sprite = inspector.Q<VisualElement>("VisualSprite");
         sprite_Field.RegisterValueChangedCallback(OnSpriteChange);
 
-        //Slider Slider_hue = inspector.Q<Slider>("Slider_hue");
-        //Slider_hue.RegisterValueChangedCallback(OnSlider_hue_Change);
-
         Toggle toggle_SpaceCoolDown_Field = inspector.Q<Toggle>("Toggle_spaceCoolDown");
         _spaceCoolDown = inspector.Q<FloatField>("Field_spaceCoolDown");
+        _spaceCoolDown2 = inspector.Q<FloatField>("Field_spaceCoolDown2");
         toggle_SpaceCoolDown_Field.RegisterValueChangedCallback(OnToggle_SpaceCoolDown_Change);
 
         Toggle toggle_BulletTime_Field = inspector.Q<Toggle>("Toggle_bulletTime");
         _bulletTime = inspector.Q<FloatField>("Field_bulletTime");
         toggle_BulletTime_Field.RegisterValueChangedCallback(OnToggle_BulletTime_Change);
+
+        Toggle toggle_direct_Field = inspector.Q<Toggle>("Toggle_direct");
+        _direct = inspector.Q<Slider>("Slider_direct");
+        toggle_direct_Field.RegisterValueChangedCallback(OnToggle_direct_Change);
 
         Toggle toggle_timeToContinue_Field = inspector.Q<Toggle>("Toggle_timeToContinue");
         _timeToContinue = inspector.Q<FloatField>("Field_timeToContinue");
@@ -49,19 +53,20 @@ public class ShipScriptableEditor : Editor
         _sprite.style.backgroundImage = new StyleBackground(evt.newValue as Sprite);
     }
 
-    //private void OnSlider_hue_Change(ChangeEvent<float> evt)
-    //{
-    //    _sprite.style.unityBackgroundImageTintColor = Color.HSVToRGB(evt.newValue, 1, 1);
-    //}
-
     private void OnToggle_SpaceCoolDown_Change(ChangeEvent<bool> evt)
     {
         _spaceCoolDown?.SetEnabled(evt.newValue);
+        _spaceCoolDown2?.SetEnabled(evt.newValue);
     }
 
     private void OnToggle_BulletTime_Change(ChangeEvent<bool> evt)
     {
         _bulletTime?.SetEnabled(evt.newValue);
+    }
+
+    private void OnToggle_direct_Change(ChangeEvent<bool> evt)
+    {
+        _direct?.SetEnabled(evt.newValue);
     }
 
     private void OnToggle_timeToContinue_Change(ChangeEvent<bool> evt)

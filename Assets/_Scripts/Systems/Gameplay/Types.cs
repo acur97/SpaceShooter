@@ -62,20 +62,18 @@ public class Enums
         Random,
         RandomPoint,
         Center,
-        AllAtOnce,
+        Uniform,
         Specific
     }
 
     public enum Behaviour
     {
-        Linear,
-        Direct,
-        Waves,
-        WavesDirect,
-        Diagonal,
-        Wave8,
-        Borders,
-        Chase
+        Linear = 0,
+        Waves = 2,
+        Diagonal = 4,
+        Wave8 = 5,
+        Borders = 6,
+        Chase = 7
     }
 
     public enum Attack
