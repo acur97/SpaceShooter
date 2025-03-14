@@ -28,7 +28,8 @@ public class ShipScriptable : ScriptableObject
 
     // Bullet Parameters
     public float bulletSpeed = 10;
-    public float coolDown = 0.1f;
+    public float fireTime = 0.5f;
+    public float coolDown = 1;
     [Space]
     public bool _spaceCoolDown = false;
     public float spaceCooldown = -1;
@@ -43,7 +44,10 @@ public class ShipScriptable : ScriptableObject
     public bool enemyCollision = true;
     public int deathScore = 8;
     public Enums.Behaviour behaviour;
+    public bool directBehaviour = false;
+    public float directLine = -0.8f;
     public float behaviourMathfSin = 1.5f;
+    public bool behaviourMathfInverted = false;
     [Space]
     public bool _timeToContinue = false;
     public float timeToContinue = -1;

@@ -30,7 +30,7 @@ public class EnemyController : ShipBaseController
 
         transform.localEulerAngles = new Vector3(0, 0, 180);
 
-        movement.Init(_properties.behaviour, _properties._timeToContinue, _properties.timeToContinue, _properties.spawnIndex);
+        movement.Init(_properties);
         shoot.Init(_properties, shootRoot1, shootRoot2, shootRoot3, shootRoot4, shootRoot5);
 
         timer = _properties.coolDown;
@@ -50,7 +50,7 @@ public class EnemyController : ShipBaseController
             return;
         }
 
-        movement.Move(_properties);
+        movement.Move();
 
         if (transform.position.x >= GameManager.BoundsLimits.w ||
             transform.position.x <= GameManager.BoundsLimits.z ||
@@ -71,7 +71,7 @@ public class EnemyController : ShipBaseController
                 {
                     timer2 += Time.deltaTime;
 
-                    if (timer2 > _properties.spaceCooldown)
+                    if (timer2 > _properties.fireTime)
                     {
                         timer2 = _properties.spaceCooldown;
                         timer2Up = false;

@@ -2,31 +2,32 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    private ShipScriptable properties;
+
     private bool _boolToContinue = false;
     private float _timeToContinue;
     private float customFloat = 0;
     private bool customBool = false;
     private Vector2 startPosition;
+    private float line;
+    private int index = 0;
 
-    public void Init(Enums.Behaviour properties, bool boolToContinue, float timeToContinue, int customInt)
+    public void Init(ShipScriptable _properties)
     {
-        _boolToContinue = boolToContinue;
-        _timeToContinue = timeToContinue;
+        properties = _properties;
 
-        switch (properties)
+        _boolToContinue = properties._timeToContinue;
+        _timeToContinue = properties.timeToContinue;
+
+        customFloat = 0;
+        customBool = false;
+        index = properties.spawnIndex;
+
+        line = Mathf.Lerp(GameManager.PlayerLimits.x, GameManager.PlayerLimits.y, (properties.directLine + 1) / 2);
+
+        switch (properties.behaviour)
         {
-            case Enums.Behaviour.Linear:
-                break;
-
-            case Enums.Behaviour.Direct:
-                break;
-
             case Enums.Behaviour.Waves:
-                LimitX();
-                startPosition = transform.localPosition;
-                break;
-
-            case Enums.Behaviour.WavesDirect:
                 LimitX();
                 startPosition = transform.localPosition;
                 break;
@@ -48,7 +49,7 @@ public class EnemyMovement : MonoBehaviour
                 break;
 
             case Enums.Behaviour.Borders:
-                if (customInt % 2 == 0)
+                if (properties.spawnIndex % 2 == 0)
                 {
                     transform.localPosition = new Vector2(GameManager.PlayerLimits.w + 0.25f, transform.localPosition.y);
                     transform.localEulerAngles = new Vector3(0, 0, 90);
@@ -59,10 +60,10 @@ public class EnemyMovement : MonoBehaviour
                     transform.localEulerAngles = new Vector3(0, 0, 270);
                 }
                 break;
-        }
 
-        customFloat = 0;
-        customBool = false;
+            default:
+                break;
+        }
     }
 
     private void LimitX()
@@ -77,7 +78,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    public void Move(ShipScriptable properties)
+    public void Move()
     {
         if (_boolToContinue && _timeToContinue > 0)
         {
@@ -92,75 +93,78 @@ public class EnemyMovement : MonoBehaviour
         switch (properties.behaviour)
         {
             case Enums.Behaviour.Linear:
-                Linear(properties);
-                break;
-
-            case Enums.Behaviour.Direct:
-                Direct(properties);
+                Linear();
                 break;
 
             case Enums.Behaviour.Waves:
-                Waves(properties);
-                break;
-
-            case Enums.Behaviour.WavesDirect:
-                WavesDirect(properties);
+                Waves();
                 break;
 
             case Enums.Behaviour.Diagonal:
-                Diagonal(properties);
+                Diagonal();
                 break;
 
             case Enums.Behaviour.Wave8:
-                Wave8(properties);
+                Wave8();
                 break;
 
             case Enums.Behaviour.Borders:
-                Borders(properties);
+                Borders();
                 break;
 
             case Enums.Behaviour.Chase:
-                Chase(properties);
+                Chase();
                 break;
         }
     }
 
-    private void Linear(ShipScriptable properties)
+    private bool StopIfDirect(bool directBool)
     {
-        transform.position += properties.speed * Time.deltaTime * transform.up;
-    }
-
-    private void Direct(ShipScriptable properties)
-    {
-        if (transform.position.y > GameManager.EnemyLine || _timeToContinue == 0)
+        if (!directBool)
         {
-            transform.position += properties.speed * Time.deltaTime * transform.up;
+            return false;
+        }
+        else if (transform.position.y <= line && _timeToContinue != 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
-    private void Waves(ShipScriptable properties)
+    private void Linear()
     {
-        transform.position += properties.speed * Time.deltaTime * transform.up;
-
-        transform.localPosition = new Vector2(
-            startPosition.x + Mathf.Sin(Time.time * GameManager.HorizontalInvertedMultiplier) * properties.behaviourMathfSin * GameManager.HorizontalMultiplier,
-            transform.localPosition.y);
-    }
-
-    private void WavesDirect(ShipScriptable properties)
-    {
-        if (transform.position.y > GameManager.EnemyLine || _timeToContinue == 0)
+        if (StopIfDirect(properties.directBehaviour))
         {
-            transform.position += properties.speed * Time.deltaTime * transform.up;
+            return;
         }
 
-        transform.localPosition = new Vector2(
-            startPosition.x + Mathf.Sin(Time.time * GameManager.HorizontalInvertedMultiplier) * properties.behaviourMathfSin * GameManager.HorizontalMultiplier,
-            transform.localPosition.y);
+        transform.position += properties.speed * Time.deltaTime * transform.up;
     }
 
-    private void Diagonal(ShipScriptable properties)
+    private void Waves()
     {
+        transform.localPosition = new Vector2(
+            startPosition.x + Mathf.Sin(Time.time + (properties.behaviourMathfInverted && index % 2 != 0 ? 3 : 0) * GameManager.HorizontalInvertedMultiplier) * properties.behaviourMathfSin * GameManager.HorizontalMultiplier,
+            transform.localPosition.y);
+
+        if (StopIfDirect(properties.directBehaviour))
+        {
+            return;
+        }
+
+        transform.position += properties.speed * Time.deltaTime * transform.up;
+    }
+
+    private void Diagonal()
+    {
+        if (StopIfDirect(properties.directBehaviour))
+        {
+            return;
+        }
+
         if (transform.localEulerAngles.z == 135)
         {
             transform.position += properties.speed * Time.deltaTime * -transform.right;
@@ -171,7 +175,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    private void Wave8(ShipScriptable properties)
+    private void Wave8()
     {
         if (!customBool && transform.position.y > 1)
         {
@@ -192,8 +196,13 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    private void Borders(ShipScriptable properties)
+    private void Borders()
     {
+        if (StopIfDirect(properties.directBehaviour))
+        {
+            return;
+        }
+
         if (transform.localEulerAngles.z == 90)
         {
             transform.position += properties.speed * Time.deltaTime * -transform.right;
@@ -204,10 +213,8 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    private void Chase(ShipScriptable properties)
+    private void Chase()
     {
-        transform.position += properties.speed * Time.deltaTime * transform.up;
-
         if (transform.position.y < PlayerController.Instance.transform.position.y)
         {
             return;
@@ -221,5 +228,12 @@ public class EnemyMovement : MonoBehaviour
         {
             transform.position = new Vector2(transform.position.x + (properties.speed * Time.deltaTime * properties.behaviourMathfSin), transform.position.y);
         }
+
+        if (StopIfDirect(properties.directBehaviour))
+        {
+            return;
+        }
+
+        transform.position += properties.speed * Time.deltaTime * transform.up;
     }
 }

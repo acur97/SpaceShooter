@@ -41,6 +41,7 @@ public class EnemySpawns : PoolBaseController
         }
 
         _groupRandom = Random.Range(GameManager.PlayerLimits.z, GameManager.PlayerLimits.w);
+
         for (int i = 0; i < _group.count; i++)
         {
             _group.ship.spawnIndex = i;
@@ -55,12 +56,16 @@ public class EnemySpawns : PoolBaseController
 
             random = newRandom;
 
-            InitEnemy(_group.ship, _group.spawnType, random, _groupRandom, _group.customFloat);
-
-            if (_group.minTimeBetweenSpawn > 0 || _group.maxTimeBetweenSpawn > 0 || _group.spawnType != Enums.SpawnType.AllAtOnce)
+            if (_group.spawnType == Enums.SpawnType.Uniform)
             {
-                await UniTask.WaitForSeconds(Random.Range(_group.minTimeBetweenSpawn, _group.maxTimeBetweenSpawn), cancellationToken: cancellationToken);
+                InitEnemy(_group.ship, _group.spawnType, random, _groupRandom, GameManager.PlayerLimits.z + (i / (float)(_group.count - 1)) * (GameManager.PlayerLimits.w - GameManager.PlayerLimits.z));
             }
+            else
+            {
+                InitEnemy(_group.ship, _group.spawnType, random, _groupRandom, _group.customFloat);
+            }
+
+            await UniTask.WaitForSeconds(Random.Range(_group.minTimeBetweenSpawn, _group.maxTimeBetweenSpawn), cancellationToken: cancellationToken);
         }
     }
 
@@ -84,8 +89,8 @@ public class EnemySpawns : PoolBaseController
                         enemys[i].transform.position = new Vector2(0, GameManager.BoundsLimits.x);
                         break;
 
-                    case Enums.SpawnType.AllAtOnce:
-                        enemys[i].transform.position = new Vector2(random, GameManager.BoundsLimits.x);
+                    case Enums.SpawnType.Uniform:
+                        enemys[i].transform.position = new Vector2(customValue, GameManager.BoundsLimits.x);
                         break;
 
                     case Enums.SpawnType.Specific:
