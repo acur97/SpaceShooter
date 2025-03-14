@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57881a7a4b18dff4b82ce561559b9591, type: 3}
-  m_Name: 02-Enemy Stay SShooting 1
+  m_Name: 02-Enemy Stay SShooting BF2
   m_EditorClassIdentifier: 
   editorCustom: 1
   editorStore: 1
@@ -30,16 +30,22 @@ MonoBehaviour:
   speed: 0.5
   health: 5
   bulletSpeed: 4
+  fireTime: 0.5
   coolDown: 0.8
   _spaceCoolDown: 1
   spaceCooldown: 1
   _bulletTime: 0
   bulletTime: -1
   attack: 0
+  startRotation: 0
+  rotationSpeed: 0
   enemyCollision: 1
   deathScore: 3
-  behaviour: 1
+  behaviour: 0
+  directBehaviour: 1
+  directLine: -0.8
   behaviourMathfSin: 2
+  behaviourMathfInverted: 0
   _timeToContinue: 1
   timeToContinue: 20
   countForGroup: 1
