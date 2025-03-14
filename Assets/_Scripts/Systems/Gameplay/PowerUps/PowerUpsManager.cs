@@ -40,6 +40,7 @@ public class PowerUpsManager : MonoBehaviour
 
     [ReadOnly] public PowerUpBase currentPowerUp;
     private bool fromStore = true;
+    private PowerUpBase lastPowerUp;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Initialize()
@@ -59,6 +60,11 @@ public class PowerUpsManager : MonoBehaviour
         Player_Damage += PlayerDamage;
         Enemy_Damage += EnemyDamage;
         Enemy_Death += EnemyDeath;
+    }
+
+    private void OnDisable()
+    {
+        ResetPowerUp();
     }
 
     private void OnDestroy()
@@ -83,8 +89,16 @@ public class PowerUpsManager : MonoBehaviour
 
     public void SelectPowerUp(PowerUpBase powerUp, bool _fromStore = true)
     {
-        gameplayScriptable.selectedPowerUp = powerUp;
         fromStore = _fromStore;
+        if (fromStore)
+        {
+            lastPowerUp = powerUp;
+        }
+        else
+        {
+            lastPowerUp = gameplayScriptable.selectedPowerUp;
+        }
+        gameplayScriptable.selectedPowerUp = powerUp;
 
         if (powerUp == null)
         {
@@ -107,6 +121,11 @@ public class PowerUpsManager : MonoBehaviour
                 icon.fillAmount = 1;
             }
         }
+    }
+
+    public void ResetPowerUp()
+    {
+        gameplayScriptable.selectedPowerUp = lastPowerUp;
     }
 
     public void AddPowerUp(PowerUpBase type)
