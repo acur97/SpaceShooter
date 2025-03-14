@@ -31,32 +31,34 @@ public class CollectablesPool : PoolBaseController
 
     private void Update()
     {
-        if (GameManager.Instance.isPlaying)
+        if (!GameManager.Instance.isPlaying)
         {
-            timer -= Time.deltaTime;
+            return;
+        }
 
-            if (timer < 0)
+        timer -= Time.deltaTime;
+
+        if (timer < 0)
+        {
+            timer = Random.Range(minProv, maxProv);
+
+            InitCoin();
+        }
+
+        for (int i = 0; i < size; i++)
+        {
+            if (objects[i].activeSelf)
             {
-                timer = Random.Range(minProv, maxProv);
+                objects[i].transform.position -= speed * Time.deltaTime * transform.up;
 
-                InitCoin();
+                if (objects[i].transform.position.y <= GameManager.BoundsLimits.y)
+                {
+                    objects[i].SetActive(false);
+                }
             }
-
-            for (int i = 0; i < size; i++)
+            else
             {
-                if (objects[i].activeSelf)
-                {
-                    objects[i].transform.position -= speed * Time.deltaTime * transform.up;
-
-                    if (objects[i].transform.position.y <= GameManager.BoundsLimits.y)
-                    {
-                        objects[i].SetActive(false);
-                    }
-                }
-                else
-                {
-                    continue;
-                }
+                continue;
             }
         }
     }

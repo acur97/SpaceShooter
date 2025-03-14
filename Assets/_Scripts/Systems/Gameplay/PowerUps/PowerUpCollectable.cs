@@ -14,7 +14,6 @@ public class PowerUpCollectable : MonoBehaviour
     [SerializeField] private float waveSpeed;
     [SerializeField] private float rotationMultiplier;
 
-    private bool canMove = false;
     private Vector2 startPosition;
     private float wave;
 
@@ -22,19 +21,19 @@ public class PowerUpCollectable : MonoBehaviour
     {
         powerUp = _powerUp;
 
-        transform.localPosition = new Vector2(Random.Range(GameManager.PlayerLimits.z, GameManager.PlayerLimits.w), GameManager.BoundsLimits.x);
+        transform.localPosition = new Vector2(Random.Range(GameManager.PlayerLimits.z + 1, GameManager.PlayerLimits.w - 1), GameManager.BoundsLimits.x);
         startPosition = transform.localPosition;
 
         sprite.sprite = _powerUp.sprite;
 
         gameObject.SetActive(true);
 
-        canMove = true;
+        PlayPause(true);
     }
 
     private void Update()
     {
-        if (!canMove)
+        if (!GameManager.Instance.isPlaying)
         {
             return;
         }
@@ -51,11 +50,18 @@ public class PowerUpCollectable : MonoBehaviour
         }
     }
 
-    public void Stop()
+    public void PlayPause(bool play)
     {
-        _collider.enabled = false;
-        canMove = false;
-        sprite.enabled = false;
-        particles.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+        _collider.enabled = play;
+        sprite.enabled = play;
+
+        if (play)
+        {
+            particles.Play();
+        }
+        else
+        {
+            particles.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+        }
     }
 }

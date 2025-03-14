@@ -174,16 +174,19 @@ public class RoundsController : MonoBehaviour
             GameManager.Instance.isPlaying &&
             GameManager.Instance.leftForNextGroup <= 0)
         {
-            if (CurrentLevels[0].rounds[roundCount].groups[groupCount].randomPowerUp)
-            {
-                PowerUpsManager.Instance.InstantiatePowerUp(gameplayScriptable.powerUps[Random.Range(0, gameplayScriptable.powerUps.Count)]);
-            }
-            else if (CurrentLevels[0].rounds[roundCount].groups[groupCount].spawnPowerUp != null)
-            {
-                PowerUpsManager.Instance.InstantiatePowerUp(CurrentLevels[0].rounds[roundCount].groups[groupCount].spawnPowerUp);
-            }
-
             StartGroup();
+
+            if (!GameManager.Instance.hasEnded)
+            {
+                if (CurrentLevels[0].rounds[roundCount].groups[groupCount].randomPowerUp)
+                {
+                    PowerUpsManager.Instance.InstantiatePowerUp(gameplayScriptable.powerUps[Random.Range(0, gameplayScriptable.powerUps.Count)]);
+                }
+                else if (CurrentLevels[0].rounds[roundCount].groups[groupCount].spawnPowerUp != null)
+                {
+                    PowerUpsManager.Instance.InstantiatePowerUp(CurrentLevels[0].rounds[roundCount].groups[groupCount].spawnPowerUp);
+                }
+            }
         }
     }
 

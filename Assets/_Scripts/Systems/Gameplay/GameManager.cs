@@ -438,27 +438,30 @@ public class GameManager : MonoBehaviour
 
     public void EndLevel(bool hasRevival)
     {
-        if (isPlaying)
+        if (!isPlaying)
         {
-            hasEnded = true;
-            isPlaying = false;
+            return;
+        }
 
-            GameStart?.Invoke(false);
+        hasEnded = true;
+        isPlaying = false;
 
-            uiManager.SetUi(UiType.Pause, false);
-            uiManager.SetUi(UiType.End, true, 1, () => uiManager.SetUi(UiType.Gameplay, false));
+        GameStart?.Invoke(false);
 
-            endScore.SetTextFormat(postScore, score);
-            endCoins.SetTextFormat(preCoins, PlayerProgress.GetCoins());
+        uiManager.SetUi(UiType.Pause, false);
+        uiManager.SetUi(UiType.End, true, 1, () => uiManager.SetUi(UiType.Gameplay, false));
 
-            audioManager.SetMasterVolume(0.5f);
-            audioManager.PlaySound(Enums.AudioType.End, 2.5f);
+        endScore.SetTextFormat(postScore, score);
+        endCoins.SetTextFormat(preCoins, PlayerProgress.GetCoins());
 
-            prevTimeScale = Time.timeScale;
-            Time.timeScale = 0.5f;
+        audioManager.SetMasterVolume(0.5f);
+        audioManager.PlaySound(Enums.AudioType.End, 2.5f);
 
-            prevLeftForNextGroup = leftForNextGroup;
-            leftForNextGroup = -1;
+        prevTimeScale = Time.timeScale;
+        Time.timeScale = 0.5f;
+
+        prevLeftForNextGroup = leftForNextGroup;
+        leftForNextGroup = -1;
 
 #if Platform_Mobile
             if (hasRevival && adRevivals > 0)
@@ -470,27 +473,27 @@ public class GameManager : MonoBehaviour
                 adLifeTxt.SetText(adLifeMovile);
             }
 #else
-            if (hasRevival && adRevivals > 0 && PlayerProgress.GetCoins() >= gameplayScriptable.numberOfCoinsRevivals)
-            {
-                adLifePanel.SetActive(true);
-                adLifeEndPanel.SetActive(false);
+        if (hasRevival && adRevivals > 0 && PlayerProgress.GetCoins() >= gameplayScriptable.numberOfCoinsRevivals)
+        {
+            adLifePanel.SetActive(true);
+            adLifeEndPanel.SetActive(false);
 
-                adIcon.SetActive(false);
-                adLifeTxt.SetTextFormat(adLifeWebGl, gameplayScriptable.numberOfCoinsRevivals);
-            }
-#endif
-            else
-            {
-                adLifePanel.SetActive(false);
-                adLifeEndPanel.SetActive(true);
-
-                PostProcessingController.Instance.SetVolumeHealth(0f);
-            }
-
-            PlayerProgress.SaveAll();
-
-            Vibration.InitVibrate();
+            adIcon.SetActive(false);
+            adLifeTxt.SetTextFormat(adLifeWebGl, gameplayScriptable.numberOfCoinsRevivals);
         }
+#endif
+        else
+        {
+            adLifePanel.SetActive(false);
+            adLifeEndPanel.SetActive(true);
+
+            PostProcessingController.Instance.SetVolumeHealth(0f);
+        }
+
+        powerUpsManager.ResetPowerUp();
+        PlayerProgress.SaveAll();
+
+        Vibration.InitVibrate();
     }
 
     public void WatchAdForLife()

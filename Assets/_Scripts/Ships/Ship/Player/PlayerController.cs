@@ -123,7 +123,7 @@ public class PlayerController : ShipBaseController
         else if (collision.CompareTag(Tags.PowerUp) && collision.TryGetComponent(out PowerUpCollectable powerUp))
         {
             PowerUpsManager.Instance.SelectPowerUp(powerUp.powerUp, false);
-            powerUp.Stop();
+            powerUp.PlayPause(false);
         }
     }
 
