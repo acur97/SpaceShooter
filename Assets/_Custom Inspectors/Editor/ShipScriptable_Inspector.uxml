@@ -34,12 +34,12 @@
         </ui:VisualElement>
     </ui:Foldout>
     <ui:Foldout text="Enemy Only" binding-path="editorEnemy" style="margin-top: 0; margin-bottom: 10px; background-color: rgba(255, 255, 255, 0.05); padding-right: 6px; -unity-font-style: bold;">
-        <ui:EnumField label="Attack Type" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" binding-path="attack" tooltip="Type of shot" style="-unity-font-style: normal;" />
+        <ui:EnumField label="Attack Type" binding-path="attack" tooltip="Type of shot" type="Enums+Attack, Assembly-CSharp" style="-unity-font-style: normal;" />
         <ui:FloatField label="Start Rotation" value="0" binding-path="startRotation" tooltip="Initial rotation of the bullet direction" style="-unity-font-style: normal;" />
         <ui:FloatField label="Rotation Speed" value="0" binding-path="rotationSpeed" tooltip="Speed of rotation at which the spin moves, zero means static" style="-unity-font-style: normal; margin-bottom: 18px;" />
         <ui:IntegerField label="Death Score" value="8" binding-path="deathScore" tooltip="Score when ship is destroyed" style="-unity-font-style: normal;" />
         <ui:Toggle label="Collision" binding-path="enemyCollision" tooltip="The player collides with this ship?" style="-unity-font-style: normal; margin-bottom: 18px;" />
-        <ui:EnumField label="Movement Behaviour" value="Left" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" binding-path="behaviour" tooltip="Type of movement/behavior" style="-unity-font-style: normal;" />
+        <ui:EnumField label="Movement Behaviour" binding-path="behaviour" tooltip="Type of movement/behavior" type="Enums+Behaviour, Assembly-CSharp" style="-unity-font-style: normal;" />
         <ui:VisualElement style="flex-grow: 1; flex-direction: row; margin-bottom: 0; margin-top: 0;">
             <ui:Toggle label="Direct" binding-path="directBehaviour" tooltip="The enemy stays in the line forever or for the time in To Continue" name="Toggle_direct" style="-unity-font-style: normal;" />
             <ui:Slider value="-0.8" high-value="1" show-input-field="true" low-value="-1" binding-path="directLine" tooltip="Line position, from top (-1) center (0) to bottom (1)" name="Slider_direct" style="flex-grow: 100; margin-left: 8px; -unity-font-style: normal;" />
