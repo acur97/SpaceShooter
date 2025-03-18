@@ -17,7 +17,7 @@ public class ControlsManager : MonoBehaviour
     [Header("Touch Controls")]
     public static bool hasTouch;
     [SerializeField] private GameObject touchUi;
-    [SerializeField] private EventTrigger powerBtn;
+    public EventTrigger powerBtn;
     [SerializeField] private Swipe swipe;
 
     [Header("Tutorial")]
@@ -54,20 +54,10 @@ public class ControlsManager : MonoBehaviour
         {
             case RoundsController.LevelType.Normal:
                 powerBtn.gameObject.SetActive(GameManager.Instance.gameplayScriptable.selectedPowerUp != null);
-
-                if (GameManager.Instance.gameplayScriptable.selectedPowerUp != null)
-                {
-                    powerBtn.GetComponent<RectTransform>().anchoredPosition = new Vector2(-60, 260);
-                }
                 break;
 
             case RoundsController.LevelType.Infinite:
                 powerBtn.gameObject.SetActive(GameManager.Instance.gameplayScriptable.selectedPowerUp != null);
-
-                if (GameManager.Instance.gameplayScriptable.selectedPowerUp != null)
-                {
-                    powerBtn.GetComponent<RectTransform>().anchoredPosition = new Vector2(-60, 60);
-                }
                 break;
         }
     }

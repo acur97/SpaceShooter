@@ -247,6 +247,9 @@ public class GameManager : MonoBehaviour
         }
 
         adRevivals = (int)gameplayScriptable.numberOfAdRevivals;
+#if Platform_Mobile
+        AdsManager.PrepareRewardedAd();
+#endif
 
         scoreText.SetTextFormat(preScore, score);
         coinsText.SetTextFormat(preCoins, PlayerProgress.GetCoins());
@@ -262,6 +265,8 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         GameStart?.Invoke(true);
+
+        playerController._collider.enabled = true;
 
         hasStarted = true;
         isPlaying = true;
@@ -443,8 +448,8 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        hasEnded = true;
         isPlaying = false;
+        hasEnded = true;
 
         GameStart?.Invoke(false);
 
@@ -464,14 +469,14 @@ public class GameManager : MonoBehaviour
         leftForNextGroup = -1;
 
 #if Platform_Mobile
-            if (hasRevival && adRevivals > 0)
-            {
-                adLifePanel.SetActive(true);
-                adLifeEndPanel.SetActive(false);
+        if (hasRevival && adRevivals > 0)
+        {
+            adLifePanel.SetActive(true);
+            adLifeEndPanel.SetActive(false);
 
-                adIcon.SetActive(true);
-                adLifeTxt.SetText(adLifeMovile);
-            }
+            adIcon.SetActive(true);
+            adLifeTxt.SetText(adLifeMovile);
+        }
 #else
         if (hasRevival && adRevivals > 0 && PlayerProgress.GetCoins() >= gameplayScriptable.numberOfCoinsRevivals)
         {
@@ -519,7 +524,6 @@ public class GameManager : MonoBehaviour
 #if Platform_Mobile
         AdsManager.OnRewardedAdCompleted -= OnAdViewed;
 #endif
-
         if (rewarded)
         {
             adRevivals--;
@@ -537,6 +541,7 @@ public class GameManager : MonoBehaviour
 
             playerController.UpdateHealthUi();
             playerController.gameObject.SetActive(true);
+            playerController.ImmuneBlink().Forget();
 
             audioManager.SetMasterVolume(1f);
 
@@ -545,6 +550,8 @@ public class GameManager : MonoBehaviour
 
             Time.timeScale = prevTimeScale;
             leftForNextGroup = prevLeftForNextGroup;
+
+            BulletsPool.Instance.ResetBullets();
 
             anim_count.SetTrigger(_init);
         }

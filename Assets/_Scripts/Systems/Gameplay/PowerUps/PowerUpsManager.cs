@@ -42,6 +42,9 @@ public class PowerUpsManager : MonoBehaviour
     private bool fromStore = true;
     private PowerUpBase lastPowerUp;
 
+    [Space]
+    [SerializeField] private ControlsManager controls;
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Initialize()
     {
@@ -89,6 +92,11 @@ public class PowerUpsManager : MonoBehaviour
 
     public void SelectPowerUp(PowerUpBase powerUp, bool _fromStore = true)
     {
+        if (GameManager.Instance.isPlaying && currentPowerUp != null)
+        {
+            RemovePowerUp(currentPowerUp);
+        }
+
         fromStore = _fromStore;
         if (fromStore)
         {
@@ -97,16 +105,17 @@ public class PowerUpsManager : MonoBehaviour
         else
         {
             lastPowerUp = gameplayScriptable.selectedPowerUp;
+            controls.powerBtn.gameObject.SetActive(true);
         }
         gameplayScriptable.selectedPowerUp = powerUp;
 
         if (powerUp == null)
         {
-            icon.gameObject.SetActive(false);
+            icon.enabled = false;
         }
         else
         {
-            icon.gameObject.SetActive(true);
+            icon.enabled = true;
 
             icon.sprite = powerUp.sprite;
 
@@ -174,6 +183,8 @@ public class PowerUpsManager : MonoBehaviour
         {
             icon.fillAmount = 1;
         }
+
+        controls.powerBtn.gameObject.SetActive(false);
     }
 
     public void RemovePowerUp(PowerUpBase type)
@@ -193,7 +204,6 @@ public class PowerUpsManager : MonoBehaviour
 
         type.Dispose();
 
-        icon.fillAmount = 0;
         icon.enabled = false;
     }
 

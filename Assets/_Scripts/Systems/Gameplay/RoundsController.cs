@@ -32,6 +32,8 @@ public class RoundsController : MonoBehaviour
     [Space]
     [SerializeField, ReadOnly] private int roundCount = -1;
     [SerializeField, ReadOnly] private int groupCount = -1;
+    private int prevGroupCount;
+    private int prevRoundCount;
 
     private const string _Normal = "Normal";
     private const string _Infinite = "Infinite";
@@ -174,17 +176,20 @@ public class RoundsController : MonoBehaviour
             GameManager.Instance.isPlaying &&
             GameManager.Instance.leftForNextGroup <= 0)
         {
+            prevGroupCount = groupCount;
+            prevRoundCount = roundCount;
+
             StartGroup();
 
             if (!GameManager.Instance.hasEnded)
             {
-                if (CurrentLevels[0].rounds[roundCount].groups[groupCount].randomPowerUp)
+                if (CurrentLevels[0].rounds[prevRoundCount].groups[prevGroupCount].randomPowerUp)
                 {
                     PowerUpsManager.Instance.InstantiatePowerUp(gameplayScriptable.powerUps[Random.Range(0, gameplayScriptable.powerUps.Count)]);
                 }
-                else if (CurrentLevels[0].rounds[roundCount].groups[groupCount].spawnPowerUp != null)
+                else if (CurrentLevels[0].rounds[prevRoundCount].groups[prevGroupCount].spawnPowerUp != null)
                 {
-                    PowerUpsManager.Instance.InstantiatePowerUp(CurrentLevels[0].rounds[roundCount].groups[groupCount].spawnPowerUp);
+                    PowerUpsManager.Instance.InstantiatePowerUp(CurrentLevels[0].rounds[prevRoundCount].groups[prevGroupCount].spawnPowerUp);
                 }
             }
         }
