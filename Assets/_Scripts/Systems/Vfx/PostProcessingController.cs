@@ -48,8 +48,8 @@ public class PostProcessingController : MonoBehaviour
     {
         Instance = this;
 
-#if Platform_Mobile && UNITY_ANDROID && !UNITY_EDITOR
-        Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
+#if Platform_Mobile && !UNITY_EDITOR
+        Application.targetFrameRate = 60;
 #endif
         //QualitySettings.maxQueuedFrames = 1;
 

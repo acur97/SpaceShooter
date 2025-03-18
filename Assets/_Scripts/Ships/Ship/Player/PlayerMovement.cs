@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!inited)
         {
+            ClampPosition();
             return;
         }
 

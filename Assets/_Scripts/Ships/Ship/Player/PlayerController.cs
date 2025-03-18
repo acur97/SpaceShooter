@@ -16,6 +16,7 @@ public class PlayerController : ShipBaseController
     public ControlsManager controls;
     public PlayerMovement movement;
     public PlayerShoot shoot;
+    public Collider2D _collider;
 
     [ReadOnly] public bool copy = false;
 
@@ -78,9 +79,10 @@ public class PlayerController : ShipBaseController
 
     private void Update()
     {
+        movement.OnUpdate();
+
         if (GameManager.Instance.isPlaying && gameObject.activeSelf)
         {
-            movement.OnUpdate();
             shoot.OnUpdate();
 
             if (controls.power && GameManager.Instance.gameplayScriptable.selectedPowerUp != null)
@@ -153,9 +155,10 @@ public class PlayerController : ShipBaseController
         {
             if (!copy)
             {
+                gameObject.SetActive(false);
+                _collider.enabled = false;
                 GameManager.Instance.EndLevel(true);
                 PostProcessingController.Instance.ScreenShake(0.5f).Forget();
-                gameObject.SetActive(false);
             }
             else
             {
@@ -182,13 +185,23 @@ public class PlayerController : ShipBaseController
     {
         float time = _time;
 
-        while (time > 0 && this != null)
+        while (gameObject.activeSelf && time > 0 && this != null)
         {
             transform.localPosition += gameplayScriptable.force * Time.deltaTime * direction;
-            movement.ClampPosition();
             await UniTask.Yield();
 
             time -= Time.deltaTime;
         }
+    }
+
+    public async UniTaskVoid ImmuneBlink()
+    {
+        while (!GameManager.Instance.isPlaying)
+        {
+            renderer.enabled = !renderer.enabled;
+            await UniTask.DelayFrame(2);
+        }
+
+        renderer.enabled = true;
     }
 }

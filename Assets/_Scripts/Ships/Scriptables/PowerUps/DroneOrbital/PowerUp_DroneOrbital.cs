@@ -58,8 +58,6 @@ public class PowerUp_DroneOrbital : PowerUpBase
         newPosition.x = shipBase.transform.position.x + distance * Mathf.Cos(angle);
         newPosition.y = shipBase.transform.position.y + distance * Mathf.Sin(angle);
         dronObject.transform.position = newPosition;
-
-        playerDron.movement.ClampPosition();
     }
 
     public override void OnPlayerDamage()

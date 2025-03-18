@@ -14743,6 +14743,8 @@ MonoBehaviour:
   shootRoot1: {fileID: 4538465617492172463}
   shootRoot2: {fileID: 820171794758127725}
   shootRoot3: {fileID: 991265192960597441}
+  shootRoot4: {fileID: 0}
+  shootRoot5: {fileID: 0}
   timer: -1
   timer2: -1
   timer2Up: 0
@@ -14751,6 +14753,7 @@ MonoBehaviour:
   controls: {fileID: 0}
   movement: {fileID: 6232858554377877128}
   shoot: {fileID: 6295853942958457189}
+  _collider: {fileID: 8478058540152977835}
   copy: 0
 --- !u!114 &6232858554377877128
 MonoBehaviour:

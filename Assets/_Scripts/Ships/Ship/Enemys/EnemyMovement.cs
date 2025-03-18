@@ -215,18 +215,16 @@ public class EnemyMovement : MonoBehaviour
 
     private void Chase()
     {
-        if (transform.position.y < PlayerController.Instance.transform.position.y)
+        if (transform.position.y >= PlayerController.Instance.transform.position.y)
         {
-            return;
-        }
-
-        if (transform.position.x >= PlayerController.Instance.transform.position.x)
-        {
-            transform.position = new Vector2(transform.position.x - (properties.speed * Time.deltaTime * properties.behaviourMathfSin), transform.position.y);
-        }
-        else
-        {
-            transform.position = new Vector2(transform.position.x + (properties.speed * Time.deltaTime * properties.behaviourMathfSin), transform.position.y);
+            if (transform.position.x >= PlayerController.Instance.transform.position.x)
+            {
+                transform.position = new Vector2(transform.position.x - (properties.speed * Time.deltaTime * properties.behaviourMathfSin), transform.position.y);
+            }
+            else
+            {
+                transform.position = new Vector2(transform.position.x + (properties.speed * Time.deltaTime * properties.behaviourMathfSin), transform.position.y);
+            }
         }
 
         if (StopIfDirect(properties.directBehaviour))
