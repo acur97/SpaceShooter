@@ -19,7 +19,7 @@ MonoBehaviour:
     customFloat: 0
     minTimeBetweenSpawn: 0.7
     maxTimeBetweenSpawn: 0.7
-    count: 35
+    count: 20
     ship: {fileID: 11400000, guid: 0b2d8ee1a193cbd458ba93593f505ec6, type: 2}
     randomPowerUp: 0
     spawnPowerUp: {fileID: 0}
@@ -45,7 +45,7 @@ MonoBehaviour:
     spawnPowerUp: {fileID: 0}
   - chained: 0
     timeToStart: 1
-    spawnType: 3
+    spawnType: 0
     customFloat: 1
     minTimeBetweenSpawn: 0.3
     maxTimeBetweenSpawn: 0.3
