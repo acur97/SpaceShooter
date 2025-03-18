@@ -30,7 +30,7 @@ MonoBehaviour:
   speed: 1
   health: 4
   bulletSpeed: 6
-  fireTime: 0.5
+  fireTime: 0.8
   coolDown: 0.5
   _spaceCoolDown: 1
   spaceCooldown: 0.8

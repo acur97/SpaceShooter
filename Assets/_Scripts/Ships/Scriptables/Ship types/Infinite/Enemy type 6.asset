@@ -30,7 +30,7 @@ MonoBehaviour:
   speed: 1
   health: 2
   bulletSpeed: 4
-  fireTime: 0.5
+  fireTime: 0.8
   coolDown: 0.5
   _spaceCoolDown: 1
   spaceCooldown: 0.8
@@ -49,4 +49,4 @@ MonoBehaviour:
   _timeToContinue: 1
   timeToContinue: 5
   countForGroup: 1
-  spawnIndex: 19
+  spawnIndex: 5
