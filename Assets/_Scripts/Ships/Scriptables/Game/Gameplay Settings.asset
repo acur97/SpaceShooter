@@ -40,13 +40,13 @@ MonoBehaviour:
   timeScaleIncrease: 0.1
   scoreScaleIncrease: 2
   levels:
-  - {fileID: 11400000, guid: 2f63fb46e2f815841b152e0343debc7f, type: 2}
+  - {fileID: 11400000, guid: 9ed78d67e65d3594eae5fc78b6f006c3, type: 2}
   infiniteLevels:
   - {fileID: 11400000, guid: 66b5210a10c7f904fb786900aeae9e8c, type: 2}
   bordersShip: {fileID: 11400000, guid: bb511d2af2e512945b19b053491f12b7, type: 2}
   timeInBorder: 2
-  countBorders: 0.98280877
   borderLimit: 0.3
+  countBorders: 0.98280877
   customs:
   - {fileID: 11400000, guid: bf566af108c065646bec685895b21a22, type: 2}
   - {fileID: 11400000, guid: b6c96e38cd1d7aa4e8f32e39e4412a8f, type: 2}
