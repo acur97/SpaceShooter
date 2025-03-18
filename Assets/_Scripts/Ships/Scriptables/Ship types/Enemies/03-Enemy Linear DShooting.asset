@@ -28,19 +28,25 @@ MonoBehaviour:
   spriteScale: {x: 0.2, y: 0.2, z: 1}
   hue: 0
   speed: 0.5
-  health: 10
+  health: 4
   bulletSpeed: 4
+  fireTime: 0.8
   coolDown: 1
-  _spaceCoolDown: 0
-  spaceCooldown: 2
+  _spaceCoolDown: 1
+  spaceCooldown: 0.5
   _bulletTime: 0
   bulletTime: -1
   attack: 1
+  startRotation: 0
+  rotationSpeed: 0
   enemyCollision: 1
   deathScore: 2
   behaviour: 0
+  directBehaviour: 0
+  directLine: -0.8
   behaviourMathfSin: 2
+  behaviourMathfInverted: 0
   _timeToContinue: 0
   timeToContinue: -1
   countForGroup: 1
-  spawnIndex: 19
+  spawnIndex: 4

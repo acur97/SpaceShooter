@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57881a7a4b18dff4b82ce561559b9591, type: 3}
-  m_Name: 02-Enemy Linear SShooting
+  m_Name: 07-Enemy Boss SShooting
   m_EditorClassIdentifier: 
   editorCustom: 1
   editorStore: 1
@@ -18,21 +18,21 @@ MonoBehaviour:
   editorBullet: 1
   editorEnemy: 1
   editorNotes: 1
-  notes: Single Shooting
+  notes: 'Wave Single Shooting '
   color: {r: 0.7379107, g: 0.06480328, b: 0.095307484, a: 1}
   name: 
   description: 
   owned: 0
   cost: 0
-  sprite: {fileID: 21300000, guid: 537b7a0a556692241a20d56547a11fca, type: 3}
+  sprite: {fileID: 21300000, guid: 8c384af33f5543a4985d62f8247fc8a6, type: 3}
   spriteScale: {x: 0.2, y: 0.2, z: 1}
   hue: 0
-  speed: 0.5
-  health: 4
-  bulletSpeed: 4
+  speed: 4
+  health: 10
+  bulletSpeed: 5
   fireTime: 0.5
-  coolDown: 2
-  _spaceCoolDown: 0
+  coolDown: 0.3
+  _spaceCoolDown: 1
   spaceCooldown: 2
   _bulletTime: 0
   bulletTime: -1
@@ -40,13 +40,13 @@ MonoBehaviour:
   startRotation: 0
   rotationSpeed: 0
   enemyCollision: 1
-  deathScore: 2
-  behaviour: 0
-  directBehaviour: 0
+  deathScore: 10
+  behaviour: 2
+  directBehaviour: 1
   directLine: -0.8
-  behaviourMathfSin: 2
+  behaviourMathfSin: 5
   behaviourMathfInverted: 0
   _timeToContinue: 0
-  timeToContinue: -1
+  timeToContinue: 20
   countForGroup: 1
   spawnIndex: 9

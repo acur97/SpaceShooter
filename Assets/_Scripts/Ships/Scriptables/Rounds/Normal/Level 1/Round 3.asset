@@ -17,19 +17,59 @@ MonoBehaviour:
     timeToStart: 1
     spawnType: 3
     customFloat: 0
-    minTimeBetweenSpawn: 1
-    maxTimeBetweenSpawn: 1
-    count: 10
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+    count: 5
     ship: {fileID: 11400000, guid: 19a1bbb4c1f71d442aa3eda34c077384, type: 2}
     randomPowerUp: 0
     spawnPowerUp: {fileID: 0}
   - chained: 0
     timeToStart: 1
+    spawnType: 0
+    customFloat: 0
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 1
+    count: 3
+    ship: {fileID: 11400000, guid: 15b2b9cf1bd71b843bdec5c04ed8fbf2, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 1
+    timeToStart: 1
+    spawnType: 3
+    customFloat: 0
+    minTimeBetweenSpawn: 2
+    maxTimeBetweenSpawn: 3
+    count: 4
+    ship: {fileID: 11400000, guid: 0d98bd564fa851c4b8a895c73b8e2b85, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 0
+    timeToStart: 1
+    spawnType: 0
+    customFloat: 0
+    minTimeBetweenSpawn: 1
+    maxTimeBetweenSpawn: 2
+    count: 10
+    ship: {fileID: 11400000, guid: 0d98bd564fa851c4b8a895c73b8e2b85, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 1
+    timeToStart: 1
+    spawnType: 0
+    customFloat: 0
+    minTimeBetweenSpawn: 1
+    maxTimeBetweenSpawn: 1.5
+    count: 15
+    ship: {fileID: 11400000, guid: 56a9a8945246d264abaf61fd48c30ab4, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 1
+    timeToStart: 1.5
     spawnType: 3
     customFloat: 0
     minTimeBetweenSpawn: 1
-    maxTimeBetweenSpawn: 1
-    count: 10
-    ship: {fileID: 11400000, guid: 15b2b9cf1bd71b843bdec5c04ed8fbf2, type: 2}
+    maxTimeBetweenSpawn: 3
+    count: 8
+    ship: {fileID: 11400000, guid: 56a9a8945246d264abaf61fd48c30ab4, type: 2}
     randomPowerUp: 0
     spawnPowerUp: {fileID: 0}

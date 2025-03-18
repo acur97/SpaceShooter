@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57881a7a4b18dff4b82ce561559b9591, type: 3}
-  m_Name: 06-Enemy Boss SShooting
+  m_Name: 05 - Enemy Circual Shooting Extreme
   m_EditorClassIdentifier: 
   editorCustom: 1
   editorStore: 1
@@ -18,31 +18,35 @@ MonoBehaviour:
   editorBullet: 1
   editorEnemy: 1
   editorNotes: 1
-  notes: 'Wave Single Shooting '
+  notes: 'Waves Singles Shooting '
   color: {r: 0.7379107, g: 0.06480328, b: 0.095307484, a: 1}
   name: 
   description: 
   owned: 0
   cost: 0
-  sprite: {fileID: 21300000, guid: 8c384af33f5543a4985d62f8247fc8a6, type: 3}
+  sprite: {fileID: 21300000, guid: 537b7a0a556692241a20d56547a11fca, type: 3}
   spriteScale: {x: 0.2, y: 0.2, z: 1}
   hue: 0
-  speed: 4
-  health: 10
-  bulletSpeed: 5
+  speed: 0.5
+  health: 8
+  bulletSpeed: 4
+  fireTime: 0.6
   coolDown: 0.3
   _spaceCoolDown: 1
-  spaceCooldown: 2
+  spaceCooldown: 0.3
   _bulletTime: 0
   bulletTime: -1
-  attack: 3
+  attack: 0
   startRotation: 0
-  rotationSpeed: 0
+  rotationSpeed: -30
   enemyCollision: 1
-  deathScore: 10
-  behaviour: 3
-  behaviourMathfSin: 5
-  _timeToContinue: 0
+  deathScore: 3
+  behaviour: 0
+  directBehaviour: 1
+  directLine: 0
+  behaviourMathfSin: 2
+  behaviourMathfInverted: 0
+  _timeToContinue: 1
   timeToContinue: 20
   countForGroup: 1
-  spawnIndex: 9
+  spawnIndex: 0

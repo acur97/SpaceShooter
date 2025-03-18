@@ -13,6 +13,4 @@ MonoBehaviour:
   m_Name: Level 2
   m_EditorClassIdentifier: 
   rounds:
-  - {fileID: 11400000, guid: 4bfe0108a25962246bb2abb4ac3703a3, type: 2}
-  - {fileID: 11400000, guid: 5fe90cc397000b14281082f3196733ad, type: 2}
-  - {fileID: 11400000, guid: e978764c741169e46ad65c37cf3a78a3, type: 2}
+  - {fileID: 11400000, guid: a52cea891d257ae40ab3b615de6c7d81, type: 2}
