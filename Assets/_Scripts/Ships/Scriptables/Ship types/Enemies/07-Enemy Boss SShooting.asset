@@ -24,9 +24,9 @@ MonoBehaviour:
   description: 
   owned: 0
   cost: 0
-  sprite: {fileID: 21300000, guid: 8c384af33f5543a4985d62f8247fc8a6, type: 3}
+  sprite: {fileID: 21300000, guid: 0da3ffbca1666964ab08aac9a84d0f1b, type: 3}
   spriteScale: {x: 0.2, y: 0.2, z: 1}
-  hue: 0
+  hue: 0.3
   speed: 4
   health: 10
   bulletSpeed: 5
