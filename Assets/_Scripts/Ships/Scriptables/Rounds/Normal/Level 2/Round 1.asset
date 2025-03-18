@@ -23,23 +23,83 @@ MonoBehaviour:
     ship: {fileID: 11400000, guid: 2427ee0799b19614195bb81a3a39da57, type: 2}
     randomPowerUp: 0
     spawnPowerUp: {fileID: 0}
-  - chained: 0
-    timeToStart: 1
-    spawnType: 4
-    customFloat: -2
+  - chained: 1
+    timeToStart: 4
+    spawnType: 0
+    customFloat: 2
     minTimeBetweenSpawn: 1
-    maxTimeBetweenSpawn: 1
-    count: 6
-    ship: {fileID: 11400000, guid: 3ec3d51dc6c78294fb55de6e454cab20, type: 2}
+    maxTimeBetweenSpawn: 1.6
+    count: 10
+    ship: {fileID: 11400000, guid: 56a9a8945246d264abaf61fd48c30ab4, type: 2}
     randomPowerUp: 0
     spawnPowerUp: {fileID: 0}
   - chained: 1
+    timeToStart: 10
+    spawnType: 4
+    customFloat: 2
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+    count: 2
+    ship: {fileID: 11400000, guid: 94224e65a17f06340975b5a083eeb18e, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 1
+    timeToStart: 12
+    spawnType: 4
+    customFloat: -2
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+    count: 2
+    ship: {fileID: 11400000, guid: 94224e65a17f06340975b5a083eeb18e, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 1
+    timeToStart: 14
+    spawnType: 4
+    customFloat: 2
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+    count: 2
+    ship: {fileID: 11400000, guid: 94224e65a17f06340975b5a083eeb18e, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 1
+    timeToStart: 16
+    spawnType: 4
+    customFloat: 2
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+    count: 2
+    ship: {fileID: 11400000, guid: 94224e65a17f06340975b5a083eeb18e, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 1
+    timeToStart: 18
+    spawnType: 4
+    customFloat: 2
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+    count: 2
+    ship: {fileID: 11400000, guid: 94224e65a17f06340975b5a083eeb18e, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 0
     timeToStart: 1
     spawnType: 4
     customFloat: 2
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+    count: 2
+    ship: {fileID: 11400000, guid: 94224e65a17f06340975b5a083eeb18e, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 1
+    timeToStart: 2
+    spawnType: 0
+    customFloat: 2
     minTimeBetweenSpawn: 1
-    maxTimeBetweenSpawn: 1
-    count: 6
-    ship: {fileID: 11400000, guid: 3ec3d51dc6c78294fb55de6e454cab20, type: 2}
+    maxTimeBetweenSpawn: 1.8
+    count: 8
+    ship: {fileID: 11400000, guid: a9dfa9d0efff7f2409796c610bb18b38, type: 2}
     randomPowerUp: 0
     spawnPowerUp: {fileID: 0}
