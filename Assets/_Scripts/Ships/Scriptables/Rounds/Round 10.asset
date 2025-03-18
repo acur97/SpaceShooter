@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d74892c7c2b61a40a56faac19d7f68c, type: 3}
+  m_Name: Round 10
+  m_EditorClassIdentifier: 
+  groups:
+  - chained: 0
+    timeToStart: 2
+    spawnType: 0
+    customFloat: 0
+    minTimeBetweenSpawn: 0.7
+    maxTimeBetweenSpawn: 0.7
+    count: 35
+    ship: {fileID: 11400000, guid: 0b2d8ee1a193cbd458ba93593f505ec6, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 1
+    timeToStart: 5
+    spawnType: 3
+    customFloat: -1
+    minTimeBetweenSpawn: 0.3
+    maxTimeBetweenSpawn: 0.3
+    count: 10
+    ship: {fileID: 11400000, guid: 0b2d8ee1a193cbd458ba93593f505ec6, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 1
+    timeToStart: 10
+    spawnType: 3
+    customFloat: 1
+    minTimeBetweenSpawn: 0.3
+    maxTimeBetweenSpawn: 0.3
+    count: 10
+    ship: {fileID: 11400000, guid: 0b2d8ee1a193cbd458ba93593f505ec6, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 0
+    timeToStart: 1
+    spawnType: 3
+    customFloat: 1
+    minTimeBetweenSpawn: 0.3
+    maxTimeBetweenSpawn: 0.3
+    count: 3
+    ship: {fileID: 11400000, guid: 3ddc9ccfc46dab44eaae66262e071e16, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
