@@ -29,12 +29,13 @@ public class Swipe : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDow
     {
         dragPosition = eventData.delta;
 
-        InputDirection = 1280f / Screen.width * multiplier * dragPosition;
+        InputDirection = 1280f / Screen.width * multiplier / Time.deltaTime * dragPosition;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         InputDirection = Vector2.zero;
+        dragPosition = Vector2.zero;
 
         OnTouch?.Invoke(false);
     }

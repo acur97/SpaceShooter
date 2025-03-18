@@ -1,5 +1,5 @@
-using GoogleMobileAds.Api;
 #if Platform_Mobile
+using GoogleMobileAds.Api;
 using System;
 using UnityEngine;
 #endif
@@ -9,52 +9,50 @@ public class AdsManager
 #if Platform_Mobile
     private static readonly RequestConfiguration requestConfiguration = new()
     {
-        TestDeviceIds = new()
-            {
-                AdRequest.TestDeviceSimulator,
-#if UNITY_IPHONE
-                ""
-#elif UNITY_ANDROID
-                "bcbb08c53d80435abd0fbe4d9f37daed" // my "moto e(7) plus" ads id
-#endif
-            }
+        //        TestDeviceIds = new()
+        //            {
+        //                AdRequest.TestDeviceSimulator,
+        //#if UNITY_IPHONE
+        //                ""
+        //#elif UNITY_ANDROID
+        //                "bcbb08c53d80435abd0fbe4d9f37daed" // my "moto e(7) plus" ads id
+        //#endif
+        //            }
     };
 
     private static bool isInitialized = false;
 
     #region BottomBannerAd
-    //private const string bannerUnitId = "ca-app-pub-8907326292508524/3533112980"; // my banner id
+    private const string bannerUnitId = "ca-app-pub-8907326292508524/3533112980";
 
-    // These ad units are configured to always serve test ads.
-#if UNITY_ANDROID
-    private const string bannerUnitId = "ca-app-pub-3940256099942544/6300978111";
-#elif UNITY_IPHONE
-    private const string bannerUnitId = "ca-app-pub-3940256099942544/2934735716";
-#else
-    private const string bannerUnitId = "unused";
-#endif
+    // test ads.
+    //#if UNITY_ANDROID
+    //    private const string bannerUnitId = "ca-app-pub-3940256099942544/6300978111";
+    //#elif UNITY_IPHONE
+    //    private const string bannerUnitId = "ca-app-pub-3940256099942544/2934735716";
+    //#else
+    //    private const string bannerUnitId = "unused";
+    //#endif
 
     private static BannerView _bannerView;
     #endregion
 
     #region RewardedAd
-    //private const string rewardedAdUnitId = "ca-app-pub-8907326292508524/9668982787"; // my rewarded ad id
+    private const string rewardedUnitId = "ca-app-pub-8907326292508524/9668982787";
 
-    // These ad units are configured to always serve test ads.
-#if UNITY_ANDROID
-    private const string rewardedUnitId = "ca-app-pub-3940256099942544/5224354917";
-#elif UNITY_IPHONE
-    private const string rewardedUnitId = "ca-app-pub-3940256099942544/1712485313";
-#else
-    private const string rewardedUnitId = "unused";
-#endif
+    // test ads.
+    //#if UNITY_ANDROID
+    //    private const string rewardedUnitId = "ca-app-pub-3940256099942544/5224354917";
+    //#elif UNITY_IPHONE
+    //    private const string rewardedUnitId = "ca-app-pub-3940256099942544/1712485313";
+    //#else
+    //    private const string rewardedUnitId = "unused";
+    //#endif
 
     private static RewardedAd _rewardedAd;
     public static Action<bool> OnRewardedAdCompleted;
     #endregion
-#endif
 
-#if Platform_Mobile
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Initialize()
     {
@@ -77,9 +75,9 @@ public class AdsManager
 #endif
     }
 
+#if Platform_Mobile
     private static void InitializeStatus(InitializationStatus status)
     {
-#if Platform_Mobile
         if (status == null)
         {
             Debug.LogError("Google Mobile Ads initialization failed.");
@@ -92,13 +90,13 @@ public class AdsManager
 
             InitBottomBannerAd();
         }
-#endif
     }
+#endif
 
     #region BottomBannerAd
+#if Platform_Mobile
     public static void InitBottomBannerAd()
     {
-#if Platform_Mobile
         if (!isInitialized)
         {
             Debug.LogError("Google Mobile Ads SDK is not correctly initialized.");
@@ -115,12 +113,10 @@ public class AdsManager
 
         AdRequest adRequest = new();
         _bannerView.LoadAd(adRequest);
-#endif
     }
 
     private static void ListenBannerAdEvents()
     {
-#if Platform_Mobile
         _bannerView.OnBannerAdLoaded += () =>
         {
             //Debug.LogWarning($"Banner view loaded an ad with response : {_bannerView.GetResponseInfo()}");
@@ -165,8 +161,8 @@ public class AdsManager
         {
             Debug.Log("Banner view full screen content closed.");
         };
-#endif
     }
+#endif
 
     public static void DestroyBottomBannerAd()
     {
@@ -179,21 +175,57 @@ public class AdsManager
     #endregion
 
     #region RewardedAd
-    public static void InitRewardedAd()
-    {
 #if Platform_Mobile
+    public static void PrepareRewardedAd()
+    {
         _rewardedAd?.Destroy();
 
-        AdRequest adRequest = new();
+        RewardedAd.Load(rewardedUnitId, new AdRequest(), RewardedAdLoad);
+    }
 
+    private static void PrepareInitRewardedAd()
+    {
+        _rewardedAd?.Destroy();
+
+        RewardedAd.Load(rewardedUnitId, new AdRequest(), RewardedAdLoadInit);
+    }
+
+    public static void InitRewardedAd()
+    {
         UiManager.Instance.SetUi(UiType.Loading, true, 0.25f);
-        RewardedAd.Load(rewardedUnitId, adRequest, RewardedAdLoad);
-#endif
+
+        if (_rewardedAd != null)
+        {
+            ListenRewardedAdEvents();
+            ShowRewardedAd();
+        }
+        else
+        {
+            PrepareInitRewardedAd();
+        }
     }
 
     private static void RewardedAdLoad(RewardedAd ad, LoadAdError error)
     {
-#if Platform_Mobile
+        if (error != null)
+        {
+            Debug.LogError($"Rewarded ad failed to load an ad with error : {error}");
+            UiManager.Instance.SetUi(UiType.Loading, false);
+            return;
+        }
+        if (ad == null)
+        {
+            Debug.LogError("Unexpected error: Rewarded load event fired with null ad and null error.");
+            UiManager.Instance.SetUi(UiType.Loading, false);
+            return;
+        }
+
+        Debug.Log($"Rewarded ad loaded with response : {ad.GetResponseInfo()}");
+        _rewardedAd = ad;
+    }
+
+    private static void RewardedAdLoadInit(RewardedAd ad, LoadAdError error)
+    {
         if (error != null)
         {
             Debug.LogError($"Rewarded ad failed to load an ad with error : {error}");
@@ -211,14 +243,11 @@ public class AdsManager
         _rewardedAd = ad;
 
         ListenRewardedAdEvents();
-
         ShowRewardedAd();
-#endif
     }
 
     private static void ListenRewardedAdEvents()
     {
-#if Platform_Mobile
         _rewardedAd.OnAdPaid += (AdValue adValue) =>
         {
             Debug.Log($"Rewarded ad paid {adValue.Value} {adValue.CurrencyCode}.");
@@ -248,16 +277,17 @@ public class AdsManager
 
         _rewardedAd.OnAdFullScreenContentFailed += (AdError error) =>
         {
-            Debug.LogError($"Rewarded ad failed to open full screen content with error : {error}");
+            if (error != null)
+            {
+                Debug.LogError($"Rewarded ad failed to open full screen content with error : {error}");
+            }
 
             OnRewardedAdCompleted?.Invoke(false);
         };
-#endif
     }
 
     public static void ShowRewardedAd()
     {
-#if Platform_Mobile
         if (_rewardedAd != null && _rewardedAd.CanShowAd())
         {
             _rewardedAd.Show(UserRewardEarned);
@@ -268,24 +298,20 @@ public class AdsManager
 
             UiManager.Instance.SetUi(UiType.Loading, false);
         }
-#endif
     }
 
     private static void UserRewardEarned(Reward reward)
     {
-#if Platform_Mobile
         Debug.Log($"Rewarded ad granted a reward: {reward.Amount} {reward.Type}");
 
         OnRewardedAdCompleted?.Invoke(true);
-#endif
     }
 
     public static void DestroyRewardedAd()
     {
-#if Platform_Mobile
         _rewardedAd?.Destroy();
         _rewardedAd = null;
-#endif
     }
+#endif
     #endregion
 }

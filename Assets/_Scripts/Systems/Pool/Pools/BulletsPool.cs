@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class BulletsPool : PoolBaseController
@@ -29,6 +30,14 @@ public class BulletsPool : PoolBaseController
                 speed = 0
             };
             bullets[i].data = data;
+        }
+    }
+
+    public void ResetBullets()
+    {
+        for (int i = 0; i < size; i++)
+        {
+            bullets[i].transform.gameObject.SetActive(false);
         }
     }
 
