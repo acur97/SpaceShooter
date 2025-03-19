@@ -40,13 +40,16 @@ MonoBehaviour:
   timeScaleIncrease: 0.1
   scoreScaleIncrease: 2
   levels:
+  - {fileID: 11400000, guid: 63ca5c01eb276f143bbd0f2c461c8e89, type: 2}
+  - {fileID: 11400000, guid: c39229dcca27c37439e844927d3a24b8, type: 2}
   - {fileID: 11400000, guid: 9ed78d67e65d3594eae5fc78b6f006c3, type: 2}
+  - {fileID: 11400000, guid: 2f63fb46e2f815841b152e0343debc7f, type: 2}
   infiniteLevels:
   - {fileID: 11400000, guid: 66b5210a10c7f904fb786900aeae9e8c, type: 2}
   bordersShip: {fileID: 11400000, guid: bb511d2af2e512945b19b053491f12b7, type: 2}
   timeInBorder: 2
   borderLimit: 0.3
-  countBorders: 0.98280877
+  countBorders: 1.8797747
   customs:
   - {fileID: 11400000, guid: bf566af108c065646bec685895b21a22, type: 2}
   - {fileID: 11400000, guid: b6c96e38cd1d7aa4e8f32e39e4412a8f, type: 2}
@@ -73,11 +76,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ca120ee2daf3ccf48ad037f431e3d983, type: 2}
   - {fileID: 11400000, guid: 5210848e21cfca049b1c30ab5e862492, type: 2}
   - {fileID: 11400000, guid: 6cd785201aceb1e4a94957e463fb0bd7, type: 2}
-  selectedPowerUp: {fileID: 11400000, guid: 0718980e695f00a42a860890628ab9c4, type: 2}
+  selectedPowerUp: {fileID: 0}
   progress:
-    playerName: Dieci
-    coins: 999840
-    powerUpAmounts: 00000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-    powerUpIndex: 3
-    customsOwneds: 010000000000
-    customsIndex: 0
+    playerName: 
+    coins: 5360
+    powerUpAmounts: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    powerUpIndex: -1
+    customsOwneds: 01000100000001
+    customsIndex: 2

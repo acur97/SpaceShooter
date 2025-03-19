@@ -71,5 +71,5 @@ MonoBehaviour:
     maxTimeBetweenSpawn: 1
     count: 15
     ship: {fileID: 11400000, guid: 0b2d8ee1a193cbd458ba93593f505ec6, type: 2}
-    randomPowerUp: 0
+    randomPowerUp: 1
     spawnPowerUp: {fileID: 0}

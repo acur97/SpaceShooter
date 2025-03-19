@@ -62,4 +62,4 @@ MonoBehaviour:
     count: 4
     ship: {fileID: 11400000, guid: 79eba48d904b57f4c98a76441201ea92, type: 2}
     randomPowerUp: 0
-    spawnPowerUp: {fileID: 0}
+    spawnPowerUp: {fileID: 11400000, guid: 4b9ec353ab82ec04c8c14f027e31e82e, type: 2}
