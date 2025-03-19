@@ -79,15 +79,21 @@ public class PlayerController : ShipBaseController
 
     private void Update()
     {
-        movement.OnUpdate();
-
-        if (GameManager.Instance.isPlaying && gameObject.activeSelf)
+        if (gameObject.activeSelf)
         {
-            shoot.OnUpdate();
-
-            if (controls.power && GameManager.Instance.gameplayScriptable.selectedPowerUp != null)
+            if (!GameManager.Instance.hasEnded)
             {
-                PowerUpsManager.Instance.AddPowerUp(GameManager.Instance.gameplayScriptable.selectedPowerUp);
+                movement.OnUpdate();
+            }
+
+            if (GameManager.Instance.isPlaying)
+            {
+                shoot.OnUpdate();
+
+                if (controls.power && GameManager.Instance.gameplayScriptable.selectedPowerUp != null)
+                {
+                    PowerUpsManager.Instance.AddPowerUp(GameManager.Instance.gameplayScriptable.selectedPowerUp);
+                }
             }
         }
     }

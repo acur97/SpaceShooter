@@ -1,3 +1,5 @@
+using Cysharp.Text;
+using Cysharp.Threading.Tasks;
 using System;
 using TMPro;
 using UnityEngine;
@@ -20,6 +22,9 @@ public class RoundsController : MonoBehaviour
     [SerializeField] private GameObject modesPanel;
     [SerializeField] private RectTransform tablePanel;
 
+    [Header("Gameplay")]
+    [SerializeField] private TextMeshProUGUI newLevelText;
+
     public enum LevelType
     {
         Normal,
@@ -30,14 +35,18 @@ public class RoundsController : MonoBehaviour
     [SerializeField] private GameplayScriptable gameplayScriptable;
 
     [Space]
+    [SerializeField, ReadOnly] private int levelCount = 0;
     [SerializeField, ReadOnly] private int roundCount = -1;
     [SerializeField, ReadOnly] private int groupCount = -1;
-    private int prevGroupCount;
+    private int prevLevelCount;
     private int prevRoundCount;
+    private int prevGroupCount;
+    private bool waiting = false;
 
     private const string _Normal = "Normal";
     private const string _Infinite = "Infinite";
     private const string lastLevelType = "LastLevelType";
+    private const string levelComplete = "level #{0}\r\ncompleted";
 
     public void Init()
     {
@@ -46,6 +55,7 @@ public class RoundsController : MonoBehaviour
         SetMode(Convert.ToBoolean(PlayerPrefs.GetInt(lastLevelType, 0)));
 
         gameplayScriptable.bordersShip.countForGroup = false;
+        newLevelText.transform.localScale = Vector3.zero;
 
         GameManager.GameStart += DisableLeaderboardModes;
     }
@@ -135,11 +145,51 @@ public class RoundsController : MonoBehaviour
 
     private void StartNormalRound()
     {
-        if (roundCount < CurrentLevels[0].rounds.Length - 1)
+        if (roundCount < CurrentLevels[levelCount].rounds.Length - 1)
         {
             UpRound();
 
             StartGroup();
+        }
+        else
+        {
+            LevelComplete().Forget();
+        }
+    }
+
+    private async UniTaskVoid LevelComplete()
+    {
+        levelCount++;
+
+        if (levelCount < CurrentLevels.Length)
+        {
+            waiting = true;
+
+            newLevelText.transform.localScale = Vector3.zero;
+            newLevelText.SetTextFormat(levelComplete, levelCount);
+
+            LeanTween.scale(newLevelText.gameObject, Vector3.one, 0.25f);
+            LeanTween.value(0, 1, 0.3f).setOnUpdate((value) =>
+            {
+                newLevelText.fontMaterial.SetFloat(MaterialProperties.GlowPower, value);
+            }).setEaseInExpo().setOnComplete(() =>
+            {
+                LeanTween.value(1, 0, 1).setOnUpdate((value) =>
+                {
+                    newLevelText.fontMaterial.SetFloat(MaterialProperties.GlowPower, value);
+                });
+            });
+
+            await UniTask.WaitForSeconds(1.2f);
+
+            LeanTween.scale(newLevelText.gameObject, Vector3.zero, 1.2f).setEaseInCubic();
+
+            await UniTask.WaitForSeconds(1.2f);
+
+            roundCount = -1;
+            StartRound();
+
+            waiting = false;
         }
         else
         {
@@ -149,15 +199,14 @@ public class RoundsController : MonoBehaviour
 
     private void StartInfinite()
     {
-        roundCount = Random.Range(-1, CurrentLevels[0].rounds.Length - 1);
+        roundCount = Random.Range(-1, CurrentLevels[levelCount].rounds.Length - 1);
 
-        if (roundCount < CurrentLevels[0].rounds.Length - 1)
+        if (roundCount < CurrentLevels[levelCount].rounds.Length - 1)
         {
             UpRound();
         }
         else
         {
-
             roundCount--;
         }
 
@@ -174,22 +223,24 @@ public class RoundsController : MonoBehaviour
     {
         if (GameManager.Instance.hasStarted &&
             GameManager.Instance.isPlaying &&
-            GameManager.Instance.leftForNextGroup <= 0)
+            GameManager.Instance.leftForNextGroup <= 0 &&
+            !waiting)
         {
             prevGroupCount = groupCount;
             prevRoundCount = roundCount;
+            prevLevelCount = levelCount;
 
             StartGroup();
 
             if (!GameManager.Instance.hasEnded)
             {
-                if (CurrentLevels[0].rounds[prevRoundCount].groups[prevGroupCount].randomPowerUp)
+                if (CurrentLevels[prevLevelCount].rounds[prevRoundCount].groups[prevGroupCount].randomPowerUp)
                 {
                     PowerUpsManager.Instance.InstantiatePowerUp(gameplayScriptable.powerUps[Random.Range(0, gameplayScriptable.powerUps.Count)]);
                 }
-                else if (CurrentLevels[0].rounds[prevRoundCount].groups[prevGroupCount].spawnPowerUp != null)
+                else if (CurrentLevels[prevLevelCount].rounds[prevRoundCount].groups[prevGroupCount].spawnPowerUp != null)
                 {
-                    PowerUpsManager.Instance.InstantiatePowerUp(CurrentLevels[0].rounds[prevRoundCount].groups[prevGroupCount].spawnPowerUp);
+                    PowerUpsManager.Instance.InstantiatePowerUp(CurrentLevels[prevLevelCount].rounds[prevRoundCount].groups[prevGroupCount].spawnPowerUp);
                 }
             }
         }
@@ -197,26 +248,26 @@ public class RoundsController : MonoBehaviour
 
     public void StartGroup()
     {
-        if (CurrentLevels[0].rounds[roundCount] == null)
+        if (CurrentLevels[levelCount].rounds[roundCount] == null)
         {
             StartRound();
             return;
         }
-        if (groupCount < CurrentLevels[0].rounds[roundCount].groups.Length - 1)
+        if (groupCount < CurrentLevels[levelCount].rounds[roundCount].groups.Length - 1)
         {
             groupCount++;
 
-            GameManager.Instance.leftForNextGroup = CurrentLevels[0].rounds[roundCount].groups[groupCount].count;
-            EnemySpawns.Instance.InstantiateEnemys(CurrentLevels[0].rounds[roundCount].groups[groupCount]).Forget();
+            GameManager.Instance.leftForNextGroup = CurrentLevels[levelCount].rounds[roundCount].groups[groupCount].count;
+            EnemySpawns.Instance.InstantiateEnemys(CurrentLevels[levelCount].rounds[roundCount].groups[groupCount]).Forget();
 
-            for (int i = groupCount + 1; i < CurrentLevels[0].rounds[roundCount].groups.Length; i++)
+            for (int i = groupCount + 1; i < CurrentLevels[levelCount].rounds[roundCount].groups.Length; i++)
             {
-                if (CurrentLevels[0].rounds[roundCount].groups[i].chained)
+                if (CurrentLevels[levelCount].rounds[roundCount].groups[i].chained)
                 {
                     groupCount++;
 
-                    GameManager.Instance.leftForNextGroup += CurrentLevels[0].rounds[roundCount].groups[i].count;
-                    EnemySpawns.Instance.InstantiateEnemys(CurrentLevels[0].rounds[roundCount].groups[i]).Forget();
+                    GameManager.Instance.leftForNextGroup += CurrentLevels[levelCount].rounds[roundCount].groups[i].count;
+                    EnemySpawns.Instance.InstantiateEnemys(CurrentLevels[levelCount].rounds[roundCount].groups[i]).Forget();
                 }
                 else
                 {

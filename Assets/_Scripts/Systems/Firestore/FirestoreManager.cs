@@ -153,7 +153,7 @@ public class FirestoreManager : MonoBehaviour
 
     public void StartUploadScore()
     {
-        if (string.IsNullOrEmpty(nameInput.text) || PlayerController.Instance.health > PlayerController.Instance._properties.health)
+        if (string.IsNullOrEmpty(nameInput.text))
         {
             return;
         }

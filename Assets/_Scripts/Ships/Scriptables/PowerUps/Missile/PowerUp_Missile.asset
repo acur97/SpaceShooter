@@ -17,8 +17,8 @@ MonoBehaviour:
   powerName: Missile
   sprite: {fileID: 21300000, guid: bd1d8a4336c263440827b325c42e395b, type: 3}
   description: Changes the shot to 2 guided missiles at the enemy, dealing 15 damage
-  currentAmount: 6
-  cost: 50
+  currentAmount: 5
+  cost: 60
   useDuration: 0
   durationRange: {x: -1, y: -1}
   duration: -1

@@ -18,7 +18,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 82313c2d1fea8b74794141604605d041, type: 3}
   description: Attracts coins to you for 10 seconds
   currentAmount: 9
-  cost: 10
+  cost: 20
   useDuration: 1
   durationRange: {x: 10, y: 10}
   duration: 10
