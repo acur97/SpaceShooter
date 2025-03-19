@@ -19,7 +19,7 @@ MonoBehaviour:
   description: Electric shield that does not protect but deals damage when touched
     by the enemy, lasts 40 seconds
   currentAmount: 4
-  cost: 10
+  cost: 20
   useDuration: 1
   durationRange: {x: 10, y: 10}
   duration: -0.0020973925

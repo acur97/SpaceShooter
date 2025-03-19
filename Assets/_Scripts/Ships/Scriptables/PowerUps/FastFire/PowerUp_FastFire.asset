@@ -18,7 +18,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 696e13cb942813c4d811a91a1dede127, type: 3}
   description: Double firing speed that lasts 10 seconds
   currentAmount: 8
-  cost: 10
+  cost: 15
   useDuration: 1
   durationRange: {x: 10, y: 10}
   duration: 10
