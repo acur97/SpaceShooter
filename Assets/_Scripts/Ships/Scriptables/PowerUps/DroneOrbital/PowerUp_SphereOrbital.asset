@@ -18,7 +18,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   description: 
   currentAmount: 0
-  cost: 40
+  cost: 300
   useDuration: 1
   durationRange: {x: 30, y: 30}
   duration: 1.6121821

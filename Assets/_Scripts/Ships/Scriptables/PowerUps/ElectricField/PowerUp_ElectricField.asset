@@ -18,8 +18,8 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 554d922031d0a2e409148e2e17d5e2c2, type: 3}
   description: Electric shield that does not protect but deals damage when touched
     by the enemy, lasts 40 seconds
-  currentAmount: 4
-  cost: 20
+  currentAmount: 22
+  cost: 150
   useDuration: 1
   durationRange: {x: 10, y: 10}
   duration: -0.0020973925

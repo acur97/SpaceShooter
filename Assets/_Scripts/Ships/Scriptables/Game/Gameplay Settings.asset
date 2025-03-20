@@ -32,7 +32,7 @@ MonoBehaviour:
     Your progress will be saved on the local device (coins, purchased powers), that
     means that if you play on another device, you will not have your progress for
     the moment."
-  coinValue: 5
+  coinValue: 3
   numberOfAdRevivals: 1
   numberOfCoinsRevivals: 100
   playerHealth: 40

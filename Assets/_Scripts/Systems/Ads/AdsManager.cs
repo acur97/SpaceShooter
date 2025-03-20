@@ -7,51 +7,18 @@ using UnityEngine;
 public class AdsManager
 {
 #if Platform_Mobile
-    private static readonly RequestConfiguration requestConfiguration = new()
-    {
-        //        TestDeviceIds = new()
-        //            {
-        //                AdRequest.TestDeviceSimulator,
-        //#if UNITY_IPHONE
-        //                ""
-        //#elif UNITY_ANDROID
-        //                "bcbb08c53d80435abd0fbe4d9f37daed" // my "moto e(7) plus" ads id
-        //#endif
-        //            }
-    };
+    private const string bannerUnitId = "ca-app-pub-8907326292508524/3533112980";
+    public const string rewardedUnitId_Life = "ca-app-pub-8907326292508524/9668982787";
+    public const string rewardedUnitId_Coins = "ca-app-pub-8907326292508524/9624656261";
+
+    private static readonly RequestConfiguration requestConfiguration = new();
 
     private static bool isInitialized = false;
 
-    #region BottomBannerAd
-    private const string bannerUnitId = "ca-app-pub-8907326292508524/3533112980";
-
-    // test ads.
-    //#if UNITY_ANDROID
-    //    private const string bannerUnitId = "ca-app-pub-3940256099942544/6300978111";
-    //#elif UNITY_IPHONE
-    //    private const string bannerUnitId = "ca-app-pub-3940256099942544/2934735716";
-    //#else
-    //    private const string bannerUnitId = "unused";
-    //#endif
-
     private static BannerView _bannerView;
-    #endregion
-
-    #region RewardedAd
-    private const string rewardedUnitId = "ca-app-pub-8907326292508524/9668982787";
-
-    // test ads.
-    //#if UNITY_ANDROID
-    //    private const string rewardedUnitId = "ca-app-pub-3940256099942544/5224354917";
-    //#elif UNITY_IPHONE
-    //    private const string rewardedUnitId = "ca-app-pub-3940256099942544/1712485313";
-    //#else
-    //    private const string rewardedUnitId = "unused";
-    //#endif
-
     private static RewardedAd _rewardedAd;
+    public static Action<double> OnRewardedAdLoaded;
     public static Action<bool> OnRewardedAdCompleted;
-    #endregion
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Initialize()
@@ -59,6 +26,7 @@ public class AdsManager
         isInitialized = false;
         _bannerView = null;
         _rewardedAd = null;
+        OnRewardedAdLoaded = null;
         OnRewardedAdCompleted = null;
     }
 #endif
@@ -176,21 +144,21 @@ public class AdsManager
 
     #region RewardedAd
 #if Platform_Mobile
-    public static void PrepareRewardedAd()
+    public static void PrepareRewardedAd(string id)
     {
         _rewardedAd?.Destroy();
 
-        RewardedAd.Load(rewardedUnitId, new AdRequest(), RewardedAdLoad);
+        RewardedAd.Load(id, new AdRequest(), RewardedAdLoad);
     }
 
-    private static void PrepareInitRewardedAd()
+    public static void PrepareInitRewardedAd(string id)
     {
         _rewardedAd?.Destroy();
 
-        RewardedAd.Load(rewardedUnitId, new AdRequest(), RewardedAdLoadInit);
+        RewardedAd.Load(id, new AdRequest(), RewardedAdLoadInit);
     }
 
-    public static void InitRewardedAd()
+    public static void InitRewardedAd(string id)
     {
         UiManager.Instance.SetUi(UiType.Loading, true, 0.25f);
 
@@ -201,7 +169,7 @@ public class AdsManager
         }
         else
         {
-            PrepareInitRewardedAd();
+            PrepareInitRewardedAd(id);
         }
     }
 
@@ -221,6 +189,7 @@ public class AdsManager
         }
 
         Debug.Log($"Rewarded ad loaded with response : {ad.GetResponseInfo()}");
+        OnRewardedAdLoaded?.Invoke(ad.GetRewardItem().Amount);
         _rewardedAd = ad;
     }
 

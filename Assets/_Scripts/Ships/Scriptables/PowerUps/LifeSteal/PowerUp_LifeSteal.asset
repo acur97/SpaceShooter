@@ -18,8 +18,8 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: d19829ca738a58449910342c9b6d66ea, type: 3}
   description: Each hit to the enemy regenerates your life (10% maximum life), lasts
     10 seconds
-  currentAmount: 5
-  cost: 5
+  currentAmount: 12
+  cost: 40
   useDuration: 1
   durationRange: {x: 10, y: 10}
   duration: 10

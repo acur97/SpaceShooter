@@ -17,8 +17,8 @@ MonoBehaviour:
   powerName: Shield
   sprite: {fileID: 21300000, guid: d42e27be39c9f73488241f32700f3f5d, type: 3}
   description: Shield that absorbs 100 impacts or lasts 10 seconds
-  currentAmount: 2
-  cost: 20
+  currentAmount: 12
+  cost: 150
   useDuration: 1
   durationRange: {x: 10, y: 10}
   duration: 10

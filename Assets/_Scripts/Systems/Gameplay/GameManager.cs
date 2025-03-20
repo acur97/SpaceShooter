@@ -97,6 +97,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private PowerUpsManager powerUpsManager;
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private StoreManager storeManager;
 
     //[ContextMenu("Delete PlayerProgress")]
     //public void DeletePlayerProgress()
@@ -214,10 +215,22 @@ public class GameManager : MonoBehaviour
     }
 #endif
 
-    public void StartGameplayUi()
+    public void StartGameplayUi(bool forceStart = false)
     {
         if (hasStarted)
         {
+            return;
+        }
+
+        if (!forceStart && gameplayScriptable.selectedPowerUp == null)
+        {
+            PopupManager.Instance.OpenPopUp(
+                "Play without Power Up?",
+                "Play",
+                () => StartGameplayUi(true),
+                "Go to Store",
+                () => storeManager.SetUi(true));
+
             return;
         }
 
@@ -248,7 +261,7 @@ public class GameManager : MonoBehaviour
 
         adRevivals = (int)gameplayScriptable.numberOfAdRevivals;
 #if Platform_Mobile
-        AdsManager.PrepareRewardedAd();
+        AdsManager.PrepareRewardedAd(AdsManager.rewardedUnitId_Life);
 #endif
 
         scoreText.SetTextFormat(preScore, score);
@@ -505,7 +518,7 @@ public class GameManager : MonoBehaviour
     {
 #if Platform_Mobile
         AdsManager.OnRewardedAdCompleted += OnAdViewed;
-        AdsManager.InitRewardedAd();
+        AdsManager.InitRewardedAd(AdsManager.rewardedUnitId_Life);
 #else
         UpCoins(-(int)gameplayScriptable.numberOfCoinsRevivals);
         OnAdViewed(true);

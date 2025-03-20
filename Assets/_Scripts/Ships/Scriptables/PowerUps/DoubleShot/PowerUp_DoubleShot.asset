@@ -17,8 +17,8 @@ MonoBehaviour:
   powerName: Double Shot
   sprite: {fileID: 21300000, guid: bc90b6923f917b84d933bcb4916273c0, type: 3}
   description: Double shot that lasts 20 seconds
-  currentAmount: 15
-  cost: 10
+  currentAmount: 14
+  cost: 75
   useDuration: 1
   durationRange: {x: 20, y: 20}
   duration: 20

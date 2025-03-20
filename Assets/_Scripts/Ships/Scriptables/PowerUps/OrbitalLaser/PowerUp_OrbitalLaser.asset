@@ -18,8 +18,8 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 5e7bc6f4287b6244d80a82b61620ef02, type: 3}
   description: Devastating explosion that clears the entire screen of enemies, has
     pre-charge time
-  currentAmount: 10
-  cost: 400
+  currentAmount: 12
+  cost: 1200
   useDuration: 0
   durationRange: {x: -1, y: -1}
   duration: -1

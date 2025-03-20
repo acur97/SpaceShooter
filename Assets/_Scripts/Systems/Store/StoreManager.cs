@@ -93,6 +93,8 @@ public class StoreManager : MonoBehaviour
     private void OnDestroy()
     {
         onRefresh -= UpdateUi;
+        AdsManager.OnRewardedAdLoaded -= OnAdLoaded;
+        AdsManager.OnRewardedAdCompleted -= OnAdViewed;
     }
 
     private void InitPrefabs()
@@ -168,7 +170,7 @@ public class StoreManager : MonoBehaviour
         coinsTxt.SetTextFormat(_coinsUi, PlayerProgress.GetCoins());
     }
 
-    public void SetUi(bool on)
+    public void SetUi(bool on = true)
     {
         if (on)
         {
@@ -208,7 +210,8 @@ public class StoreManager : MonoBehaviour
 
         buyBtn.onClick.RemoveAllListeners();
         buyBtn.onClick.AddListener(() => BuyPowerUp());
-        buyBtn.interactable = PlayerProgress.GetCoins() >= showingPowerUp.cost;
+        //buyBtn.interactable = PlayerProgress.GetCoins() >= showingPowerUp.cost;
+        buyBtn.interactable = true;
 
         selectTgl.SetIsOnWithoutNotify(gameplayScriptable.selectedPowerUp == showingPowerUp);
         onTgl.SetActive(selectTgl.isOn);
@@ -218,12 +221,58 @@ public class StoreManager : MonoBehaviour
 
     private void BuyPowerUp()
     {
+        if (PlayerProgress.GetCoins() < showingPowerUp.cost)
+        {
+            PopupManager.Instance.OpenPopUp(
+                "Watch an ad for ... coins?",
+                "Close",
+                () =>
+                {
+                    AdsManager.OnRewardedAdLoaded -= OnAdLoaded;
+                    PopupManager.Instance.ClosePopUp();
+                },
+                "loading...",
+                null,
+                false);
+
+            AdsManager.OnRewardedAdLoaded += OnAdLoaded;
+            AdsManager.PrepareRewardedAd(AdsManager.rewardedUnitId_Coins);
+            return;
+        }
+
         PlayerProgress.SetCoins(-(int)showingPowerUp.cost);
         showingPowerUp.currentAmount++;
-        buyBtn.interactable = PlayerProgress.GetCoins() >= showingPowerUp.cost;
+        //buyBtn.interactable = PlayerProgress.GetCoins() >= showingPowerUp.cost;
+        buyBtn.interactable = true;
         selectTgl.interactable = showingPowerUp.currentAmount > 0;
 
         onRefresh?.Invoke();
+    }
+
+    private void OnAdLoaded(double amount)
+    {
+        AdsManager.OnRewardedAdLoaded -= OnAdLoaded;
+
+        PopupManager.Instance.UpdateText($"Watch an ad for {amount} coins?");
+        PopupManager.Instance.UpdateRightText("Watch Ad");
+        PopupManager.Instance.UpdateRightAction(() =>
+        {
+            AdsManager.OnRewardedAdCompleted += OnAdViewed;
+            AdsManager.InitRewardedAd(AdsManager.rewardedUnitId_Coins);
+
+            PopupManager.Instance.ClosePopUp();
+        });
+    }
+
+    private void OnAdViewed(bool rewarded)
+    {
+        AdsManager.OnRewardedAdCompleted -= OnAdViewed;
+
+        if (rewarded)
+        {
+            GameManager.Instance.UpCoins(10);
+            UpdateUi();
+        }
     }
 
     public void SelectCustom(ShipScriptable ship)
@@ -250,7 +299,8 @@ public class StoreManager : MonoBehaviour
 
         buyBtn.onClick.RemoveAllListeners();
         buyBtn.onClick.AddListener(() => BuyCustom());
-        buyBtn.interactable = PlayerProgress.GetCoins() >= showingShip.cost && !showingShip.owned;
+        //buyBtn.interactable = PlayerProgress.GetCoins() >= showingShip.cost && !showingShip.owned;
+        buyBtn.interactable = true;
 
         selectTgl.SetIsOnWithoutNotify(gameplayScriptable.selectedCustoms == showingShip);
         onTgl.SetActive(selectTgl.isOn);
