@@ -44,12 +44,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c39229dcca27c37439e844927d3a24b8, type: 2}
   - {fileID: 11400000, guid: 9ed78d67e65d3594eae5fc78b6f006c3, type: 2}
   - {fileID: 11400000, guid: 2f63fb46e2f815841b152e0343debc7f, type: 2}
+  - {fileID: 11400000, guid: 9469afd8af4a9714a8e0fa5c648ad0e2, type: 2}
+  - {fileID: 11400000, guid: 00a169ac6d4f79c49aad49ab02bd8bc7, type: 2}
   infiniteLevels:
   - {fileID: 11400000, guid: 66b5210a10c7f904fb786900aeae9e8c, type: 2}
   bordersShip: {fileID: 11400000, guid: bb511d2af2e512945b19b053491f12b7, type: 2}
   timeInBorder: 2
   borderLimit: 0.3
-  countBorders: 1.8797747
+  countBorders: 1.0392718
   customs:
   - {fileID: 11400000, guid: bf566af108c065646bec685895b21a22, type: 2}
   - {fileID: 11400000, guid: b6c96e38cd1d7aa4e8f32e39e4412a8f, type: 2}
@@ -79,7 +81,7 @@ MonoBehaviour:
   selectedPowerUp: {fileID: 0}
   progress:
     playerName: 
-    coins: 5360
+    coins: 5410
     powerUpAmounts: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
     powerUpIndex: -1
     customsOwneds: 01000100000001
