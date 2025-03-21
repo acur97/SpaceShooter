@@ -131,7 +131,10 @@ public class PowerUpsManager : MonoBehaviour
             }
         }
 
-        AnalyticsManager.Log_SelectPowerUp(powerUp.type, _fromStore);
+        if (powerUp != null)
+        {
+            AnalyticsManager.Log_SelectPowerUp(powerUp.type, _fromStore);
+        }
     }
 
     public void ResetPowerUp()

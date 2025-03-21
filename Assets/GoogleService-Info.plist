@@ -26,5 +26,7 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:802342611622:ios:869d3d3ab4c39d34f7a267</string>
+	<key>DATABASE_URL</key>
+	<string>https://polygonus-spaceshooter-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

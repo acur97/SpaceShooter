@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "802342611622",
+    "firebase_url": "https://polygonus-spaceshooter-default-rtdb.firebaseio.com",
     "project_id": "polygonus-spaceshooter",
     "storage_bucket": "polygonus-spaceshooter.firebasestorage.app"
   },
