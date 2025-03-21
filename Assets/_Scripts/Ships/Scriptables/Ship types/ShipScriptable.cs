@@ -45,7 +45,7 @@ public class ShipScriptable : ScriptableObject
     public int deathScore = 8;
     public Enums.Behaviour behaviour;
     public bool directBehaviour = false;
-    public float directLine = -0.8f;
+    public float directLine = -0.9f;
     public float behaviourMathfSin = 1.5f;
     public bool behaviourMathfInverted = false;
     [Space]

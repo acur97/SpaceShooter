@@ -8,6 +8,8 @@ public class PopupManager : MonoBehaviour
 {
     public static PopupManager Instance;
 
+    [ReadOnly] public bool isOpen = false;
+
     [Header("References")]
     [SerializeField] private GameObject root;
     [SerializeField] private TextMeshProUGUI text;
@@ -36,6 +38,8 @@ public class PopupManager : MonoBehaviour
 
     public void OpenPopUp(string _text, string _leftText = "Accept", Action _leftAction = null, string _rightText = "Cancel", Action _rightAction = null, bool _autoClose = true)
     {
+        isOpen = true;
+
         text.text = _text;
 
         leftBtnText.text = _leftText;
@@ -59,6 +63,8 @@ public class PopupManager : MonoBehaviour
 
     public void ClosePopUp()
     {
+        isOpen = false;
+
         leftButton.onClick.RemoveAllListeners();
         rightButton.onClick.RemoveAllListeners();
 

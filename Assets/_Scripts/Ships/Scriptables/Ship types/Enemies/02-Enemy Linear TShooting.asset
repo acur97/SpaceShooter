@@ -43,10 +43,10 @@ MonoBehaviour:
   deathScore: 2
   behaviour: 0
   directBehaviour: 0
-  directLine: -0.8
+  directLine: -0.9
   behaviourMathfSin: 2
   behaviourMathfInverted: 0
   _timeToContinue: 0
   timeToContinue: -1
   countForGroup: 1
-  spawnIndex: 9
+  spawnIndex: 5

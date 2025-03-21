@@ -35,8 +35,8 @@ MonoBehaviour:
   coinValue: 3
   numberOfAdRevivals: 1
   numberOfCoinsRevivals: 100
-  playerHealth: 40
-  playerHealthInfinite: 80
+  playerHealth: 50
+  playerHealthInfinite: 100
   timeScaleIncrease: 0.1
   scoreScaleIncrease: 2
   levels:
@@ -51,7 +51,7 @@ MonoBehaviour:
   bordersShip: {fileID: 11400000, guid: bb511d2af2e512945b19b053491f12b7, type: 2}
   timeInBorder: 2
   borderLimit: 0.3
-  countBorders: 1.0392718
+  countBorders: 0.2452451
   customs:
   - {fileID: 11400000, guid: bf566af108c065646bec685895b21a22, type: 2}
   - {fileID: 11400000, guid: b6c96e38cd1d7aa4e8f32e39e4412a8f, type: 2}
@@ -60,7 +60,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b7eb3c78d89dc704cb74cb73c3f70915, type: 2}
   - {fileID: 11400000, guid: 90abd9d671ceb00468dbe6445babe6b5, type: 2}
   - {fileID: 11400000, guid: 9ec9fa9ef84aac9439e8b369827bb023, type: 2}
-  selectedCustoms: {fileID: 11400000, guid: 31b487c0d5d742948add83cadf9276d4, type: 2}
+  selectedCustoms: {fileID: 11400000, guid: bf566af108c065646bec685895b21a22, type: 2}
   powerUps:
   - {fileID: 11400000, guid: 2f5b416c7307fdd449a39ac6d6daa6c1, type: 2}
   - {fileID: 11400000, guid: 0c12553f632fcbb4ea13d2c948d5502b, type: 2}
@@ -80,9 +80,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6cd785201aceb1e4a94957e463fb0bd7, type: 2}
   selectedPowerUp: {fileID: 0}
   progress:
-    playerName: 
-    coins: 5410
-    powerUpAmounts: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    playerName: Dan
+    coins: 0
+    powerUpAmounts: 01000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
     powerUpIndex: -1
-    customsOwneds: 01000100000001
-    customsIndex: 2
+    customsOwneds: 01000000000000
+    customsIndex: 0

@@ -43,7 +43,7 @@ MonoBehaviour:
   deathScore: 8
   behaviour: 4
   directBehaviour: 0
-  directLine: -0.8
+  directLine: -0.9
   behaviourMathfSin: 2
   behaviourMathfInverted: 0
   _timeToContinue: 0

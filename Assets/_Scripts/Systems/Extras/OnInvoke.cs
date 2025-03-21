@@ -25,7 +25,7 @@ public class OnInvoke : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown(Inputs.Cancel))
+        if (Input.GetButtonDown(Inputs.Cancel) && !PopupManager.Instance.isOpen)
         {
             OnCancelEvent.Invoke();
         }

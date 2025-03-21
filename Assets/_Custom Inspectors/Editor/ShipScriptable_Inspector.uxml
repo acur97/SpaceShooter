@@ -42,7 +42,7 @@
         <ui:EnumField label="Movement Behaviour" binding-path="behaviour" tooltip="Type of movement/behavior" type="Enums+Behaviour, Assembly-CSharp" style="-unity-font-style: normal;" />
         <ui:VisualElement style="flex-grow: 1; flex-direction: row; margin-bottom: 0; margin-top: 0;">
             <ui:Toggle label="Direct" binding-path="directBehaviour" tooltip="The enemy stays in the line forever or for the time in To Continue" name="Toggle_direct" style="-unity-font-style: normal;" />
-            <ui:Slider value="-0.8" high-value="1" show-input-field="true" low-value="-1" binding-path="directLine" tooltip="Line position, from top (-1) center (0) to bottom (1)" name="Slider_direct" style="flex-grow: 100; margin-left: 8px; -unity-font-style: normal;" />
+            <ui:Slider value="-0.9" high-value="1" show-input-field="true" low-value="-1" binding-path="directLine" tooltip="Line position, from top (-1) center (0) to bottom (1)" name="Slider_direct" style="flex-grow: 100; margin-left: 8px; -unity-font-style: normal;" />
         </ui:VisualElement>
         <ui:VisualElement style="flex-grow: 1; flex-direction: row; margin-bottom: 1px; align-items: center; -unity-font-style: normal;">
             <ui:Toggle label="Time to continue" binding-path="_timeToContinue" tooltip="Waiting time for an enemy that remains in the line, so that it can continue moving" name="Toggle_timeToContinue" style="align-items: flex-end; margin-bottom: 3px;" />

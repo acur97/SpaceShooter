@@ -228,6 +228,8 @@ public class StoreManager : MonoBehaviour
                 "Close",
                 () =>
                 {
+                    buyBtn.Select();
+
                     AdsManager.OnRewardedAdLoaded -= OnAdLoaded;
                     PopupManager.Instance.ClosePopUp();
                 },
@@ -248,7 +250,7 @@ public class StoreManager : MonoBehaviour
 
         onRefresh?.Invoke();
 
-        AnalyticsManager.Log_BuyPowerUp(showingPowerUp.type);
+        AnalyticsManager.Log_BuyPowerUp(showingPowerUp.type, showingPowerUp.cost);
     }
 
     private void OnAdLoaded(double amount)

@@ -22,7 +22,7 @@ public class AnalyticsManager
             new("group", RoundsController.Instance.groupCount),
             new("score", GameManager.Instance.score),
             new("revived", GameManager.Instance.isRevived.ToString()),
-            new("coins_collected", PlayerProgress.GetCoins()),
+            new("earn_virtual_currency", PlayerProgress.GetCoins()),
             new("time_played", GameManager.Instance.finalTimeOfGameplay)
         });
     }
@@ -36,9 +36,13 @@ public class AnalyticsManager
         });
     }
 
-    public static void Log_BuyPowerUp(PowerUpsManager.PowerUpType type)
+    public static void Log_BuyPowerUp(PowerUpsManager.PowerUpType type, uint cost)
     {
-        FirebaseAnalytics.LogEvent("power_up", "buy", type.ToString());
+        FirebaseAnalytics.LogEvent("power_up", new Parameter[]
+        {
+            new("buy", type.ToString()),
+            new("spend_virtual_currency", cost)
+        });
     }
 
     public static void Log_SelectPowerUp(PowerUpsManager.PowerUpType type, bool fromStore)

@@ -30,6 +30,7 @@ MonoBehaviour:
   speed: 4
   health: 2
   bulletSpeed: 20
+  fireTime: 0.5
   coolDown: 0.5
   _spaceCoolDown: 1
   spaceCooldown: 0.5
@@ -41,8 +42,11 @@ MonoBehaviour:
   enemyCollision: 1
   deathScore: 1
   behaviour: 2
+  directBehaviour: 0
+  directLine: -0.9
   behaviourMathfSin: 2
+  behaviourMathfInverted: 0
   _timeToContinue: 0
   timeToContinue: -1
   countForGroup: 1
-  spawnIndex: 5
+  spawnIndex: 9

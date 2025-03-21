@@ -8735,7 +8735,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 96
+  m_fontSize: 61.2
   m_fontSizeBase: 59.4
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -9220,6 +9220,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 700575096}
+  - component: {fileID: 700575097}
   m_Layer: 5
   m_Name: Root
   m_TagString: Untagged
@@ -9248,6 +9249,42 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &700575097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700575095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46e0c7471804fa49a557e0972852959, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInvokeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnEnableEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1288637549}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: Select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDisableEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCancelEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &705991779
 GameObject:
   m_ObjectHideFlags: 0
@@ -10959,10 +10996,10 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 934377357}
-    m_SelectOnDown: {fileID: 147629409}
-    m_SelectOnLeft: {fileID: 1780347286}
-    m_SelectOnRight: {fileID: 1802675547}
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 1288637549}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -10987,19 +11024,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 850819523}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1758410992}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: StartGameplayUi
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   scale: 1.05
 --- !u!114 &850819523
 MonoBehaviour:
@@ -17539,10 +17564,10 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 934377357}
-    m_SelectOnDown: {fileID: 147629409}
-    m_SelectOnLeft: {fileID: 1780347286}
-    m_SelectOnRight: {fileID: 1802675547}
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 850819522}
+    m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -17567,19 +17592,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1288637550}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1758410992}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: StartGameplayUi
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   scale: 1.05
 --- !u!114 &1288637550
 MonoBehaviour:
@@ -18853,6 +18866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 228137da84fda5e46bab0c200be043cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpen: 0
   root: {fileID: 700575095}
   text: {fileID: 112103393}
   leftButton: {fileID: 850819522}
@@ -23742,6 +23756,8 @@ MonoBehaviour:
   isPlaying: 0
   hasEnded: 0
   leftForNextGroup: -1
+  finalTimeOfGameplay: 0
+  isRevived: 0
   scoreText: {fileID: 1104863391}
   score: 0
   endScore: {fileID: 1327159356}
@@ -23798,6 +23814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   editorMobile: 0
+  eventSystem: {fileID: 0}
   fireDown: 0
   fireUp: 0
   move: {x: 0, y: 0}

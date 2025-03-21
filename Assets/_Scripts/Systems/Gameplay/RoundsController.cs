@@ -50,6 +50,8 @@ public class RoundsController : MonoBehaviour
 
     public void Init()
     {
+        Random.InitState(DateTime.Now.Millisecond);
+
         Instance = this;
 
         SetMode(Convert.ToBoolean(PlayerPrefs.GetInt(lastLevelType, 0)));
