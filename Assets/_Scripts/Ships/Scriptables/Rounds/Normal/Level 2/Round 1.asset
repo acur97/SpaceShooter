@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d74892c7c2b61a40a56faac19d7f68c, type: 3}
+  m_Name: Round 1
+  m_EditorClassIdentifier: 
+  groups:
+  - chained: 0
+    timeToStart: 1
+    spawnType: 0
+    customFloat: 0
+    minTimeBetweenSpawn: 1
+    maxTimeBetweenSpawn: 1
+    count: 6
+    ship: {fileID: 11400000, guid: 2427ee0799b19614195bb81a3a39da57, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 1
+    timeToStart: 4
+    spawnType: 0
+    customFloat: 2
+    minTimeBetweenSpawn: 1
+    maxTimeBetweenSpawn: 1.6
+    count: 10
+    ship: {fileID: 11400000, guid: 56a9a8945246d264abaf61fd48c30ab4, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 1
+    timeToStart: 10
+    spawnType: 4
+    customFloat: 2
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+    count: 2
+    ship: {fileID: 11400000, guid: 94224e65a17f06340975b5a083eeb18e, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 1
+    timeToStart: 12
+    spawnType: 4
+    customFloat: -2
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+    count: 2
+    ship: {fileID: 11400000, guid: 94224e65a17f06340975b5a083eeb18e, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 1
+    timeToStart: 14
+    spawnType: 4
+    customFloat: 2
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+    count: 2
+    ship: {fileID: 11400000, guid: 94224e65a17f06340975b5a083eeb18e, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 1
+    timeToStart: 16
+    spawnType: 4
+    customFloat: 2
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+    count: 2
+    ship: {fileID: 11400000, guid: 94224e65a17f06340975b5a083eeb18e, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 1
+    timeToStart: 18
+    spawnType: 4
+    customFloat: 2
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+    count: 2
+    ship: {fileID: 11400000, guid: 94224e65a17f06340975b5a083eeb18e, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 0
+    timeToStart: 1
+    spawnType: 4
+    customFloat: 2
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+    count: 2
+    ship: {fileID: 11400000, guid: 94224e65a17f06340975b5a083eeb18e, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 1
+    timeToStart: 2
+    spawnType: 0
+    customFloat: 2
+    minTimeBetweenSpawn: 1
+    maxTimeBetweenSpawn: 1.8
+    count: 8
+    ship: {fileID: 11400000, guid: a9dfa9d0efff7f2409796c610bb18b38, type: 2}
+    randomPowerUp: 1
+    spawnPowerUp: {fileID: 0}

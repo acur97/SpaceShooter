@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57881a7a4b18dff4b82ce561559b9591, type: 3}
+  m_Name: 05 - Enemy Circual Shooting 1
+  m_EditorClassIdentifier: 
+  editorCustom: 1
+  editorStore: 1
+  editorShip: 1
+  editorBullet: 1
+  editorEnemy: 1
+  editorNotes: 1
+  notes: 'Waves Singles Shooting '
+  color: {r: 0.7379107, g: 0.06480328, b: 0.095307484, a: 1}
+  name: 
+  description: 
+  owned: 0
+  cost: 0
+  sprite: {fileID: 21300000, guid: 1f4f4209b0d0c794ea3c4d133cb59caf, type: 3}
+  spriteScale: {x: 0.2, y: 0.2, z: 1}
+  hue: 0
+  speed: 0.5
+  health: 8
+  bulletSpeed: 4
+  fireTime: 1
+  coolDown: 0.6
+  _spaceCoolDown: 1
+  spaceCooldown: 0.4
+  _bulletTime: 0
+  bulletTime: -1
+  attack: 0
+  startRotation: 0
+  rotationSpeed: 20
+  enemyCollision: 1
+  deathScore: 3
+  behaviour: 0
+  directBehaviour: 1
+  directLine: 0
+  behaviourMathfSin: 2
+  behaviourMathfInverted: 0
+  _timeToContinue: 1
+  timeToContinue: 20
+  countForGroup: 1
+  spawnIndex: 3

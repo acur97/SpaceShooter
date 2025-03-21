@@ -21,6 +21,8 @@ MonoBehaviour:
     maxTimeBetweenSpawn: 1.5
     count: 10
     ship: {fileID: 11400000, guid: 4f1616953502d0441a34f045a3a03102, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
   - chained: 0
     timeToStart: 2
     spawnType: 3
@@ -29,6 +31,8 @@ MonoBehaviour:
     maxTimeBetweenSpawn: 0
     count: 10
     ship: {fileID: 11400000, guid: d4c36c4630e5fc8459e69f8b499be7fc, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
   - chained: 0
     timeToStart: 2
     spawnType: 0
@@ -37,3 +41,5 @@ MonoBehaviour:
     maxTimeBetweenSpawn: 1
     count: 20
     ship: {fileID: 11400000, guid: 71b658ed0cf5bb743a1a6055a81a876b, type: 2}
+    randomPowerUp: 1
+    spawnPowerUp: {fileID: 0}
