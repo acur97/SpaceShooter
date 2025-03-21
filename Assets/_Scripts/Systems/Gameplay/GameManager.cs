@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
     private float prevTimeScale;
     private int prevLeftForNextGroup;
     private int adRevivals;
+    private float timeDelayStartup = 0f;
+    [ReadOnly] public float finalTimeOfGameplay = 0f;
+    [ReadOnly] public bool isRevived = false;
 
     [Header("Score")]
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -273,6 +276,8 @@ public class GameManager : MonoBehaviour
         audioManager.PlaySound(Enums.AudioType.Start, 2f);
 
         AdsManager.DestroyBottomBannerAd();
+
+        AnalyticsManager.Log_LevelStart();
     }
 
     public void StartGame()
@@ -289,6 +294,8 @@ public class GameManager : MonoBehaviour
         {
             roundsController.StartRound();
         }
+
+        timeDelayStartup = Time.realtimeSinceStartup - finalTimeOfGameplay;
 
         Vibration.InitVibrate();
     }
@@ -326,6 +333,7 @@ public class GameManager : MonoBehaviour
         postProcessingController.Init();
         powerUpsManager.Init();
         playerController.Init(gameplayScriptable.selectedCustoms);
+        AnalyticsManager.Init();
 
         Time.timeScale = 1;
         audioManager.SetMasterVolume(1f);
@@ -481,6 +489,8 @@ public class GameManager : MonoBehaviour
         prevLeftForNextGroup = leftForNextGroup;
         leftForNextGroup = -1;
 
+        finalTimeOfGameplay = Time.realtimeSinceStartup - timeDelayStartup;
+
 #if Platform_Mobile
         if (hasRevival && adRevivals > 0)
         {
@@ -502,16 +512,23 @@ public class GameManager : MonoBehaviour
 #endif
         else
         {
-            adLifePanel.SetActive(false);
-            adLifeEndPanel.SetActive(true);
-
-            PostProcessingController.Instance.SetVolumeHealth(0f);
+            FinalizeGameplay();
         }
 
         powerUpsManager.ResetPowerUp();
         PlayerProgress.SaveAll();
 
         Vibration.InitVibrate();
+    }
+
+    public void FinalizeGameplay()
+    {
+        adLifePanel.SetActive(false);
+        adLifeEndPanel.SetActive(true);
+
+        PostProcessingController.Instance.SetVolumeHealth(0f);
+
+        AnalyticsManager.Log_LevelEnd();
     }
 
     public void WatchAdForLife()
@@ -565,6 +582,8 @@ public class GameManager : MonoBehaviour
             leftForNextGroup = prevLeftForNextGroup;
 
             BulletsPool.Instance.ResetBullets();
+
+            isRevived = true;
 
             anim_count.SetTrigger(_init);
         }

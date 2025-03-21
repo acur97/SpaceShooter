@@ -35,9 +35,9 @@ public class RoundsController : MonoBehaviour
     [SerializeField] private GameplayScriptable gameplayScriptable;
 
     [Space]
-    [SerializeField, ReadOnly] private int levelCount = 0;
-    [SerializeField, ReadOnly] private int roundCount = -1;
-    [SerializeField, ReadOnly] private int groupCount = -1;
+    [SerializeField, ReadOnly] public int levelCount = 0;
+    [SerializeField, ReadOnly] public int roundCount = -1;
+    [SerializeField, ReadOnly] public int groupCount = -1;
     private int prevLevelCount;
     private int prevRoundCount;
     private int prevGroupCount;

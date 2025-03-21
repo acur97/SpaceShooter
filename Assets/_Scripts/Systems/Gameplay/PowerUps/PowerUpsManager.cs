@@ -130,6 +130,8 @@ public class PowerUpsManager : MonoBehaviour
                 icon.fillAmount = 1;
             }
         }
+
+        AnalyticsManager.Log_SelectPowerUp(powerUp.type, _fromStore);
     }
 
     public void ResetPowerUp()
@@ -137,14 +139,14 @@ public class PowerUpsManager : MonoBehaviour
         gameplayScriptable.selectedPowerUp = lastPowerUp;
     }
 
-    public void AddPowerUp(PowerUpBase type)
+    public void AddPowerUp(PowerUpBase powerUp)
     {
         if (currentPowerUp != null)
         {
             return;
         }
 
-        currentPowerUp = type;
+        currentPowerUp = powerUp;
         if (fromStore)
         {
             currentPowerUp.currentAmount--;
@@ -152,32 +154,32 @@ public class PowerUpsManager : MonoBehaviour
         }
         gameplayScriptable.selectedPowerUp = null;
 
-        type.shipBase = PlayerController.Instance;
+        powerUp.shipBase = PlayerController.Instance;
 
-        if (type.useDuration)
+        if (powerUp.useDuration)
         {
-            type.CountDuration().Forget();
+            powerUp.CountDuration().Forget();
         }
 
-        type.OnActivate();
+        powerUp.OnActivate();
 
-        if (type.clip_activate.audioClip != null)
+        if (powerUp.clip_activate.audioClip != null)
         {
-            AudioManager.Instance.PlaySound(type.clip_activate.audioClip, type.clip_activate.audioVolume, Enums.SourceType.PowerUps);
+            AudioManager.Instance.PlaySound(powerUp.clip_activate.audioClip, powerUp.clip_activate.audioVolume, Enums.SourceType.PowerUps);
         }
 
-        if (type.clip_constant.audioClip != null && type.waitForActivate)
+        if (powerUp.clip_constant.audioClip != null && powerUp.waitForActivate)
         {
-            AudioManager.Instance.PlaySoundLoopDelayed(type.clip_constant.audioClip, type.clip_activate.audioClip.length, type.clip_constant.audioVolume, Enums.SourceType.PowerUpsLoop).Forget();
+            AudioManager.Instance.PlaySoundLoopDelayed(powerUp.clip_constant.audioClip, powerUp.clip_activate.audioClip.length, powerUp.clip_constant.audioVolume, Enums.SourceType.PowerUpsLoop).Forget();
         }
-        else if (type.clip_constant.audioClip != null)
+        else if (powerUp.clip_constant.audioClip != null)
         {
-            AudioManager.Instance.PlaySoundLoop(type.clip_constant.audioClip, type.clip_constant.audioVolume, Enums.SourceType.PowerUpsLoop);
+            AudioManager.Instance.PlaySoundLoop(powerUp.clip_constant.audioClip, powerUp.clip_constant.audioVolume, Enums.SourceType.PowerUpsLoop);
         }
 
-        if (type.useDuration)
+        if (powerUp.useDuration)
         {
-            maxValue = type.duration;
+            maxValue = powerUp.duration;
         }
         else
         {
@@ -185,24 +187,26 @@ public class PowerUpsManager : MonoBehaviour
         }
 
         controls.powerBtn.gameObject.SetActive(false);
+
+        AnalyticsManager.Log_UsePowerUp(powerUp.type);
     }
 
-    public void RemovePowerUp(PowerUpBase type)
+    public void RemovePowerUp(PowerUpBase powerUp)
     {
-        if (type.clip_deactivate.audioClip != null)
+        if (powerUp.clip_deactivate.audioClip != null)
         {
-            AudioManager.Instance.PlaySound(type.clip_deactivate.audioClip, type.clip_deactivate.audioVolume, Enums.SourceType.PowerUps);
+            AudioManager.Instance.PlaySound(powerUp.clip_deactivate.audioClip, powerUp.clip_deactivate.audioVolume, Enums.SourceType.PowerUps);
         }
-        if (type.clip_constant.audioClip != null)
+        if (powerUp.clip_constant.audioClip != null)
         {
             AudioManager.Instance.StopSource(Enums.SourceType.PowerUpsLoop);
         }
 
-        type.OnDeactivate();
+        powerUp.OnDeactivate();
 
         currentPowerUp = null;
 
-        type.Dispose();
+        powerUp.Dispose();
 
         icon.enabled = false;
     }

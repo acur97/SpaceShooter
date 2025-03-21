@@ -247,6 +247,8 @@ public class StoreManager : MonoBehaviour
         selectTgl.interactable = showingPowerUp.currentAmount > 0;
 
         onRefresh?.Invoke();
+
+        AnalyticsManager.Log_BuyPowerUp(showingPowerUp.type);
     }
 
     private void OnAdLoaded(double amount)
