@@ -58,7 +58,6 @@ public class GameManager : MonoBehaviour
 
     [Header("Gameplay")]
     [SerializeField] private Animator anim_count;
-    private const string _init = "Init";
 
     [Header("Screen Borders")]
     [SerializeField] private Transform borders_top;
@@ -271,7 +270,7 @@ public class GameManager : MonoBehaviour
         coinsText.SetTextFormat(preCoins, PlayerProgress.GetCoins());
 
         uiManager.SetUi(UiType.Gameplay, true);
-        uiManager.SetUi(UiType.Select, false, 1, () => anim_count.SetTrigger(_init));
+        uiManager.SetUi(UiType.Select, false, 1, () => anim_count.SetTrigger(AnimationParameters.Init));
 
         audioManager.PlaySound(Enums.AudioType.Start, 2f);
 
@@ -585,7 +584,7 @@ public class GameManager : MonoBehaviour
 
             isRevived = true;
 
-            anim_count.SetTrigger(_init);
+            anim_count.SetTrigger(AnimationParameters.Init);
         }
     }
 

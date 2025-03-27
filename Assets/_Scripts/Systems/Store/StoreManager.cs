@@ -93,8 +93,10 @@ public class StoreManager : MonoBehaviour
     private void OnDestroy()
     {
         onRefresh -= UpdateUi;
+#if Platform_Mobile
         AdsManager.OnRewardedAdLoaded -= OnAdLoaded;
         AdsManager.OnRewardedAdCompleted -= OnAdViewed;
+#endif
     }
 
     private void InitPrefabs()
@@ -230,15 +232,19 @@ public class StoreManager : MonoBehaviour
                 {
                     buyBtn.Select();
 
+#if Platform_Mobile
                     AdsManager.OnRewardedAdLoaded -= OnAdLoaded;
+#endif
                     PopupManager.Instance.ClosePopUp();
                 },
                 "loading...",
                 null,
                 false);
 
+#if Platform_Mobile
             AdsManager.OnRewardedAdLoaded += OnAdLoaded;
             AdsManager.PrepareRewardedAd(AdsManager.rewardedUnitId_Coins);
+#endif
             return;
         }
 
@@ -255,6 +261,7 @@ public class StoreManager : MonoBehaviour
 
     private void OnAdLoaded(double amount)
     {
+#if Platform_Mobile
         AdsManager.OnRewardedAdLoaded -= OnAdLoaded;
 
         PopupManager.Instance.UpdateText($"Watch an ad for {amount} coins?");
@@ -266,11 +273,14 @@ public class StoreManager : MonoBehaviour
 
             PopupManager.Instance.ClosePopUp();
         });
+#endif
     }
 
     private void OnAdViewed(bool rewarded)
     {
+#if Platform_Mobile
         AdsManager.OnRewardedAdCompleted -= OnAdViewed;
+#endif
 
         if (rewarded)
         {

@@ -1,5 +1,12 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Round ", menuName = "Gameplay/Level design/Round", order = 1)]
+public class RoundScriptable : ScriptableObject
+{
+    public Group[] groups;
+    [TextArea] public string notes;
+}
+
 [System.Serializable]
 public struct Group
 {
@@ -17,10 +24,4 @@ public struct Group
     [Space]
     public bool randomPowerUp;
     public PowerUpBase spawnPowerUp;
-}
-
-[CreateAssetMenu(fileName = "Round ", menuName = "Gameplay/Level design/Round", order = 1)]
-public class RoundScriptable : ScriptableObject
-{
-    public Group[] groups;
 }

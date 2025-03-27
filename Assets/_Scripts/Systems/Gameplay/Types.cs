@@ -38,6 +38,12 @@ public class MaterialProperties
 }
 
 [Preserve]
+public class AnimationParameters
+{
+    public static readonly int Init = Animator.StringToHash("Init");
+}
+
+[Preserve]
 public class UiCommonTexts
 {
     public const string Free = "free";
