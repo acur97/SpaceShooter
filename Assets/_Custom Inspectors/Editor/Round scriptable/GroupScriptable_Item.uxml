@@ -1,0 +1,23 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <engine:Foldout text="Group" binding-path="groupEnable">
+        <engine:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.1); padding-bottom: 2px; margin-left: -20px; margin-right: 2px; padding-right: 6px; margin-top: 0; margin-bottom: 0;">
+            <engine:Toggle label="Chained" binding-path="chained" tooltip="The &quot;Time to start&quot; starts counting together with the previous group" />
+            <engine:FloatField label="Time to start" binding-path="timeToStart" tooltip="Time to start this group when the previous one ends" />
+            <engine:EnumField label="Spawn type" value="Random" type="Enums+SpawnType, Assembly-CSharp" binding-path="spawnType" tooltip="How the enemy appears" />
+            <engine:Slider label="Custom float" value="0" high-value="2" binding-path="customFloat" low-value="-2" show-input-field="true" tooltip="Float custom (Especific, etc)" />
+            <engine:VisualElement style="flex-direction: row; align-items: center;">
+                <engine:Label text="Time between spawns" tooltip="Random time between each enemy&apos;s appearance" style="padding-right: 15px; padding-left: 4px;" />
+                <engine:FloatField binding-path="minTimeBetweenSpawn" tooltip="Min" style="flex-grow: 100;" />
+                <engine:FloatField binding-path="maxTimeBetweenSpawn" tooltip="Max" style="flex-grow: 100;" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+        <engine:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.1); margin-top: 10px; padding-top: 3px; padding-bottom: 3px; margin-left: -20px; padding-right: 6px; margin-right: 2px;">
+            <engine:FloatField label="Count" binding-path="count" tooltip="Number of enemies" style="margin-top: 0;" />
+            <editor:ObjectField label="Ship" type="ShipScriptable, Assembly-CSharp" binding-path="ship" tooltip="Enemy" />
+        </engine:VisualElement>
+        <engine:VisualElement style="background-color: rgba(0, 0, 0, 0.1); margin-top: 10px; margin-bottom: 10px; padding-top: 0; padding-bottom: 2px; margin-right: 2px; margin-left: -20px; padding-right: 6px;">
+            <editor:ObjectField type="PowerUpBase, Assembly-CSharp" binding-path="spawnPowerUp" tooltip="PowerUp to spawn at the end of this group (empty means none will spawn)" label="PowerUp" />
+            <engine:Toggle label="Random?" binding-path="randomPowerUp" tooltip="Use a random PowerUp from all the existing ones?" />
+        </engine:VisualElement>
+    </engine:Foldout>
+</engine:UXML>

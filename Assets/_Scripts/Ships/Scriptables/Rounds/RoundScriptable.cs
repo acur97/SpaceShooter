@@ -4,12 +4,18 @@ using UnityEngine;
 public class RoundScriptable : ScriptableObject
 {
     public Group[] groups;
-    [TextArea] public string notes;
+
+    // Editor
+    public bool editorNotes = true;
+    public string notes;
 }
 
 [System.Serializable]
 public struct Group
 {
+    // Editor
+    public bool groupEnable;
+
     public bool chained;
     public float timeToStart;
     public Enums.SpawnType spawnType;

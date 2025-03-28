@@ -7,33 +7,66 @@ using UnityEngine;
 public class AdsManager
 {
 #if Platform_Mobile
-    private const string bannerUnitId = "ca-app-pub-8907326292508524/3533112980";
-    public const string rewardedUnitId_Life = "ca-app-pub-8907326292508524/9668982787";
-    public const string rewardedUnitId_Coins = "ca-app-pub-8907326292508524/9624656261";
+    public enum AdType
+    {
+        Banner,
+        Banner2,
+        Rewarded_Life,
+        Rewarded2_Life,
+        Rewarded_Coins,
+        Rewarded2_Coins
+    }
+
+    private const string bannerUnitId1 = "ca-app-pub-8907326292508524/3533112980";
+    private const string bannerUnitId2 = "ca-app-pub-8907326292508524/2375478360";
+    private static int bannerUnitTrys = 0;
+
+    public const string rewardedUnitId1_Life = "ca-app-pub-8907326292508524/9668982787";
+    public const string rewardedUnitId2_Life = "ca-app-pub-8907326292508524/7605254741";
+    private static int rewardedUnitTrys_Life = 0;
+
+    public const string rewardedUnitId1_Coins = "ca-app-pub-8907326292508524/9624656261";
+    public const string rewardedUnitId2_Coins = "ca-app-pub-8907326292508524/8176100389";
+    private static int rewardedUnitTrys_Coins = 0;
 
     private static readonly RequestConfiguration requestConfiguration = new();
 
     private static bool isInitialized = false;
 
     private static BannerView _bannerView;
+    public static bool BannerLoaded = false;
     private static RewardedAd _rewardedAd;
-    public static Action<double> OnRewardedAdLoaded;
+    public static bool RewardedLoaded = false;
+    public static Action<bool, double> OnRewardedAdLoaded;
     public static Action<bool> OnRewardedAdCompleted;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Initialize()
     {
         isInitialized = false;
+
         _bannerView = null;
         _rewardedAd = null;
+
         OnRewardedAdLoaded = null;
         OnRewardedAdCompleted = null;
+
+        bannerUnitTrys = 0;
+        rewardedUnitTrys_Life = 0;
+        rewardedUnitTrys_Coins = 0;
+
+        BannerLoaded = false;
+        RewardedLoaded = false;
     }
 #endif
 
     public static void Init()
     {
 #if Platform_Mobile
+        bannerUnitTrys = 0;
+        rewardedUnitTrys_Life = 0;
+        rewardedUnitTrys_Coins = 0;
+
         MobileAds.SetiOSAppPauseOnBackground(true);
         MobileAds.RaiseAdEventsOnUnityMainThread = true;
 
@@ -43,7 +76,6 @@ public class AdsManager
 #endif
     }
 
-#if Platform_Mobile
     private static void InitializeStatus(InitializationStatus status)
     {
         if (status == null)
@@ -56,206 +88,304 @@ public class AdsManager
             Debug.Log("Google Mobile Ads initialization succeeded.");
             isInitialized = true;
 
-            InitBottomBannerAd();
+            PrepareAd(AdType.Banner, true);
         }
     }
-#endif
 
-    #region BottomBannerAd
-#if Platform_Mobile
-    public static void InitBottomBannerAd()
+    public static void PrepareAd(AdType type, bool showWhenReady = false)
     {
+#if Platform_Mobile
         if (!isInitialized)
         {
             Debug.LogError("Google Mobile Ads SDK is not correctly initialized.");
             return;
         }
 
-        RectSafeArea.RefreshAdSafeArea(false, 0);
-        _bannerView?.Destroy();
+        switch (type)
+        {
+            case AdType.Banner:
+                bannerUnitTrys++;
+                PrepareBanner(bannerUnitId1);
+                break;
 
-        AdSize adaptiveSize = AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(AdSize.FullWidth);
-        _bannerView = new BannerView(bannerUnitId, adaptiveSize, AdPosition.Bottom);
+            case AdType.Banner2:
+                bannerUnitTrys++;
+                PrepareBanner(bannerUnitId2);
+                break;
 
-        ListenBannerAdEvents();
+            case AdType.Rewarded_Life:
+                rewardedUnitTrys_Life++;
+                PrepareRewarded(rewardedUnitId1_Life, showWhenReady);
+                break;
 
-        AdRequest adRequest = new();
-        _bannerView.LoadAd(adRequest);
+            case AdType.Rewarded2_Life:
+                rewardedUnitTrys_Life++;
+                PrepareRewarded(rewardedUnitId2_Life, showWhenReady);
+                break;
+
+            case AdType.Rewarded_Coins:
+                rewardedUnitTrys_Coins++;
+                PrepareRewarded(rewardedUnitId1_Coins, showWhenReady);
+                break;
+
+            case AdType.Rewarded2_Coins:
+                rewardedUnitTrys_Coins++;
+                PrepareRewarded(rewardedUnitId2_Coins, showWhenReady);
+                break;
+        }
+#endif
     }
 
-    private static void ListenBannerAdEvents()
+#if Platform_Mobile
+    private static void PrepareBanner(string id)
     {
-        _bannerView.OnBannerAdLoaded += () =>
-        {
-            //Debug.LogWarning($"Banner view loaded an ad with response : {_bannerView.GetResponseInfo()}");
+        RectSafeArea.RefreshAdSafeArea(false, 0);
 
-            RectSafeArea.RefreshAdSafeArea(true, _bannerView.GetHeightInPixels());
+        _bannerView?.Destroy();
+        _bannerView = new BannerView(id, AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(AdSize.FullWidth), AdPosition.Bottom);
+
+        ListenBannerEvents();
+
+        _bannerView.LoadAd(new AdRequest());
+    }
+
+    private static void ListenBannerEvents()
+    {
+        if (_bannerView == null)
+        {
+            return;
+        }
+
+        _bannerView.OnBannerAdLoaded += OnBanner_Loaded;
+        _bannerView.OnBannerAdLoadFailed += OnBanner_LoadFailed;
+
+        _bannerView.OnAdPaid += OnBanner_Paid;
+        _bannerView.OnAdImpressionRecorded += OnBanner_ImpressionRecorded;
+        _bannerView.OnAdClicked += OnBanner_Clicked;
+        _bannerView.OnAdFullScreenContentOpened += OnBanner_FullScreenContentOpened;
+        _bannerView.OnAdFullScreenContentClosed += OnBanner_FullScreenContentClosed;
+    }
+
+    #region Banner Events
+    private static void OnBanner_Loaded()
+    {
+        Debug.LogWarning($"Banner view loaded an ad with response : {_bannerView.GetResponseInfo()}");
+
+        RectSafeArea.RefreshAdSafeArea(true, _bannerView.GetHeightInPixels());
+        BannerLoaded = true;
+
+        if (GameManager.Instance.hasStarted)
+        {
+            DestroyBottomBannerAd();
 
             GC.Collect();
+        }
+    }
 
-            if (GameManager.Instance.hasStarted)
+    private static void OnBanner_LoadFailed(LoadAdError error)
+    {
+        Debug.LogError($"Banner view failed to load an ad with error : {error}");
+
+        DestroyBottomBannerAd();
+
+        if (bannerUnitTrys == 1)
+        {
+            Debug.LogWarning("Trying to load ad #2 ...");
+            PrepareAd(AdType.Banner2);
+        }
+    }
+
+    private static void OnBanner_Paid(AdValue adValue)
+    {
+        Debug.Log($"Banner view paid {adValue.Value} {adValue.CurrencyCode}.");
+    }
+
+    private static void OnBanner_ImpressionRecorded()
+    {
+        Debug.Log("Banner view recorded an impression.");
+    }
+
+    private static void OnBanner_Clicked()
+    {
+        Debug.Log("Banner view was clicked.");
+    }
+
+    private static void OnBanner_FullScreenContentOpened()
+    {
+        Debug.Log("Banner view full screen content opened.");
+    }
+
+    private static void OnBanner_FullScreenContentClosed()
+    {
+        Debug.Log("Banner view full screen content closed.");
+    }
+    #endregion
+#endif
+
+    public static void DestroyBottomBannerAd(bool resetRetrys = false)
+    {
+#if Platform_Mobile
+        if (resetRetrys)
+        {
+            ResetBannerRetrys();
+        }
+
+        if (_bannerView != null)
+        {
+            _bannerView.OnBannerAdLoaded -= OnBanner_Loaded;
+            _bannerView.OnBannerAdLoadFailed -= OnBanner_LoadFailed;
+
+            _bannerView.OnAdPaid -= OnBanner_Paid;
+            _bannerView.OnAdImpressionRecorded -= OnBanner_ImpressionRecorded;
+            _bannerView.OnAdClicked -= OnBanner_Clicked;
+            _bannerView.OnAdFullScreenContentOpened -= OnBanner_FullScreenContentOpened;
+            _bannerView.OnAdFullScreenContentClosed -= OnBanner_FullScreenContentClosed;
+
+            _bannerView.Destroy();
+        }
+
+        _bannerView = null;
+        BannerLoaded = false;
+
+        RectSafeArea.RefreshAdSafeArea(false, 0);
+#endif
+    }
+
+    public static void ResetBannerRetrys()
+    {
+        bannerUnitTrys = 0;
+    }
+
+#if Platform_Mobile
+    private static void PrepareRewarded(string id, bool showWhenReady)
+    {
+        _rewardedAd?.Destroy();
+
+        RewardedAd.Load(id, new AdRequest(), (ad, error) => RewardedAdLoad(ad, error, id, showWhenReady));
+    }
+
+    private static void RewardedAdLoad(RewardedAd ad, LoadAdError error, string id, bool showWhenReady)
+    {
+        if (error != null)
+        {
+            Debug.LogError($"Rewarded ad failed to load an ad with error : {error}");
+
+            switch (id)
             {
-                DestroyBottomBannerAd();
+                case rewardedUnitId1_Life:
+                    if (rewardedUnitTrys_Life == 1)
+                    {
+                        Debug.LogWarning("Trying to load ad #2 ...");
+                        PrepareAd(AdType.Rewarded2_Life, showWhenReady);
+                        return;
+                    }
+                    else
+                    {
+                        UiManager.Instance.SetUi(UiType.Loading, false);
+                    }
+                    break;
+
+                case rewardedUnitId1_Coins:
+                    if (rewardedUnitTrys_Coins == 1)
+                    {
+                        Debug.LogWarning("Trying to load ad #2 ...");
+                        PrepareAd(AdType.Rewarded2_Coins, showWhenReady);
+                        return;
+                    }
+                    else
+                    {
+                        UiManager.Instance.SetUi(UiType.Loading, false);
+                    }
+                    break;
             }
-        };
 
-        _bannerView.OnBannerAdLoadFailed += (LoadAdError error) =>
-        {
-            Debug.LogError($"Banner view failed to load an ad with error : {error}");
-        };
+            OnRewardedAdLoaded?.Invoke(false, 0);
 
-        // Raised when the ad is estimated to have earned money.
-        _bannerView.OnAdPaid += (AdValue adValue) =>
-        {
-            Debug.Log($"Banner view paid {adValue.Value} {adValue.CurrencyCode}.");
-        };
+            return;
+        }
 
-        _bannerView.OnAdImpressionRecorded += () =>
+        if (ad == null)
         {
-            Debug.Log("Banner view recorded an impression.");
-        };
+            Debug.LogError("Unexpected error: Rewarded load event fired with null ad and null error.");
+            return;
+        }
 
-        _bannerView.OnAdClicked += () =>
-        {
-            Debug.Log("Banner view was clicked.");
-        };
+        Debug.Log($"Rewarded ad loaded with response : {ad.GetResponseInfo()}");
+        OnRewardedAdLoaded?.Invoke(true, ad.GetRewardItem().Amount);
+        _rewardedAd = ad;
+        RewardedLoaded = true;
 
-        _bannerView.OnAdFullScreenContentOpened += () =>
+        if (showWhenReady)
         {
-            Debug.Log("Banner view full screen content opened.");
-        };
-
-        _bannerView.OnAdFullScreenContentClosed += () =>
-        {
-            Debug.Log("Banner view full screen content closed.");
-        };
+            ShowRewarded();
+        }
     }
 #endif
 
-    public static void DestroyBottomBannerAd()
+    public static void ShowRewarded()
     {
 #if Platform_Mobile
-        _bannerView?.Destroy();
-        _bannerView = null;
-        RectSafeArea.RefreshAdSafeArea(false, 0);
+        ListenRewardedAdEvents();
+        ShowRewardedAd();
 #endif
+    }
+
+#if Platform_Mobile
+    private static void ListenRewardedAdEvents()
+    {
+        if (_bannerView == null)
+        {
+            return;
+        }
+
+        _rewardedAd.OnAdPaid += OnRewarded_Paid;
+        _rewardedAd.OnAdImpressionRecorded += OnRewarded_ImpressionRecorded;
+        _rewardedAd.OnAdClicked += OnRewarded_Clicked;
+        _rewardedAd.OnAdFullScreenContentOpened += OnRewarded_FullScreenContentOpened;
+        _rewardedAd.OnAdFullScreenContentClosed += OnRewarded_FullScreenContentClosed;
+        _rewardedAd.OnAdFullScreenContentFailed += OnRewarded_FullScreenContentFailed;
+    }
+
+    #region Rewarded Events
+    private static void OnRewarded_Paid(AdValue adValue)
+    {
+        Debug.Log($"Rewarded ad paid {adValue.Value} {adValue.CurrencyCode}.");
+    }
+
+    private static void OnRewarded_ImpressionRecorded()
+    {
+        Debug.Log("Rewarded ad recorded an impression.");
+    }
+
+    private static void OnRewarded_Clicked()
+    {
+        Debug.Log("Rewarded ad was clicked.");
+    }
+
+    private static void OnRewarded_FullScreenContentOpened()
+    {
+        Debug.Log("Rewarded ad full screen content opened.");
+    }
+
+    private static void OnRewarded_FullScreenContentClosed()
+    {
+        Debug.Log("Rewarded ad full screen content closed.");
+
+        UiManager.Instance.SetUi(UiType.Loading, false);
+    }
+
+    private static void OnRewarded_FullScreenContentFailed(AdError error)
+    {
+        if (error != null)
+        {
+            Debug.LogError($"Rewarded ad failed to open full screen content with error : {error}");
+        }
+
+        OnRewardedAdCompleted?.Invoke(false);
     }
     #endregion
 
-    #region RewardedAd
-#if Platform_Mobile
-    public static void PrepareRewardedAd(string id)
-    {
-        _rewardedAd?.Destroy();
-
-        RewardedAd.Load(id, new AdRequest(), RewardedAdLoad);
-    }
-
-    public static void PrepareInitRewardedAd(string id)
-    {
-        _rewardedAd?.Destroy();
-
-        RewardedAd.Load(id, new AdRequest(), RewardedAdLoadInit);
-    }
-
-    public static void InitRewardedAd(string id)
-    {
-        UiManager.Instance.SetUi(UiType.Loading, true, 0.25f);
-
-        if (_rewardedAd != null)
-        {
-            ListenRewardedAdEvents();
-            ShowRewardedAd();
-        }
-        else
-        {
-            PrepareInitRewardedAd(id);
-        }
-    }
-
-    private static void RewardedAdLoad(RewardedAd ad, LoadAdError error)
-    {
-        if (error != null)
-        {
-            Debug.LogError($"Rewarded ad failed to load an ad with error : {error}");
-            UiManager.Instance.SetUi(UiType.Loading, false);
-            return;
-        }
-        if (ad == null)
-        {
-            Debug.LogError("Unexpected error: Rewarded load event fired with null ad and null error.");
-            UiManager.Instance.SetUi(UiType.Loading, false);
-            return;
-        }
-
-        Debug.Log($"Rewarded ad loaded with response : {ad.GetResponseInfo()}");
-        OnRewardedAdLoaded?.Invoke(ad.GetRewardItem().Amount);
-        _rewardedAd = ad;
-    }
-
-    private static void RewardedAdLoadInit(RewardedAd ad, LoadAdError error)
-    {
-        if (error != null)
-        {
-            Debug.LogError($"Rewarded ad failed to load an ad with error : {error}");
-            UiManager.Instance.SetUi(UiType.Loading, false);
-            return;
-        }
-        if (ad == null)
-        {
-            Debug.LogError("Unexpected error: Rewarded load event fired with null ad and null error.");
-            UiManager.Instance.SetUi(UiType.Loading, false);
-            return;
-        }
-
-        Debug.Log($"Rewarded ad loaded with response : {ad.GetResponseInfo()}");
-        _rewardedAd = ad;
-
-        ListenRewardedAdEvents();
-        ShowRewardedAd();
-    }
-
-    private static void ListenRewardedAdEvents()
-    {
-        _rewardedAd.OnAdPaid += (AdValue adValue) =>
-        {
-            Debug.Log($"Rewarded ad paid {adValue.Value} {adValue.CurrencyCode}.");
-        };
-
-        _rewardedAd.OnAdImpressionRecorded += () =>
-        {
-            Debug.Log("Rewarded ad recorded an impression.");
-        };
-
-        _rewardedAd.OnAdClicked += () =>
-        {
-            Debug.Log("Rewarded ad was clicked.");
-        };
-
-        _rewardedAd.OnAdFullScreenContentOpened += () =>
-        {
-            Debug.Log("Rewarded ad full screen content opened.");
-        };
-
-        _rewardedAd.OnAdFullScreenContentClosed += () =>
-        {
-            Debug.Log("Rewarded ad full screen content closed.");
-
-            UiManager.Instance.SetUi(UiType.Loading, false);
-        };
-
-        _rewardedAd.OnAdFullScreenContentFailed += (AdError error) =>
-        {
-            if (error != null)
-            {
-                Debug.LogError($"Rewarded ad failed to open full screen content with error : {error}");
-            }
-
-            OnRewardedAdCompleted?.Invoke(false);
-        };
-    }
-
-    public static void ShowRewardedAd()
+    private static void ShowRewardedAd()
     {
         if (_rewardedAd != null && _rewardedAd.CanShowAd())
         {
@@ -275,12 +405,36 @@ public class AdsManager
 
         OnRewardedAdCompleted?.Invoke(true);
     }
-
-    public static void DestroyRewardedAd()
-    {
-        _rewardedAd?.Destroy();
-        _rewardedAd = null;
-    }
 #endif
-    #endregion
+
+    public static void DestroyRewarded(bool resetRetrys = false)
+    {
+#if Platform_Mobile
+        if (resetRetrys)
+        {
+            ResetRewardedRetrys();
+        }
+
+        if (_rewardedAd != null)
+        {
+            _rewardedAd.OnAdPaid -= OnRewarded_Paid;
+            _rewardedAd.OnAdImpressionRecorded -= OnRewarded_ImpressionRecorded;
+            _rewardedAd.OnAdClicked -= OnRewarded_Clicked;
+            _rewardedAd.OnAdFullScreenContentOpened -= OnRewarded_FullScreenContentOpened;
+            _rewardedAd.OnAdFullScreenContentClosed -= OnRewarded_FullScreenContentClosed;
+            _rewardedAd.OnAdFullScreenContentFailed -= OnRewarded_FullScreenContentFailed;
+
+            _rewardedAd.Destroy();
+        }
+
+        _rewardedAd = null;
+        RewardedLoaded = false;
+#endif
+    }
+
+    public static void ResetRewardedRetrys()
+    {
+        rewardedUnitTrys_Life = 0;
+        rewardedUnitTrys_Coins = 0;
+    }
 }

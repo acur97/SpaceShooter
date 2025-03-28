@@ -242,8 +242,9 @@ public class StoreManager : MonoBehaviour
                 false);
 
 #if Platform_Mobile
+            AdsManager.ResetRewardedRetrys();
             AdsManager.OnRewardedAdLoaded += OnAdLoaded;
-            AdsManager.PrepareRewardedAd(AdsManager.rewardedUnitId_Coins);
+            AdsManager.PrepareAd(AdsManager.AdType.Rewarded_Coins);
 #endif
             return;
         }
@@ -259,20 +260,34 @@ public class StoreManager : MonoBehaviour
         AnalyticsManager.Log_BuyPowerUp(showingPowerUp.type, showingPowerUp.cost);
     }
 
-    private void OnAdLoaded(double amount)
+    private void OnAdLoaded(bool success, double amount)
     {
 #if Platform_Mobile
         AdsManager.OnRewardedAdLoaded -= OnAdLoaded;
 
-        PopupManager.Instance.UpdateText($"Watch an ad for {amount} coins?");
-        PopupManager.Instance.UpdateRightText("Watch Ad");
-        PopupManager.Instance.UpdateRightAction(() =>
+        if (success)
         {
-            AdsManager.OnRewardedAdCompleted += OnAdViewed;
-            AdsManager.InitRewardedAd(AdsManager.rewardedUnitId_Coins);
+            PopupManager.Instance.UpdateText($"Watch an ad for {amount} coins?");
+            PopupManager.Instance.UpdateRightText("Watch Ad");
+            PopupManager.Instance.UpdateRightAction(() =>
+            {
+                AdsManager.OnRewardedAdCompleted += OnAdViewed;
+                AdsManager.ShowRewarded();
 
-            PopupManager.Instance.ClosePopUp();
-        });
+                buyBtn.Select();
+                PopupManager.Instance.ClosePopUp();
+            });
+        }
+        else
+        {
+            PopupManager.Instance.UpdateText("There are no ads at this time");
+            PopupManager.Instance.UpdateRightText("Try later");
+            PopupManager.Instance.UpdateRightAction(() =>
+            {
+                buyBtn.Select();
+                PopupManager.Instance.ClosePopUp();
+            });
+        }
 #endif
     }
 

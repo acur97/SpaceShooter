@@ -50,9 +50,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject adLifeEndPanel;
     [SerializeField] private TextMeshProUGUI adLifeTxt;
 #if Platform_Web
-    private const string adLifeWebGl = "Need a Life? <color=#FFFFFF>Use <b>{0}</b> Coins!";
+    private const string adLifeFormat = "Need a Life? <color=#FFFFFF>Use <b>{0}</b> Coins!";
 #else
-    private const string adLifeMovile = "Need a Life? <color=#FFFFFF>Watch Ad!";
+    private const string adLifeFormat = "Need a Life? <color=#FFFFFF>Watch Ad!";
 #endif
 
 
@@ -263,7 +263,7 @@ public class GameManager : MonoBehaviour
 
         adRevivals = (int)gameplayScriptable.numberOfAdRevivals;
 #if Platform_Mobile
-        AdsManager.PrepareRewardedAd(AdsManager.rewardedUnitId_Life);
+        AdsManager.PrepareAd(AdsManager.AdType.Rewarded_Life);
 #endif
 
         scoreText.SetTextFormat(preScore, score);
@@ -491,22 +491,18 @@ public class GameManager : MonoBehaviour
         finalTimeOfGameplay = Time.realtimeSinceStartup - timeDelayStartup;
 
 #if Platform_Mobile
-        if (hasRevival && adRevivals > 0)
+        if (hasRevival && adRevivals > 0 && AdsManager.RewardedLoaded)
         {
-            adLifePanel.SetActive(true);
-            adLifeEndPanel.SetActive(false);
-
-            adIcon.SetActive(true);
-            adLifeTxt.SetText(adLifeMovile);
+            ShowRevivalWithAd();
+        }
+        else if (hasRevival && adRevivals > 0 && PlayerProgress.GetCoins() >= gameplayScriptable.numberOfCoinsRevivals)
+        {
+            ShowRevivalWithCoins();
         }
 #else
         if (hasRevival && adRevivals > 0 && PlayerProgress.GetCoins() >= gameplayScriptable.numberOfCoinsRevivals)
         {
-            adLifePanel.SetActive(true);
-            adLifeEndPanel.SetActive(false);
-
-            adIcon.SetActive(false);
-            adLifeTxt.SetTextFormat(adLifeWebGl, gameplayScriptable.numberOfCoinsRevivals);
+            ShowRevivalWithCoins();
         }
 #endif
         else
@@ -518,6 +514,24 @@ public class GameManager : MonoBehaviour
         PlayerProgress.SaveAll();
 
         Vibration.InitVibrate();
+    }
+
+    private void ShowRevivalWithAd()
+    {
+        adLifePanel.SetActive(true);
+        adLifeEndPanel.SetActive(false);
+
+        adIcon.SetActive(true);
+        adLifeTxt.SetText(adLifeFormat);
+    }
+
+    private void ShowRevivalWithCoins()
+    {
+        adLifePanel.SetActive(true);
+        adLifeEndPanel.SetActive(false);
+
+        adIcon.SetActive(false);
+        adLifeTxt.SetTextFormat(adLifeFormat, gameplayScriptable.numberOfCoinsRevivals);
     }
 
     public void FinalizeGameplay()
@@ -534,7 +548,7 @@ public class GameManager : MonoBehaviour
     {
 #if Platform_Mobile
         AdsManager.OnRewardedAdCompleted += OnAdViewed;
-        AdsManager.InitRewardedAd(AdsManager.rewardedUnitId_Life);
+        AdsManager.ShowRewarded();
 #else
         UpCoins(-(int)gameplayScriptable.numberOfCoinsRevivals);
         OnAdViewed(true);

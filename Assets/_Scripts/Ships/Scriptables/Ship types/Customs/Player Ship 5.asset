@@ -20,7 +20,7 @@ MonoBehaviour:
   editorNotes: 1
   notes: 
   color: {r: 0, g: 4.237095, b: 3.2484393, a: 1}
-  name: Cyan
+  name: Marat
   description: ship and bullets in <color=#00ffc3>cyan</color>, enemy bullets in
     <color=#4400ff>purple
   owned: 1

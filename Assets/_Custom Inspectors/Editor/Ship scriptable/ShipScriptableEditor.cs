@@ -21,7 +21,7 @@ public class ShipScriptableEditor : Editor
         inspector = new();
         inspector.Add(new Label("Custom Inspector"));
 
-        m_InspectorXML = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/_Custom Inspectors/Editor/ShipScriptable_Inspector.uxml");
+        m_InspectorXML = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/_Custom Inspectors/Editor/Ship scriptable/ShipScriptable_Inspector.uxml");
         inspector = m_InspectorXML.Instantiate();
 
         ObjectField sprite_Field = inspector.Q<ObjectField>("Field_ShipSprite");

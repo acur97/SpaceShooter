@@ -20,7 +20,7 @@ MonoBehaviour:
   editorNotes: 1
   notes: 
   color: {r: 2.6834934, g: 4.237095, b: 0, a: 1}
-  name: Yellow
+  name: Imperator
   description: ship and bullets in <color=#e5ff00>yellow</color>, enemy bullets in
     <color=#00ffdd>cyan
   owned: 1
