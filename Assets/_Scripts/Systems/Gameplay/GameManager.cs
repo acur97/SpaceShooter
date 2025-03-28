@@ -547,12 +547,29 @@ public class GameManager : MonoBehaviour
     public void WatchAdForLife()
     {
 #if Platform_Mobile
+        if (AdsManager.RewardedLoaded)
+        {
+            ShowAdForLife();
+        }
+        else
+        {
+            UseCoinsForLife();
+        }
+#else
+        UseCoinsForLife();
+#endif
+    }
+
+    private void ShowAdForLife()
+    {
         AdsManager.OnRewardedAdCompleted += OnAdViewed;
         AdsManager.ShowRewarded();
-#else
+    }
+
+    private void UseCoinsForLife()
+    {
         UpCoins(-(int)gameplayScriptable.numberOfCoinsRevivals);
         OnAdViewed(true);
-#endif
     }
 
 #if Platform_Mobile
