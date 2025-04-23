@@ -10,57 +10,47 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d74892c7c2b61a40a56faac19d7f68c, type: 3}
-  m_Name: Round 4
+  m_Name: Lv2 Round 1
   m_EditorClassIdentifier: 
   groups:
   - chained: 0
     timeToStart: 1
     spawnType: 3
     customFloat: 0
-    minTimeBetweenSpawn: 1
-    maxTimeBetweenSpawn: 2
-    count: 4
-    ship: {fileID: 11400000, guid: c1d08a09fbd110a46a11f0423b1d4c9f, type: 2}
-    randomPowerUp: 0
-    spawnPowerUp: {fileID: 0}
-  - chained: 1
-    timeToStart: 0
-    spawnType: 0
-    customFloat: 0
-    minTimeBetweenSpawn: 1
-    maxTimeBetweenSpawn: 1.5
-    count: 6
-    ship: {fileID: 11400000, guid: aac73918c9923fb46b65d0b982061ed0, type: 2}
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 0
+    count: 5
+    ship: {fileID: 11400000, guid: 19a1bbb4c1f71d442aa3eda34c077384, type: 2}
     randomPowerUp: 0
     spawnPowerUp: {fileID: 0}
   - chained: 0
+    timeToStart: 1
+    spawnType: 0
+    customFloat: 0
+    minTimeBetweenSpawn: 0
+    maxTimeBetweenSpawn: 1
+    count: 3
+    ship: {fileID: 11400000, guid: 15b2b9cf1bd71b843bdec5c04ed8fbf2, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 1
     timeToStart: 1
     spawnType: 3
     customFloat: 0
-    minTimeBetweenSpawn: 1
-    maxTimeBetweenSpawn: 1
-    count: 6
-    ship: {fileID: 11400000, guid: 37ddafc348c24764099296d6da24436c, type: 2}
-    randomPowerUp: 0
-    spawnPowerUp: {fileID: 0}
-  - chained: 1
-    timeToStart: 0
-    spawnType: 4
-    customFloat: -2
-    minTimeBetweenSpawn: 1
-    maxTimeBetweenSpawn: 1.5
-    count: 6
-    ship: {fileID: 11400000, guid: aac73918c9923fb46b65d0b982061ed0, type: 2}
+    minTimeBetweenSpawn: 2
+    maxTimeBetweenSpawn: 3
+    count: 4
+    ship: {fileID: 11400000, guid: 0d98bd564fa851c4b8a895c73b8e2b85, type: 2}
     randomPowerUp: 0
     spawnPowerUp: {fileID: 0}
   - chained: 0
     timeToStart: 1
-    spawnType: 4
+    spawnType: 0
     customFloat: 0
     minTimeBetweenSpawn: 1
-    maxTimeBetweenSpawn: 1.5
-    count: 1
-    ship: {fileID: 11400000, guid: e1a455aa20ff0ae46ab8b31cfeb88c99, type: 2}
+    maxTimeBetweenSpawn: 2
+    count: 10
+    ship: {fileID: 11400000, guid: 0d98bd564fa851c4b8a895c73b8e2b85, type: 2}
     randomPowerUp: 0
     spawnPowerUp: {fileID: 0}
   - chained: 1
@@ -69,17 +59,17 @@ MonoBehaviour:
     customFloat: 0
     minTimeBetweenSpawn: 1
     maxTimeBetweenSpawn: 1.5
-    count: 1
+    count: 15
     ship: {fileID: 11400000, guid: 56a9a8945246d264abaf61fd48c30ab4, type: 2}
     randomPowerUp: 0
     spawnPowerUp: {fileID: 0}
-  - chained: 0
-    timeToStart: 1
-    spawnType: 4
+  - chained: 1
+    timeToStart: 1.5
+    spawnType: 3
     customFloat: 0
     minTimeBetweenSpawn: 1
-    maxTimeBetweenSpawn: 1.5
-    count: 1
-    ship: {fileID: 11400000, guid: 45390d83c779442488a5f9e36b42e647, type: 2}
+    maxTimeBetweenSpawn: 3
+    count: 8
+    ship: {fileID: 11400000, guid: 56a9a8945246d264abaf61fd48c30ab4, type: 2}
     randomPowerUp: 1
     spawnPowerUp: {fileID: 0}
