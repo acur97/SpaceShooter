@@ -24,16 +24,16 @@ public class StoreItem : MonoBehaviour
         store = _store;
         powerUp = _powerUp;
 
-        spriteImg.sprite = powerUp.sprite;
-        titleTxt.text = powerUp.powerName;
+        spriteImg.sprite = _powerUp.sprite;
+        titleTxt.text = _powerUp.powerName;
 
-        if (powerUp.cost == 0)
+        if (_powerUp.cost == 0)
         {
             priceTxt.text = UiCommonTexts.Free;
         }
         else
         {
-            priceTxt.SetTextFormat(UiCommonTexts.PriceFormat, powerUp.cost);
+            priceTxt.SetTextFormat(UiCommonTexts.PriceFormat, _powerUp.cost);
         }
 
         StoreManager.onRefresh += UpdateBtn;
@@ -45,6 +45,7 @@ public class StoreItem : MonoBehaviour
     {
         countTxt.SetTextFormat(countFormat, powerUp.currentAmount);
         countTxt.color = powerUp.currentAmount > 0 ? haveColor : dontColor;
+
         selected.enabled = GameManager.Instance.gameplayScriptable.selectedPowerUp == powerUp;
     }
 

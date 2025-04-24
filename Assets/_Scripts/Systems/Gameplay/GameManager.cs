@@ -274,7 +274,9 @@ public class GameManager : MonoBehaviour
 
         audioManager.PlaySound(Enums.AudioType.Start, 2f);
 
+#if Platform_Mobile
         AdsManager.DestroyBottomBannerAd();
+#endif
 
         AnalyticsManager.Log_LevelStart();
     }
@@ -347,6 +349,7 @@ public class GameManager : MonoBehaviour
         EnableMobileKeyboard(false);
     }
 
+#if Platform_Mobile
     private void Start()
     {
         AdsManager.Init();
@@ -357,6 +360,7 @@ public class GameManager : MonoBehaviour
     {
         AdsManager.DestroyBottomBannerAd();
     }
+#endif
 
     public void SetCustoms(ShipScriptable value)
     {
@@ -560,11 +564,13 @@ public class GameManager : MonoBehaviour
 #endif
     }
 
+#if Platform_Mobile
     private void ShowAdForLife()
     {
         AdsManager.OnRewardedAdCompleted += OnAdViewed;
         AdsManager.ShowRewarded();
     }
+#endif
 
     private void UseCoinsForLife()
     {

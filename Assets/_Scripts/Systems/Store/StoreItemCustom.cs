@@ -22,6 +22,22 @@ public class StoreItemCustom : MonoBehaviour
         spriteImg.sprite = _ship.sprite;
         titleTxt.text = _ship.name;
 
+        UpdatePrice(_ship);
+
+        StoreManager.onRefresh += UpdateBtn;
+
+        selectBtn.onClick.AddListener(Select);
+    }
+
+    private void UpdateBtn()
+    {
+        UpdatePrice(ship);
+
+        selected.enabled = GameManager.Instance.gameplayScriptable.selectedCustoms == ship;
+    }
+
+    private void UpdatePrice(ShipScriptable _ship)
+    {
         if (_ship.owned)
         {
             priceTxt.text = UiCommonTexts.Owned;
@@ -34,16 +50,6 @@ public class StoreItemCustom : MonoBehaviour
         {
             priceTxt.SetTextFormat(UiCommonTexts.PriceFormat, _ship.cost);
         }
-
-        StoreManager.onRefresh += UpdateBtn;
-
-        selectBtn.onClick.AddListener(Select);
-    }
-
-    private void UpdateBtn()
-    {
-        priceTxt.text = ship.owned ? UiCommonTexts.Owned : UiCommonTexts.Free;
-        selected.enabled = GameManager.Instance.gameplayScriptable.selectedCustoms == ship;
     }
 
     private void Select()

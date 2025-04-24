@@ -76,6 +76,7 @@ public class AdsManager
 #endif
     }
 
+#if Platform_Mobile
     private static void InitializeStatus(InitializationStatus status)
     {
         if (status == null)
@@ -94,7 +95,6 @@ public class AdsManager
 
     public static void PrepareAd(AdType type, bool showWhenReady = false)
     {
-#if Platform_Mobile
         if (!isInitialized)
         {
             Debug.LogError("Google Mobile Ads SDK is not correctly initialized.");
@@ -133,10 +133,8 @@ public class AdsManager
                 PrepareRewarded(rewardedUnitId2_Coins, showWhenReady);
                 break;
         }
-#endif
     }
 
-#if Platform_Mobile
     private static void PrepareBanner(string id)
     {
         RectSafeArea.RefreshAdSafeArea(false, 0);
@@ -220,11 +218,9 @@ public class AdsManager
         Debug.Log("Banner view full screen content closed.");
     }
     #endregion
-#endif
 
     public static void DestroyBottomBannerAd(bool resetRetrys = false)
     {
-#if Platform_Mobile
         if (resetRetrys)
         {
             ResetBannerRetrys();
@@ -248,7 +244,6 @@ public class AdsManager
         BannerLoaded = false;
 
         RectSafeArea.RefreshAdSafeArea(false, 0);
-#endif
     }
 
     public static void ResetBannerRetrys()
@@ -256,7 +251,6 @@ public class AdsManager
         bannerUnitTrys = 0;
     }
 
-#if Platform_Mobile
     private static void PrepareRewarded(string id, bool showWhenReady)
     {
         _rewardedAd?.Destroy();
@@ -405,11 +399,9 @@ public class AdsManager
 
         OnRewardedAdCompleted?.Invoke(true);
     }
-#endif
 
     public static void DestroyRewarded(bool resetRetrys = false)
     {
-#if Platform_Mobile
         if (resetRetrys)
         {
             ResetRewardedRetrys();
@@ -429,7 +421,6 @@ public class AdsManager
 
         _rewardedAd = null;
         RewardedLoaded = false;
-#endif
     }
 
     public static void ResetRewardedRetrys()
@@ -437,4 +428,5 @@ public class AdsManager
         rewardedUnitTrys_Life = 0;
         rewardedUnitTrys_Coins = 0;
     }
+#endif
 }
