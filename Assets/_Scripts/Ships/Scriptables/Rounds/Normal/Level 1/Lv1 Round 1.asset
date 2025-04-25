@@ -10,36 +10,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d74892c7c2b61a40a56faac19d7f68c, type: 3}
-  m_Name: Round Miniboss 2
+  m_Name: Lv1 Round 1
   m_EditorClassIdentifier: 
   groups:
   - chained: 0
     timeToStart: 1
-    spawnType: 2
+    spawnType: 0
     customFloat: 0
+    minTimeBetweenSpawn: 0.5
+    maxTimeBetweenSpawn: 1
+    count: 10
+    ship: {fileID: 11400000, guid: 56a9a8945246d264abaf61fd48c30ab4, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 0
+    timeToStart: 1
+    spawnType: 4
+    customFloat: -2
     minTimeBetweenSpawn: 1
     maxTimeBetweenSpawn: 1
-    count: 1
-    ship: {fileID: 11400000, guid: 62c172414b15d5649a4f8afd9db4044c, type: 2}
+    count: 8
+    ship: {fileID: 11400000, guid: aac73918c9923fb46b65d0b982061ed0, type: 2}
     randomPowerUp: 0
     spawnPowerUp: {fileID: 0}
   - chained: 1
     timeToStart: 1
     spawnType: 4
     customFloat: 2
-    minTimeBetweenSpawn: 1
-    maxTimeBetweenSpawn: 1
-    count: 1
-    ship: {fileID: 11400000, guid: 0c5c0484cc0ca224a8183dfca74a0a13, type: 2}
-    randomPowerUp: 0
+    minTimeBetweenSpawn: 1.2
+    maxTimeBetweenSpawn: 2
+    count: 7
+    ship: {fileID: 11400000, guid: aac73918c9923fb46b65d0b982061ed0, type: 2}
+    randomPowerUp: 1
     spawnPowerUp: {fileID: 0}
-  - chained: 1
-    timeToStart: 1
-    spawnType: 4
-    customFloat: -2
-    minTimeBetweenSpawn: 1
-    maxTimeBetweenSpawn: 1
-    count: 1
-    ship: {fileID: 11400000, guid: 0c5c0484cc0ca224a8183dfca74a0a13, type: 2}
-    randomPowerUp: 0
-    spawnPowerUp: {fileID: 11400000, guid: 4b9ec353ab82ec04c8c14f027e31e82e, type: 2}
