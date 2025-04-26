@@ -51,7 +51,7 @@ public class PostProcessingController : MonoBehaviour
 #if Platform_Mobile && !UNITY_EDITOR
         Application.targetFrameRate = 60;
 #endif
-        //QualitySettings.maxQueuedFrames = 1;
+        QualitySettings.maxQueuedFrames = 1;
 
         SetImpactFrameFeature(false);
 
