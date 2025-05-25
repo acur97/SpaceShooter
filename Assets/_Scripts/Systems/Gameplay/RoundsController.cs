@@ -2,6 +2,10 @@ using Cysharp.Text;
 using Cysharp.Threading.Tasks;
 using System;
 using TMPro;
+#if UNITY_EDITOR
+using UnityEditor.Build;
+using UnityEditor.Build.Reporting;
+#endif
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -47,6 +51,74 @@ public class RoundsController : MonoBehaviour
     private const string _Infinite = "Infinite";
     private const string lastLevelType = "LastLevelType";
     private const string levelComplete = "level #{0}\r\ncompleted";
+
+#if UNITY_EDITOR
+    public void OnPreprocessBuild(BuildReport report)
+    {
+        if (!ComprobarRondas())
+        {
+            throw new BuildFailedException("Error en los niveles.");
+        }
+
+        Debug.Log("Comprobacion de niveles correcta.");
+    }
+
+    private bool ComprobarRondas()
+    {
+        for (int i = 0; i < gameplayScriptable.levels.Length; i++)
+        {
+            if (gameplayScriptable.levels[i] == null)
+            {
+                Debug.LogError("Level " + i + " is empty");
+                return false;
+            }
+            else
+            {
+                for (int j = 0; j < gameplayScriptable.levels[i].rounds.Length; j++)
+                {
+                    if (gameplayScriptable.levels[i].rounds[j] == null)
+                    {
+                        Debug.LogError("Round " + j + " in level " + i + " is empty");
+                        return false;
+                    }
+                    else
+                    {
+                        for (int l = 0; l < gameplayScriptable.levels[i].rounds[j].groups.Length; l++)
+                        {
+                            if (gameplayScriptable.levels[i].rounds[j].groups[l].ship == null)
+                            {
+                                Debug.LogError("Ship " + l + " in round " + j + " in level " + i + " is empty");
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        for (int j = 0; j < gameplayScriptable.infiniteLevels[0].rounds.Length; j++)
+        {
+            if (gameplayScriptable.levels[0].rounds[j] == null)
+            {
+                Debug.LogError("Round " + j + " in infinite level " + 0 + " is empty");
+                return false;
+            }
+            else
+            {
+                for (int l = 0; l < gameplayScriptable.levels[0].rounds[j].groups.Length; l++)
+                {
+                    if (gameplayScriptable.levels[0].rounds[j].groups[l].ship == null)
+                    {
+                        Debug.LogError("Ship " + l + " in round " + j + " in infinite level " + 0 + " is empty");
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+#endif
 
     public void Init()
     {

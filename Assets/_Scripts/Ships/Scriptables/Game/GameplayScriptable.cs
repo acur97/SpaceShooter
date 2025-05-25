@@ -32,8 +32,9 @@ public class GameplayScriptable : ScriptableObject
     public float timeScaleIncrease = 0.1f;
     public float scoreScaleIncrease = 2f;
 
-    [Header("Levels")]
+    [Header("Normal Levels")]
     public LevelScriptable[] levels;
+    [Header("Ininite Levels (Only 1)")]
     public LevelScriptable[] infiniteLevels;
 
     [Header("Borders")]
