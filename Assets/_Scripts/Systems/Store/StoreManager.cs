@@ -212,8 +212,11 @@ public class StoreManager : MonoBehaviour
 
         buyBtn.onClick.RemoveAllListeners();
         buyBtn.onClick.AddListener(() => BuyPowerUp());
-        //buyBtn.interactable = PlayerProgress.GetCoins() >= showingPowerUp.cost;
+#if !Platform_Mobile
+        buyBtn.interactable = PlayerProgress.GetCoins() >= showingPowerUp.cost;
+#else
         buyBtn.interactable = true;
+#endif
 
         selectTgl.SetIsOnWithoutNotify(gameplayScriptable.selectedPowerUp == showingPowerUp);
         onTgl.SetActive(selectTgl.isOn);
