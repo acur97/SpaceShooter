@@ -54,6 +54,7 @@ public class UiManager : MonoBehaviour
 
     public void SetUi(UiType type, bool active, float fadeTime = -1f, Action callback = null)
     {
+
         switch (type)
         {
             case UiType.Gameplay:

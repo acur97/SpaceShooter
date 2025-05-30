@@ -1,6 +1,6 @@
 using Cysharp.Text;
 using Cysharp.Threading.Tasks;
-#if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID
 using Google.Play.AppUpdate;
 using Google.Play.Common;
 #endif
@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public static Action<bool> GameStart;
 
     [Space]
+    [ReadOnly] public bool hasInitStarted = false;
     [ReadOnly] public bool hasStarted = false;
     [ReadOnly] public bool isPlaying = false;
     [ReadOnly] public bool hasEnded = false;
@@ -58,6 +59,9 @@ public class GameManager : MonoBehaviour
 #else
     private const string adLifeFormat = "Need a Life? <color=#FFFFFF>Watch Ad!";
 #endif
+    [Header("Web QR Code")]
+    [SerializeField] private GameObject qrCodePanel;
+    [SerializeField] private GameObject qrCodeSprite;
 
 
     [Header("Gameplay")]
@@ -104,12 +108,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PowerUpsManager powerUpsManager;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private StoreManager storeManager;
-
-    // Google Play
-#if UNITY_ANDROID && !UNITY_EDITOR
-    private readonly AppUpdateManager appUpdateManager = new();
-    private AppUpdateInfo appUpdateInfoResult;
-#endif
 
     //[ContextMenu("Delete PlayerProgress")]
     //public void DeletePlayerProgress()
@@ -234,6 +232,8 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        hasInitStarted = true;
+
         if (!forceStart && gameplayScriptable.selectedPowerUp == null)
         {
             PopupManager.Instance.OpenPopUp(
@@ -241,8 +241,11 @@ public class GameManager : MonoBehaviour
                 "Play",
                 () => StartGameplayUi(true),
                 "Go to Store",
-                () => storeManager.SetUi(true));
-
+                () =>
+                {
+                    storeManager.SetUi(true);
+                    hasInitStarted = false;
+                });
             return;
         }
 
@@ -322,6 +325,11 @@ public class GameManager : MonoBehaviour
     //    playerController.SetHealth(on ? 10000000 : playerController._properties.health);
     //}
 
+    public void OpenPlayStoreLink()
+    {
+        Application.OpenURL("https://play.google.com/store/apps/details?id=com.PolygonUs.SpaceShooter");
+    }
+
     private void Awake()
     {
         PlayerLoopSystem loop = PlayerLoop.GetCurrentPlayerLoop();
@@ -349,6 +357,8 @@ public class GameManager : MonoBehaviour
         wNewTxt.SetTextFormat(wNewFormat, Application.version);
         wNewParagraph.text = gameplayScriptable.wNew;
 
+        qrCodePanel.gameObject.SetActive(false);
+
 #if UNITY_WEBGL && !UNITY_EDITOR
         EnableMobileKeyboard(false);
 #endif
@@ -365,16 +375,17 @@ public class GameManager : MonoBehaviour
     }
 #endif
 
-#if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID
     private async UniTaskVoid CheckForUpdate()
     {
+        AppUpdateManager appUpdateManager = new();
         PlayAsyncOperation<AppUpdateInfo, AppUpdateErrorCode> appUpdateInfoOperation = appUpdateManager.GetAppUpdateInfo();
 
         await appUpdateInfoOperation;
 
         if (appUpdateInfoOperation.IsSuccessful)
         {
-            appUpdateInfoResult = appUpdateInfoOperation.GetResult();
+            AppUpdateInfo appUpdateInfoResult = appUpdateInfoOperation.GetResult();
             //Debug.Log("Days since update in Play Store " + appUpdateInfoResult.ClientVersionStalenessDays);
 
             if (appUpdateInfoResult.UpdateAvailability == UpdateAvailability.UpdateAvailable)
@@ -418,11 +429,27 @@ public class GameManager : MonoBehaviour
     }
 #endif
 
+    public void SetQR(bool isMobile)
+    {
+        qrCodePanel.SetActive(true);
+        qrCodeSprite.SetActive(!isMobile);
+    }
+
     public void SetCustoms(ShipScriptable value)
     {
         gameplayScriptable.selectedCustoms = value;
         playerController.SetColor(value);
     }
+
+#if plamorm_Mobile
+    private void OnApplicationFocus(bool focus)
+    {
+        if (hasStarted && !focus)
+        {
+            Pause();
+        }
+    }
+#endif
 
     private void Update()
     {
@@ -468,6 +495,17 @@ public class GameManager : MonoBehaviour
                 //    leftForNextGroup = 0;
                 //}
             }
+        }
+        else if (!hasInitStarted &&
+            !PopupManager.Instance.isOpen &&
+            !storeManager.gameObject.activeSelf &&
+            Input.GetButtonDown(Inputs.Cancel))
+        {
+            PopupManager.Instance.OpenPopUp(
+                "Wanto to leave?",
+                "Exit",
+                () => Application.Quit(),
+                "Back");
         }
     }
 
