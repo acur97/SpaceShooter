@@ -8,26 +8,18 @@ public class ParallaxManager : MonoBehaviour
 
     private int materialsCount;
     private Material[] materials;
-    private Vector2 offset = Vector2.zero;
 
     private void Awake()
     {
         materialsCount = transform.childCount;
         materials = new Material[materialsCount];
 
-        for (int i = 0; i < materials.Length; i++)
-        {
-            materials[i] = transform.GetChild(i).GetComponent<SpriteRenderer>().material = Instantiate(mat);
-            transform.GetChild(i).transform.localPosition = new Vector2(Random.Range(-xOffset, xOffset), 0);
-        }
-    }
-
-    private void Update()
-    {
         for (int i = 0; i < materialsCount; i++)
         {
-            offset.y = materials[i].GetVector(MaterialProperties.Offset).y - (speed * (i + 1) * Time.deltaTime);
-            materials[i].SetVector(MaterialProperties.Offset, offset);
+            transform.GetChild(i).transform.localPosition = new Vector2(Random.Range(-xOffset, xOffset), 0);
+
+            materials[i] = transform.GetChild(i).GetComponent<SpriteRenderer>().material = Instantiate(mat);
+            materials[i].SetFloat(MaterialProperties.Speed, speed * (i + 1));
         }
     }
 }

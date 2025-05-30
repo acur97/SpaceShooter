@@ -30,6 +30,7 @@ public class MaterialProperties
     public static readonly int Hue = Shader.PropertyToID("_Hue");
 
     public static readonly int Offset = Shader.PropertyToID("_Offset");
+    public static readonly int Speed = Shader.PropertyToID("_Speed");
 
     public static readonly int Invert = Shader.PropertyToID("_invert");
     public static readonly int Frecuency = Shader.PropertyToID("_frecuency");
