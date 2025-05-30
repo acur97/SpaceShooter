@@ -1,5 +1,9 @@
 using Cysharp.Text;
 using Cysharp.Threading.Tasks;
+#if UNITY_ANDROID && !UNITY_EDITOR
+using Google.Play.AppUpdate;
+using Google.Play.Common;
+#endif
 using System;
 using TMPro;
 using UnityEngine;
@@ -100,6 +104,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PowerUpsManager powerUpsManager;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private StoreManager storeManager;
+
+    // Google Play
+#if UNITY_ANDROID && !UNITY_EDITOR
+    private readonly AppUpdateManager appUpdateManager = new();
+    private AppUpdateInfo appUpdateInfoResult;
+#endif
 
     //[ContextMenu("Delete PlayerProgress")]
     //public void DeletePlayerProgress()
@@ -312,13 +322,6 @@ public class GameManager : MonoBehaviour
     //    playerController.SetHealth(on ? 10000000 : playerController._properties.health);
     //}
 
-    public void EnableMobileKeyboard(bool on)
-    {
-#if !UNITY_EDITOR && UNITY_WEBGL
-        WebGLInput.mobileKeyboardSupport = on;
-#endif
-    }
-
     private void Awake()
     {
         PlayerLoopSystem loop = PlayerLoop.GetCurrentPlayerLoop();
@@ -346,8 +349,61 @@ public class GameManager : MonoBehaviour
         wNewTxt.SetTextFormat(wNewFormat, Application.version);
         wNewParagraph.text = gameplayScriptable.wNew;
 
+#if UNITY_WEBGL && !UNITY_EDITOR
         EnableMobileKeyboard(false);
+#endif
+
+#if UNITY_ANDROID && !UNITY_EDITOR
+        CheckForUpdate().Forget();
+#endif
     }
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+    public void EnableMobileKeyboard(bool on)
+    {
+        WebGLInput.mobileKeyboardSupport = on;
+    }
+#endif
+
+#if UNITY_ANDROID && !UNITY_EDITOR
+    private async UniTaskVoid CheckForUpdate()
+    {
+        PlayAsyncOperation<AppUpdateInfo, AppUpdateErrorCode> appUpdateInfoOperation = appUpdateManager.GetAppUpdateInfo();
+
+        await appUpdateInfoOperation;
+
+        if (appUpdateInfoOperation.IsSuccessful)
+        {
+            appUpdateInfoResult = appUpdateInfoOperation.GetResult();
+            //Debug.Log("Days since update in Play Store " + appUpdateInfoResult.ClientVersionStalenessDays);
+
+            if (appUpdateInfoResult.UpdateAvailability == UpdateAvailability.UpdateAvailable)
+            {
+                AppUpdateRequest startUpdateRequest = appUpdateManager.StartUpdate(
+                  appUpdateInfoResult,
+                  AppUpdateOptions.FlexibleAppUpdateOptions());
+
+                while (!startUpdateRequest.IsDone)
+                {
+                    // For flexible flow, the user can continue to use the app while
+                    // the update downloads in the background. You can implement a
+                    // progress bar showing the download status during this time.
+                    await UniTask.Yield();
+                }
+
+                PlayAsyncOperation<VoidResult, AppUpdateErrorCode> result = appUpdateManager.CompleteUpdate();
+                await result; // update complete.
+
+                // or update error:
+                Debug.LogError("Update error: " + result.Error);
+            }
+        }
+        else
+        {
+            Debug.LogError("Failed to get app update info: " + appUpdateInfoOperation.Error);
+        }
+}
+#endif
 
 #if Platform_Mobile
     private void Start()
