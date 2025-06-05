@@ -29,7 +29,7 @@ namespace Google.Play.Core.Internal
         // This must be called from Main thread.
         public static void CreateInScene()
         {
-            var obj = new GameObject {name = "PlayCoreEventHandler"};
+            var obj = new GameObject { name = "PlayCoreEventHandler" };
             DontDestroyOnLoad(obj);
             obj.AddComponent<PlayCoreEventHandler>();
         }

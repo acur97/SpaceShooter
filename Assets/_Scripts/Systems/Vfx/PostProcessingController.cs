@@ -101,24 +101,26 @@ public class PostProcessingController : MonoBehaviour
         AudioManager.Instance.PlaySound(Enums.AudioType.Boom, 0.2f);
     }
 
+    private void OnCompletePostExposure()
+    {
+        tweenPostExposure2 = LeanTween.value(colorAdjustments.postExposure.value, exposureRange.x, volumeSpeed)
+            .setOnUpdate(OnUpdatePostExposure).id;
+    }
+
     private void OnUpdatePostExposure(float value)
     {
         colorAdjustments.saturation.value = value;
     }
 
-    private void OnCompletePostExposure()
+    private void OnCompleteChromaticAberration()
     {
-        tweenPostExposure2 = LeanTween.value(colorAdjustments.postExposure.value, exposureRange.x, volumeSpeed).setOnUpdate(OnUpdatePostExposure).id;
+        tweenChromaticAberration2 = LeanTween.value(chromaticAberration.intensity.value, chromaticAberrationRange.x, volumeSpeed)
+            .setOnUpdate(OnUpdateChromaticAberration).id;
     }
 
     private void OnUpdateChromaticAberration(float value)
     {
         chromaticAberration.intensity.value = value;
-    }
-
-    private void OnCompleteChromaticAberration()
-    {
-        tweenChromaticAberration2 = LeanTween.value(chromaticAberration.intensity.value, chromaticAberrationRange.x, volumeSpeed).setOnUpdate(OnUpdateChromaticAberration).id;
     }
 
     public void SetVolumeHealth(float val)

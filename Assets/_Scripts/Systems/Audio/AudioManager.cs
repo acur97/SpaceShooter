@@ -40,31 +40,36 @@ public class AudioManager : MonoBehaviour
     {
         Instance = this;
 
-        GameManager.GameStart += LoadMainClips;
+        clipStart.LoadAudioData();
+
+        GameManager.GamePreStart += LoadMainClips;
+        GameManager.GameStart += UnloadMainClips;
     }
 
     private void OnDestroy()
     {
-        GameManager.GameStart -= LoadMainClips;
+        clipEnd.UnloadAudioData();
+
+        GameManager.GamePreStart -= LoadMainClips;
+        GameManager.GameStart -= UnloadMainClips;
     }
 
-    private void LoadMainClips(bool start)
+    private void LoadMainClips()
     {
-        if (start)
+        clipZap.LoadAudioData();
+        clipBoom.LoadAudioData();
+        clipCoin.LoadAudioData();
+        clipEnd.LoadAudioData();
+    }
+
+    private void UnloadMainClips(bool start)
+    {
+        if (!start)
         {
-            clipBoom.LoadAudioData();
-            clipCoin.LoadAudioData();
-            clipStart.LoadAudioData();
-            clipEnd.LoadAudioData();
-            clipZap.LoadAudioData();
-        }
-        else
-        {
+            clipZap.UnloadAudioData();
             clipBoom.UnloadAudioData();
             clipCoin.UnloadAudioData();
             clipStart.UnloadAudioData();
-            clipEnd.UnloadAudioData();
-            clipZap.UnloadAudioData();
         }
     }
 

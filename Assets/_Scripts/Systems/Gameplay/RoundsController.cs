@@ -243,20 +243,15 @@ public class RoundsController : MonoBehaviour
             newLevelText.SetTextFormat(levelComplete, levelCount);
 
             LeanTween.scale(newLevelText.gameObject, Vector3.one, 0.25f);
-            LeanTween.value(0, 1, 0.3f).setOnUpdate((value) =>
-            {
-                newLevelText.fontMaterial.SetFloat(MaterialProperties.GlowPower, value);
-            }).setEaseInExpo().setOnComplete(() =>
-            {
-                LeanTween.value(1, 0, 1).setOnUpdate((value) =>
-                {
-                    newLevelText.fontMaterial.SetFloat(MaterialProperties.GlowPower, value);
-                });
-            });
+            LeanTween.value(0, 1, 0.3f)
+                .setOnUpdate(UpdateFontGlow)
+                .setEaseInExpo()
+                .setOnComplete(OnGlowComplete);
 
             await UniTask.WaitForSeconds(1.2f);
 
-            LeanTween.scale(newLevelText.gameObject, Vector3.zero, 1.2f).setEaseInCubic();
+            LeanTween.scale(newLevelText.gameObject, Vector3.zero, 1.2f)
+                .setEaseInCubic();
 
             await UniTask.WaitForSeconds(1.2f);
 
@@ -269,6 +264,17 @@ public class RoundsController : MonoBehaviour
         {
             GameManager.Instance.EndLevel(false);
         }
+    }
+
+    private void OnGlowComplete()
+    {
+        LeanTween.value(1, 0, 1)
+            .setOnUpdate(UpdateFontGlow);
+    }
+
+    private void UpdateFontGlow(float value)
+    {
+        newLevelText.fontMaterial.SetFloat(MaterialProperties.GlowPower, value);
     }
 
     private void StartInfinite()

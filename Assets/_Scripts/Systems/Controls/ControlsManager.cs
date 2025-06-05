@@ -44,7 +44,7 @@ public class ControlsManager : MonoBehaviour
         OnDeviceCheck(editorMobile ? 1 : 0);
 
 #elif Platform_Mobile
-        OnDeviceCheck(1, false);
+        OnDeviceCheck(1);
 #endif
     }
 
@@ -63,15 +63,14 @@ public class ControlsManager : MonoBehaviour
     }
 
     // This method will be called from JavaScript for WebGl builds
-    public void OnDeviceCheck(int isMobile, bool fromWebGl = true)
+    public void OnDeviceCheck(int isMobile)
     {
         hasTouch = isMobile == 1;
         touchUi.SetActive(hasTouch);
 
-        if (fromWebGl)
-        {
-            GameManager.Instance.SetQR(hasTouch);
-        }
+#if Platform_Web
+        GameManager.Instance.SetQR(hasTouch);
+#endif
 
         if (hasTouch)
         {

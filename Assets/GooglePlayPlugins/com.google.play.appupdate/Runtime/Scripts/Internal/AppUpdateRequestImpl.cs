@@ -62,9 +62,9 @@ namespace Google.Play.AppUpdate.Internal
             }
             else
             {
-                BytesDownloaded = (ulong) bytesDownloaded;
-                TotalBytesToDownload = (ulong) totalBytesToDownload;
-                DownloadProgress = bytesDownloaded / (float) totalBytesToDownload;
+                BytesDownloaded = (ulong)bytesDownloaded;
+                TotalBytesToDownload = (ulong)totalBytesToDownload;
+                DownloadProgress = bytesDownloaded / (float)totalBytesToDownload;
             }
 
             if (Status == AppUpdateStatus.Downloaded)

@@ -81,7 +81,7 @@ MonoBehaviour:
     - line: '|   mipStripping: 1'
     - line: '|   numberOfMipsStripped: 0'
     - line: '|   numberOfMipsStrippedPerMipmapLimitGroup: {}'
-    - line: '|   m_StackTraceTypes: 010000000100000001000000010000000100000001000000'
+    - line: '|   m_StackTraceTypes: 000000000000000000000000000000000000000001000000'
     - line: '|   iosShowActivityIndicatorOnLoading: -1'
     - line: '|   androidShowActivityIndicatorOnLoading: 0'
     - line: '|   iosUseCustomAppBackgroundBehavior: 0'
@@ -166,7 +166,7 @@ MonoBehaviour:
     - line: '|   loadStoreDebugModeEnabled: 0'
     - line: '|   visionOSBundleVersion: 1.0'
     - line: '|   tvOSBundleVersion: 1.0'
-    - line: '|   bundleVersion: 0.8.5.2'
+    - line: '|   bundleVersion: 0.8.5.3'
     - line: '|   preloadedAssets: []'
     - line: '|   metroInputSource: 0'
     - line: '|   wsaTransparentSwapchain: 0'
@@ -198,7 +198,7 @@ MonoBehaviour:
     - line: '|     iPhone: 0'
     - line: '|     tvOS: 0'
     - line: '|   overrideDefaultApplicationIdentifier: 0'
-    - line: '|   AndroidBundleVersionCode: 35'
+    - line: '|   AndroidBundleVersionCode: 36'
     - line: '|   AndroidMinSdkVersion: 23'
     - line: '|   AndroidTargetSdkVersion: 0'
     - line: '|   AndroidPreferredInstallLocation: 0'
@@ -597,7 +597,7 @@ MonoBehaviour:
     - line: '|     m_Formats: 05000000'
     - line: '|   - serializedVersion: 3'
     - line: '|     m_BuildTarget: Android'
-    - line: '|     m_Formats: 030000000200000001000000'
+    - line: '|     m_Formats: 0300000002000000'
     - line: '|   - serializedVersion: 3'
     - line: '|     m_BuildTarget: iOS'
     - line: '|     m_Formats: 03000000'
@@ -1025,7 +1025,7 @@ MonoBehaviour:
         m_ExplicitArrayBoundsChecks: 0
         m_CompressionType: 3
         m_InstallInBuildFolder: 0
-        m_BuildSubtarget: 4
+        m_BuildSubtarget: 6
         m_BuildSystem: 1
         m_ExportAsGoogleAndroidProject: 0
         m_DebugSymbolLevel: 2

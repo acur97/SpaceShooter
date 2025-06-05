@@ -136,11 +136,24 @@ public class UiManager : MonoBehaviour
 
         canvas.gameObject.SetActive(canvas.gameObject.activeSelf || true);
 
-        LeanTween.alphaCanvas(canvas, active ? 1 : 0, duration).setOnComplete(() =>
-        {
-            callback?.Invoke();
-            canvas.gameObject.SetActive(active);
-        }).setIgnoreTimeScale(true);
+        LeanTween.alphaCanvas(canvas, active ? 1 : 0, duration)
+            .setOnComplete(OnFadeComplete)
+            .setOnCompleteParam(new FadeData { Canvas = canvas, Active = active, Callback = callback })
+            .setIgnoreTimeScale(true);
+    }
+
+    private class FadeData
+    {
+        public CanvasGroup Canvas;
+        public bool Active;
+        public Action Callback;
+    }
+
+    private static void OnFadeComplete(object param)
+    {
+        FadeData data = (FadeData)param;
+        data.Callback?.Invoke();
+        data.Canvas.gameObject.SetActive(data.Active);
     }
 }
 

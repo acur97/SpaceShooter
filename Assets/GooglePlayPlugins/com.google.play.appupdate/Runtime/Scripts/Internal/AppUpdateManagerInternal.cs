@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using Google.Play.Common;
 using Google.Play.Core.Internal;
+using System;
 using UnityEngine;
 
 namespace Google.Play.AppUpdate.Internal
@@ -182,8 +182,10 @@ namespace Google.Play.AppUpdate.Internal
         /// <summary>
         /// Cancels the current update request.
         /// </summary>
-        public void CancelRequest() {
-            if (_appUpdateRequest != null && _appUpdateRequest.Status == AppUpdateStatus.Unknown) {
+        public void CancelRequest()
+        {
+            if (_appUpdateRequest != null && _appUpdateRequest.Status == AppUpdateStatus.Unknown)
+            {
                 _appUpdateRequest.SetUpdateActivityResult(ActivityResult.ResultCancelled);
                 // Set app update request to null to avoid the "Another update flow is already in
                 // progress" error when a new request is made.

@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using Google.Play.Common;
 using Google.Play.Core.Internal;
+using System;
 using UnityEngine;
 
 namespace Google.Play.AppUpdate.Internal

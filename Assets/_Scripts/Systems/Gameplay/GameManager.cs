@@ -357,7 +357,7 @@ public class GameManager : MonoBehaviour
         wNewTxt.SetTextFormat(wNewFormat, Application.version);
         wNewParagraph.text = gameplayScriptable.wNew;
 
-        qrCodePanel.gameObject.SetActive(false);
+        qrCodePanel.SetActive(false);
 
 #if UNITY_WEBGL && !UNITY_EDITOR
         EnableMobileKeyboard(false);
@@ -413,7 +413,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("Failed to get app update info: " + appUpdateInfoOperation.Error);
         }
-}
+    }
 #endif
 
 #if Platform_Mobile

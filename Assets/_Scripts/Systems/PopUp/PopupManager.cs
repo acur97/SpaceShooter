@@ -1,4 +1,3 @@
-using Cysharp.Text;
 using System;
 using TMPro;
 using UnityEngine;
@@ -32,7 +31,7 @@ public class PopupManager : MonoBehaviour
     {
         Instance = this;
 
-        root.SetActive(false);
+        DisableRoot();
         root.transform.localScale = Vector3.zero;
     }
 
@@ -56,7 +55,8 @@ public class PopupManager : MonoBehaviour
             leftButton.onClick.AddListener(() => ClosePopUp());
         }
 
-        LeanTween.scale(root, Vector3.one, 0.3f).setEaseOutBack();
+        LeanTween.scale(root, Vector3.one, 0.3f)
+            .setEaseOutBack();
 
         root.SetActive(true);
     }
@@ -68,7 +68,14 @@ public class PopupManager : MonoBehaviour
         leftButton.onClick.RemoveAllListeners();
         rightButton.onClick.RemoveAllListeners();
 
-        LeanTween.scale(root, Vector3.zero, 0.2f).setEaseInBack().setOnComplete(() => root.SetActive(false));
+        LeanTween.scale(root, Vector3.zero, 0.2f)
+            .setEaseInBack()
+            .setOnComplete(DisableRoot);
+    }
+
+    private void DisableRoot()
+    {
+        root.SetActive(false);
     }
 
     public void UpdateText(string _text)
