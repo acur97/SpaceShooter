@@ -363,7 +363,7 @@ public class GameManager : MonoBehaviour
         EnableMobileKeyboard(false);
 #endif
 
-#if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID
         CheckForUpdate().Forget();
 #endif
     }
@@ -392,21 +392,12 @@ public class GameManager : MonoBehaviour
             {
                 AppUpdateRequest startUpdateRequest = appUpdateManager.StartUpdate(
                   appUpdateInfoResult,
-                  AppUpdateOptions.FlexibleAppUpdateOptions());
+                  AppUpdateOptions.ImmediateAppUpdateOptions());
 
-                while (!startUpdateRequest.IsDone)
-                {
-                    // For flexible flow, the user can continue to use the app while
-                    // the update downloads in the background. You can implement a
-                    // progress bar showing the download status during this time.
-                    await UniTask.Yield();
-                }
-
-                PlayAsyncOperation<VoidResult, AppUpdateErrorCode> result = appUpdateManager.CompleteUpdate();
-                await result; // update complete.
+                await startUpdateRequest;
 
                 // or update error:
-                Debug.LogError("Update error: " + result.Error);
+                Debug.LogError("Update error.");
             }
         }
         else
