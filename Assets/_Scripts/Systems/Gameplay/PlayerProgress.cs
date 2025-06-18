@@ -1,6 +1,6 @@
-//using Med.SafeValue;
 using System;
 using UnityEngine;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
 
 public class PlayerProgress
 {
@@ -10,14 +10,13 @@ public class PlayerProgress
         public string playerName;
 
         public int coins;
+        [ReadOnly] public IntVariable coinsVariable;
 
         public uint[] powerUpAmounts;
         public int powerUpIndex;
 
         public bool[] customsOwneds;
         public int customsIndex;
-
-        //public SafeInt safeCoins;
     }
 
     private static GameplayScriptable scriptable;
@@ -30,7 +29,7 @@ public class PlayerProgress
         scriptable = null;
     }
 
-    public static void Init(GameplayScriptable _scriptable)
+    public static void Init(GameplayScriptable _scriptable, IntVariable _coins)
     {
         scriptable = _scriptable;
 
@@ -52,6 +51,7 @@ public class PlayerProgress
         }
 
         InitPowerUps();
+        scriptable.progress.coinsVariable = _coins;
         InitCustoms();
     }
 
@@ -83,6 +83,8 @@ public class PlayerProgress
         {
             scriptable.selectedCustoms = scriptable.customs[scriptable.progress.customsIndex];
         }
+
+        scriptable.progress.coinsVariable.Value = scriptable.progress.coins;
     }
 
     public static void SaveAll()
@@ -125,6 +127,8 @@ public class PlayerProgress
 
         scriptable.progress.customsIndex = scriptable.customs.IndexOf(scriptable.selectedCustoms);
 
+        scriptable.progress.coins = scriptable.progress.coinsVariable.Value;
+
         if (_writeSave)
         {
             WriteSaves();
@@ -142,13 +146,13 @@ public class PlayerProgress
         return scriptable.progress.playerName;
     }
 
-    public static int SetCoins(int value)
+    public static void SetCoins(int value)
     {
-        return scriptable.progress.coins += value;
+        scriptable.progress.coinsVariable.Value += value;
     }
 
     public static int GetCoins()
     {
-        return scriptable.progress.coins;
+        return scriptable.progress.coinsVariable.Value;
     }
 }

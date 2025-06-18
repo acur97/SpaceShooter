@@ -17,6 +17,8 @@ MonoBehaviour:
   powerName: Coins Magnet
   sprite: {fileID: 21300000, guid: 82313c2d1fea8b74794141604605d041, type: 3}
   description: Attracts coins to you for 10 seconds
+  powerTitleKey: coinMagnet_title
+  powerDescriptionKey: coinMagnet_desc
   currentAmount: 12
   cost: 200
   useDuration: 1

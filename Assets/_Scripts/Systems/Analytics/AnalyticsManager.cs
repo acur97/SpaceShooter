@@ -27,7 +27,7 @@ public class AnalyticsManager
             new("level", RoundsController.Instance.levelCount),
             new("round", RoundsController.Instance.roundCount),
             new("group", RoundsController.Instance.groupCount),
-            new("score", GameManager.Instance.score),
+            new("score", GameManager.Instance.Score),
             new("revived", GameManager.Instance.isRevived.ToString()),
             new("earn_virtual_currency", PlayerProgress.GetCoins()),
             new("time_played", GameManager.Instance.finalTimeOfGameplay)
@@ -41,7 +41,7 @@ public class AnalyticsManager
         FirebaseAnalytics.LogEvent("post_score", new Parameter[]
         {
             new("mode", RoundsController.Instance.levelType.ToString()),
-            new("score", GameManager.Instance.score)
+            new("score", GameManager.Instance.Score)
         });
 #endif
     }

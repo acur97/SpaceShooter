@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: PopUps_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: 0b034b834c940554eb76b6150c294213, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 1879193326079442966
+  m_TableData:
+  - m_Id: 14032023552
+    m_Localized: Jugaras sin Poderes?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 257792389120
+    m_Localized: Jugar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 328076341248
+    m_Localized: Ir a la Tienda
+    m_Metadata:
+      m_Items: []
+  - m_Id: 643387338752
+    m_Localized: Mira un anuncio por ... monedas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1376325185536
+    m_Localized: Mira un anuncio por {custom} monedas
+    m_Metadata:
+      m_Items:
+      - rid: 1879193326079442966
+  - m_Id: 2299093037056
+    m_Localized: Cerrar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2340968968192
+    m_Localized: Mirar anuncio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50388336095232
+    m_Localized: Aceptar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50422427398144
+    m_Localized: Cancelar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54533520601088
+    m_Localized: "\xBFQuieres salir?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54611740176384
+    m_Localized: Salir
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54669529296896
+    m_Localized: Atras
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54783912161280
+    m_Localized: Cerrar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54837506977792
+    m_Localized: cargando...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55165983895552
+    m_Localized: Intenta luego
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55230978830336
+    m_Localized: No hay anuncios por ahora
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 1879193326079442966
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 1376325185536

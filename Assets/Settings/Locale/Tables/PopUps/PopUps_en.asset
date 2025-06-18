@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: PopUps_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 0b034b834c940554eb76b6150c294213, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 1879193326079442965
+  m_TableData:
+  - m_Id: 14032023552
+    m_Localized: Play without PowerUp?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 257792389120
+    m_Localized: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 328076341248
+    m_Localized: Go to Store
+    m_Metadata:
+      m_Items: []
+  - m_Id: 643387338752
+    m_Localized: Watch an ad for ... coins?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1376325185536
+    m_Localized: Watch an ad for {custom} coins?
+    m_Metadata:
+      m_Items:
+      - rid: 1879193326079442965
+  - m_Id: 2299093037056
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2340968968192
+    m_Localized: Watch ad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50388336095232
+    m_Localized: Accept
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50422427398144
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54533520601088
+    m_Localized: Wanto to leave?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54611740176384
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54669529296896
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54783912161280
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54837506977792
+    m_Localized: loading...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55165983895552
+    m_Localized: Try later
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55230978830336
+    m_Localized: There are no ads at this time
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 1879193326079442965
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 1376325185536

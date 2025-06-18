@@ -8,9 +8,9 @@ public abstract class PowerUpBase : ScriptableObject
 
     [Header("Descriptions")]
     public PowerUpsManager.PowerUpType type;
-    public string powerName;
     public Sprite sprite;
-    [TextArea] public string description;
+    public string powerTitleKey;
+    public string powerDescriptionKey;
 
     [Header("Prices")]
     public uint currentAmount = 0;

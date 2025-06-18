@@ -1,0 +1,160 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: PowerUps Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: PowerUps
+  m_TableCollectionNameGuidString: 07f64f5553742dc42a8d85a2cea344b7
+  m_Entries:
+  - m_Id: 131564810240
+    m_Key: coinMagnet_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361647550464
+    m_Key: coinMagnet_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1227733577728
+    m_Key: doubleShot_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1316959006720
+    m_Key: doubleShot_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1509045547008
+    m_Key: orbitalDron_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1599189528576
+    m_Key: orbitalDron_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1735009480704
+    m_Key: supportDron_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1832816455680
+    m_Key: supportDron_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1940559736832
+    m_Key: electricField_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2005005217792
+    m_Key: electricField_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2164594290688
+    m_Key: Extract Life_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2249738661888
+    m_Key: Extract Life_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2444341784576
+    m_Key: fastFire_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2511807164416
+    m_Key: fastFire_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2591419248640
+    m_Key: laserBurst_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2740178628608
+    m_Key: laserBurst_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2815692877824
+    m_Key: lifeRegen_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2893727903744
+    m_Key: lifeRegen_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2968180994048
+    m_Key: lifeSteal_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3047461728256
+    m_Key: lifeSteal_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3126889263104
+    m_Key: missile_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3186003783680
+    m_Key: missile_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3258061926400
+    m_Key: moveFaster_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3356716150784
+    m_Key: moveFaster_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3423258783744
+    m_Key: orbitalBlast_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3496420028416
+    m_Key: orbitalBlast_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3558239875072
+    m_Key: shield_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3612371562496
+    m_Key: shield_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3679174242304
+    m_Key: timeSlower_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3742545981440
+    m_Key: timeSlower_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3802629386240
+    m_Key: tripleShot_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3882652512256
+    m_Key: tripleShot_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4673413033984
+    m_Key: _empty
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 1879193326079443553
+  references:
+    version: 2
+    RefIds:
+    - rid: 1879193326079443553
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1750234073846

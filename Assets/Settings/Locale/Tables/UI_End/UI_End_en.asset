@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_End_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: bde1feb883bf5444e973090b59fb2f52, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 1879193326079443262
+  m_TableData:
+  - m_Id: 101990772736
+    m_Localized: Continue?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 170617974784
+    m_Localized: No
+    m_Metadata:
+      m_Items: []
+  - m_Id: 196362612736
+    m_Localized: Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 820743483392
+    m_Localized: Need a Life? <color=#FFFFFF>Use <b>{custom}</b> Coins!
+    m_Metadata:
+      m_Items:
+      - rid: 1879193326079443262
+  - m_Id: 1174457528320
+    m_Localized: Need a Life? <color=#FFFFFF>Watch Ad!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2191320395776
+    m_Localized: 'Final score:
+
+      {global.score}'
+    m_Metadata:
+      m_Items:
+      - rid: 1879193326079443262
+  - m_Id: 2344462823424
+    m_Localized: Upload Score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4475366387712
+    m_Localized: Your name...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3875585110016
+    m_Localized: Upload
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4607222722560
+    m_Localized: uploading score ...
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 1879193326079443262
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 2191320395776
+        - id: 820743483392

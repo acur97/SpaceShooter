@@ -20,9 +20,9 @@ MonoBehaviour:
   editorNotes: 1
   notes: 
   color: {r: 3.0365846, g: 0, b: 4.237095, a: 1}
-  name: Yamato
-  description: ship and bullets in <color=#b700ff>pink</color>, enemy bullets in
-    <color=#e5ff00>yellow
+  name: "\xC6on Drifter"
+  description: "> run aeon_drifter.exe  \r\n> WARNING: Quantum bleed detected  \r\n>
+    Time anchor... LOST  \r\n> Trace echoes: YES  \r\n> Launch? [Y/N] _"
   owned: 0
   cost: 0
   sprite: {fileID: 21300000, guid: 07bbaae3a21f5a147aa794e4df297d8c, type: 3}

@@ -20,9 +20,8 @@ MonoBehaviour:
   editorNotes: 1
   notes: 
   color: {r: 0, g: 0, b: 4.237095, a: 1}
-  name: Tirpitz
-  description: ship and bullets in <color=#0000ff>blue</color>, enemy bullets in
-    <color=#e5ff00>yellow
+  name: Nebulark
+  description: Ex tenebris nata, fugax lux inter astra. Finem suum semper fugit
   owned: 0
   cost: 0
   sprite: {fileID: 21300000, guid: 7acce72f27351e74fb41158d63708752, type: 3}

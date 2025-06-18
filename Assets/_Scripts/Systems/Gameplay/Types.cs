@@ -50,6 +50,7 @@ public class UiCommonTexts
     public const string Free = "free";
     public const string Owned = "owned";
     public const string PriceFormat = "${0}";
+    public const string CountFormat = "x{0:00}";
 }
 
 [Preserve]

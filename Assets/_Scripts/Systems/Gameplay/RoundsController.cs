@@ -1,4 +1,3 @@
-using Cysharp.Text;
 using Cysharp.Threading.Tasks;
 using System;
 using TMPro;
@@ -7,6 +6,8 @@ using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 #endif
 using UnityEngine;
+using UnityEngine.Localization.Components;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -16,6 +17,7 @@ public class RoundsController : MonoBehaviour
 
     [Header("Start UI")]
     [SerializeField] private TextMeshProUGUI modeText;
+    [SerializeField] private LocalizeStringEvent modeTextEvent;
     [SerializeField] private Color normalColor;
     [SerializeField] private Color infiniteColor;
     private Color bGColor;
@@ -28,6 +30,7 @@ public class RoundsController : MonoBehaviour
 
     [Header("Gameplay")]
     [SerializeField] private TextMeshProUGUI newLevelText;
+    [SerializeField] private LocalizeStringEvent newLevelTextEvent;
 
     public enum LevelType
     {
@@ -47,10 +50,7 @@ public class RoundsController : MonoBehaviour
     private int prevGroupCount;
     private bool waiting = false;
 
-    private const string _Normal = "Normal";
-    private const string _Infinite = "Infinite";
     private const string lastLevelType = "LastLevelType";
-    private const string levelComplete = "level #{0}\r\ncompleted";
 
 #if UNITY_EDITOR
     public void OnPreprocessBuild(BuildReport report)
@@ -166,7 +166,7 @@ public class RoundsController : MonoBehaviour
         {
             bGColor = infiniteColor;
             modeText.color = bGColor;
-            modeText.text = _Infinite;
+            modeTextEvent.StringReference.SetReference("Globals", "mode_infinite");
 
             bGColor.a = 0.1f;
             leaderboardBg.color = bGColor;
@@ -178,7 +178,7 @@ public class RoundsController : MonoBehaviour
         {
             bGColor = normalColor;
             modeText.color = bGColor;
-            modeText.text = _Normal;
+            modeTextEvent.StringReference.SetReference("Globals", "mode_normal");
 
             bGColor.a = 0.1f;
             leaderboardBg.color = bGColor;
@@ -240,7 +240,8 @@ public class RoundsController : MonoBehaviour
             waiting = true;
 
             newLevelText.transform.localScale = Vector3.zero;
-            newLevelText.SetTextFormat(levelComplete, levelCount);
+            (newLevelTextEvent.StringReference["level"] as IntVariable).Value = levelCount;
+            newLevelTextEvent.StringReference.SetReference("Globals", "levelComplete");
 
             LeanTween.scale(newLevelText.gameObject, Vector3.one, 0.25f);
             LeanTween.value(0, 1, 0.3f)

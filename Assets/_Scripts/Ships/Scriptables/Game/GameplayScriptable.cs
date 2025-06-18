@@ -22,7 +22,7 @@ public class GameplayScriptable : ScriptableObject
     [TextArea(10, 20)] public string wNew;
     public int coinValue = 5;
     public uint numberOfAdRevivals = 1;
-    public uint numberOfCoinsRevivals = 100;
+    public int numberOfCoinsRevivals = 100;
 
     [Header("Normal Level Type")]
     public uint playerHealth = 20;

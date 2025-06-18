@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Globals_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: dcdbebd672a49734295e4fd377abb725, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 1879193326079443256
+  m_TableData:
+  - m_Id: 101185466368
+    m_Localized: Normal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 172568326144
+    m_Localized: Infinite
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12536357302272
+    m_Localized: 'Coins: {global.coins}'
+    m_Metadata:
+      m_Items:
+      - rid: 1879193326079443256
+  - m_Id: 12880969707520
+    m_Localized: 'Score: {global.score}'
+    m_Metadata:
+      m_Items:
+      - rid: 1879193326079443256
+  - m_Id: 16719743528960
+    m_Localized: Leaderboard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18429853544448
+    m_Localized: Return home screen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22281008951296
+    m_Localized: 'Level #{level}
+
+      Completed'
+    m_Metadata:
+      m_Items:
+      - rid: 1879193326079443256
+  references:
+    version: 2
+    RefIds:
+    - rid: 1879193326079443256
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 12536357302272
+        - id: 12880969707520
+        - id: 22281008951296

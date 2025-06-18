@@ -18,6 +18,8 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: d19829ca738a58449910342c9b6d66ea, type: 3}
   description: Each hit to the enemy regenerates your life (10% maximum life), lasts
     10 seconds
+  powerTitleKey: lifeSteal_title
+  powerDescriptionKey: lifeSteal_desc
   currentAmount: 12
   cost: 40
   useDuration: 1

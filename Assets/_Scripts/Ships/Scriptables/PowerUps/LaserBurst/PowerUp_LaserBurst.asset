@@ -18,6 +18,8 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: da9aba4e2e454de4d8e32933e3fc7c05, type: 3}
   description: Directional laser that damages whatever it touches, lasts 6 to 9 seconds
     and has pre-charge time
+  powerTitleKey: laserBurst_title
+  powerDescriptionKey: laserBurst_desc
   currentAmount: 12
   cost: 900
   useDuration: 1

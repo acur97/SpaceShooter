@@ -20,8 +20,9 @@ MonoBehaviour:
   editorNotes: 1
   notes: 
   color: {r: 4.237095, g: 0, b: 0, a: 1}
-  name: Lowa
-  description: ship and bullets in <color=#ff0000>red</color>, enemy bullets in <color=#00ffdd>cyan
+  name: Pulse Raptor
+  description: "-_origin: UNKNOWN  \n\r\n-_input: THOUGHT INTERFACE ACTIVE\n\r\n-_status:
+    UNREADABLE  "
   owned: 0
   cost: 0
   sprite: {fileID: 21300000, guid: 16240b8098e32574d9f510c81afff5fb, type: 3}

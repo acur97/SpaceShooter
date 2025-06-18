@@ -17,6 +17,8 @@ MonoBehaviour:
   powerName: Triple Shot
   sprite: {fileID: 21300000, guid: e1222b27d8a3ebe41be8285267a3b8a8, type: 3}
   description: Triple shot that lasts 20 seconds
+  powerTitleKey: tripleShot_title
+  powerDescriptionKey: tripleShot_desc
   currentAmount: 12
   cost: 220
   useDuration: 1

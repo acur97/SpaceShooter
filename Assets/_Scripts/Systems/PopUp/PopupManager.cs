@@ -1,6 +1,8 @@
 using System;
-using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Components;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
+using UnityEngine.Localization.Tables;
 using UnityEngine.UI;
 
 public class PopupManager : MonoBehaviour
@@ -9,17 +11,19 @@ public class PopupManager : MonoBehaviour
 
     [ReadOnly] public bool isOpen = false;
 
+    [Header("Localization")]
+
     [Header("References")]
     [SerializeField] private GameObject root;
-    [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private LocalizeStringEvent text;
 
     [Space]
     [SerializeField] private Button leftButton;
-    [SerializeField] private TextMeshProUGUI leftBtnText;
+    [SerializeField] private LocalizeStringEvent leftBtnText;
 
     [Space]
     [SerializeField] private Button rightButton;
-    [SerializeField] private TextMeshProUGUI rightBtnText;
+    [SerializeField] private LocalizeStringEvent rightBtnText;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Initialize()
@@ -35,17 +39,21 @@ public class PopupManager : MonoBehaviour
         root.transform.localScale = Vector3.zero;
     }
 
-    public void OpenPopUp(string _text, string _leftText = "Accept", Action _leftAction = null, string _rightText = "Cancel", Action _rightAction = null, bool _autoClose = true)
+    public void OpenPopUp(TableEntryReference _text, TableEntryReference _leftText = default, Action _leftAction = null, TableEntryReference _rightText = default, Action _rightAction = null, bool _autoClose = true)
     {
         isOpen = true;
 
-        text.text = _text;
+        text.StringReference.SetReference("PopUps", _text);
 
-        leftBtnText.text = _leftText;
+        if (_leftText.Equals(default))
+            _leftText = "accept";
+        leftBtnText.StringReference.SetReference("PopUps", _leftText);
         leftButton.onClick.RemoveAllListeners();
         leftButton.onClick.AddListener(() => _leftAction?.Invoke());
 
-        rightBtnText.text = _rightText;
+        if (_rightText.Equals(default))
+            _rightText = "cancel";
+        rightBtnText.StringReference.SetReference("PopUps", _rightText);
         rightButton.onClick.RemoveAllListeners();
         rightButton.onClick.AddListener(() => _rightAction?.Invoke());
 
@@ -78,19 +86,28 @@ public class PopupManager : MonoBehaviour
         root.SetActive(false);
     }
 
-    public void UpdateText(string _text)
+    public void UpdateText(TableEntryReference _text, string customVariable = null)
     {
-        text.text = _text;
+        if (customVariable != null)
+            (text.StringReference["custom"] as StringVariable).Value = customVariable;
+
+        text.StringReference.SetReference("PopUps", _text);
     }
 
-    public void UpdateLeftText(string _text)
+    public void UpdateLeftText(TableEntryReference _text, string customVariable = null)
     {
-        leftBtnText.text = _text;
+        if (customVariable != null)
+            (leftBtnText.StringReference["custom"] as StringVariable).Value = customVariable;
+
+        leftBtnText.StringReference.SetReference("PopUps", _text);
     }
 
-    public void UpdateRightText(string _text)
+    public void UpdateRightText(TableEntryReference _text, string customVariable = null)
     {
-        rightBtnText.text = _text;
+        if (customVariable != null)
+            (rightBtnText.StringReference["custom"] as StringVariable).Value = customVariable;
+
+        rightBtnText.StringReference.SetReference("PopUps", _text);
     }
 
     public void UpdateLeftAction(Action _leftAction = null)

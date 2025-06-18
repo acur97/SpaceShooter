@@ -20,9 +20,9 @@ MonoBehaviour:
   editorNotes: 1
   notes: 
   color: {r: 0.3105724, g: 4.237095, b: 0, a: 1}
-  name: Kvar
-  description: ship and bullets in <color=#11ff00>green</color>, enemy bullets in
-    <color=#4400ff>purple
+  name: Spectra MkII
+  description: "01010011 01101000 01100101 00100000 01101001 01110011 01101110\u201901110100
+    00100000 01110100 01101000 01100101 01110010 01100101"
   owned: 0
   cost: 0
   sprite: {fileID: 21300000, guid: 31db2e56e5697f54aa4fd084328ee41e, type: 3}

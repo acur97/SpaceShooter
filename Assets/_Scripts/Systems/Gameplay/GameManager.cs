@@ -1,12 +1,12 @@
-using Cysharp.Text;
 using Cysharp.Threading.Tasks;
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
 using Google.Play.AppUpdate;
 using Google.Play.Common;
 #endif
 using System;
-using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Components;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.LowLevel;
 using UnityEngine.SceneManagement;
 
@@ -31,34 +31,26 @@ public class GameManager : MonoBehaviour
     [ReadOnly] public float finalTimeOfGameplay = 0f;
     [ReadOnly] public bool isRevived = false;
 
+    [Header("Localization")]
+    [SerializeField] private VariablesGroupAsset globalVariables;
+
     [Header("Score")]
-    [SerializeField] private TextMeshProUGUI scoreText;
-    private const string preScore = "Score: {0}";
-    public int score = 0;
+    public int Score
+    {
+        get => score.Value;
+        set => score.Value = value;
+    }
+    [SerializeField, ReadOnly] private IntVariable score;
     private float accumulatedScore = 0f;
     private int pointsToAdd = 0;
-    [SerializeField] private TextMeshProUGUI endScore;
-    private const string postScore = "Final score:\n {0}";
-
-    [Header("Coins")]
-    [SerializeField] private TextMeshProUGUI coinsText;
-    private const string preCoins = "Coins: {0}";
-    [SerializeField] private TextMeshProUGUI endCoins;
 
     [Header("Ui")]
     [SerializeField] private Camera mainCamera;
-    [SerializeField] private TextMeshProUGUI wNewTxt;
-    [SerializeField] private TextMeshProUGUI wNewParagraph;
-    private const string wNewFormat = "What's new    {0}";
     [SerializeField] private GameObject adLifePanel;
     [SerializeField] private GameObject adIcon;
     [SerializeField] private GameObject adLifeEndPanel;
-    [SerializeField] private TextMeshProUGUI adLifeTxt;
-#if Platform_Web
-    private const string adLifeFormat = "Need a Life? <color=#FFFFFF>Use <b>{0}</b> Coins!";
-#else
-    private const string adLifeFormat = "Need a Life? <color=#FFFFFF>Watch Ad!";
-#endif
+    [SerializeField] private LocalizeStringEvent adLifeTxt;
+
     [Header("Web QR Code")]
     [SerializeField] private GameObject qrCodePanel;
     [SerializeField] private GameObject qrCodeSprite;
@@ -237,10 +229,10 @@ public class GameManager : MonoBehaviour
         if (!forceStart && gameplayScriptable.selectedPowerUp == null)
         {
             PopupManager.Instance.OpenPopUp(
-                "Play without Power Up?",
-                "Play",
+                "playWithout_title",
+                "playWithout_play",
                 () => StartGameplayUi(true),
-                "Go to Store",
+                "playWithout_store",
                 () =>
                 {
                     storeManager.SetUi(true);
@@ -279,8 +271,7 @@ public class GameManager : MonoBehaviour
         AdsManager.PrepareAd(AdsManager.AdType.Rewarded_Life);
 #endif
 
-        scoreText.SetTextFormat(preScore, score);
-        coinsText.SetTextFormat(preCoins, PlayerProgress.GetCoins());
+        //coinsText.SetTextFormat(preCoins, PlayerProgress.GetCoins());
 
         uiManager.SetUi(UiType.Gameplay, true);
         uiManager.SetUi(UiType.Select, false, 1, () => anim_count.SetTrigger(AnimationParameters.Init));
@@ -332,11 +323,17 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        IntVariable globalScore = globalVariables["score"] as IntVariable;
         PlayerLoopSystem loop = PlayerLoop.GetCurrentPlayerLoop();
         PlayerLoopHelper.Initialize(ref loop, InjectPlayerLoopTimings.Minimum);
         //PlayerLoopHelper.DumpCurrentPlayerLoop();
 
         Instance = this;
+
+        score = globalVariables["score"] as IntVariable;
+        Score = 0;
+
+        (globalVariables["version"] as StringVariable).Value = Application.version;
 
         uiManager.Init();
         roundsController.Init();
@@ -351,11 +348,8 @@ public class GameManager : MonoBehaviour
         audioManager.SetMasterVolume(1f);
         audioManager.SetMusicPitch(1f);
 
-        PlayerProgress.Init(gameplayScriptable);
+        PlayerProgress.Init(gameplayScriptable, globalVariables["coins"] as IntVariable);
         SetCustoms(gameplayScriptable.selectedCustoms);
-
-        wNewTxt.SetTextFormat(wNewFormat, Application.version);
-        wNewParagraph.text = gameplayScriptable.wNew;
 
         qrCodePanel.SetActive(false);
 
@@ -363,7 +357,7 @@ public class GameManager : MonoBehaviour
         EnableMobileKeyboard(false);
 #endif
 
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
         CheckForUpdate().Forget();
 #endif
     }
@@ -375,7 +369,7 @@ public class GameManager : MonoBehaviour
     }
 #endif
 
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
     private async UniTaskVoid CheckForUpdate()
     {
         AppUpdateManager appUpdateManager = new();
@@ -493,10 +487,10 @@ public class GameManager : MonoBehaviour
             Input.GetButtonDown(Inputs.Cancel))
         {
             PopupManager.Instance.OpenPopUp(
-                "Wanto to leave?",
-                "Exit",
+                "leave",
+                "exit",
                 () => Application.Quit(),
-                "Back");
+                "back");
         }
     }
 
@@ -538,15 +532,13 @@ public class GameManager : MonoBehaviour
     {
         if (isPlaying)
         {
-            score += value;
-            scoreText.SetTextFormat(preScore, score);
+            Score += value;
         }
     }
 
     public void UpCoins(int value)
     {
         PlayerProgress.SetCoins(value);
-        coinsText.SetTextFormat(preCoins, PlayerProgress.GetCoins());
         audioManager.PlaySound(Enums.AudioType.Coin);
     }
 
@@ -564,9 +556,6 @@ public class GameManager : MonoBehaviour
 
         uiManager.SetUi(UiType.Pause, false);
         uiManager.SetUi(UiType.End, true, 1, () => uiManager.SetUi(UiType.Gameplay, false));
-
-        endScore.SetTextFormat(postScore, score);
-        endCoins.SetTextFormat(preCoins, PlayerProgress.GetCoins());
 
         audioManager.SetMasterVolume(0.5f);
         audioManager.PlaySound(Enums.AudioType.End, 2.5f);
@@ -605,14 +594,17 @@ public class GameManager : MonoBehaviour
         Vibration.InitVibrate();
     }
 
+#if Platform_Mobile
     private void ShowRevivalWithAd()
     {
         adLifePanel.SetActive(true);
         adLifeEndPanel.SetActive(false);
 
         adIcon.SetActive(true);
-        adLifeTxt.SetText(adLifeFormat);
+
+        adLifeTxt.StringReference.SetReference("UI_End", "needLife2");
     }
+#endif
 
     private void ShowRevivalWithCoins()
     {
@@ -620,7 +612,9 @@ public class GameManager : MonoBehaviour
         adLifeEndPanel.SetActive(false);
 
         adIcon.SetActive(false);
-        adLifeTxt.SetTextFormat(adLifeFormat, gameplayScriptable.numberOfCoinsRevivals);
+
+        (adLifeTxt.StringReference["custom"] as IntVariable).Value = gameplayScriptable.numberOfCoinsRevivals;
+        adLifeTxt.StringReference.SetReference("UI_End", "needLife1");
     }
 
     public void FinalizeGameplay()

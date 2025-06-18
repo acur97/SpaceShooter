@@ -17,6 +17,8 @@ MonoBehaviour:
   powerName: Extract Life
   sprite: {fileID: 21300000, guid: 81fd5d9b5a36f4b42bf88d1c076dadeb, type: 3}
   description: Steals the total life of 1 enemy you destroy
+  powerTitleKey: Extract Life_title
+  powerDescriptionKey: Extract Life_desc
   currentAmount: 12
   cost: 150
   useDuration: 0

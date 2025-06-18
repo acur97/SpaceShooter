@@ -174,14 +174,14 @@ public class FirestoreManager : MonoBehaviour
 
         for (int i = 0; i < leaderboard.fields.Scores.arrayValue.values.Count; i++)
         {
-            playerScore = $"{GameManager.Instance.score}{scoreSeparator}{nameInput.text}";
-            if (GameManager.Instance.score >= int.Parse(leaderboard.fields.Scores.arrayValue.values[i].stringValue.Split(scoreSeparator)[0]))
+            playerScore = $"{GameManager.Instance.Score}{scoreSeparator}{nameInput.text}";
+            if (GameManager.Instance.Score >= int.Parse(leaderboard.fields.Scores.arrayValue.values[i].stringValue.Split(scoreSeparator)[0]))
             {
                 leaderboard.fields.Scores.arrayValue.values.Insert(i, new Document.Value() { stringValue = playerScore });
                 break;
             }
 
-            if (i == leaderboard.fields.Scores.arrayValue.values.Count - 1 && GameManager.Instance.score > 0)
+            if (i == leaderboard.fields.Scores.arrayValue.values.Count - 1 && GameManager.Instance.Score > 0)
             {
                 leaderboard.fields.Scores.arrayValue.values.Add(new Document.Value() { stringValue = playerScore });
                 break;

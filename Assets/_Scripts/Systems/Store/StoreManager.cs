@@ -1,9 +1,9 @@
-using Cysharp.Text;
 using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
 public class StoreManager : MonoBehaviour
@@ -18,7 +18,7 @@ public class StoreManager : MonoBehaviour
     [SerializeField] private ScrollRect scrollRect;
 
     private GameObject instenciatedPrefab;
-    private List<GameObject> instanciatedPrefabs = new();
+    private readonly List<GameObject> instanciatedPrefabs = new();
     [SerializeField] private EventSystem eventSystem;
     [SerializeField] private Transform first;
     [SerializeField] private Transform top;
@@ -34,12 +34,14 @@ public class StoreManager : MonoBehaviour
     [SerializeField] private RectTransform tgl2;
 
     [Space]
-    [SerializeField] private Toggle customTgl;
     [SerializeField] private Toggle powersTgl;
+    [SerializeField] private Toggle customTgl;
 
     [Header("Info Panel")]
-    [SerializeField] private TextMeshProUGUI titleTxt;
-    [SerializeField] private TextMeshProUGUI descriptionTxt;
+    [SerializeField] private TextMeshProUGUI titleTmp;
+    [SerializeField] private LocalizeStringEvent titleTxt;
+    [SerializeField] private TextMeshProUGUI descriptionTmp;
+    [SerializeField] private LocalizeStringEvent descriptionTxt;
     [SerializeField] private Button buyBtn;
     [SerializeField] private Toggle selectTgl;
     [SerializeField] private GameObject onTgl;
@@ -49,12 +51,8 @@ public class StoreManager : MonoBehaviour
     private PowerUpBase showingPowerUp;
     private ShipScriptable showingShip;
 
-    [Space]
-    [SerializeField] private TextMeshProUGUI coinsTxt;
-
     private const float limit = 1.050505f;
     private float cameraAspect = 1.777778f;
-    private const string _coinsUi = "Coins: {0}";
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Initialize()
@@ -64,7 +62,7 @@ public class StoreManager : MonoBehaviour
 
     private void Awake()
     {
-        onRefresh += UpdateUi;
+        //onRefresh += UpdateUi;
 
         customTgl.onValueChanged.AddListener((on) =>
         {
@@ -92,7 +90,7 @@ public class StoreManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        onRefresh -= UpdateUi;
+        //onRefresh -= UpdateUi;
 #if Platform_Mobile
         AdsManager.OnRewardedAdLoaded -= OnAdLoaded;
         AdsManager.OnRewardedAdCompleted -= OnAdViewed;
@@ -167,10 +165,9 @@ public class StoreManager : MonoBehaviour
         onRefresh?.Invoke();
     }
 
-    private void UpdateUi()
-    {
-        coinsTxt.SetTextFormat(_coinsUi, PlayerProgress.GetCoins());
-    }
+    //private void UpdateUi()
+    //{
+    //}
 
     public void SetUi(bool on = true)
     {
@@ -192,23 +189,14 @@ public class StoreManager : MonoBehaviour
     {
         if (powerUp == null)
         {
-            titleTxt.text = string.Empty;
-            descriptionTxt.text = string.Empty;
-
-            buyBtn.interactable = false;
-            selectTgl.interactable = false;
-
-            selectTgl.SetIsOnWithoutNotify(false);
-            onTgl.SetActive(false);
-            offTgl.SetActive(true);
-
+            DisableComponents();
             return;
         }
 
         showingPowerUp = powerUp;
 
-        titleTxt.text = showingPowerUp.powerName;
-        descriptionTxt.text = showingPowerUp.description;
+        titleTxt.StringReference.SetReference("PowerUps", showingPowerUp.powerTitleKey);
+        descriptionTxt.StringReference.SetReference("PowerUps", showingPowerUp.powerDescriptionKey);
 
         buyBtn.onClick.RemoveAllListeners();
         buyBtn.onClick.AddListener(() => BuyPowerUp());
@@ -224,13 +212,26 @@ public class StoreManager : MonoBehaviour
         selectTgl.interactable = showingPowerUp.currentAmount > 0;
     }
 
+    public void DisableComponents()
+    {
+        titleTxt.StringReference.SetReference("PowerUps", "_empty");
+        descriptionTxt.StringReference.SetReference("PowerUps", "_empty");
+
+        buyBtn.interactable = false;
+        selectTgl.interactable = false;
+
+        selectTgl.SetIsOnWithoutNotify(false);
+        onTgl.SetActive(false);
+        offTgl.SetActive(true);
+    }
+
     private void BuyPowerUp()
     {
         if (PlayerProgress.GetCoins() < showingPowerUp.cost)
         {
             PopupManager.Instance.OpenPopUp(
-                "Watch an ad for ... coins?",
-                "Close",
+                "watchAdFor_title1",
+                "close",
                 () =>
                 {
                     buyBtn.Select();
@@ -240,7 +241,7 @@ public class StoreManager : MonoBehaviour
 #endif
                     PopupManager.Instance.ClosePopUp();
                 },
-                "loading...",
+                "loading",
                 null,
                 false);
 
@@ -270,8 +271,8 @@ public class StoreManager : MonoBehaviour
 
         if (success)
         {
-            PopupManager.Instance.UpdateText($"Watch an ad for {amount} coins?");
-            PopupManager.Instance.UpdateRightText("Watch Ad");
+            PopupManager.Instance.UpdateText("watchAdFor_title2", amount.ToString());
+            PopupManager.Instance.UpdateRightText("watchAdFor_watch");
             PopupManager.Instance.UpdateRightAction(() =>
             {
                 AdsManager.OnRewardedAdCompleted += OnAdViewed;
@@ -283,8 +284,8 @@ public class StoreManager : MonoBehaviour
         }
         else
         {
-            PopupManager.Instance.UpdateText("There are no ads at this time");
-            PopupManager.Instance.UpdateRightText("Try later");
+            PopupManager.Instance.UpdateText("noAds");
+            PopupManager.Instance.UpdateRightText("tryLater");
             PopupManager.Instance.UpdateRightAction(() =>
             {
                 buyBtn.Select();
@@ -303,7 +304,6 @@ public class StoreManager : MonoBehaviour
         if (rewarded)
         {
             GameManager.Instance.UpCoins(10);
-            UpdateUi();
         }
     }
 
@@ -311,23 +311,14 @@ public class StoreManager : MonoBehaviour
     {
         if (ship == null)
         {
-            titleTxt.text = string.Empty;
-            descriptionTxt.text = string.Empty;
-
-            buyBtn.interactable = false;
-            selectTgl.interactable = false;
-
-            selectTgl.SetIsOnWithoutNotify(false);
-            onTgl.SetActive(false);
-            offTgl.SetActive(true);
-
+            DisableComponents();
             return;
         }
 
         showingShip = ship;
 
-        titleTxt.text = showingShip.name;
-        descriptionTxt.text = showingShip.description;
+        titleTmp.text = showingShip.name;
+        descriptionTmp.text = showingShip.description;
 
         buyBtn.onClick.RemoveAllListeners();
         buyBtn.onClick.AddListener(() => BuyCustom());

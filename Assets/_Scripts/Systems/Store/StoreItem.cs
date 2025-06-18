@@ -1,6 +1,7 @@
 using Cysharp.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
 public class StoreItem : MonoBehaviour
@@ -9,7 +10,7 @@ public class StoreItem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI countTxt;
     [SerializeField] private Color haveColor;
     [SerializeField] private Color dontColor;
-    [SerializeField] private TextMeshProUGUI titleTxt;
+    [SerializeField] private LocalizeStringEvent titleTxt;
     [SerializeField] private TextMeshProUGUI priceTxt;
     [SerializeField] private Button selectBtn;
     [SerializeField] private Image selected;
@@ -17,15 +18,13 @@ public class StoreItem : MonoBehaviour
     private StoreManager store;
     private PowerUpBase powerUp;
 
-    private const string countFormat = "x{0:00}";
-
     public void Init(StoreManager _store, PowerUpBase _powerUp)
     {
         store = _store;
         powerUp = _powerUp;
 
         spriteImg.sprite = _powerUp.sprite;
-        titleTxt.text = _powerUp.powerName;
+        titleTxt.StringReference.SetReference("PowerUps", _powerUp.powerTitleKey);
 
         if (_powerUp.cost == 0)
         {
@@ -43,7 +42,7 @@ public class StoreItem : MonoBehaviour
 
     private void UpdateBtn()
     {
-        countTxt.SetTextFormat(countFormat, powerUp.currentAmount);
+        countTxt.SetTextFormat(UiCommonTexts.CountFormat, powerUp.currentAmount);
         countTxt.color = powerUp.currentAmount > 0 ? haveColor : dontColor;
 
         selected.enabled = GameManager.Instance.gameplayScriptable.selectedPowerUp == powerUp;
