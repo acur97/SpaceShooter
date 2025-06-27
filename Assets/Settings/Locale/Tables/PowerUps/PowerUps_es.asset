@@ -106,8 +106,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3186003783680
-    m_Localized: "Cambia el disparo a 2 misiles guiados al enemigo, lo que inflige
-      15 de da\xF1o"
+    m_Localized: Cambia el disparo a 2 misiles guiados al enemigo, lo que inflige
+      15 cuando explotan
     m_Metadata:
       m_Items: []
   - m_Id: 3258061926400

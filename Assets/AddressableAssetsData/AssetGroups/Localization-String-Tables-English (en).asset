@@ -45,30 +45,11 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a1877108bb47ae44f9b9a49ce934eca8
-    m_Address: UI_End_en
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: cf7ca57902c524b43a37987c8ff9f760
-    m_Address: UI_Pause_en
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ec33259150a4c0b4fb8427fe2d90bac7
     m_Address: UI_Wnew_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f55e5fc534f0b894d8d4988c6b928c59
-    m_Address: UI_Select_en
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en
-    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 6a57ebb067634224d9cb6ad94e404120, type: 2}

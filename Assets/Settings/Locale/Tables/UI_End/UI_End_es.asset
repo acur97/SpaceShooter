@@ -20,7 +20,7 @@ MonoBehaviour:
     - rid: 1879193326079443263
   m_TableData:
   - m_Id: 101990772736
-    m_Localized: "\xBFContinuar?"
+    m_Localized: Continuar?
     m_Metadata:
       m_Items: []
   - m_Id: 170617974784
@@ -32,16 +32,18 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 820743483392
-    m_Localized: "\xBFNecesitas vidas? <color=#FFFFFF>Usa <b>{custom}</b> monedas!"
+    m_Localized: Necesitas vidas? <color=#FFFFFF>Usa <b>{custom}</b> monedas!
     m_Metadata:
       m_Items:
       - rid: 1879193326079443263
   - m_Id: 1174457528320
-    m_Localized: "\xBFNecesitas vidas? <color=#FFFFFF>Mira un anuncio!"
+    m_Localized: Necesitas vidas? <color=#FFFFFF>Mira un anuncio!
     m_Metadata:
       m_Items: []
   - m_Id: 2191320395776
-    m_Localized: "Puntuaci\xF3n final:\n{global.score}"
+    m_Localized: 'Puntuacion final:
+
+      {global.score}'
     m_Metadata:
       m_Items:
       - rid: 1879193326079443263

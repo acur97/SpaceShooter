@@ -39,7 +39,9 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 58200214712320
-    m_Localized: "\xA1Descarga la versi\xF3n m\xF3vil en\n<b><u>\xA1Google Play Store!"
+    m_Localized: 'Descarga la version movil en
+
+      <b><u>Google Play Store!'
     m_Metadata:
       m_Items: []
   references:

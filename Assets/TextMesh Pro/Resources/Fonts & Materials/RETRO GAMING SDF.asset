@@ -11,7 +11,7 @@ Texture2D:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
   m_IsAlphaChannelOptional: 0
-  serializedVersion: 3
+  serializedVersion: 4
   m_Width: 512
   m_Height: 512
   m_CompleteImageSize: 262144
@@ -76,8 +76,8 @@ MonoBehaviour:
     m_SuperscriptSize: 0.5
     m_SubscriptOffset: -13.907958
     m_SubscriptSize: 0.5
-    m_UnderlineOffset: 3.8225095
-    m_UnderlineThickness: 2.540039
+    m_UnderlineOffset: -22
+    m_UnderlineThickness: 4.5
     m_StrikethroughOffset: 9.6
     m_StrikethroughThickness: 2.540039
     m_TabWidth: 19

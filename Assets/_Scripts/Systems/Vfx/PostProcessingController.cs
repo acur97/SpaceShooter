@@ -146,14 +146,6 @@ public class PostProcessingController : MonoBehaviour
         ResetCameraPosition();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            ImpactFrame().Forget();
-        }
-    }
-
     public async UniTaskVoid ImpactFrame(bool lastFrame = true, Action onComplete = null)
     {
         impactFrameMaterial.SetInt(MaterialProperties.Invert, 0);
