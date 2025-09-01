@@ -1,7 +1,9 @@
-# PolygonUs_PruebaTecnica
-Videojuego top-down como prueba tecnica basado en Twin Bee de NES.
+# SpaceShooter
+Videojuego top-down (que inicio como prueba tecnica para PolygonUs) basado en Twin Bee de NES.
 
-- Un ejecutable del juego se puede descargar desde la pagina de [Releases](https://github.com/acur97/PolygonUs_PruebaTecnica/releases)
+-> LEGACY:
+
+- Un ejecutable antiguo del juego se puede descargar desde la pagina de [Releases](https://github.com/acur97/PolygonUs_PruebaTecnica/releases)
 
 # Controles
 - Interaccion UI con el Mouse
