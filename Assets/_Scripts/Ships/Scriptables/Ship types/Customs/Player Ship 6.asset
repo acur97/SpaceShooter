@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57881a7a4b18dff4b82ce561559b9591, type: 3}
+  m_Name: Player Ship 6
+  m_EditorClassIdentifier: 
+  editorCustom: 1
+  editorStore: 1
+  editorShip: 1
+  editorBullet: 1
+  editorEnemy: 1
+  editorNotes: 1
+  notes: 
+  color: {r: 0.3105724, g: 4.237095, b: 0, a: 1}
+  name: Spectra MkII
+  description: "01010011 01101000 01100101 00100000 01101001 01110011 01101110\u201901110100
+    00100000 01110100 01101000 01100101 01110010 01100101"
+  owned: 0
+  cost: 0
+  sprite: {fileID: 21300000, guid: 31db2e56e5697f54aa4fd084328ee41e, type: 3}
+  spriteScale: {x: 0.2, y: 0.2, z: 1}
+  hue: 0
+  speed: 4
+  health: 0
+  bulletSpeed: 10
+  fireTime: 0.5
+  coolDown: 0.1
+  _spaceCoolDown: 0
+  spaceCooldown: -1
+  _bulletTime: 0
+  bulletTime: -1
+  attack: 0
+  startRotation: 0
+  rotationSpeed: 0
+  enemyCollision: 0
+  deathScore: 8
+  behaviour: 0
+  directBehaviour: 0
+  directLine: -0.9
+  behaviourMathfSin: 1.5
+  behaviourMathfInverted: 0
+  _timeToContinue: 0
+  timeToContinue: -1
+  countForGroup: 1
+  spawnIndex: 0

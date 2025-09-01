@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "802342611622",
+    "firebase_url": "https://polygonus-spaceshooter-default-rtdb.firebaseio.com",
+    "project_id": "polygonus-spaceshooter",
+    "storage_bucket": "polygonus-spaceshooter.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:802342611622:android:36baa92c3e145079f7a267",
+        "android_client_info": {
+          "package_name": "com.PolygonUs.SpaceShooter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLW9MafMxioSgxKpOAGH_Cxtz2HoAh-XI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

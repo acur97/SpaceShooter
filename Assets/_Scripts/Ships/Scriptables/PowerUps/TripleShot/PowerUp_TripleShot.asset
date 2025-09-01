@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 144e89259653bc74494491e24d34aa16, type: 3}
+  m_Name: PowerUp_TripleShot
+  m_EditorClassIdentifier: 
+  shipBase: {fileID: 0}
+  type: 2
+  powerName: Triple Shot
+  sprite: {fileID: 21300000, guid: e1222b27d8a3ebe41be8285267a3b8a8, type: 3}
+  description: Triple shot that lasts 20 seconds
+  powerTitleKey: tripleShot_title
+  powerDescriptionKey: tripleShot_desc
+  currentAmount: 12
+  cost: 220
+  useDuration: 1
+  durationRange: {x: 20, y: 20}
+  duration: 20
+  clip_activate:
+    audioClip: {fileID: 8300000, guid: 0b0f8cc964df8c140b6d761869c33fd9, type: 3}
+    audioVolume: 1
+  clip_constant:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_deactivate:
+    audioClip: {fileID: 8300000, guid: 5c47e1d4af485ae43b2d8f22541a8c6b, type: 3}
+    audioVolume: 1.5
+  waitForActivate: 0
+  clip_shoot:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_playerDamage:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_enemyDamage:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_enemyDeath:
+    audioClip: {fileID: 0}
+    audioVolume: 0

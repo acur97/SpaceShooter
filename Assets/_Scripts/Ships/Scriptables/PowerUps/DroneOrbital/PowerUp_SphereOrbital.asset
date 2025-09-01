@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8189e2c8fc47cd541913e14187d72451, type: 3}
+  m_Name: PowerUp_SphereOrbital
+  m_EditorClassIdentifier: 
+  shipBase: {fileID: 0}
+  type: 12
+  powerName: 
+  sprite: {fileID: 0}
+  description: 
+  currentAmount: 0
+  cost: 300
+  useDuration: 1
+  durationRange: {x: 30, y: 30}
+  duration: 1.6121821
+  clip_activate:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_constant:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_deactivate:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  waitForActivate: 0
+  clip_shoot:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_playerDamage:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_enemyDamage:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_enemyDeath:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  prefab: {fileID: 3048626543858494239, guid: c349196ec58fb7e438b76593666aabb5, type: 3}
+  distance: 1
+  speed: 3

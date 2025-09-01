@@ -1,0 +1,57 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:Foldout text="Custom" binding-path="editorCustom" style="margin-bottom: 10px; background-color: rgba(255, 255, 255, 0.05); margin-top: 10px; padding-bottom: 0; margin-right: 0; padding-right: 6px; -unity-font-style: bold;">
+        <uie:ColorField label="Custom Color" binding-path="color" tooltip="Custom color for particles and bullets" show-eye-dropper="false" show-alpha="true" hdr="true" value="#FFFFFFFF" style="margin-bottom: 4px; -unity-font-style: normal;" />
+        <ui:Foldout text="Store" enabled="true" value="true" binding-path="editorStore" style="margin-top: 0; margin-bottom: 6px; background-color: rgba(255, 255, 255, 0.05); padding-right: 6px; padding-bottom: 0; min-width: 0; min-height: 26px;">
+            <ui:TextField label="Name" placeholder-text="store name..." tooltip="Name in the store" binding-path="name" style="-unity-font-style: normal;" />
+            <ui:TextField placeholder-text="description..." binding-path="description" multiline="true" label="Description" tooltip="Description of the custom for the store" style="white-space: normal; -unity-font-style: normal;" />
+            <ui:Toggle label="Owned" tooltip="I have this customization" binding-path="owned" style="-unity-font-style: normal;" />
+            <ui:UnsignedIntegerField label="Cost" value="0" binding-path="cost" style="-unity-font-style: normal;" />
+        </ui:Foldout>
+    </ui:Foldout>
+    <ui:Foldout text="Ship Parameters" binding-path="editorShip" style="margin-top: 0; margin-bottom: 10px; background-color: rgba(255, 255, 255, 0.05); padding-right: 6px; -unity-font-style: bold;">
+        <ui:VisualElement style="flex-direction: row; height: 18px; justify-content: space-between; align-self: stretch; -unity-font-style: normal;">
+            <uie:ObjectField label="Sprite" allow-scene-objects="false" type="UnityEngine.Sprite, UnityEngine.CoreModule" binding-path="sprite" tooltip="Sprite of the Ship" name="Field_ShipSprite" style="flex-direction: row; align-items: flex-start; align-self: flex-end; width: 86%;" />
+            <ui:VisualElement style="height: 34px; align-self: flex-end; min-width: 32px; width: 100%;">
+                <ui:VisualElement name="VisualSprite" style="background-image: url(&quot;project://database/Assets/Sprites/ships/_Player2.png?fileID=2800000&amp;guid=14e8c8df02407bd4b8aa044eedeb5630&amp;type=3#_Player2&quot;); width: 32px; height: 32px; align-self: center; padding-left: 0; margin-left: 15%;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:Vector3Field label="Scale" binding-path="spriteScale" tooltip="Sprite scale" value="1,1,1" style="-unity-font-style: normal;" />
+        <ui:Slider label="Hue" value="0" high-value="1" binding-path="hue" tooltip="H component of HSV color variation of Sprite (0.5 means +180 of Hue, like inverted colors)" name="Slider_hue" show-input-field="true" style="margin-bottom: 18px; -unity-font-style: normal;" />
+        <ui:FloatField label="Speed" value="4" tooltip="Speed/Movement of the Ship" binding-path="speed" style="-unity-font-style: normal;" />
+        <ui:UnsignedIntegerField label="Health" value="10" binding-path="health" tooltip="Health of the Ship" style="margin-bottom: 4px; -unity-font-style: normal;" />
+    </ui:Foldout>
+    <ui:Foldout text="Bullet Parameters" binding-path="editorBullet" style="margin-top: 0; margin-bottom: 10px; background-color: rgba(255, 255, 255, 0.05); padding-right: 6px; -unity-font-style: bold;">
+        <ui:FloatField label="Speed" value="10" binding-path="bulletSpeed" tooltip="Speed of the Bullets (0 means the bullets spaws static) (For enemies, the attack type must be set to None so that it does not shoot)" name="FloatField" style="-unity-font-style: normal; margin-bottom: 18px;" />
+        <ui:FloatField label="Bursts of fire" value="0.5" binding-path="coolDown" tooltip="Time between each bullet shot" style="-unity-font-style: normal; height: 18px;" />
+        <ui:VisualElement name="VisualElement" style="flex-grow: 1; flex-direction: row; align-items: center; -unity-font-style: normal; margin-bottom: 18px;">
+            <ui:Toggle label="Cooldown" binding-path="_spaceCoolDown" tooltip="Space that lasts while waiting and while shooting" name="Toggle_spaceCoolDown" style="align-items: flex-end;" />
+            <ui:FloatField value="-1" binding-path="spaceCooldown" name="Field_spaceCoolDown" tooltip="Time without shooting" style="flex-grow: 50; margin-left: 8px;" />
+            <ui:FloatField value="0.5" binding-path="fireTime" name="Field_spaceCoolDown2" tooltip="Time shooting" style="flex-grow: 50;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; flex-direction: row; margin-bottom: 4px; align-items: center; -unity-font-style: normal;">
+            <ui:Toggle label="Life time" binding-path="_bulletTime" tooltip="How long the bullet lasts before disappearing (they usually disappear when they leave the screen)" name="Toggle_bulletTime" style="align-items: flex-end;" />
+            <ui:FloatField value="-1" binding-path="bulletTime" name="Field_bulletTime" style="flex-grow: 100; margin-left: 8px;" />
+        </ui:VisualElement>
+    </ui:Foldout>
+    <ui:Foldout text="Enemy Only" binding-path="editorEnemy" style="margin-top: 0; margin-bottom: 10px; background-color: rgba(255, 255, 255, 0.05); padding-right: 6px; -unity-font-style: bold;">
+        <ui:EnumField label="Attack Type" binding-path="attack" tooltip="Type of shot" type="Enums+Attack, Assembly-CSharp" style="-unity-font-style: normal;" />
+        <ui:FloatField label="Start Rotation" value="0" binding-path="startRotation" tooltip="Initial rotation of the bullet direction" style="-unity-font-style: normal;" />
+        <ui:FloatField label="Rotation Speed" value="0" binding-path="rotationSpeed" tooltip="Speed of rotation at which the spin moves, zero means static" style="-unity-font-style: normal; margin-bottom: 18px;" />
+        <ui:IntegerField label="Death Score" value="8" binding-path="deathScore" tooltip="Score when ship is destroyed" style="-unity-font-style: normal;" />
+        <ui:Toggle label="Collision" binding-path="enemyCollision" tooltip="The player collides with this ship?" style="-unity-font-style: normal; margin-bottom: 18px;" />
+        <ui:EnumField label="Movement Behaviour" binding-path="behaviour" tooltip="Type of movement/behavior" type="Enums+Behaviour, Assembly-CSharp" style="-unity-font-style: normal;" />
+        <ui:VisualElement style="flex-grow: 1; flex-direction: row; margin-bottom: 0; margin-top: 0;">
+            <ui:Toggle label="Direct" binding-path="directBehaviour" tooltip="The enemy stays in the line forever or for the time in To Continue" name="Toggle_direct" style="-unity-font-style: normal;" />
+            <ui:Slider value="-0.9" high-value="1" show-input-field="true" low-value="-1" binding-path="directLine" tooltip="Line position, from top (-1) center (0) to bottom (1)" name="Slider_direct" style="flex-grow: 100; margin-left: 8px; -unity-font-style: normal;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; flex-direction: row; margin-bottom: 1px; align-items: center; -unity-font-style: normal;">
+            <ui:Toggle label="Time to continue" binding-path="_timeToContinue" tooltip="Waiting time for an enemy that remains in the line, so that it can continue moving" name="Toggle_timeToContinue" style="align-items: flex-end; margin-bottom: 3px;" />
+            <ui:FloatField value="-1" binding-path="timeToContinue" enabled="true" name="Field_timeToContinue" style="flex-grow: 100; margin-left: 8px;" />
+        </ui:VisualElement>
+        <ui:FloatField label="Custom ∿ Strength" value="1.5" binding-path="behaviourMathfSin" tooltip="Wave strength of behaviours that use it" style="-unity-font-style: normal; margin-bottom: 1px;" />
+        <ui:Toggle label="Waves inverted" binding-path="behaviourMathfInverted" tooltip="Motion wave inverted" style="-unity-font-style: normal; margin-bottom: 4px;" />
+    </ui:Foldout>
+    <ui:Foldout text="Notes" enabled="true" value="true" binding-path="editorNotes" style="margin-top: 0; margin-bottom: 10px; background-color: rgba(255, 255, 255, 0.05); padding-right: 6px; padding-bottom: 0; -unity-font-style: bold;">
+        <ui:TextField placeholder-text="notes ..." multiline="true" binding-path="notes" enabled="true" style="align-items: stretch; justify-content: flex-start; align-self: auto; align-content: auto; white-space: normal; height: 100%; margin-top: 0; margin-right: 0; margin-bottom: 6px; margin-left: -10px; -unity-font-style: normal;" />
+    </ui:Foldout>
+</ui:UXML>

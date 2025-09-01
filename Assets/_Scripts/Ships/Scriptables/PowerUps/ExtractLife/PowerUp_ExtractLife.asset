@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d291022fcef3142a39f1a6cad05394, type: 3}
+  m_Name: PowerUp_ExtractLife
+  m_EditorClassIdentifier: 
+  shipBase: {fileID: 0}
+  type: 15
+  powerName: Extract Life
+  sprite: {fileID: 21300000, guid: 81fd5d9b5a36f4b42bf88d1c076dadeb, type: 3}
+  description: Steals the total life of 1 enemy you destroy
+  powerTitleKey: Extract Life_title
+  powerDescriptionKey: Extract Life_desc
+  currentAmount: 12
+  cost: 150
+  useDuration: 0
+  durationRange: {x: -1, y: -1}
+  duration: -1
+  clip_activate:
+    audioClip: {fileID: 8300000, guid: 59de91a90eeac3c4b8aef3843a8e67e0, type: 3}
+    audioVolume: 1
+  clip_constant:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_deactivate:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  waitForActivate: 0
+  clip_shoot:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_playerDamage:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_enemyDamage:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_enemyDeath:
+    audioClip: {fileID: 8300000, guid: 0c419ce58baa73d47973dcd37847fc83, type: 3}
+    audioVolume: 1
+  prefab: {fileID: 7042420193141323986, guid: 8675c898342189b4897ec5b4d6d2663f, type: 3}
+  steals: 1

@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e8260d1b056204abb9de06ee954f70, type: 3}
+  m_Name: PowerUp_FastFire
+  m_EditorClassIdentifier: 
+  shipBase: {fileID: 0}
+  type: 8
+  powerName: Fast Fire
+  sprite: {fileID: 21300000, guid: 696e13cb942813c4d811a91a1dede127, type: 3}
+  description: Double firing speed that lasts 10 seconds
+  powerTitleKey: fastFire_title
+  powerDescriptionKey: fastFire_desc
+  currentAmount: 12
+  cost: 120
+  useDuration: 1
+  durationRange: {x: 10, y: 10}
+  duration: 10
+  clip_activate:
+    audioClip: {fileID: 8300000, guid: 59de91a90eeac3c4b8aef3843a8e67e0, type: 3}
+    audioVolume: 1
+  clip_constant:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_deactivate:
+    audioClip: {fileID: 8300000, guid: 2568d45576b07004db1683b43b7d26da, type: 3}
+    audioVolume: 1
+  waitForActivate: 0
+  clip_shoot:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_playerDamage:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_enemyDamage:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_enemyDeath:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  multiplier: 2

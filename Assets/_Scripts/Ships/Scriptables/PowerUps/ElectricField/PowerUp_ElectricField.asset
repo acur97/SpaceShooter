@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3164d3d41ad9664296805888bee8eb5, type: 3}
+  m_Name: PowerUp_ElectricField
+  m_EditorClassIdentifier: 
+  shipBase: {fileID: 0}
+  type: 5
+  powerName: Electric Field
+  sprite: {fileID: 21300000, guid: 554d922031d0a2e409148e2e17d5e2c2, type: 3}
+  description: Electric shield that does not protect but deals damage when touched
+    by the enemy, lasts 40 seconds
+  powerTitleKey: electricField_title
+  powerDescriptionKey: electricField_desc
+  currentAmount: 22
+  cost: 150
+  useDuration: 1
+  durationRange: {x: 10, y: 10}
+  duration: -0.0020973925
+  clip_activate:
+    audioClip: {fileID: 8300000, guid: 0d904376d8219714baf42789ca176cf5, type: 3}
+    audioVolume: 1
+  clip_constant:
+    audioClip: {fileID: 8300000, guid: 5355b2451b2e95d4cbbe75abde9c64fb, type: 3}
+    audioVolume: 1
+  clip_deactivate:
+    audioClip: {fileID: 8300000, guid: 2eadbc6045e91624ba2b5004a6fb1df2, type: 3}
+    audioVolume: 1
+  waitForActivate: 1
+  clip_shoot:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_playerDamage:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_enemyDamage:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_enemyDeath:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  prefab: {fileID: 7042420193141323986, guid: 52832364ff91bea4ca6f4b235820fdcb, type: 3}
+  radius: 1
+  enemyDamage: 1

@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57881a7a4b18dff4b82ce561559b9591, type: 3}
+  m_Name: Enemy type 11
+  m_EditorClassIdentifier: 
+  editorCustom: 1
+  editorStore: 1
+  editorShip: 1
+  editorBullet: 1
+  editorEnemy: 1
+  editorNotes: 1
+  notes: 
+  color: {r: 0.37626222, g: 0.016807375, b: 0.07618539, a: 1}
+  name: 
+  description: 
+  owned: 0
+  cost: 0
+  sprite: {fileID: 21300000, guid: 0da3ffbca1666964ab08aac9a84d0f1b, type: 3}
+  spriteScale: {x: 0.2, y: 0.2, z: 1}
+  hue: 0
+  speed: 1.2
+  health: 40
+  bulletSpeed: 10
+  fireTime: 0.5
+  coolDown: 0.25
+  _spaceCoolDown: 0
+  spaceCooldown: -1
+  _bulletTime: 1
+  bulletTime: -1
+  attack: 0
+  startRotation: 0
+  rotationSpeed: 0
+  enemyCollision: 1
+  deathScore: 8
+  behaviour: 5
+  directBehaviour: 0
+  directLine: -0.9
+  behaviourMathfSin: -2.1
+  behaviourMathfInverted: 0
+  _timeToContinue: 0
+  timeToContinue: -1
+  countForGroup: 1
+  spawnIndex: 0

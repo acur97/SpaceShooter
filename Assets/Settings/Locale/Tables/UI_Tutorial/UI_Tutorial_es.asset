@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_Tutorial_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: 89698e5a913f6b74abb615ea4d8ce3ee, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 7111421952
+    m_Localized: Como jugar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50824458240
+    m_Localized: "Activa el Poder con este bot\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 145968050176
+    m_Localized: "En modo normal, la nave tambi\xE9n dispara al deslizar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 160790720512
+    m_Localized: Desliza para mover
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1509947322368
+    m_Localized: 'Mueve la nave con:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1555996585984
+    m_Localized: 'Dispara:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1566532677632
+    m_Localized: 'Poder:'
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -13,21 +13,33 @@ MonoBehaviour:
   m_Name: Round 1
   m_EditorClassIdentifier: 
   groups:
-  - timeToStart: 2
-    count: 10
-    ship: {fileID: 11400000, guid: 0b2d8ee1a193cbd458ba93593f505ec6, type: 2}
+  - chained: 0
+    timeToStart: 0
     spawnType: 0
+    customFloat: 0
     minTimeBetweenSpawn: 0.5
     maxTimeBetweenSpawn: 1
-  - timeToStart: 2
-    count: 10
-    ship: {fileID: 11400000, guid: 2cde79363b3ab70408cd641e4575cdfd, type: 2}
+    count: 14
+    ship: {fileID: 11400000, guid: 0b2d8ee1a193cbd458ba93593f505ec6, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 0
+    timeToStart: 2
     spawnType: 3
+    customFloat: 0
     minTimeBetweenSpawn: 0
     maxTimeBetweenSpawn: 0
-  - timeToStart: 2
-    count: 20
-    ship: {fileID: 11400000, guid: ece45f39c82c7a543ba4e3881b76f1fc, type: 2}
+    count: 10
+    ship: {fileID: 11400000, guid: 2cde79363b3ab70408cd641e4575cdfd, type: 2}
+    randomPowerUp: 0
+    spawnPowerUp: {fileID: 0}
+  - chained: 0
+    timeToStart: 2
     spawnType: 1
+    customFloat: 0
     minTimeBetweenSpawn: 0.7
     maxTimeBetweenSpawn: 0.7
+    count: 20
+    ship: {fileID: 11400000, guid: ece45f39c82c7a543ba4e3881b76f1fc, type: 2}
+    randomPowerUp: 1
+    spawnPowerUp: {fileID: 0}

@@ -1,0 +1,160 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: PowerUps_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: 07f64f5553742dc42a8d85a2cea344b7, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 131564810240
+    m_Localized: Iman de monedas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361647550464
+    m_Localized: Atrae monedas hacia ti durante 10 segundos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1227733577728
+    m_Localized: Disparo Doble
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1316959006720
+    m_Localized: Doble disparo que dura 20 segundos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1509045547008
+    m_Localized: Dron Orbital
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1599189528576
+    m_Localized: Drone orbitando a tu alrededor, dura 20 segundos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1735009480704
+    m_Localized: Dron de Soporte
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1832816455680
+    m_Localized: Drone que dispara a tu lado, dura 30 segundos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1940559736832
+    m_Localized: Campo Electrico
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2005005217792
+    m_Localized: Escudo electrico que no protege pero le baja vida al enemigo al
+      ser tocado, dura 40 segundos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2164594290688
+    m_Localized: Extractor de Vida
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2249738661888
+    m_Localized: Roba la vida total de 1 enemigo que destruyes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2444341784576
+    m_Localized: Disparo Rapido
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2511807164416
+    m_Localized: Doble velocidad de disparo que dura 10 segundos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2591419248640
+    m_Localized: Rafaga laser
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2740178628608
+    m_Localized: Laser direccional que elimina todo lo que toca, dura de 6 a 9 segundos
+      y tiene tiempo de precarga.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2815692877824
+    m_Localized: Regenerador de vida
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2893727903744
+    m_Localized: Restaura el 30% de la vida al instante
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2968180994048
+    m_Localized: Robador de vida
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3047461728256
+    m_Localized: Cada golpe al enemigo regenera tu vida (10% vida maxima), dura 10
+      segundos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3126889263104
+    m_Localized: Misiles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3186003783680
+    m_Localized: Cambia el disparo a 2 misiles guiados al enemigo, lo que inflige
+      15 cuando explotan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3258061926400
+    m_Localized: Movimiento Rapido
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3356716150784
+    m_Localized: Velocidad de movimiento x2, dura de 8 a 10 segundos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3423258783744
+    m_Localized: Explosion orbital
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3496420028416
+    m_Localized: Explosion devastadora que limpia toda la pantalla de enemigos, tiene
+      tiempo de precarga
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3558239875072
+    m_Localized: Escudo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3612371562496
+    m_Localized: Escudo que absorbe 100 impactos o dura 10 segundos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3679174242304
+    m_Localized: Camara Lenta
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3742545981440
+    m_Localized: Camara lenta durante 10 segundos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3802629386240
+    m_Localized: Triple Disparo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3882652512256
+    m_Localized: Triple disparo que dura 20 segundos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4673413033984
+    m_Localized: ' '
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

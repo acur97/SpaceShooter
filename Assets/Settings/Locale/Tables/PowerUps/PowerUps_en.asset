@@ -1,0 +1,159 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: PowerUps_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 07f64f5553742dc42a8d85a2cea344b7, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 131564810240
+    m_Localized: Coins Magnet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361647550464
+    m_Localized: Attracts coins to you for 10 seconds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1227733577728
+    m_Localized: Double Shot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1316959006720
+    m_Localized: Double shot that lasts 20 seconds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1509045547008
+    m_Localized: Orbital Dron
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1599189528576
+    m_Localized: Drone orbiting around you, lasts 20 seconds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1735009480704
+    m_Localized: Support Dron
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1832816455680
+    m_Localized: Drone that shoots next to you, lasts 30 seconds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1940559736832
+    m_Localized: Electric Field
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2005005217792
+    m_Localized: Electric shield that does not protect but deals damage when touched
+      by the enemy, lasts 40 seconds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2164594290688
+    m_Localized: Extract Life
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2249738661888
+    m_Localized: Steals the total life of 1 enemy you destroy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2444341784576
+    m_Localized: Fast Fire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2511807164416
+    m_Localized: Double firing speed that lasts 10 seconds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2591419248640
+    m_Localized: Laser Burst
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2740178628608
+    m_Localized: Directional laser that damages whatever it touches, lasts 6 to 9
+      seconds and has pre-charge time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2815692877824
+    m_Localized: Life Regen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2893727903744
+    m_Localized: Restores 30% of life instantly
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2968180994048
+    m_Localized: Life Steal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3047461728256
+    m_Localized: Each hit to the enemy regenerates your life (10% maximum life),
+      lasts 10 seconds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3126889263104
+    m_Localized: Missile
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3186003783680
+    m_Localized: Changes the shot to 2 guided missiles at the enemy, dealing 15 damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3258061926400
+    m_Localized: Move Faster
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3356716150784
+    m_Localized: x2 movement speed, lasts 8 to 10 seconds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3423258783744
+    m_Localized: Orbital Blast
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3496420028416
+    m_Localized: Devastating explosion that clears the entire screen of enemies,
+      has pre-charge time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3558239875072
+    m_Localized: Shield
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3612371562496
+    m_Localized: Shield that absorbs 100 impacts or lasts 10 seconds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3679174242304
+    m_Localized: Time Slower
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3742545981440
+    m_Localized: Slow motion for 10 seconds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3802629386240
+    m_Localized: Triple Shot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3882652512256
+    m_Localized: Triple shot that lasts 20 seconds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4673413033984
+    m_Localized: ' '
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

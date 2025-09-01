@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Globals Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Globals
+  m_TableCollectionNameGuidString: dcdbebd672a49734295e4fd377abb725
+  m_Entries:
+  - m_Id: 101185466368
+    m_Key: mode_normal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 172568326144
+    m_Key: mode_infinite
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12536357302272
+    m_Key: coins
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12880969707520
+    m_Key: score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16719743528960
+    m_Key: leaderboard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18429853544448
+    m_Key: retry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22281008951296
+    m_Key: levelComplete
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 1879193326079442945
+  references:
+    version: 2
+    RefIds:
+    - rid: 1879193326079442945
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1750217084269

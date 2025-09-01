@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8189e2c8fc47cd541913e14187d72451, type: 3}
+  m_Name: PowerUp_DroneOrbital
+  m_EditorClassIdentifier: 
+  shipBase: {fileID: 0}
+  type: 12
+  powerName: Orbital Dron
+  sprite: {fileID: 21300000, guid: 18f0df9dbc2aba74f8735ecfda6e646e, type: 3}
+  description: Drone orbiting around you, lasts 20 seconds
+  powerTitleKey: orbitalDron_title
+  powerDescriptionKey: orbitalDron_desc
+  currentAmount: 10
+  cost: 300
+  useDuration: 1
+  durationRange: {x: 20, y: 20}
+  duration: 20
+  clip_activate:
+    audioClip: {fileID: 8300000, guid: 80caadda59f8dd542a239e8845fc77ff, type: 3}
+    audioVolume: 2
+  clip_constant:
+    audioClip: {fileID: 8300000, guid: 25c3861daa91f3c48aac026bd65f7a8b, type: 3}
+    audioVolume: 0.3
+  clip_deactivate:
+    audioClip: {fileID: 8300000, guid: 40854bec2b4f4104e9721dc8c0d124e8, type: 3}
+    audioVolume: 1
+  waitForActivate: 0
+  clip_shoot:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_playerDamage:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_enemyDamage:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  clip_enemyDeath:
+    audioClip: {fileID: 0}
+    audioVolume: 0
+  prefab: {fileID: 3048626543858494239, guid: 3479a277a7aae61489f7ef1ff55c5236, type: 3}
+  distance: 1
+  speed: 2

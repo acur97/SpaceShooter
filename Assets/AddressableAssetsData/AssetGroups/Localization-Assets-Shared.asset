@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-Assets-Shared
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-Assets-Shared
+  m_GUID: fc18f22e855a5c145a91533b416a133b
+  m_SerializeEntries:
+  - m_GUID: 01e00ca37ae935646ba90f7cdd6e3fa3
+    m_Address: Assets/Settings/Locale/Tables/UI_Tables/UI_Store Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 07f64f5553742dc42a8d85a2cea344b7
+    m_Address: Assets/Settings/Locale/Tables/PowerUps/PowerUps Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0b034b834c940554eb76b6150c294213
+    m_Address: Assets/Settings/Locale/Tables/PopUps/PopUps Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 41000697546cf0848844b4bdd38ba7ca
+    m_Address: Assets/Settings/Locale/Tables/UI_wNew/UI_Wnew Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4c09984470afb1748ad1f2133c9abcd1
+    m_Address: Assets/Settings/Locale/Tables/UI_Select/UI_Select Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c14e1c233bf9904385c123b8a3d073f
+    m_Address: Assets/Settings/Locale/Tables/UI_Pause/UI_Pause Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 89698e5a913f6b74abb615ea4d8ce3ee
+    m_Address: Assets/Settings/Locale/Tables/UI_Tutorial/UI_Tutorial Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bde1feb883bf5444e973090b59fb2f52
+    m_Address: Assets/Settings/Locale/Tables/UI_end/UI_End Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dcdbebd672a49734295e4fd377abb725
+    m_Address: Assets/Settings/Locale/Tables/Globals/Globals Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: 6a57ebb067634224d9cb6ad94e404120, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 74b3845096f4d984e9d224717effa300, type: 2}
+    - {fileID: 11400000, guid: 0dec404925a31f145a086dd9204f0116, type: 2}
