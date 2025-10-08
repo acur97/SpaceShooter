@@ -112,6 +112,7 @@ MonoBehaviour:
     - line: '|   muteOtherAudioSources: 1'
     - line: '|   Prepare IOS For Recording: 0'
     - line: '|   Force IOS Speakers When Recording: 0'
+    - line: '|   audioSpatialExperience: 0'
     - line: '|   deferSystemGesturesMode: 0'
     - line: '|   hideHomeButton: 0'
     - line: '|   submitAnalytics: 1'
@@ -167,7 +168,7 @@ MonoBehaviour:
     - line: '|   loadStoreDebugModeEnabled: 0'
     - line: '|   visionOSBundleVersion: 1.0'
     - line: '|   tvOSBundleVersion: 1.0'
-    - line: '|   bundleVersion: 0.8.6'
+    - line: '|   bundleVersion: 0.8.7'
     - line: '|   preloadedAssets:'
     - line: '|   - {fileID: 11400000, guid: e37b39ce9a5c6524a97a586fd8abd025, type:
         2}'
@@ -201,7 +202,7 @@ MonoBehaviour:
     - line: '|     iPhone: 0'
     - line: '|     tvOS: 0'
     - line: '|   overrideDefaultApplicationIdentifier: 0'
-    - line: '|   AndroidBundleVersionCode: 38'
+    - line: '|   AndroidBundleVersionCode: 39'
     - line: '|   AndroidMinSdkVersion: 23'
     - line: '|   AndroidTargetSdkVersion: 0'
     - line: '|   AndroidPreferredInstallLocation: 0'
@@ -545,7 +546,7 @@ MonoBehaviour:
     - line: '|     m_GraphicsJobs: 1'
     - line: '|   m_BuildTargetGraphicsJobMode:'
     - line: '|   - m_BuildTarget: AndroidPlayer'
-    - line: '|     m_GraphicsJobMode: 0'
+    - line: '|     m_GraphicsJobMode: 2'
     - line: '|   m_BuildTargetGraphicsAPIs:'
     - line: '|   - m_BuildTarget: WindowsStandaloneSupport'
     - line: '|     m_APIs: 12000000'
@@ -1013,6 +1014,7 @@ MonoBehaviour:
     - line: '|   androidVulkanDenyFilterList: []'
     - line: '|   androidVulkanAllowFilterList: []'
     - line: '|   androidVulkanDeviceFilterListAsset: {instanceID: 0}'
+    - line: '|   d3d12DeviceFilterListAsset: {instanceID: 0}'
     - line: '| '
   references:
     version: 2
