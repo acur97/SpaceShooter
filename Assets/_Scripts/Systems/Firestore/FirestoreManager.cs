@@ -129,7 +129,7 @@ public class FirestoreManager : MonoBehaviour
         using UnityWebRequest webRequest = UnityWebRequest.Get(CurrentUrl);
         await webRequest.SendWebRequest();
 
-        if (!cancellationToken.IsCancellationRequested && webRequest.result == UnityWebRequest.Result.Success)
+        if (!cancellationToken.IsCancellationRequested && webRequest.result == UnityWebRequest.Result.Success && webRequest.isDone)
         {
             leaderboard = JsonUtility.FromJson<Document>(webRequest.downloadHandler.text);
         }
@@ -205,6 +205,38 @@ public class FirestoreManager : MonoBehaviour
 
             AnalyticsManager.Log_PostScore();
         }
+    }
+
+    [ContextMenu("Backup normal scores")]
+    private void BackupNormal()
+    {
+        Backup(true).Forget();
+    }
+
+    [ContextMenu("Backup infinite scores")]
+    private void BackupInfinite()
+    {
+        Backup(false).Forget();
+    }
+
+    private async UniTaskVoid Backup(bool normal)
+    {
+        using UnityWebRequest webRequest1 = UnityWebRequest.Get(normal ? firestoreUrl : firestoreInfiniteUrl);
+        await webRequest1.SendWebRequest();
+
+        if (webRequest1.result == UnityWebRequest.Result.Success && webRequest1.isDone)
+            leaderboard = JsonUtility.FromJson<Document>(webRequest1.downloadHandler.text);
+        else
+            return;
+
+        using UnityWebRequest webRequest2 = UnityWebRequest.Put(normal ? $"{firestoreUrl}_Backup" : $"{firestoreInfiniteUrl}_Backup", JsonUtility.ToJson(leaderboard));
+        webRequest2.method = _patch;
+        await webRequest2.SendWebRequest();
+
+        if (webRequest2.result == UnityWebRequest.Result.Success && webRequest2.isDone)
+            Debug.Log("Backup ready");
+        else
+            Debug.LogWarning("Something happened");
     }
 }
 

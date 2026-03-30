@@ -11,8 +11,6 @@ public class PopupManager : MonoBehaviour
 
     [ReadOnly] public bool isOpen = false;
 
-    [Header("Localization")]
-
     [Header("References")]
     [SerializeField] private GameObject root;
     [SerializeField] private LocalizeStringEvent text;
