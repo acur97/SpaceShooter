@@ -238,6 +238,38 @@ public class FirestoreManager : MonoBehaviour
         else
             Debug.LogWarning("Something happened");
     }
+
+    [ContextMenu("Reset backup normal")]
+    private void ResetBackupNormal()
+    {
+        ResetBackup(true).Forget();
+    }
+
+    [ContextMenu("Reset backup infinite")]
+    private void ResetBackupInfinite()
+    {
+        ResetBackup(false).Forget();
+    }
+
+    private async UniTaskVoid ResetBackup(bool normal)
+    {
+        using UnityWebRequest webRequest1 = UnityWebRequest.Get(normal ? $"{firestoreUrl}_Backup" : $"{firestoreInfiniteUrl}_Backup");
+        await webRequest1.SendWebRequest();
+
+        if (webRequest1.result == UnityWebRequest.Result.Success && webRequest1.isDone)
+            leaderboard = JsonUtility.FromJson<Document>(webRequest1.downloadHandler.text);
+        else
+            return;
+
+        using UnityWebRequest webRequest2 = UnityWebRequest.Put(normal ? firestoreUrl : firestoreInfiniteUrl, JsonUtility.ToJson(leaderboard));
+        webRequest2.method = _patch;
+        await webRequest2.SendWebRequest();
+
+        if (webRequest2.result == UnityWebRequest.Result.Success && webRequest2.isDone)
+            Debug.Log("Restored backup ready");
+        else
+            Debug.LogWarning("Something happened");
+    }
 }
 
 [Serializable]
