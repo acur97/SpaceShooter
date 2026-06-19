@@ -17,12 +17,16 @@ public class PowerUp_FastFire : PowerUpBase
 
     public override void OnActivate()
     {
+        PlayerController.Instance.shoot.shootPowerUp = true;
+
         prevBulletSpeed = shipBase._properties.bulletSpeed;
         shipBase._properties.bulletSpeed *= multiplier;
     }
 
     public override void OnDeactivate()
     {
+        PlayerController.Instance.shoot.shootPowerUp = false;
+
         shipBase._properties.bulletSpeed = prevBulletSpeed;
     }
 
@@ -48,7 +52,8 @@ public class PowerUp_FastFire : PowerUpBase
 
     public override void OnPlayerShoot()
     {
-
+        BulletsPool.Instance.InitBullet(shipBase._properties, Enums.TypeBullet.player,
+            (shipBase.shootRoot2.position, shipBase.shootRoot2.rotation));
     }
 
     public override void Dispose()

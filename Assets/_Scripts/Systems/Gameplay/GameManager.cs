@@ -276,7 +276,7 @@ public class GameManager : MonoBehaviour
         uiManager.SetUi(UiType.Gameplay, true);
         uiManager.SetUi(UiType.Select, false, 1, () => anim_count.SetTrigger(AnimationParameters.Init));
 
-        audioManager.PlaySound(Enums.AudioType.Start, 2f);
+        audioManager.PlaySound(Enums.AudioType.Start, 3f);
 
 #if Platform_Mobile
         AdsManager.DestroyBottomBannerAd();

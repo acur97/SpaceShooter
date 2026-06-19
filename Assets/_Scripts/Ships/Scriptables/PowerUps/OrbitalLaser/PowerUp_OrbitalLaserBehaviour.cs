@@ -29,11 +29,14 @@ public class PowerUp_OrbitalLaserBehaviour : MonoBehaviour
         PostProcessingController.Instance.ScreenShake(counter, 0.1f).Forget();
         PostProcessingController.Instance.VolumePunch();
 
-        AudioManager.Instance.PlaySound(boomSound, 2f);
+        AudioManager.Instance.PlaySound(boomSound, 1.25f);
 
         while (circle2.localScale.x < 150f)
         {
             await UniTask.Yield();
+
+            if (this == null)
+                return;
 
             circle2.localScale += Time.deltaTime * 225f * Vector3.one;
         }
@@ -68,21 +71,30 @@ public class PowerUp_OrbitalLaserBehaviour : MonoBehaviour
         {
             await UniTask.Yield();
 
+            if (this == null)
+                return;
+
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, sprite.color.a - Time.deltaTime * 0.225f);
         }
     }
 
     private async UniTaskVoid Sparkles()
     {
-        while (counter > 0 && this != null)
+        while (counter > 0)
         {
             await UniTask.Yield();
 
+            if (this == null)
+                return;
+
             counter -= Time.deltaTime;
 
-            VfxPool.Instance.InitVfx(new Vector2(
-                Random.Range(GameManager.BulletLimits.z, GameManager.BulletLimits.w),
-                Random.Range(GameManager.BulletLimits.y, GameManager.BulletLimits.x)));
+            if (Time.timeScale != 0)
+            {
+                VfxPool.Instance.InitVfx(new Vector2(
+                    Random.Range(GameManager.BulletLimits.z, GameManager.BulletLimits.w),
+                    Random.Range(GameManager.BulletLimits.y, GameManager.BulletLimits.x)));
+            }
         }
 
         Destroy(gameObject);

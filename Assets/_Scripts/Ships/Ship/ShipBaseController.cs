@@ -8,10 +8,14 @@ public class ShipBaseController : MonoBehaviour
     [HideInInspector] public float healthNormalized = 1f;
 
     [Space]
+#pragma warning disable CS0109 // El miembro no oculta un miembro heredado. No se necesita una nueva palabra clave
     public new SpriteRenderer renderer;
+#pragma warning restore CS0109
     public ParticleSystem engine1;
     public ParticleSystem engine2;
+#pragma warning disable UAC1001 // Public field skipped by serialization due to missing [Serializable]
     [HideInInspector] public ParticleSystem.MainModule module;
+#pragma warning restore UAC1001
 
     [Header("Firing")]
     public Transform shootRoot1;

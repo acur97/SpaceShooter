@@ -191,7 +191,7 @@ public class PlayerController : ShipBaseController
     {
         float time = _time;
 
-        while (gameObject.activeSelf && time > 0 && this != null)
+        while (this != null && gameObject.activeSelf && time > 0 && this != null)
         {
             transform.localPosition += gameplayScriptable.force * Time.deltaTime * direction;
             await UniTask.Yield();

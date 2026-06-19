@@ -40,7 +40,7 @@ public class PowerUp_LaserBurstBehaviour : MonoBehaviour
 
         PostProcessingController.Instance.ImpactFrame().Forget();
 
-        AudioManager.Instance.PlaySound(boomSound, 2f);
+        AudioManager.Instance.PlaySound(boomSound, 1.5f);
 
         startSpeedCurve.mode = ParticleSystemCurveMode.Constant;
         startSpeedCurve.constant = 1f;
@@ -61,6 +61,9 @@ public class PowerUp_LaserBurstBehaviour : MonoBehaviour
         while (range <= 20)
         {
             await UniTask.Yield();
+
+            if (this == null)
+                return;
 
             range += Time.deltaTime * 50f;
             laserPoint.y = range;
@@ -83,6 +86,9 @@ public class PowerUp_LaserBurstBehaviour : MonoBehaviour
 
         while (range > 0)
         {
+            if (this == null)
+                return;
+
             range -= Time.deltaTime * 1.5f;
 
             if (range <= 0)

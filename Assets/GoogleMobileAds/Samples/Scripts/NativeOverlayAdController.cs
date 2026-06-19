@@ -41,7 +41,9 @@ namespace GoogleMobileAds.Sample
         /// <summary>
         /// Define our native ad template style.
         /// </summary>
+#pragma warning disable UAC1001 // Public field skipped by serialization due to missing [Serializable]
         public NativeTemplateStyle Style = new NativeTemplateStyle
+#pragma warning restore UAC1001 // Public field skipped by serialization due to missing [Serializable]
         {
             TemplateId = NativeTemplateId.Medium,
         };
