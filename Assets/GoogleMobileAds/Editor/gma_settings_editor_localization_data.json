@@ -12,6 +12,14 @@
       "en": "Android settings",
       "fr": "Paramètres Android"
     },
+    "KEY_ENABLE_GRADLE_BUILD_PRE_PROCESSOR_HELPBOX": {
+      "en": "Modifies the /Plugin/Android/ Gradle files to fix common build errors seen on older Unity versions, see https://developers.google.com/admob/unity/android",
+      "fr": "Modifie les fichiers Gradle de /Plugin/Android/ pour corriger les erreurs de compilation les plus courantes sur des versions antérieures d'Unity, voir https://developers.google.com/admob/unity/android?hl=fr"
+    },
+    "KEY_ENABLE_GRADLE_BUILD_PRE_PROCESSOR_SETTING": {
+      "en": "Enable Gradle build pre-processor",
+      "fr": "Activer le pre-processeur de compilation Gradle"
+    },
     "KEY_ENABLE_KOTLINX_COROUTINES_PACKAGING_OPTION_HELPBOX": {
       "en": "Adds an instruction to fix the build.gradle build error with message '2 files found with path 'META-INF/kotlinx_coroutines_core.version''. For more details, see https://developers.google.com/admob/unity/gradle",
       "fr": "Ajoute une instruction pour corriger l'erreur de compilation de build.gradle '2 files found with path 'META-INF/kotlinx_coroutines_core.version''. Pour plus d'informations, visitez https://developers.google.com/admob/unity/gradle?hl=fr"
@@ -32,21 +40,21 @@
       "en": "Misc",
       "fr": "Divers"
     },
-    "KEY_OPTIMIZE_AD_LOADING_HELPBOX": {
-      "en": "Ad loading tasks will be offloaded to a background thread.",
-      "fr": "Les tâches de chargement des annonces seront transférées à une thread d'arrière-plan."
+    "KEY_DISABLE_OPTIMIZE_AD_LOADING_HELPBOX": {
+      "en": "This disables using a background thread to offload Ad loading tasks",
+      "fr": "Cela désactive l'utilisation d'un thread d'arrière-plan pour décharger les tâches de chargement des publicités."
     },
-    "KEY_OPTIMIZE_AD_LOADING_SETTING": {
-      "en": "Optimize ad loading",
-      "fr": "Optimiser le chargement des annonces"
+    "KEY_DISABLE_OPTIMIZE_AD_LOADING_SETTING": {
+      "en": "Disable ad loading optimization",
+      "fr": "Désactiver l'optimisation du chargement des annonces"
     },
-    "KEY_OPTIMIZE_INITIALIZATION_HELPBOX": {
-      "en": "Initialization will be offloaded to a background thread.",
-      "fr": "L'initialisation sera transférée à une thread d'arrière-plan."
+    "KEY_DISABLE_OPTIMIZE_INITIALIZATION_HELPBOX": {
+      "en": "Disable offloading initialization to a background thread.",
+      "fr": "L'initialisation ne sera pas transférée vers un thread d'arrière-plan."
     },
-    "KEY_OPTIMIZE_INITIALIZATION_SETTING": {
-      "en": "Optimize initialization",
-      "fr": "Optimiser l'initialisation"
+    "KEY_DISABLE_OPTIMIZE_INITIALIZATION_SETTING": {
+      "en": "Disable initialization optimization",
+      "fr": "Désactiver l'optimisation de l'initialisation"
     },
     "KEY_UMP_SPECIFIC_SETTINGS_LABEL": {
       "en": "UMP-specific settings",
@@ -60,13 +68,33 @@
       "en": "User Tracking Usage Description",
       "fr": "Description de l'utilisation du suivi des utilisateurs"
     },
-    "KEY_VALIDATE_GRADLE_DEPENDENCIES_HELPBOX": {
-      "en": "This option ensures the GMA Android SDK is compatible with the version of Android Gradle Plugin being used. Enabling this option is required for Unity Projects that use Android Gradle Plugin under version 4.2.2.",
-      "fr": "Cette option garantit que le SDK Android GMA est compatible avec la version utilisée du plugin Android Gradle. L'activation de cette option est requise pour les projets Unity utilisant le plugin Android Gradle avant la version 4.2.2."
+    "KEY_OVERRIDE_DEFAULT_GMA_ANDROID_ARCHITECTURE_SETTING": {
+      "en": "Switch Google Mobile Ads Android architecture",
+      "fr": "Changer l'architecture Google Mobile Ads Android"
     },
-    "KEY_VALIDATE_GRADLE_DEPENDENCIES_SETTING": {
-      "en": "Remove property tag from GMA Android SDK",
-      "fr": "Supprimer la balise de propriété du SDK GMA Android"
+    "KEY_OVERRIDE_DEFAULT_GMA_ANDROID_ARCHITECTURE_DESCRIPTION": {
+      "en": "You can continue using the current Google Mobile Ads SDK architecture or you can switch to the Next-Gen architecture to improve latency and stability. You can switch back to the current architecture at any time.",
+      "fr": "Vous pouvez continuer à utiliser l'architecture actuelle du SDK Google Mobile Ads ou passer à l'architecture Next-Gen pour améliorer la latence et la stabilité. Vous pouvez revenir à l'architecture actuelle à tout moment."
+    },
+    "KEY_ACTIVE_ARCHITECTURE_LABEL": {
+      "en": "Selected architecture: ",
+      "fr": "Architecture sélectionnée : "
+    },
+    "KEY_GMA_ANDROID_SDK_STANDARD": {
+      "en": "Google Mobile Ads SDK",
+      "fr": "SDK Google Mobile Ads"
+    },
+    "KEY_GMA_ANDROID_SDK_NEXT_GEN": {
+      "en": "GMA Next-Gen SDK",
+      "fr": "SDK GMA Next-Gen"
+    },
+    "KEY_GMA_ANDROID_SDK_STANDARD_OPTION": {
+      "en": "Continue using the Google Mobile Ads SDK",
+      "fr": "Continuer à utiliser le SDK Google Mobile Ads"
+    },
+    "KEY_GMA_ANDROID_SDK_NEXT_GEN_OPTION": {
+      "en": "Upgrade to the GMA Next-Gen SDK",
+      "fr": "Mettre à niveau vers le SDK GMA Next-Gen"
     }
   }
 }

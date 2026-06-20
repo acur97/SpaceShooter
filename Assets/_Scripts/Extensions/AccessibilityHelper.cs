@@ -17,7 +17,7 @@ public class AccessibilityHelper : MonoBehaviour
     {
         using AndroidJavaClass unityPlayer = new("com.unity3d.player.UnityPlayer");
         using AndroidJavaObject activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
-        using AndroidJavaObject view = activity.Call<AndroidJavaObject>("findViewById", obj.GetInstanceID());
+        using AndroidJavaObject view = activity.Call<AndroidJavaObject>("findViewById", obj.GetEntityId());
         view?.Call("setContentDescription", description);
     }
 #endif
