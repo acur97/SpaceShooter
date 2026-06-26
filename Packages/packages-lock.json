@@ -15,11 +15,11 @@
       "hash": "e7eee2fa33dbc1f8630ee23b41241cf12ebc3987"
     },
     "com.febucci.custom-hierarchy": {
-      "version": "https://github.com/andresurrego97/unitypackage-custom-hierarchy.git",
+      "version": "https://github.com/acur97/unitypackage-custom-hierarchy.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "92c060305c115ade4c3b2fce76c41927727c1df2"
+      "hash": "e814856a0266f774af12c35ba210ba1372f8b39a"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
